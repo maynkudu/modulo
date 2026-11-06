@@ -1,0 +1,47 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "modulo",
+  "homepage": "http://modulo.localhost:1355",
+  "items": [
+    {
+      "name": "interactive-art",
+      "title": "Interactive art",
+      "description": "A growing lotus garden with flexible stems, a day and night cycle, and PNG layer exports.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/interactive-art/examples/GardenCanvas.tsx",
+          "type": "registry:component",
+          "target": "components/interactive-art/examples/GardenCanvas.tsx"
+        },
+        {
+          "path": "src/registry/interactive-art/scenes/garden.ts",
+          "type": "registry:lib",
+          "target": "components/interactive-art/scenes/garden.ts"
+        },
+        {
+          "path": "src/registry/interactive-art/engine/runtime.ts",
+          "type": "registry:lib",
+          "target": "components/interactive-art/engine/runtime.ts"
+        },
+        {
+          "path": "src/registry/interactive-art/engine/elastic.ts",
+          "type": "registry:lib",
+          "target": "components/interactive-art/engine/elastic.ts"
+        },
+        {
+          "path": "src/registry/interactive-art/engine/math.ts",
+          "type": "registry:lib",
+          "target": "components/interactive-art/engine/math.ts"
+        },
+        {
+          "path": "src/registry/interactive-art/engine/scene.css",
+          "type": "registry:file",
+          "target": "components/interactive-art/engine/scene.css"
+        }
+      ],
+      "type": "registry:component"
+    }
+  ]
+}

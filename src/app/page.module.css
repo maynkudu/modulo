@@ -1,0 +1,87 @@
+.page { min-height: 100svh; background: #000; color: #fff; font-family: var(--font-geist-mono), monospace; }
+.header { min-height: 120px; display: flex; align-items: center; gap: 32px; padding: 20px max(32px, calc((100vw - 1280px) / 2)); border-bottom: 1px solid #333; background: #000; }
+.brandGroup { flex-shrink: 0; }
+.brandDescription { display: block; margin-top: 8px; font-size: 10px; color: #999; }
+.brand { flex-shrink: 0; display: block; width: 232px; text-decoration: none; }
+.brandImage { width: 100%; height: auto; display: block; }
+.header nav { display: flex; gap: 8px; }
+.header nav a { position: relative; padding: 12px 16px; font-size: 12px; text-decoration: none; }
+.header nav a[aria-current] { background: #fff; color: #000; }
+.header nav a:not([aria-current])::after { position: absolute; content: ""; left: 16px; right: 16px; bottom: 4px; height: 4px; background: repeating-linear-gradient(90deg,#fff 0 4px,transparent 4px 8px); transform: scaleX(0); transform-origin: left; transition: transform 160ms steps(4); }
+.header nav a:hover::after { transform: scaleX(1); }
+.soundToggle { margin-left: auto; min-height: 40px; flex-shrink: 0; padding: 10px 14px; border: 1px solid #555; font: inherit; font-size: 11px; background: #000; color: #ccc; cursor: pointer; transition: transform 100ms cubic-bezier(.2,.8,.2,1), border-color 100ms ease-out; }
+.soundToggle:hover { border-color: #fff; color: #fff; }
+.soundToggle:active { transform: translateY(1px) scale(.98); }
+.main { max-width: 1280px; margin: 0 auto; padding: 48px 0 80px; }
+.catalog { margin: 0; padding: 0; list-style: none; }
+.componentName { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 0; border-bottom: 1px solid #333; font-family: var(--font-geist-pixel-square), monospace; font-size: 22px; line-height: 1.2; text-decoration: none; }
+.componentName time { font-family: var(--font-geist-mono), monospace; font-size: 11px; color: #999; white-space: nowrap; }
+.componentName:hover > span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.catalogSearch { display: grid; grid-template-columns: minmax(0,1fr) 180px 180px; gap: 16px; margin-bottom: 24px; color-scheme: dark; }
+.catalogSearch label { display: grid; gap: 10px; min-width: 0; }
+.catalogSearch label > span { font-size: 11px; color: #aaa; }
+.catalogSearch :is(input, select) { width: 100%; min-width: 0; min-height: 44px; border: 1px solid #555; padding: 12px; background: #000; color: #fff; font: inherit; font-size: 12px; border-radius: 0; }
+.catalogSearch input::placeholder { color: #888; }
+.emptyResults { font-size: 12px; color: #999; padding: 22px 0; }
+.heading { display: flex; align-items: center; justify-content: space-between; gap: 32px; margin-bottom: 32px; scroll-margin-top: 32px; }
+.heading h1 { margin: 0 0 16px; font-family: var(--font-geist-pixel-square), monospace; font-size: clamp(28px,3vw,40px); font-weight: 500; line-height: 1.1; letter-spacing: -1px; }
+.heading p { max-width: 640px; margin: 0; color: #a0a0a0; font-size: 12px; line-height: 1.8; }
+.sourceLink { flex-shrink: 0; padding: 16px 24px; border: 1px solid #fff; background: #000; color: #fff; font-size: 12px; text-decoration: none; transition: background 120ms steps(1, end), color 120ms steps(1, end); }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.panel { min-width: 0; padding: 32px; border: 1px solid #333; background: #000; }
+.install { grid-column: span 5; }
+.api { grid-column: span 7; }
+.source { grid-column: 1 / -1; scroll-margin-top: 32px; }
+.panel h2 { margin: 0 0 24px; font-family: var(--font-geist-pixel-square), monospace; font-size: 24px; font-weight: 500; }
+.panel h3 { margin: 0 0 16px; font-size: 13px; font-weight: 500; }
+.panel p { color: #a0a0a0; font-size: 11px; line-height: 1.9; margin: 16px 0; }
+.panel pre { overflow: auto; max-width: 100%; margin: 0 0 16px; padding: 20px; background: #101010; border-left: 2px solid #fff; font-size: 11px; line-height: 1.9; }
+.install pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.panel :is(pre, p, td) code { font-family: var(--font-geist-mono), monospace; }
+.panel button { min-height: 44px; padding: 12px 20px; border: 1px solid #fff; background: #fff; color: #000; font: inherit; font-size: 12px; cursor: pointer; transition: background 120ms steps(1, end), color 120ms steps(1, end); }
+.panel button:hover { background: #000; color: #fff; }
+.panel button[aria-pressed="false"] { background: #000; color: #aaa; border-color: #555; }
+.commandRunners { display: flex; gap: 8px; margin-bottom: 16px; }
+.sourceLink:hover { background: #fff; color: #000; }
+.panel a { display: inline-block; margin-right: 16px; font-size: 11px; text-underline-offset: 4px; text-decoration: underline; }
+.panelDivider { margin: 32px 0; border-top: 1px solid #333; }
+.tableScroll { overflow: auto; }
+.api table { width: 100%; border-collapse: collapse; text-align: left; font-size: 11px; }
+.api th { padding: 0 12px 16px 0; color: #999; font-weight: 400; }
+.api td { padding: 16px 12px 16px 0; vertical-align: top; border-top: 1px solid #333; }
+.api td:last-child { padding-right: 0; }
+.api td span { display: block; max-width: 245px; margin-top: 8px; color: #999; font-size: 10px; line-height: 1.8; }
+.details { border-top: 1px solid #333; padding-top: 16px; margin-top: 16px; }
+.details summary { cursor: pointer; font-size: 12px; overflow-wrap: anywhere; }
+.details pre { margin-top: 16px; max-height: 480px; }
+.page :is(a, button, input, select, summary, [tabindex]):not(:global(.interactive-art-target)):focus-visible { outline: 2px solid #999; outline-offset: 4px; }
+.skipLink { position: fixed; top: 8px; left: 8px; z-index: 10; padding: 12px 16px; background: #fff; color: #000; border: 2px solid #999; transform: translateY(-150%); }
+.skipLink:focus { transform: translateY(0); }
+@media (max-width: 1344px) { .main { margin: 0 32px; } }
+@media (max-width: 1050px) {
+  .main { padding-top: 32px; }
+  .header { padding: 16px 24px; gap: 32px; }
+  .main { margin: 0 24px; }
+  .install, .api { grid-column: span 6; }
+}
+@media (max-width: 760px) {
+  .header { min-height: 104px; padding: 16px; gap: 16px; flex-wrap: wrap; }
+  .brand { width: 184px; }
+  .brandDescription { font-size: 9px; }
+  .soundToggle { margin-left: auto; }
+  .header nav { order: 3; width: 100%; gap: 4px; }
+  .header nav a { padding: 8px 12px; font-size: 11px; }
+  .main { margin: 0 16px; padding: 32px 0 48px; }
+  .heading { align-items: start; margin-bottom: 24px; gap: 20px; flex-direction: column; }
+  .heading h1 { font-size: 32px; }
+  .heading p { font-size: 11px; }
+  .sourceLink { padding: 10px 16px; font-size: 11px; }
+  .grid { gap: 12px; }
+  .install, .api { grid-column: 1 / -1; }
+  .panel { padding: 24px; }
+  .api table { min-width: 500px; }
+  .catalogSearch { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .searchField { grid-column: 1 / -1; }
+  .componentName { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .header nav a::after, .sourceLink, .panel button, .soundToggle { transition: none; } .soundToggle:active { transform: none; } }
