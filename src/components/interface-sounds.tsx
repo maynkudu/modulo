@@ -10,10 +10,7 @@ export function SoundToggle({ className }: { className?: string }) {
   return (
     <button type="button" className={className} data-sound-toggle
       aria-label={enabled ? "Mute interface sounds" : "Unmute interface sounds"}
-      aria-pressed={enabled} onClick={() => {
-        setSoundEnabled(!enabled);
-        if (!enabled) playSound("toggle");
-      }}>
+      aria-pressed={enabled} onClick={() => setSoundEnabled(!enabled)}>
       Sound {enabled ? "on" : "off"}
     </button>
   );
@@ -26,11 +23,28 @@ export function InterfaceSounds() {
     let dragging: { pointer: number; x: number; y: number } | undefined;
     document.addEventListener("click", (event) => {
       if (!(event.target instanceof Element)) return;
-      const control = event.target.closest("a, button, summary");
-      if (control && !control.matches("[data-sound-toggle], :disabled")) {
-        if (!control.hasAttribute("data-scene-object") || event.detail === 0) playSound("click");
+      const control = event.target.closest("a, button, summary, input:not([type=range]), select, [role=button], [role=tab], [role=checkbox], [role=switch]");
+      if (!control || control.matches("[data-sound-toggle], :disabled")) return;
+      if (control.hasAttribute("data-scene-object") && event.detail !== 0) return;
+      const before = control.getAttribute("aria-pressed");
+      if (before === null) {
+        playSound("click");
+        return;
       }
+      // React commits a discrete state change after the capture listener returns.
+      setTimeout(() => {
+        if (signal.aborted) return;
+        const after = control.getAttribute("aria-pressed");
+        playSound(before !== after && after !== null ? after === "true" ? "on" : "off" : "click");
+      }, 0);
     }, { capture: true, signal });
+    document.addEventListener("pointerover", (event) => {
+      if (event.pointerType === "touch" || !(event.target instanceof Element)) return;
+      const button = event.target.closest("a, button, input, select, summary, [role=button], [role=tab], [role=checkbox], [role=switch], [data-haptic-hover]");
+      if (!button || button.matches(":disabled, [data-scene-object]")) return;
+      if (event.relatedTarget instanceof Node && button.contains(event.relatedTarget)) return;
+      playSound("hover");
+    }, { signal });
     document.addEventListener("input", (event) => {
       const input = event.target;
       if (input instanceof HTMLInputElement && input.type === "range") {
