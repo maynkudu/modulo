@@ -10,12 +10,11 @@ const normalize = (value: string) => value.toLowerCase().replace(/[^\p{L}\p{N}]+
 
 export function CatalogIndex() {
   const [query, setQuery] = useState("");
-  const [date, setDate] = useState("");
   const [order, setOrder] = useState("newest");
   const words = normalize(query).split(" ").filter(Boolean);
   const visible = catalogItems.filter((item) => {
     const text = normalize([item.component.title, item.component.name, item.component.description, ...item.keywords, item.addedAt, dateFormat.format(new Date(item.addedAt))].join(" "));
-    return (!date || item.addedAt === date) && words.every((word) => text.includes(word));
+    return words.every((word) => text.includes(word));
   }).toSorted((a, b) => order === "title"
     ? a.component.title.localeCompare(b.component.title)
     : order === "oldest" ? a.addedAt.localeCompare(b.addedAt) : b.addedAt.localeCompare(a.addedAt));
@@ -26,10 +25,6 @@ export function CatalogIndex() {
         <label className={styles.searchField}>
           <span>Search</span>
           <input type="search" value={query} onChange={(event) => setQuery(event.currentTarget.value)} placeholder="Title, keyword, or date" aria-label="Search components" />
-        </label>
-        <label className={styles.dateField}>
-          <span>Added on</span>
-          <input type="date" value={date} onChange={(event) => setDate(event.currentTarget.value)} />
         </label>
         <label className={styles.sortField}>
           <span>Sort</span>

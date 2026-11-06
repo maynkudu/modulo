@@ -1,0 +1,9 @@
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
+.column { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.tile { position: relative; min-width: 0; overflow: hidden; border: 1px solid #333; background: #000; }
+.preview { position: absolute; inset: 0; pointer-events: none; }
+.preview .scene { height: 100%; width: 100%; aspect-ratio: auto; }
+.tileLink { position: absolute; inset: 0; display: block; }
+.tile:has(.tileLink:hover), .tile:focus-within { border-color: #fff; }
+.tile .tileLink:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
+@media (max-width: 760px) { .gallery, .column { gap: 10px; } }

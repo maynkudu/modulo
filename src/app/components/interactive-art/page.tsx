@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/site-header";
+import Link from "next/link";
 import { GardenDemo } from "@/components/garden-demo";
 import { InstallCommand } from "@/components/install-command";
 import { gardenProps, gardenUsage, interactiveArt } from "@/lib/catalog";
@@ -13,6 +14,13 @@ export default function InteractiveArtPage() {
       <a className={styles.skipLink} href="#content">Skip to component</a>
       <SiteHeader page="component" />
       <main className={styles.main} id="content">
+        <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+          <ol>
+            <li><Link href="/">Home</Link></li>
+            <li><Link href="/components">Components</Link></li>
+            <li aria-current="page">{interactiveArt.title}</li>
+          </ol>
+        </nav>
         <div className={styles.heading} id="interactive-art">
           <div>
             <h1>{interactiveArt.title}</h1>

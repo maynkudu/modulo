@@ -4,7 +4,7 @@
 .brandDescription { display: block; margin-top: 8px; font-size: 10px; color: #999; }
 .brand { flex-shrink: 0; display: block; width: 232px; text-decoration: none; }
 .brandImage { width: 100%; height: auto; display: block; }
-.header nav { display: flex; gap: 8px; }
+.header nav { display: flex; flex-wrap: wrap; gap: 8px; }
 .header nav a { position: relative; padding: 12px 16px; font-size: 12px; text-decoration: none; }
 .header nav a[aria-current] { background: #fff; color: #000; }
 .header nav a:not([aria-current])::after { position: absolute; content: ""; left: 16px; right: 16px; bottom: 4px; height: 4px; background: repeating-linear-gradient(90deg,#fff 0 4px,transparent 4px 8px); transform: scaleX(0); transform-origin: left; transition: transform 160ms steps(4); }
@@ -13,11 +13,19 @@
 .soundToggle:hover { border-color: #fff; color: #fff; }
 .soundToggle:active { transform: translateY(1px) scale(.98); }
 .main { max-width: 1280px; margin: 0 auto; padding: 48px 0 80px; }
+.main.galleryMain { padding-top: 24px; padding-bottom: 160px; }
+.breadcrumbs { margin-bottom: 28px; font-size: 11px; }
+.breadcrumbs ol { display: flex; flex-wrap: wrap; gap: 12px; list-style: none; margin: 0; padding: 0; }
+.breadcrumbs li { display: flex; gap: 12px; align-items: center; color: #999; }
+.breadcrumbs li + li::before { content: "/"; color: #555; }
+.breadcrumbs a { color: #bbb; text-decoration: none; }
+.breadcrumbs a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.breadcrumbs [aria-current] { color: #fff; }
 .catalog { margin: 0; padding: 0; list-style: none; }
 .componentName { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px 0; border-bottom: 1px solid #333; font-family: var(--font-geist-pixel-square), monospace; font-size: 22px; line-height: 1.2; text-decoration: none; }
 .componentName time { font-family: var(--font-geist-mono), monospace; font-size: 11px; color: #999; white-space: nowrap; }
 .componentName:hover > span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
-.catalogSearch { display: grid; grid-template-columns: minmax(0,1fr) 180px 180px; gap: 16px; margin-bottom: 24px; color-scheme: dark; }
+.catalogSearch { display: grid; grid-template-columns: minmax(0,1fr) 180px; gap: 16px; margin-bottom: 24px; color-scheme: dark; }
 .catalogSearch label { display: grid; gap: 10px; min-width: 0; }
 .catalogSearch label > span { font-size: 11px; color: #aaa; }
 .catalogSearch :is(input, select) { width: 100%; min-width: 0; min-height: 44px; border: 1px solid #555; padding: 12px; background: #000; color: #fff; font: inherit; font-size: 12px; border-radius: 0; }
@@ -80,7 +88,7 @@
   .install, .api { grid-column: 1 / -1; }
   .panel { padding: 24px; }
   .api table { min-width: 500px; }
-  .catalogSearch { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .catalogSearch { grid-template-columns: minmax(0,1fr); }
   .searchField { grid-column: 1 / -1; }
   .componentName { font-size: 20px; }
 }

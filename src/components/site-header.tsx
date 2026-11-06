@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SoundToggle } from "./interface-sounds";
 import styles from "@/app/page.module.css";
 
-export function SiteHeader({ page }: { page: "catalog" | "component" | "registry" }) {
+export function SiteHeader({ page }: { page: "home" | "catalog" | "component" | "registry" }) {
   return (
     <header className={styles.header}>
       <div className={styles.brandGroup}>
@@ -13,7 +13,8 @@ export function SiteHeader({ page }: { page: "catalog" | "component" | "registry
         <span className={styles.brandDescription}>React components, source included.</span>
       </div>
       <nav aria-label="Main navigation">
-        <Link href="/" aria-current={page === "catalog" ? "page" : undefined}>Components</Link>
+        <Link href="/" aria-current={page === "home" ? "page" : undefined}>Home</Link>
+        <Link href="/components" aria-current={page === "catalog" ? "page" : undefined}>Components</Link>
         <Link href="/registry" aria-current={page === "registry" ? "page" : undefined}>Registry</Link>
         {page === "component" && <>
           <a href="#installation">Installation</a>
