@@ -36,6 +36,7 @@ vec3 tube() {
 }`;
 
 const skinSource = `
+uniform float u_darkness;
 float hash(vec2 p) {
   vec3 q = fract(vec3(p.xyx) * 0.1031);
   q += dot(q, q.yzx + 33.33);
@@ -58,8 +59,10 @@ vec4 skin(vec2 position, vec2 profile, float phase, float alpha) {
   vec2 material = vec2(dot(position, direction), dot(position, vec2(-direction.y, direction.x))) + phase * 43.0;
   float tissue = noise(material * vec2(0.017, 0.032) + phase);
   float grain = hash(floor(position * 1.6) + phase) - 0.5;
-  vec3 base = mix(vec3(0.077, 0.032, 0.043), vec3(0.102, 0.052, 0.061), tissue);
-  vec3 color = base * (0.36 + diffuse * 0.84) + grain * 0.009;
+  vec3 darkBase = mix(vec3(0.077, 0.032, 0.043), vec3(0.102, 0.052, 0.061), tissue);
+  vec3 brightBase = mix(vec3(0.37, 0.17, 0.20), vec3(0.52, 0.25, 0.29), tissue);
+  vec3 base = mix(darkBase, brightBase, u_darkness);
+  vec3 color = base * (mix(0.36, 0.60, u_darkness) + diffuse * 0.84) + grain * 0.009;
   if (u_detail > 0.5) {
     float vein = pow(1.0 - abs(sin(material.y * 0.09 + tissue * 7.0 + phase)), 20.0);
     color *= 1.0 - vein * 0.17;
@@ -76,7 +79,7 @@ vec4 skin(vec2 position, vec2 profile, float phase, float alpha) {
     color += scar * vec3(0.013, 0.008, 0.009);
     color *= 0.96 + noise(material * 0.18) * 0.08;
   }
-  if (phase < 0.0) { color = vec3(0.24, 0.11, 0.14); alpha *= 0.16; }
+  if (phase < 0.0) { color = mix(vec3(0.24, 0.11, 0.14), vec3(0.55, 0.26, 0.31), u_darkness); alpha *= 0.16; }
   return vec4(max(color, vec3(0.0)) * alpha, alpha);
 }`;
 
@@ -224,6 +227,7 @@ function makeField(gl: WebGL2RenderingContext) {
     tissueViewport: gl.getUniformLocation(tissue, "u_viewport"),
     sphereViewport: gl.getUniformLocation(spheres, "u_viewport"),
     skinViewport: gl.getUniformLocation(skin, "u_viewport"),
+    darkness: gl.getUniformLocation(skin, "u_darkness"),
     detail: gl.getUniformLocation(skin, "u_detail"), sampler: gl.getUniformLocation(skin, "u_field") };
 }
 
@@ -283,6 +287,7 @@ function makeGpu(gl: WebGL2RenderingContext) {
   gl.disable(gl.CULL_FACE); gl.clearColor(0, 0, 0, 0); gl.clearDepth(1);
   return { program, buffer, vao, field, bytes: 0, sphereBuffer, sphereVao, sphereProgram, sphereBytes: 0,
     viewport: gl.getUniformLocation(program, "u_viewport"), detail: gl.getUniformLocation(program, "u_detail"),
+    darkness: gl.getUniformLocation(program, "u_darkness"), sphereDarkness: gl.getUniformLocation(sphereProgram, "u_darkness"),
     sphereViewport: gl.getUniformLocation(sphereProgram, "u_viewport"), sphereDetail: gl.getUniformLocation(sphereProgram, "u_detail") };
 }
 
@@ -292,6 +297,9 @@ export class RootRenderer {
   private width = 1;
   private height = 1;
   private density = 1;
+  private backgroundLuminance = 1;
+  private darkness = 0;
+  private skinDarkness = -1;
   private readonly geometry = new RootGeometry();
   private readonly gl: WebGL2RenderingContext | null;
   private readonly context: CanvasRenderingContext2D | null;
@@ -308,7 +316,22 @@ export class RootRenderer {
       this.gpu = makeGpu(this.gl);
       canvas.addEventListener("webglcontextlost", this.onLost);
       canvas.addEventListener("webglcontextrestored", this.onRestored);
-    } else if (this.context) {
+    } else if (this.context) this.updateCanvasSkin();
+    else throw new Error("Root Infection requires WebGL 2 or Canvas 2D.");
+  }
+
+  /** Sampled page luminance selects contrast without changing geometry or skin detail. */
+  setBackgroundLuminance(luminance: number) {
+    this.backgroundLuminance = Math.max(0, Math.min(1, luminance));
+    const blend = Math.max(0, Math.min(1, (this.backgroundLuminance - 0.02) / 0.33));
+    this.darkness = 1 - blend * blend * (3 - 2 * blend);
+    if (this.context && Math.abs(this.skinDarkness - this.darkness) > 0.02) this.updateCanvasSkin();
+  }
+
+  private updateCanvasSkin() {
+    if (this.context) {
+      this.skinDarkness = this.darkness;
+      const canvas = this.canvas;
       const tile = canvas.ownerDocument.createElement("canvas");
       tile.width = tile.height = 128;
       const context = tile.getContext("2d");
@@ -318,13 +341,14 @@ export class RootRenderer {
         for (let index = 0; index < pixels.data.length; index += 4) {
           seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
           const grain = seed / 4294967296 * 8;
-          pixels.data[index] = 18 + grain; pixels.data[index + 1] = 8 + grain * 0.5;
-          pixels.data[index + 2] = 12 + grain * 0.7; pixels.data[index + 3] = 255;
+          pixels.data[index] = 18 + this.darkness * 82 + grain;
+          pixels.data[index + 1] = 8 + this.darkness * 38 + grain * 0.5;
+          pixels.data[index + 2] = 12 + this.darkness * 44 + grain * 0.7; pixels.data[index + 3] = 255;
         }
         context.putImageData(pixels, 0, 0);
         this.skin = this.context.createPattern(tile, "repeat");
       }
-    } else throw new Error("Root Infection requires WebGL 2 or Canvas 2D.");
+    }
   }
 
   private onLost = (event: Event) => { event.preventDefault(); this.lost = true; };
@@ -359,7 +383,7 @@ export class RootRenderer {
     }
   }
 
-  private paintCanvas(world: PhysicsWorld) {
+  private paintCanvas() {
     const c = this.context;
     if (!c) return;
     const geometry = this.geometry;
@@ -390,7 +414,8 @@ export class RootRenderer {
       lastCircle = g.firstCircle + g.circleCount;
     }
     c.beginPath(); this.triangles(c, end, geometry.vertexCount - end);
-    this.circles(c, lastCircle, geometry.circleCount - lastCircle); c.fillStyle = "#34181f"; c.fill();
+    this.circles(c, lastCircle, geometry.circleCount - lastCircle);
+    c.fillStyle = `rgb(${52 + this.darkness * 65}, ${24 + this.darkness * 30}, ${31 + this.darkness * 35})`; c.fill();
     this.timings.bodyMs = bodyMs; this.timings.detailMs = detailMs;
   }
 
@@ -439,21 +464,24 @@ export class RootRenderer {
         gl.useProgram(field.skin); gl.bindVertexArray(field.vao);
         gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, field.texture);
         gl.uniform1i(field.sampler, 0); gl.uniform2f(field.skinViewport, this.width, this.height);
-        gl.uniform1f(field.detail, this.detail); gl.drawArrays(gl.TRIANGLES, 0, 3);
+        gl.uniform1f(field.detail, this.detail); gl.uniform1f(field.darkness, this.darkness); gl.drawArrays(gl.TRIANGLES, 0, 3);
       } else {
         gl.enable(gl.DEPTH_TEST); gl.enable(gl.BLEND); gl.useProgram(gpu.program);
         gl.uniform2f(gpu.viewport, this.width, this.height); gl.uniform1f(gpu.detail, this.detail);
+        gl.uniform1f(gpu.darkness, this.darkness);
         gl.drawArrays(gl.TRIANGLES, 0, this.geometry.vertexCount);
         gl.useProgram(gpu.sphereProgram); gl.bindVertexArray(gpu.sphereVao);
         gl.uniform2f(gpu.sphereViewport, this.width, this.height); gl.uniform1f(gpu.sphereDetail, this.detail);
+        gl.uniform1f(gpu.sphereDarkness, this.darkness);
         gl.drawArraysInstanced(gl.TRIANGLES, 0, 6, this.geometry.circleCount);
       }
       this.timings.bodyMs = performance.now() - submit; this.timings.detailMs = 0;
-    } else this.paintCanvas(world);
+    } else this.paintCanvas();
   }
 
   inspect() {
     return { backend: this.gl ? "webgl2" : "canvas2d", passes: this.gpu?.field ? 2 : 1,
+      backgroundLuminance: this.backgroundLuminance, brightness: this.darkness,
       vertices: this.geometry.vertexCount, spheres: this.geometry.circleCount,
       bufferBytes: this.geometry.vertices.byteLength + this.geometry.circles.byteLength, contextLost: this.lost };
   }

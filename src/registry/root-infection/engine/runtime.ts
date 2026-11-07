@@ -17,6 +17,14 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
   const world = new PhysicsWorld(config);
   const renderer = new RootRenderer(canvas);
   document.body.append(canvas);
+  const backgroundCanvas = document.createElement("canvas");
+  backgroundCanvas.width = 5; backgroundCanvas.height = 1;
+  const backgroundContext = backgroundCanvas.getContext("2d", { willReadFrequently: true });
+  const backgroundColors: string[] = [];
+  const backgroundStyles = new Map<Element, string>();
+  const luminances = new Float32Array(5);
+  const samplePoints = [[0.12, 0.16], [0.88, 0.16], [0.5, 0.5], [0.12, 0.84], [0.88, 0.84]];
+  let nextBackgroundRead = 0;
   const sound = new SoundEngine(config.enableAudio, config.volume);
   const events = new AbortController();
   const { signal } = events;
@@ -39,6 +47,37 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
   world.iterations = Math.max(1, config.physicsIterations - (quality === 0 ? 3 : quality === 1 ? 1 : 0));
   world.collisionEvery = quality === 0 ? 3 : 1;
 
+  /** Composite ancestor backgrounds at a few visible points. Canvas resolves CSS color spaces and alpha. */
+  function refreshBackground() {
+    const scheme = view.getComputedStyle(document.documentElement).colorScheme;
+    const darkCanvas = scheme.includes("dark") && (!scheme.includes("light") || view.matchMedia("(prefers-color-scheme: dark)").matches);
+    const c = backgroundContext;
+    if (!c) { renderer.setBackgroundLuminance(darkCanvas ? 0 : 1); return; }
+    c.fillStyle = darkCanvas ? "#121212" : "#fff";
+    c.fillRect(0, 0, 5, 1);
+    backgroundStyles.clear();
+    for (let sample = 0; sample < samplePoints.length; sample++) {
+      const point = samplePoints[sample];
+      backgroundColors.length = 0;
+      for (let element = document.elementFromPoint(world.width * point[0], world.height * point[1]); element; element = element.parentElement) {
+        let color = backgroundStyles.get(element);
+        if (color === undefined) { color = view.getComputedStyle(element).backgroundColor; backgroundStyles.set(element, color); }
+        backgroundColors.push(color);
+      }
+      for (let layer = backgroundColors.length - 1; layer >= 0; layer--) {
+        c.fillStyle = backgroundColors[layer]; c.fillRect(sample, 0, 1, 1);
+      }
+    }
+    const pixels = c.getImageData(0, 0, 5, 1).data;
+    const linear = (channel: number) => { const value = channel / 255; return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4; };
+    for (let sample = 0; sample < 5; sample++) {
+      const offset = sample * 4;
+      luminances[sample] = linear(pixels[offset]) * 0.2126 + linear(pixels[offset + 1]) * 0.7152 + linear(pixels[offset + 2]) * 0.0722;
+    }
+    luminances.sort();
+    renderer.setBackgroundLuminance(luminances[2]);
+  }
+
   function publishState() {
     if (world.state === state) return;
     state = world.state;
@@ -57,6 +96,7 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
     renderer.resize(width, height, density);
     renderer.detail = quality;
     geometryDirty = true;
+    nextBackgroundRead = 0;
     if (world.state === "IDLE") {
       const rect = host.getBoundingClientRect();
       x = rect.left + rect.width / 2; y = rect.top + rect.height / 2;
@@ -85,6 +125,7 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
       timer = undefined;
       if (destroyed || document.hidden || motion.matches || !inView || !armed || world.state !== "IDLE") return;
       world.field.refresh(document, host, world.width, world.height);
+      refreshBackground(); nextBackgroundRead = performance.now() + 1000;
       geometryDirty = false;
       world.awaken(x, y);
       movementX = x; movementY = y;
@@ -102,6 +143,7 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
     frame = 0;
     if (destroyed || document.hidden || motion.matches || world.state === "IDLE") return;
     const start = performance.now();
+    if (now >= nextBackgroundRead) { refreshBackground(); nextBackgroundRead = now + 1000; }
     const delta = lastFrame ? Math.max(0, (now - lastFrame) / 1000) : FIXED_STEP;
     lastFrame = now;
     droppedSeconds += Math.max(0, delta - 0.1);
@@ -232,6 +274,7 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
 
   document.addEventListener("scroll", () => {
     geometryDirty = true;
+    nextBackgroundRead = 0;
     world.pushFromScroll(view.scrollY - scrollY);
     scrollY = view.scrollY;
   }, { passive: true, capture: true, signal });
@@ -240,7 +283,7 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
     clearIdle(); stopFrame();
     release();
     sound.setHidden(document.hidden);
-    if (!document.hidden) { geometryDirty = true; scheduleIdle(); scheduleFrame(); }
+    if (!document.hidden) { geometryDirty = true; nextBackgroundRead = 0; scheduleIdle(); scheduleFrame(); }
   }, { signal });
   motion.addEventListener("change", () => {
     clearIdle(); stopFrame();
@@ -287,6 +330,8 @@ export function mountRootInfection(host: HTMLElement, options: RootInfectionProp
       release();
       intersection.disconnect(); layout.disconnect();
       sound.dispose(); renderer.dispose(); world.reset(); canvas.remove();
+      backgroundStyles.clear(); backgroundColors.length = 0;
+      backgroundCanvas.width = backgroundCanvas.height = 0;
       delete host.dataset.infectionState;
     },
   };
