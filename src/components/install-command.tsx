@@ -7,10 +7,10 @@ const subscribe = () => () => {};
 const getOrigin = () => window.location.origin;
 const getServerOrigin = () => "<registry-url>";
 
-export function InstallCommand() {
+export function InstallCommand({ name = "interactive-art" }: { name?: string }) {
   const origin = useSyncExternalStore(subscribe, getOrigin, getServerOrigin);
   const [runner, setRunner] = useState<"bunx" | "npx">("bunx");
-  const command = `${runner} shadcn@latest add ${origin}/r/interactive-art.json`;
+  const command = `${runner} shadcn@latest add ${origin}/r/${name}.json`;
   const [status, setStatus] = useState<"idle" | "copied" | "failed">("idle");
 
   async function copy() {

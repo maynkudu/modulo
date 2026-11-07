@@ -42,10 +42,35 @@ export const interactiveArt = {
   ],
 } satisfies RegistryItem;
 
+export const rootInfection = {
+  name: "root-infection",
+  type: "registry:component",
+  title: "Root Infection",
+  description: "Stay still. Roots grow from your cursor and spread across the page.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/root-infection/RootInfection.tsx", target: "components/root-infection/RootInfection.tsx", type: "registry:component" },
+    { path: "src/registry/root-infection/types.ts", target: "components/root-infection/types.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/engine/runtime.ts", target: "components/root-infection/engine/runtime.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/engine/world.ts", target: "components/root-infection/engine/world.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/engine/particles.ts", target: "components/root-infection/engine/particles.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/engine/spatial-hash.ts", target: "components/root-infection/engine/spatial-hash.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/engine/collision-field.ts", target: "components/root-infection/engine/collision-field.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/rendering/renderer.ts", target: "components/root-infection/rendering/renderer.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/rendering/root-geometry.ts", target: "components/root-infection/rendering/root-geometry.ts", type: "registry:lib" },
+    { path: "src/registry/root-infection/audio/sound-engine.ts", target: "components/root-infection/audio/sound-engine.ts", type: "registry:lib" },
+  ],
+} satisfies RegistryItem;
+
 export const catalogItems = [{
   component: interactiveArt,
   addedAt: "2026-11-06",
   keywords: ["lotus", "garden", "canvas", "growth", "day", "night", "elastic"],
+}, {
+  component: rootInfection,
+  addedAt: "2026-11-07",
+  keywords: ["roots", "horror", "infection", "worms", "physics", "verlet", "canvas", "webgl", "cursor", "audio"],
 }];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -67,4 +92,28 @@ export const gardenProps = [
   ["onReady", "(garden | null) => void", "Optional", "Controller on mount, null on cleanup. Keep callbacks stable."],
   ["onFrame", "(FrameState) => void", "Optional", "Scene status after a rendered frame."],
   ["onError", "(Error) => void", "Optional", "Canvas initialization failure."],
+] as const;
+
+export const rootInfectionUsage = `import { RootInfection } from "@/components/root-infection/RootInfection";
+
+export default function Example() {
+  return <RootInfection inactivityDelay={2400} volume={0.45} />;
+}`;
+
+export const rootInfectionProps = [
+  ["inactivityDelay", "number", "2400", "Pointer inactivity in milliseconds before emergence."],
+  ["fullInfectionDelay", "number", "24000", "Milliseconds to full infection. Thin-root consolidation starts halfway through, after at least eight seconds."],
+  ["maxRoots", "number", "Infinity", "Optional allocation budget across all phases. Mature growth reuses absorbed branch slots."],
+  ["maxParticles", "number", "Infinity", "Optional particle budget. Omit for an expanding pool. Finite budgets have a minimum of 16."],
+  ["growthSpeed", "number", "1", "Growth multiplier. Clamped to 0.1 through 4."],
+  ["branchingProbability", "number", "0.075", "Branch probability per growth interval. Clamped to 0 through 0.5. Generations spread breadth-first."],
+  ["physicsIterations", "number", "5", "Distance constraint passes per fixed step. Clamped to 1 through 12."],
+  ["particleRadius", "number", "4.2", "Starting radius in CSS pixels. Roots vary, taper, and keep thickening without a size ceiling."],
+  ["enableAudio", "boolean", "true", "Mute all procedural audio when false. Changes apply immediately."],
+  ["volume", "number", "0.45", "Master volume from 0 through 1. Changes apply immediately."],
+  ["enableExplosion", "boolean", "true", "Primary pointer press releases fragments with outward impulses and gravity."],
+  ["enableRetraction", "boolean", "true", "Meaningful pointer movement or keyboard interaction retracts the roots."],
+  ["quality", '"low" | "medium" | "high" | "auto"', '"auto"', "Auto keeps full detail and can advance consolidation when frame cost grows. Low and medium apply only when explicitly selected."],
+  ["className", "string", '""', "Class names for the preview host. The overlay remains fixed to the viewport."],
+  ["onReady", "(controller | null) => void", "Optional", "Stable callback for diagnostics, reset, and audio control. Receives null on unmount."],
 ] as const;

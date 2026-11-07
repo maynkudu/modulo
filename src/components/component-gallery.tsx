@@ -70,6 +70,10 @@ export function ComponentGallery() {
     <section ref={gallery} className={styles.gallery} aria-label="Component gallery">
       {columns.map((column, index) => (
         <div key={index} className={styles.column}>
+          {index === 0 && <article className={styles.tile} style={{ aspectRatio: "4 / 3" }}>
+            <div className={styles.infectionPreview} aria-hidden="true">don&apos;t move your mouse</div>
+            <Link className={styles.tileLink} href="/components/root-infection" aria-label="Open Root Infection" />
+          </article>}
           {column.map((view, row) => (
             <article key={view.name} className={styles.tile} style={{ aspectRatio: view.ratio }}
               onPointerEnter={(event) => { if (event.pointerType !== "touch") activate(index * 4 + row); }}

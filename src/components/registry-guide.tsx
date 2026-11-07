@@ -24,6 +24,7 @@ export function RegistryGuide() {
         <p>For npm projects, use <code>npx</code> in place of <code>bunx</code>.</p>
         <a href="/r/registry.json">Registry catalog</a>
         <a href="/r/interactive-art.json">Interactive art manifest</a>
+        <a href="/r/root-infection.json">Root Infection manifest</a>
       </section>
     </div>
   );

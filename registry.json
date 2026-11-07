@@ -42,6 +42,66 @@
         }
       ],
       "type": "registry:component"
+    },
+    {
+      "name": "root-infection",
+      "title": "Root Infection",
+      "description": "Stay still. Roots grow from your cursor and spread across the page.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/root-infection/RootInfection.tsx",
+          "type": "registry:component",
+          "target": "components/root-infection/RootInfection.tsx"
+        },
+        {
+          "path": "src/registry/root-infection/types.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/types.ts"
+        },
+        {
+          "path": "src/registry/root-infection/engine/runtime.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/engine/runtime.ts"
+        },
+        {
+          "path": "src/registry/root-infection/engine/world.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/engine/world.ts"
+        },
+        {
+          "path": "src/registry/root-infection/engine/particles.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/engine/particles.ts"
+        },
+        {
+          "path": "src/registry/root-infection/engine/spatial-hash.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/engine/spatial-hash.ts"
+        },
+        {
+          "path": "src/registry/root-infection/engine/collision-field.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/engine/collision-field.ts"
+        },
+        {
+          "path": "src/registry/root-infection/rendering/renderer.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/rendering/renderer.ts"
+        },
+        {
+          "path": "src/registry/root-infection/rendering/root-geometry.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/rendering/root-geometry.ts"
+        },
+        {
+          "path": "src/registry/root-infection/audio/sound-engine.ts",
+          "type": "registry:lib",
+          "target": "components/root-infection/audio/sound-engine.ts"
+        }
+      ],
+      "type": "registry:component"
     }
   ]
 }
