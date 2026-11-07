@@ -63,6 +63,27 @@ export const rootInfection = {
   ],
 } satisfies RegistryItem;
 
+export const nilkamal = {
+  name: "nilkamal",
+  type: "registry:component",
+  title: "Nilkamal",
+  description: "A blue lotus on a living pond. Rain, storms, snow, and ice change the scene.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/nilkamal/Nilkamal.tsx", target: "components/nilkamal/Nilkamal.tsx", type: "registry:component" },
+    { path: "src/registry/nilkamal/create-nilkamal.ts", target: "components/nilkamal/create-nilkamal.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/scene.ts", target: "components/nilkamal/scene.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/lotus.ts", target: "components/nilkamal/lotus.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/weather.ts", target: "components/nilkamal/weather.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/audio.ts", target: "components/nilkamal/audio.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/engine/runtime.ts", target: "components/nilkamal/engine/runtime.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/engine/elastic.ts", target: "components/nilkamal/engine/elastic.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/engine/math.ts", target: "components/nilkamal/engine/math.ts", type: "registry:lib" },
+    { path: "src/registry/nilkamal/scene.css", target: "components/nilkamal/scene.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 export const catalogItems = [{
   component: interactiveArt,
   addedAt: "2026-11-06",
@@ -71,6 +92,10 @@ export const catalogItems = [{
   component: rootInfection,
   addedAt: "2026-11-07",
   keywords: ["roots", "horror", "infection", "worms", "physics", "verlet", "canvas", "webgl", "cursor", "audio"],
+}, {
+  component: nilkamal,
+  addedAt: "2026-11-07",
+  keywords: ["blue", "lotus", "kamal", "pond", "weather", "rain", "storm", "snow", "hail", "ice", "water", "interactive", "art", "audio"],
 }];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -116,4 +141,24 @@ export const rootInfectionProps = [
   ["quality", '"low" | "medium" | "high" | "auto"', '"auto"', "Auto keeps full detail and can advance consolidation when frame cost grows. Low and medium apply only when explicitly selected."],
   ["className", "string", '""', "Class names for the preview host. The overlay remains fixed to the viewport."],
   ["onReady", "(controller | null) => void", "Optional", "Stable callback for diagnostics, reset, and audio control. Receives null on unmount."],
+] as const;
+
+export const nilkamalUsage = `import { Nilkamal } from "@/components/nilkamal/Nilkamal";
+
+export default function Example() {
+  return <Nilkamal weather="rain" intensity={0.8} volume={0.45} />;
+}`;
+
+export const nilkamalProps = [
+  ["weather", '"clear" | "rain" | "storm" | "snow" | "hail"', '"clear"', "Transitions without resetting the accumulated snow or ice."],
+  ["intensity", "number", "0.8", "Weather strength from 0.2 to 1. Changes precipitation and ambience."],
+  ["seed", "number", "731", "Repeatable particle, sky, and texture setup. Changing the seed starts a fresh scene."],
+  ["paused", "boolean", "false", "Stops animation and audio. Weather can still be selected."],
+  ["enableAudio", "boolean", "true", "Sound unlocks after interaction. Turning this off suspends audio."],
+  ["volume", "number", "0.45", "Master volume from 0 to 1."],
+  ["fallback", "string", "Optional", "A still image displayed behind the canvas."],
+  ["className", "string", '""', "Class names for the scene container."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller on mount and null on cleanup. Keep callbacks stable."],
+  ["onFrame", "(FrameState) => void", "Optional", "Animation, visibility, pause, and reduced-motion status."],
+  ["onError", "(Error) => void", "Optional", "Canvas initialization failure."],
 ] as const;

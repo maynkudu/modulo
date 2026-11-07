@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useMemo, useRef } from "react";
@@ -73,6 +74,12 @@ export function ComponentGallery() {
           {index === 0 && <article className={styles.tile} style={{ aspectRatio: "4 / 3" }}>
             <div className={styles.infectionPreview} aria-hidden="true">don&apos;t move your mouse</div>
             <Link className={styles.tileLink} href="/components/root-infection" aria-label="Open Root Infection" />
+          </article>}
+          {index === 1 && <article className={styles.tile} style={{ aspectRatio: "4 / 3" }}>
+            <div className={styles.preview} aria-hidden="true">
+              <Image className={styles.scene} src="/artwork/nilkamal.png" alt="" fill sizes="(max-width: 760px) 33vw, 400px" style={{ objectFit: "cover" }} />
+            </div>
+            <Link className={styles.tileLink} href="/components/nilkamal" aria-label="Open Nilkamal" />
           </article>}
           {column.map((view, row) => (
             <article key={view.name} className={styles.tile} style={{ aspectRatio: view.ratio }}

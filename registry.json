@@ -102,6 +102,66 @@
         }
       ],
       "type": "registry:component"
+    },
+    {
+      "name": "nilkamal",
+      "title": "Nilkamal",
+      "description": "A blue lotus on a living pond. Rain, storms, snow, and ice change the scene.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/nilkamal/Nilkamal.tsx",
+          "type": "registry:component",
+          "target": "components/nilkamal/Nilkamal.tsx"
+        },
+        {
+          "path": "src/registry/nilkamal/create-nilkamal.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/create-nilkamal.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/scene.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/scene.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/lotus.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/lotus.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/weather.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/weather.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/audio.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/audio.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/engine/runtime.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/engine/runtime.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/engine/elastic.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/engine/elastic.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/engine/math.ts",
+          "type": "registry:lib",
+          "target": "components/nilkamal/engine/math.ts"
+        },
+        {
+          "path": "src/registry/nilkamal/scene.css",
+          "type": "registry:file",
+          "target": "components/nilkamal/scene.css"
+        }
+      ],
+      "type": "registry:component"
     }
   ]
 }

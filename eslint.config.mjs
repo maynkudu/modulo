@@ -6,7 +6,7 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   {
-    files: ["src/registry/**/examples/*.tsx"],
+    files: ["src/registry/**/examples/*.tsx", "src/registry/nilkamal/*.tsx"],
     rules: {
       "@next/next/no-img-element": "off",
     },

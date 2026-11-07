@@ -70,6 +70,18 @@ bun scripts/verify-root-infection.ts --benchmark
 
 The benchmark measures physics only. Use the controller's `snapshot()` for actual browser frame and rendering timings. These measurements are specific to the machine and current load.
 
+## Nilkamal
+
+```sh
+bunx shadcn@latest add https://modulo.localhost/r/nilkamal.json
+```
+
+Import `Nilkamal` from `@/components/nilkamal/Nilkamal`. The single blue lotus responds to hovering and dragging. Choose clear, rain, storm, snow, or hail. Rain beads on the petals and splashes into the pond. Snow accumulates while ice spreads across the water. Warmer weather melts the accumulation.
+
+Weather, intensity, pause, and audio props update the existing scene. The controller supports bloom, lightning, reset, state inspection, and PNG layer exports. Each instance owns its Canvas and Web Audio resources. Sound unlocks after interaction. Pause, hidden tabs, offscreen visibility, and reduced motion stop continuous work.
+
+The component page at `/components/nilkamal` includes controls, installation, API documentation, and the ten installable source files. It requires React and browser Canvas 2D, with optional Web Audio, and adds no runtime dependency.
+
 ## Sharing
 
 The registry needs no central registration for URL installs. Serve `public/r/` from a public origin and set `REGISTRY_BASE_URL` to that origin when building so catalog metadata uses the public URL. Consumers can use `npx shadcn@latest add <origin>/r/interactive-art.json`, or configure `@modulo` through the Registry page.
