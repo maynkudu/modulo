@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "bun run registry:build && next typegen && tsc --noEmit",
+    "media:build": "bun scripts/build-component-media.ts",
     "registry:build": "bun scripts/build-registry.ts"
   },
   "dependencies": {

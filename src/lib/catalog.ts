@@ -84,19 +84,43 @@ export const nilkamal = {
   ],
 } satisfies RegistryItem;
 
+function componentMedia({ name, alt }: { name: string; alt: string }) {
+  return {
+    thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height: 630, type: "image/jpeg" },
+    animation: { src: `/media/${name}.gif`, width: 640, height: 336, type: "image/gif" },
+    video: { src: `/media/${name}.mp4`, width: 1200, height: 630, type: "video/mp4", duration: 4 },
+  };
+}
+
+export type ComponentMedia = ReturnType<typeof componentMedia>;
+
+type CatalogItem = {
+  component: RegistryItem;
+  addedAt: string;
+  keywords: string[];
+  seoDescription: string;
+  media: ComponentMedia;
+};
+
 export const catalogItems = [{
   component: interactiveArt,
   addedAt: "2026-11-06",
   keywords: ["lotus", "garden", "canvas", "growth", "day", "night", "elastic"],
+  seoDescription: "An interactive lotus garden for React with elastic stems, a day and night cycle, keyboard controls, and PNG exports. Preview and install the TypeScript source.",
+  media: componentMedia({ name: interactiveArt.name, alt: "White and purple lotus flowers growing above a pond in daylight." }),
 }, {
   component: rootInfection,
   addedAt: "2026-11-07",
   keywords: ["roots", "horror", "infection", "worms", "physics", "verlet", "canvas", "webgl", "cursor", "audio"],
+  seoDescription: "Cursor-driven root growth for React with Verlet physics, WebGL rendering, retraction, and procedural audio. Try the demo and install the TypeScript source.",
+  media: componentMedia({ name: rootInfection.name, alt: "Maroon roots branching from the cursor across a dark page." }),
 }, {
   component: nilkamal,
   addedAt: "2026-11-07",
   keywords: ["blue", "lotus", "kamal", "pond", "weather", "rain", "storm", "snow", "hail", "ice", "water", "interactive", "art", "audio"],
-}];
+  seoDescription: "An interactive blue lotus for React with rain, storms, snow, and ice. Try the Canvas demo, adjust the weather, and install the TypeScript source.",
+  media: componentMedia({ name: nilkamal.name, alt: "A blue lotus and its reflection on a moonlit pond in the rain." }),
+}] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
 

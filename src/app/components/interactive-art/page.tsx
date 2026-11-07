@@ -2,11 +2,14 @@ import { SiteHeader } from "@/components/site-header";
 import Link from "next/link";
 import { GardenDemo } from "@/components/garden-demo";
 import { InstallCommand } from "@/components/install-command";
+import { ComponentMediaLinks } from "@/components/component-media-links";
+import { StructuredData } from "@/components/structured-data";
+import { getComponentMetadata, getComponentStructuredData } from "@/lib/seo";
 import { gardenProps, gardenUsage, interactiveArt } from "@/lib/catalog";
 import item from "../../../../public/r/interactive-art.json";
 import styles from "../../page.module.css";
 
-export const metadata = { title: "Interactive art | Modulo" };
+export const metadata = getComponentMetadata(interactiveArt);
 
 export default function InteractiveArtPage() {
   return (
@@ -14,6 +17,7 @@ export default function InteractiveArtPage() {
       <a className={styles.skipLink} href="#content">Skip to component</a>
       <SiteHeader page="component" />
       <main className={styles.main} id="content">
+        <StructuredData data={getComponentStructuredData(interactiveArt)} />
         <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
           <ol>
             <li><Link href="/">Home</Link></li>
@@ -39,6 +43,7 @@ export default function InteractiveArtPage() {
             <p>React and Canvas 2D. No animation package required.</p>
             <a href="/r/interactive-art.json">Registry JSON</a>
             <a href="/artwork/lotus-garden.png" download>Download still fallback</a>
+            <ComponentMediaLinks component={interactiveArt} />
           </section>
           <section className={`${styles.panel} ${styles.api}`} aria-labelledby="api">
             <h2 id="api">API</h2>

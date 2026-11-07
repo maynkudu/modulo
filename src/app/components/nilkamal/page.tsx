@@ -2,17 +2,21 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { NilkamalDemo } from "@/components/nilkamal-demo";
 import { InstallCommand } from "@/components/install-command";
+import { ComponentMediaLinks } from "@/components/component-media-links";
+import { StructuredData } from "@/components/structured-data";
+import { getComponentMetadata, getComponentStructuredData } from "@/lib/seo";
 import { nilkamal, nilkamalProps, nilkamalUsage } from "@/lib/catalog";
 import item from "../../../../public/r/nilkamal.json";
 import styles from "../../page.module.css";
 
-export const metadata = { title: "Nilkamal | Modulo" };
+export const metadata = getComponentMetadata(nilkamal);
 
 export default function NilkamalPage() {
   return <div className={styles.page}>
     <a className={styles.skipLink} href="#content">Skip to component</a>
     <SiteHeader page="component" />
     <main className={styles.main} id="content">
+      <StructuredData data={getComponentStructuredData(nilkamal)} />
       <nav className={styles.breadcrumbs} aria-label="Breadcrumb"><ol>
         <li><Link href="/">Home</Link></li><li><Link href="/components">Components</Link></li><li aria-current="page">Nilkamal</li>
       </ol></nav>
@@ -29,6 +33,7 @@ export default function NilkamalPage() {
           <h3>Usage</h3><pre><code>{nilkamalUsage}</code></pre>
           <p>React, Canvas 2D, and Web Audio. All ten source files install together. No animation package required.</p>
           <a href="/r/nilkamal.json">Registry JSON</a><a href="/artwork/nilkamal.png" download>Download still fallback</a>
+          <ComponentMediaLinks component={nilkamal} />
           <div className={styles.panelDivider} />
           <h3>Interaction</h3>
           <p>Hover over individual petals or hold and pull the lotus. The stem stays anchored below the water. Brush the pond to make ripples. Tab to the lotus or pond and press Enter for keyboard interaction.</p>

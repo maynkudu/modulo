@@ -2,11 +2,14 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { RootInfectionDemo } from "@/components/root-infection-demo";
 import { InstallCommand } from "@/components/install-command";
+import { ComponentMediaLinks } from "@/components/component-media-links";
+import { StructuredData } from "@/components/structured-data";
+import { getComponentMetadata, getComponentStructuredData } from "@/lib/seo";
 import { rootInfection, rootInfectionProps, rootInfectionUsage } from "@/lib/catalog";
 import item from "../../../../public/r/root-infection.json";
 import styles from "../../page.module.css";
 
-export const metadata = { title: "Root Infection | Modulo" };
+export const metadata = getComponentMetadata(rootInfection);
 
 export default function RootInfectionPage() {
   return (
@@ -14,6 +17,7 @@ export default function RootInfectionPage() {
       <a className={styles.skipLink} href="#content">Skip to component</a>
       <SiteHeader page="component" />
       <main className={styles.main} id="content">
+        <StructuredData data={getComponentStructuredData(rootInfection)} />
         <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
           <ol>
             <li><Link href="/">Home</Link></li>
@@ -35,6 +39,7 @@ export default function RootInfectionPage() {
             <pre><code>{rootInfectionUsage}</code></pre>
             <p>React, WebGL 2 with a Canvas 2D fallback, and Web Audio. No physics or animation package required. All ten source files install together.</p>
             <a href="/r/root-infection.json">Registry JSON</a>
+            <ComponentMediaLinks component={rootInfection} />
             <div className={styles.panelDivider} />
             <h3>Interaction</h3>
             <p>Keep the pointer still in the preview. Move it to pull the roots back, or click to scatter them. Press Escape to clear the screen.</p>

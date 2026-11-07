@@ -21,12 +21,15 @@ bun run build
 
 ## Structure
 
-- `src/app/page.tsx` lists component names and added dates at `/`, with keyword and date filters.
+- `src/app/page.tsx` shows one thumbnail per component at `/`, with GIF previews on hover and keyboard focus.
+- `src/app/components/page.tsx` lists component names and added dates, with keyword and date filters.
 - `src/app/components/interactive-art/page.tsx` contains the garden preview, controls, installation, API, and source.
 - `src/registry/interactive-art/` contains the six installable garden files.
 - `src/app/components/root-infection/page.tsx` contains the text-only horror preview, installation, API, implementation notes, and source.
 - `src/registry/root-infection/` contains the ten installable files for the independent Verlet solver, mesh renderer, audio engine, and React lifecycle.
 - `src/lib/catalog.ts` contains component metadata, installation targets, and API documentation.
+- `src/lib/seo.ts` and `src/lib/site.ts` set page metadata, structured data, and the site origin.
+- `public/media/` contains each component's thumbnail, GIF, and MP4.
 - `src/app/registry/page.tsx` documents direct installation and the `@modulo` namespace.
 - `scripts/build-registry.ts` generates the source `registry.json` and the served catalog and item manifests under `public/r/`.
 - `src/components/interface-sounds.tsx` and `src/lib/interface-sounds.ts` handle soft interaction sounds and the saved sound preference.
@@ -84,8 +87,31 @@ The component page at `/components/nilkamal` includes controls, installation, AP
 
 ## Sharing
 
-The registry needs no central registration for URL installs. Serve `public/r/` from a public origin and set `REGISTRY_BASE_URL` to that origin when building so catalog metadata uses the public URL. Consumers can use `npx shadcn@latest add <origin>/r/interactive-art.json`, or configure `@modulo` through the Registry page.
+The registry needs no central registration for URL installs. Serve `public/r/` from a public origin. The registry defaults to the site's canonical origin. Set `REGISTRY_BASE_URL` when hosting the registry separately. Consumers can use `npx shadcn@latest add <origin>/r/interactive-art.json`, or configure `@modulo` through the Registry page.
 
 The root `registry.json` also prepares the source for a GitHub registry. Public hosting and publishing still require a destination. They are not part of this local preview.
 
 Inspect BLANK source with `blank source <name>`. After choosing a component for the app, configure access with `blank configure .`, then install it with `blank shadcn add @compronents/<name>`. The helper supplies authentication at runtime.
+
+## SEO and component media
+
+The canonical origin defaults to `https://modulo.maynkudu.com`. Set `NEXT_PUBLIC_SITE_URL` in the deployment environment to select another origin. Until the production domain is connected, the current deployment can use:
+
+```sh
+NEXT_PUBLIC_SITE_URL=https://modulo-maynkudu.vercel.app bun run build
+```
+
+The home, Components, and Registry pages use the Modulo logo for sharing. Each component uses its thumbnail for Open Graph and Twitter images, and its matching MP4 for `og:video`. GIFs play in the home grid on hover or keyboard focus. Reduced motion keeps the thumbnails still.
+
+`/sitemap.xml` lists the six public pages and their images. `/robots.txt` points to the sitemap. Vercel preview deployments have `noindex` metadata. Registry JSON responses have a `noindex` header.
+
+Regenerate the component media with FFmpeg installed:
+
+```sh
+bun run media:build --dry-run
+bun run media:build
+```
+
+The command bundles the existing components into a local capture page and uses Webreel to record them. Capture files and the recording config live in `.plannotator/component-media/`. JPGs and MP4s are 1200 by 630 pixels. GIFs are 640 by 336 pixels and four seconds long. Use `--output-dir <directory>` to inspect regenerated assets in a separate directory.
+
+Add a capture scenario in `scripts/build-component-media.ts` and its preview in `scripts/component-media-preview.tsx` when adding a component. The registry build checks that every component has nonempty media files before generating the manifests.

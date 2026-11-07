@@ -43,5 +43,29 @@
       "target": "components/interactive-art/engine/scene.css"
     }
   ],
+  "meta": {
+    "media": {
+      "thumbnail": {
+        "alt": "White and purple lotus flowers growing above a pond in daylight.",
+        "width": 1200,
+        "height": 630,
+        "type": "image/jpeg",
+        "url": "https://modulo.maynkudu.com/media/interactive-art.jpg"
+      },
+      "animation": {
+        "width": 640,
+        "height": 336,
+        "type": "image/gif",
+        "url": "https://modulo.maynkudu.com/media/interactive-art.gif"
+      },
+      "video": {
+        "width": 1200,
+        "height": 630,
+        "type": "video/mp4",
+        "duration": 4,
+        "url": "https://modulo.maynkudu.com/media/interactive-art.mp4"
+      }
+    }
+  },
   "type": "registry:component"
 }

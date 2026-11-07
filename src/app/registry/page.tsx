@@ -1,8 +1,9 @@
 import { RegistryGuide } from "@/components/registry-guide";
 import { SiteHeader } from "@/components/site-header";
+import { getSiteMetadata } from "@/lib/seo";
 import styles from "../page.module.css";
 
-export const metadata = { title: "Registry | Modulo" };
+export const metadata = getSiteMetadata("registry");
 
 export default function RegistryPage() {
   return (

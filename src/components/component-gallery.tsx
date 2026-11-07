@@ -4,50 +4,69 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useMemo, useRef } from "react";
-import { GardenCanvas, type GardenController } from "@/registry/interactive-art/examples/GardenCanvas";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { catalogItems } from "@/lib/catalog";
 import styles from "./component-gallery.module.css";
 
-const views = [
-  { name: "daylight", time: 34, seed: 1486, ratio: "4 / 5" },
-  { name: "sunset", time: 70, seed: 1486, ratio: "3 / 2" },
-  { name: "moonlight", time: 102, seed: 786, ratio: "1 / 1" },
-  { name: "new growth", time: 14, seed: 2120, ratio: "4 / 3" },
-  { name: "night", time: 102, seed: 1486, ratio: "4 / 3" },
-  { name: "morning", time: 22, seed: 786, ratio: "4 / 5" },
-  { name: "golden hour", time: 62, seed: 2120, ratio: "3 / 2" },
-  { name: "blue hour", time: 86, seed: 1789, ratio: "1 / 1" },
-  { name: "buds", time: 8, seed: 1486, ratio: "1 / 1" },
-  { name: "blossoms", time: 54, seed: 2120, ratio: "4 / 3" },
-  { name: "dusk", time: 76, seed: 786, ratio: "4 / 5" },
-  { name: "first light", time: 118, seed: 1789, ratio: "3 / 2" },
-] as const;
-
-const columns = [views.slice(0, 4), views.slice(4, 8), views.slice(8, 12)];
 const depths = [-0.55, 0.35, -1];
+const items = catalogItems.toSorted((a, b) => b.addedAt.localeCompare(a.addedAt));
+const columns = depths.map((_, column) => items.filter((_, index) => index % depths.length === column));
+const thumbnailSizes = "(max-width: 760px) calc((100vw - 52px) / 3), (max-width: 1050px) calc((100vw - 80px) / 3), (max-width: 1344px) calc((100vw - 96px) / 3), 416px";
+
+function subscribeToMotion(notify: () => void) {
+  const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+  query.addEventListener("change", notify);
+  return () => query.removeEventListener("change", notify);
+}
+
+function reducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function subscribeToVisibility(notify: () => void) {
+  document.addEventListener("visibilitychange", notify);
+  return () => document.removeEventListener("visibilitychange", notify);
+}
+
+function pageVisible() {
+  return document.visibilityState !== "hidden";
+}
+
+const noReducedMotionOnServer = () => false;
+const visibleOnServer = () => true;
+
+function ComponentTile({ item, canAnimate, eager }: {
+  item: (typeof catalogItems)[number];
+  canAnimate: boolean;
+  eager: boolean;
+}) {
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const { component, media } = item;
+  const playing = canAnimate && !failed && (hovered || focused);
+
+  return <article className={styles.tile}
+    style={{ aspectRatio: component.name === "interactive-art" ? "1 / 1" : "4 / 3" }}
+    aria-labelledby={`preview-${component.name}`}
+    onPointerEnter={(event) => { if (event.pointerType !== "touch") setHovered(true); }}
+    onPointerLeave={() => setHovered(false)}
+    onFocus={() => setFocused(true)} onBlur={() => setFocused(false)}>
+    <h2 className="sr-only" id={`preview-${component.name}`}>{component.title}</h2>
+    <div className={styles.preview}>
+      <Image className={styles.scene} src={media.thumbnail.src} alt={media.thumbnail.alt}
+        fill sizes={thumbnailSizes} loading={eager ? "eager" : "lazy"} />
+      {playing && <Image className={`${styles.scene} ${styles.animation}`} src={media.animation.src}
+        alt="" aria-hidden="true" fill sizes={thumbnailSizes} unoptimized loading="eager" onError={() => setFailed(true)} />}
+    </div>
+    <Link className={styles.tileLink} href={`/components/${component.name}`} aria-label={`Open ${component.title}`} />
+  </article>;
+}
 
 export function ComponentGallery() {
   const gallery = useRef<HTMLElement>(null);
-  const gardens = useRef<(GardenController | null)[]>([]);
-  const activeGarden = useRef<GardenController | null>(null);
-  const readyCallbacks = useMemo(() => views.map((_, index) => (garden: GardenController | null) => {
-    if (!garden && activeGarden.current === gardens.current[index]) activeGarden.current = null;
-    gardens.current[index] = garden;
-  }), []);
-
-  function activate(index: number) {
-    const garden = gardens.current[index];
-    if (!garden || activeGarden.current === garden) return;
-    activeGarden.current?.pause();
-    activeGarden.current = garden;
-    garden.resume();
-  }
-
-  function deactivate(index: number) {
-    if (activeGarden.current !== gardens.current[index]) return;
-    activeGarden.current?.pause();
-    activeGarden.current = null;
-  }
+  const reduced = useSyncExternalStore(subscribeToMotion, reducedMotion, noReducedMotionOnServer);
+  const visible = useSyncExternalStore(subscribeToVisibility, pageVisible, visibleOnServer);
 
   useEffect(() => {
     const root = gallery.current;
@@ -71,29 +90,8 @@ export function ComponentGallery() {
     <section ref={gallery} className={styles.gallery} aria-label="Component gallery">
       {columns.map((column, index) => (
         <div key={index} className={styles.column}>
-          {index === 0 && <article className={styles.tile} style={{ aspectRatio: "4 / 3" }}>
-            <div className={styles.infectionPreview} aria-hidden="true">don&apos;t move your mouse</div>
-            <Link className={styles.tileLink} href="/components/root-infection" aria-label="Open Root Infection" />
-          </article>}
-          {index === 1 && <article className={styles.tile} style={{ aspectRatio: "4 / 3" }}>
-            <div className={styles.preview} aria-hidden="true">
-              <Image className={styles.scene} src="/artwork/nilkamal.png" alt="" fill sizes="(max-width: 760px) 33vw, 400px" style={{ objectFit: "cover" }} />
-            </div>
-            <Link className={styles.tileLink} href="/components/nilkamal" aria-label="Open Nilkamal" />
-          </article>}
-          {column.map((view, row) => (
-            <article key={view.name} className={styles.tile} style={{ aspectRatio: view.ratio }}
-              onPointerEnter={(event) => { if (event.pointerType !== "touch") activate(index * 4 + row); }}
-              onPointerLeave={() => deactivate(index * 4 + row)}
-              onFocus={() => activate(index * 4 + row)} onBlur={() => deactivate(index * 4 + row)}>
-              <div className={styles.preview} aria-hidden="true" inert>
-                <GardenCanvas className={styles.scene} initialTime={view.time} seed={view.seed}
-                  timeScale={0.2} wind={0.5} paused onReady={readyCallbacks[index * 4 + row]}
-                  fallback="/artwork/lotus-garden.png" />
-              </div>
-              <Link className={styles.tileLink} href="/components/interactive-art"
-                aria-label={`Open Interactive art, ${view.name} preview`} />
-            </article>
+          {column.map((item, row) => (
+            <ComponentTile key={item.component.name} item={item} eager={row === 0} canAnimate={!reduced && visible} />
           ))}
         </div>
       ))}

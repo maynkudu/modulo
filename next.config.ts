@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  async headers() {
+    return [{
+      source: "/r/:path*",
+      headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+    }];
+  },
   turbopack: {
     rules: {
       "globals.css": {
