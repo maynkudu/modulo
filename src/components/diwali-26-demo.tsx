@@ -1,19 +1,18 @@
 "use client";
 
-import { useCallback, useId, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 import { Diwali26, type Diwali26Controller, type Pattern, type FrameState } from "@/registry/diwali-26/Diwali26";
-import { soundEnabled, subscribeToSound } from "@/lib/interface-sounds";
+import { useSoundSettings } from "@/lib/interface-sounds";
 import styles from "./diwali-26-demo.module.css";
 
 declare global { interface Window { diwali26?: Diwali26Controller; } }
-const enabledOnServer=()=>true;
 const patterns=[{value:"surprise",label:"Surprise me"},{value:"chrysanthemum",label:"Chrysanthemum"},{value:"lotus",label:"Lotus"},{value:"rings",label:"Double ring"},{value:"willow",label:"Golden willow"},{value:"diwali",label:"DIWALI"},{value:"2026",label:"2026"}] satisfies {value:Pattern;label:string}[];
 
 export function Diwali26Demo() {
  const id=useId(),controller=useRef<Diwali26Controller|null>(null),lastStatus=useRef("");
  const artwork=useRef<HTMLElement|null>(null),pendingLaunch=useRef(false);
- const enabled=useSyncExternalStore(subscribeToSound,soundEnabled,enabledOnServer);
- const [pattern,setPattern]=useState<Pattern>("surprise"),[volume,setVolume]=useState(.9),[paused,setPaused]=useState(false);
+ const sound=useSoundSettings(),enabled=sound.enabled&&sound.volume>0;
+ const [pattern,setPattern]=useState<Pattern>("surprise"),[volume,setVolume]=useState(1),[paused,setPaused]=useState(false);
  const [reduced,setReduced]=useState(false),[ready,setReady]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState("");
  const onReady=useCallback((instance:Diwali26Controller|null)=>{controller.current=instance;pendingLaunch.current=false;setReady(Boolean(instance));if(process.env.NODE_ENV==="development"){if(instance)window.diwali26=instance;else delete window.diwali26;}},[]);
  const onFrame=useCallback((frame:FrameState)=>{if(pendingLaunch.current&&frame.visible&&!frame.paused){pendingLaunch.current=false;controller.current?.launch();}const value=String(frame.reducedMotion);if(lastStatus.current!==value){lastStatus.current=value;setReduced(frame.reducedMotion);}},[]);
@@ -33,7 +32,7 @@ export function Diwali26Demo() {
  return <>
   <section ref={artwork} className={styles.artwork} aria-label="Diwali/26 preview">
    <header className={styles.artworkHeader}><h2>Diwali/26</h2><span>{reduced?"Still skyshots":paused?"Paused":"Click the sky"}</span></header>
-   <Diwali26 pattern={pattern} volume={volume} paused={paused} enableAudio={enabled} fallback={error ? "/artwork/diwali-26.png" : undefined} onReady={onReady} onFrame={onFrame} onError={onError}/>
+   <Diwali26 pattern={pattern} volume={volume * sound.volume} paused={paused} enableAudio={enabled} fallback={error ? "/artwork/diwali-26.png" : undefined} onReady={onReady} onFrame={onFrame} onError={onError}/>
   </section>
   <section className={styles.controlsPanel} aria-labelledby={`${id}-controls`}>
    <h2 id={`${id}-controls`}>Skyshots</h2>

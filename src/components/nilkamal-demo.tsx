@@ -1,22 +1,22 @@
 "use client";
 
-import { useCallback, useId, useRef, useState, useSyncExternalStore } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 import { Nilkamal, WEATHERS, type NilkamalController, type Weather } from "@/registry/nilkamal/Nilkamal";
 import type { FrameState } from "@/registry/nilkamal/engine/runtime";
-import { soundEnabled, subscribeToSound } from "@/lib/interface-sounds";
+import { useSoundSettings } from "@/lib/interface-sounds";
 import styles from "./nilkamal-demo.module.css";
 
 declare global { interface Window { nilkamal?: NilkamalController; } }
-const enabledOnServer = () => true;
 
 export function NilkamalDemo() {
   const id = useId();
   const controller = useRef<NilkamalController | null>(null);
   const lastStatus = useRef("");
-  const enabled = useSyncExternalStore(subscribeToSound, soundEnabled, enabledOnServer);
+  const sound = useSoundSettings();
+  const enabled = sound.enabled && sound.volume > 0;
   const [weather, setWeather] = useState<Weather>("clear");
   const [intensity, setIntensity] = useState(.8);
-  const [volume, setVolume] = useState(.9);
+  const [volume, setVolume] = useState(1);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [bloom, setBloom] = useState(1);
@@ -49,7 +49,7 @@ export function NilkamalDemo() {
   return <>
     <section className={styles.artwork} aria-label="Nilkamal preview">
       <header className={styles.artworkHeader}><h2>Nilkamal</h2><span>{reducedMotion ? "Still preview" : paused ? "Paused" : weather.charAt(0).toUpperCase() + weather.slice(1)}</span></header>
-      <Nilkamal weather={weather} intensity={intensity} paused={paused} enableAudio={enabled} volume={volume} onReady={onReady} onFrame={onFrame} onError={onError} fallback="/artwork/nilkamal.png" />
+      <Nilkamal weather={weather} intensity={intensity} paused={paused} enableAudio={enabled} volume={volume * sound.volume} onReady={onReady} onFrame={onFrame} onError={onError} fallback="/artwork/nilkamal.png" />
     </section>
     <section className={styles.controlsPanel} aria-labelledby={`${id}-controls`}>
       <h2 id={`${id}-controls`}>Weather</h2>

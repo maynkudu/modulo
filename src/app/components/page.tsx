@@ -11,8 +11,8 @@ export default function Components() {
     <div className={styles.page}>
       <a className={styles.skipLink} href="#content">Skip to components</a>
       <SiteHeader page="catalog" />
-      <main className={styles.main} id="content" aria-label="Components">
-        <h1 className="sr-only">Components</h1>
+      <main className={`${styles.main} ${styles.catalogMain}`} id="content" aria-label="Components">
+        <h1 className={styles.catalogTitle}>Components</h1>
         <StructuredData data={getCollectionStructuredData("components")} />
         <CatalogIndex />
       </main>

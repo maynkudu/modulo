@@ -1,10 +1,13 @@
 .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; }
 .column { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-.tile { position: relative; min-width: 0; overflow: hidden; border: 1px solid #333; background: #000; }
+.tile { position: relative; min-width: 0; overflow: hidden; border: 1px solid var(--ui-border); background: #000; transition: border-color 120ms ease-out; }
 .preview { position: absolute; inset: 0; pointer-events: none; }
-.preview .scene { height: 100%; width: 100%; aspect-ratio: auto; object-fit: cover; }
+.preview .scene { height: 100%; width: 100%; aspect-ratio: auto; object-fit: contain; }
 .tileLink { position: absolute; inset: 0; display: block; }
 .tile:has(.tileLink:hover), .tile:focus-within { border-color: #fff; }
 .tile .tileLink:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
-@media (max-width: 760px) { .gallery, .column { gap: 10px; } }
-@media (prefers-reduced-motion: reduce) { .animation { display: none; } }
+.animation { opacity: 0; }
+.playing { opacity: 1; }
+@media (max-width: 1000px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .gallery, .column { gap: 12px; } }
+@media (prefers-reduced-motion: reduce) { .animation { display: none; } .tile { transition: none; } }

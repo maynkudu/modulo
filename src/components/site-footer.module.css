@@ -1,0 +1,5 @@
+.footer { max-width: 1280px; margin: 0 auto; padding: 24px 0 80px; border-top: 1px solid var(--ui-border); display: flex; justify-content: space-between; gap: 20px; color: var(--ui-muted); font-size: 12px; }
+.footer a { text-decoration: none; color: inherit; }
+.footer a:hover { color: #fff; }
+@media (max-width: 1360px) { .footer { margin: 0 40px; } }
+@media (max-width: 700px) { .footer { margin: 0 20px; padding-bottom: 50px; } }

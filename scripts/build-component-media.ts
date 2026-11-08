@@ -26,6 +26,7 @@ for (let index = 0; index < args.length; index++) {
 const workspace = resolve(root, ".plannotator/component-media");
 const bundle = resolve(workspace, "bundle");
 const ffmpeg = process.env.FFMPEG_PATH ?? "ffmpeg";
+const ffprobe = process.env.FFPROBE_PATH ?? "ffprobe";
 await mkdir(workspace, { recursive: true });
 execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=iife", "--production", `--outdir=${bundle}`], {
   cwd: root, stdio: "inherit",
@@ -44,10 +45,10 @@ html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#0503
 </style></head><body><main id="root"></main><script>${javascript.replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
-  { name: "diwali-26", flow: "diwali-skyshots", height: 630, pause: 6500, seek: 1.6, movePointer: false },
-  { name: "root-infection", flow: "root-growth", height: 630, pause: 32000, seek: 25, movePointer: true },
-  { name: "nilkamal", flow: "lotus-rain", height: 816, pause: 8000, seek: 2, movePointer: false },
-  { name: "interactive-art", flow: "garden-growth", height: 816, pause: 8000, seek: 2, movePointer: false },
+  { name: "diwali-26", flow: "diwali-skyshots", pause: 20000, seek: 1.6, movePointer: false },
+  { name: "root-infection", flow: "root-growth", pause: 32000, seek: 25, movePointer: true },
+  { name: "nilkamal", flow: "lotus-rain", pause: 8000, seek: 2, movePointer: false },
+  { name: "interactive-art", flow: "garden-growth", pause: 8000, seek: 2, movePointer: false },
 ];
 const selectedItems = selectedComponent ? catalogItems.filter(entry => entry.component.name === selectedComponent) : catalogItems;
 if (!selectedItems.length) throw new Error(`Unknown component: ${selectedComponent}`);
@@ -65,7 +66,7 @@ await writeFile(configPath, `${JSON.stringify({
   videos: Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, {
     url: `${pathToFileURL(previewPath).href}?component=${entry.component.name}`,
     output: `${entry.component.name}.mp4`,
-    viewport: { width: entry.media.video.width, height: specification.height },
+    viewport: { width: entry.media.video.width, height: entry.media.video.height },
     fps: 20,
     waitFor: "body[data-ready=true]",
     steps: [
@@ -86,15 +87,19 @@ if (!dryRun) {
     const video = resolve(destination, basename(media.video.src));
     const thumbnail = resolve(destination, basename(media.thumbnail.src));
     const animation = resolve(destination, basename(media.animation.src));
-    const crop = `crop=${media.video.width}:${media.video.height}`;
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-ss", String(specification.seek), "-i", recording,
-      "-t", String(media.video.duration), "-vf", crop, "-an", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "25", "-movflags", "+faststart", video]);
+      "-t", String(media.video.duration), "-an", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-movflags", "+faststart", video]);
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", video, "-frames:v", "1", "-q:v", "2", thumbnail]);
-    const palette = `fps=10,scale=${media.animation.width}:${media.animation.height}:flags=lanczos,split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=bayer:bayer_scale=3`;
+    const palette = `fps=10,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=sierra2_4a`;
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", video, "-filter_complex", palette, "-loop", "0", animation]);
     for (const asset of [thumbnail, animation, video]) {
       if ((await stat(asset)).size === 0) throw new Error(`Empty component media: ${asset}`);
+      const dimensions = execFileSync(ffprobe, ["-v", "error", "-select_streams", "v:0", "-show_entries", "stream=width,height", "-of", "csv=s=x:p=0", asset], { encoding: "utf8" }).trim();
+      const [width, height] = dimensions.split("x").map(Number);
+      if (width !== media.video.width || height !== media.video.height) throw new Error(`Unexpected component media dimensions: ${asset} (${dimensions}).`);
     }
+    const duration = Number(execFileSync(ffprobe, ["-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", video], { encoding: "utf8" }).trim());
+    if (!Number.isFinite(duration) || Math.abs(duration - media.video.duration) > .1) throw new Error(`Incomplete component video: ${video} (${duration}s). Increase its capture time.`);
     console.log(`Built thumbnail, GIF, and MP4 for ${component.name}.`);
   }
   if (!selectedComponent) {

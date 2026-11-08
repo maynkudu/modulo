@@ -3,6 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { accessRequest, okSchema, sessionStatusSchema, sourceItemSchema } from "@/lib/access-schema";
+import { ComponentSection } from "./component-section";
 import styles from "@/app/page.module.css";
 
 type SourceState = { kind: "loading" } | { kind: "locked" } | { kind: "ready"; item: z.infer<typeof sourceItemSchema> };
@@ -50,19 +51,19 @@ export function ComponentSource({ name }: { name: string }) {
     finally { setPending(false); }
   }
 
-  return <section className={`${styles.panel} ${styles.source}`} id="source" aria-labelledby="source-heading">
-    <div className={styles.accessHeading}><h2 id="source-heading">Source</h2>
+  return <ComponentSection title="Source" id="source"><div className={`${styles.panel} ${styles.sourceGate}`}>
+    <div className={styles.accessHeading}>
       {state.kind === "ready" && <button type="button" className={styles.secondaryButton} onClick={lock} disabled={pending}>Lock source</button>}
     </div>
     {state.kind === "loading" && <p role="status">Checking source access...</p>}
-    {state.kind === "locked" && <form className={styles.accessForm} onSubmit={unlock}>
+    {state.kind === "locked" && <><p>Enter an active Modulo key to view the source.</p><form className={styles.accessForm} onSubmit={unlock}>
       <label htmlFor={`source-key-${name}`}>Key</label>
       <input id={`source-key-${name}`} name="key" type="password" placeholder="maynkudu_..." autoComplete="off" autoCapitalize="none" spellCheck={false} required maxLength={128} disabled={pending} />
       <button type="submit" disabled={pending}>{pending ? "Checking..." : "Unlock source"}</button>
-    </form>}
+    </form></>}
     {error && <p role="alert">{error}</p>}
     {state.kind === "ready" && state.item.files.map(file => <details className={styles.details} key={file.path}>
       <summary>{file.target ?? file.path}</summary><pre><code>{file.content}</code></pre>
     </details>)}
-  </section>;
+  </div></ComponentSection>;
 }

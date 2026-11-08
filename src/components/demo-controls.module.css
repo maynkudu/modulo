@@ -1,0 +1,30 @@
+.artwork { min-width: 0; overflow: hidden; position: relative; background: #000; }
+.artworkHeader { position: absolute; top: 0; left: 0; right: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; pointer-events: none; }
+.artworkHeader h2 { margin: 0; color: #aaa; font-size: 12px; font-weight: 400; }
+.artworkHeader span { font-size: 12px; color: #aaa; white-space: nowrap; }
+.controlsPanel { min-width: 0; padding: 22px; border-left: 1px solid var(--ui-border); align-self: stretch; display: flex; flex-direction: column; background: #000; color: #e8e8e8; }
+.controlsPanel h2, .controlsPanel h3 { margin: 0 0 16px; font-size: 14px; font-weight: 500; }
+.controlsPanel button, .controlsPanel select { min-height: 40px; padding: 8px 12px; border: 1px solid var(--ui-border); border-radius: 3px; background: #000; color: inherit; font: inherit; font-size: 12px; }
+.controlsPanel button { cursor: pointer; transition: background 120ms ease-out, border-color 120ms ease-out, transform 100ms ease-out; }
+.controlsPanel button:hover:not(:disabled):not([aria-pressed=true]) { background: var(--ui-control); border-color: #555; }
+.controlsPanel button[aria-pressed=true] { background: #e8e8e8; color: #000; border-color: #e8e8e8; }
+.controlsPanel button:active:not(:disabled) { transform: scale(.97); }
+.controlsPanel :is(button, select):disabled { color: #777; cursor: default; }
+.panelHeading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.panelHeading span { color: var(--ui-muted); font-size: 12px; }
+.weather { display: flex; flex-wrap: wrap; gap: 5px; }
+.weather button { min-height: 34px; padding: 6px 9px; }
+.hint { margin: 22px 0; color: var(--ui-muted); font-size: 13px; line-height: 1.7; }
+.field { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 13px; font-size: 13px; }
+.field output { color: var(--ui-muted); font-variant-numeric: tabular-nums; }
+.field select { max-width: 170px; }
+.slider { display: block; width: 100%; min-height: 40px; margin: 0; padding: 0; background: transparent; accent-color: #e8e8e8; cursor: ew-resize; }
+.slider:disabled { opacity: .45; cursor: default; }
+.actions, .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.actions { margin-top: 20px; }
+.export { margin-top: auto; padding-top: 24px; }
+.export h3 { margin-top: 8px; }
+.save { margin-top: 16px; width: 100%; }
+.error { margin: 16px 0 0; color: #ff8d8d; font-size: 13px; line-height: 1.7; }
+@media (max-width: 700px) { .controlsPanel { padding: 20px; border-left: 0; border-top: 1px solid var(--ui-border); } .weather button { min-height: 38px; padding: 7px 11px; font-size: 13px; } .actions button { font-size: 13px; } .hint { margin: 16px 0; } .export { margin-top: 24px; } }
+@media (prefers-reduced-motion: reduce) { .controlsPanel button { transition: none; } .controlsPanel button:active:not(:disabled) { transform: none; } }

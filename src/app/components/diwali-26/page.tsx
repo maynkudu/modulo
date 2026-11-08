@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
 import { Diwali26Demo } from "@/components/diwali-26-demo";
 import { InstallCommand } from "@/components/install-command";
@@ -24,10 +25,9 @@ export default function Diwali26Page() {
         <div><h1>{diwali26.title}</h1><p>{diwali26.description}</p></div>
         <a className={styles.sourceLink} href="#source">View source</a>
       </div>
-      <div className={styles.grid}>
-        <Diwali26Demo />
-        <section className={`${styles.panel} ${styles.install}`} aria-labelledby="installation">
-          <h2 id="installation">Installation</h2>
+      <div className={styles.sections}>
+        <ComponentSection title="Preview" id="preview"><div className={styles.demo}><Diwali26Demo /></div></ComponentSection>
+        <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="diwali-26" />
           <div className={styles.panelDivider} />
           <h3>Usage</h3><pre><code>{diwali26Usage}</code></pre>
@@ -39,9 +39,8 @@ export default function Diwali26Page() {
           <p>Click the open sky to launch at that point. Brush the rangoli to move individual petals, leaves and powder. Tab to the sky or a flower and press Enter for keyboard interaction.</p>
           <p>Each skyshot has its own whistle, boom and crackle tail. Sound starts after interaction. The header sound toggle mutes the scene and haptics. Vibration depends on browser and device support.</p>
           <p>Pause, hidden tabs and scrolling the scene out of view stop animation and sound. Reduced motion keeps the rangoli still and draws skyshots without rocket motion or flashes.</p>
-        </section>
-        <section className={`${styles.panel} ${styles.api}`} aria-labelledby="api">
-          <h2 id="api">API</h2>
+        </div></ComponentSection>
+        <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
           <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Diwali/26 properties"><table>
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
             <tbody>{diwali26Props.map(([name, type, value, description]) => <tr key={name}>
@@ -53,7 +52,7 @@ export default function Diwali26Page() {
             <p><code>setPattern(pattern)</code> changes new skyshots. <code>unlockAudio()</code> unlocks sound from an external gesture. <code>setAudio(enabled, volume)</code> controls sound and haptics. <code>snapshot()</code> reports geometry, skyshots and runtime state.</p>
             <p><code>exportPNG()</code> exports the current pose. Pass <code>layers</code> to export sky, fireworks, rangoli, powder or lamps separately. All layers share coordinates. The component calls <code>destroy()</code> on unmount.</p>
           </details>
-        </section>
+        </div></ComponentSection>
         <ComponentSource name="diwali-26" />
       </div>
     </main>

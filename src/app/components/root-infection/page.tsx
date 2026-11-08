@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
 import { RootInfectionDemo } from "@/components/root-infection-demo";
 import { InstallCommand } from "@/components/install-command";
@@ -29,10 +30,9 @@ export default function RootInfectionPage() {
           <div><h1>{rootInfection.title}</h1><p>{rootInfection.description}</p></div>
           <a className={styles.sourceLink} href="#source">View source</a>
         </div>
-        <div className={styles.grid}>
-          <RootInfectionDemo />
-          <section className={`${styles.panel} ${styles.install}`} aria-labelledby="installation">
-            <h2 id="installation">Installation</h2>
+        <div className={styles.sections}>
+          <ComponentSection title="Preview" id="preview"><RootInfectionDemo /></ComponentSection>
+          <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
             <InstallCommand name="root-infection" />
             <div className={styles.panelDivider} />
             <h3>Usage</h3>
@@ -47,9 +47,8 @@ export default function RootInfectionPage() {
             <p>Roots cling to buttons and links and tug their edges. As the infection matures, thinner roots merge into larger trunks. Thick new forks keep spreading while the existing roots grow wider and press against the viewport.</p>
             <p>Sound starts after the first click or key press. The header sound toggle mutes the demo. Reduced motion keeps the preview still.</p>
             <p>Moving outside the preview stops new infections while you read the documentation. The overlay never intercepts links or controls.</p>
-          </section>
-          <section className={`${styles.panel} ${styles.api}`} aria-labelledby="api">
-            <h2 id="api">API</h2>
+          </div></ComponentSection>
+          <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
             <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Root Infection properties">
               <table>
                 <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
@@ -66,9 +65,8 @@ export default function RootInfectionPage() {
             <p><code>snapshot()</code> reports particle counts, branch counts, solver error, audio state, rendering backend, and measured frame timings. WebGL body timings measure CPU submission, while frame intervals include browser scheduling. <code>reset()</code> clears the infection. <code>setAudio(enabled, volume)</code> changes audio immediately.</p>
               <p>Keep <code>onReady</code> stable. Physics prop changes create a fresh simulation. Audio and class changes preserve the current infection. Cleanup calls <code>destroy()</code> automatically.</p>
             </details>
-          </section>
-          <section className={`${styles.panel} ${styles.source}`} aria-labelledby="physics">
-            <h2 id="physics">How it works</h2>
+          </div></ComponentSection>
+          <ComponentSection title="How it works" id="physics"><div className={`${styles.panel} ${styles.docPanel} ${styles.source}`}>
             <p>Each root is a chain of pooled particles. Verlet integration derives velocity from position history. Distance constraints keep neighboring joints connected, and angular constraints resist sharp folds more strongly as the roots thicken. Branches share a parent joint.</p>
             <p>A shared breadth-first frontier fills sibling branch slots before opening a deeper generation. New roots and segments inherit the infection age, so later branches start thicker and occupy more space between joints. Segment additions slow as their size increases.</p>
             <p>At the default settings, consolidation starts 12 seconds after emergence. Thin roots, including earlier branches and detached worms, converge onto larger trunks in staggered 1.8-second merges. Substantial forks and their supporting parents stay connected.</p>
@@ -81,7 +79,7 @@ export default function RootInfectionPage() {
             <p>The renderer builds rounded tube meshes whose neighboring joints share surface normals. Connected forks share a skin field, so their texture stays continuous as they merge. WebGL depth-tests the tissue into a floating-point field and adds lighting, pores, veins, small scars, and wet highlights once per visible pixel. The roots use brighter maroon tones on dark pages and near-black tones on light pages. Background sampling updates once a second during the infection, including after a theme change. Browsers without floating-point targets use the same material directly. Canvas 2D provides a fallback. Geometry and GPU buffers are reused.</p>
             <p>The sound engine synthesizes filtered noise, small cracks, a beating bass drone, a stereo suction sweep, and a descending sub-bass impact. A compressor and voice limit control overlapping sound.</p>
             <a href="https://youtube.com/shorts/HJas6mdFDqI" target="_blank" rel="noreferrer">Physics inspiration</a>
-          </section>
+          </div></ComponentSection>
           <ComponentSource name="root-infection" />
         </div>
       </main>

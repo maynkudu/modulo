@@ -1,3 +1,4 @@
+import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
 import Link from "next/link";
 import { GardenDemo } from "@/components/garden-demo";
@@ -32,10 +33,9 @@ export default function InteractiveArtPage() {
           </div>
           <a className={styles.sourceLink} href="#source">View source</a>
         </div>
-        <div className={styles.grid}>
-          <GardenDemo />
-          <section className={`${styles.panel} ${styles.install}`} aria-labelledby="installation">
-            <h2 id="installation">Installation</h2>
+        <div className={styles.sections}>
+          <ComponentSection title="Preview" id="preview"><div className={styles.demo}><GardenDemo /></div></ComponentSection>
+          <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
             <InstallCommand />
             <div className={styles.panelDivider} />
             <h3>Usage</h3>
@@ -44,9 +44,8 @@ export default function InteractiveArtPage() {
             <a href="/r/interactive-art.json">Registry JSON</a>
             <a href="/artwork/lotus-garden.png" download>Download still fallback</a>
             <ComponentMediaLinks component={interactiveArt} />
-          </section>
-          <section className={`${styles.panel} ${styles.api}`} aria-labelledby="api">
-            <h2 id="api">API</h2>
+          </div></ComponentSection>
+          <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
             <p>Pass scene options to <code>GardenCanvas</code>. Use the controller from <code>onReady</code> for live changes.</p>
             <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="GardenCanvas properties">
               <table>
@@ -65,7 +64,7 @@ export default function InteractiveArtPage() {
               <p><code>pause()</code>, <code>resume()</code>, <code>seek(seconds)</code>, <code>setTimeScale(value)</code>, and <code>bend(id, direction)</code> control the scene.</p>
               <p><code>snapshot()</code> and <code>saveState()</code> return scene state. <code>exportPNG(options)</code> saves the whole scene or selected layers. The React component calls <code>destroy()</code> on unmount.</p>
             </details>
-          </section>
+          </div></ComponentSection>
           <ComponentSource name="interactive-art" />
         </div>
       </main>

@@ -1,18 +1,17 @@
 "use client";
 
-import { useCallback, useSyncExternalStore } from "react";
+import { useCallback } from "react";
 import { RootInfection, type RootInfectionController } from "@/registry/root-infection/RootInfection";
-import { soundEnabled, subscribeToSound } from "@/lib/interface-sounds";
+import { useSoundSettings } from "@/lib/interface-sounds";
 import styles from "./root-infection-demo.module.css";
 
 declare global {
   interface Window { rootInfection?: RootInfectionController; }
 }
 
-const enabledOnServer = () => true;
 
 export function RootInfectionDemo() {
-  const enabled = useSyncExternalStore(subscribeToSound, soundEnabled, enabledOnServer);
+  const sound = useSoundSettings();
   const onReady = useCallback((controller: RootInfectionController | null) => {
     if (process.env.NODE_ENV !== "development") return;
     if (controller) window.rootInfection = controller;
@@ -20,6 +19,6 @@ export function RootInfectionDemo() {
   }, []);
 
   return <section className={styles.preview} aria-label="Root Infection preview">
-    <RootInfection volume={.85} enableAudio={enabled} className={styles.experience} onReady={onReady} />
+    <RootInfection volume={.85 * sound.volume} enableAudio={sound.enabled && sound.volume > 0} className={styles.experience} onReady={onReady} />
   </section>;
 }

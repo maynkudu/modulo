@@ -1,18 +1,42 @@
 "use client";
 
-import { useEffect, useSyncExternalStore } from "react";
-import { closeSounds, playSound, setSoundEnabled, soundEnabled, subscribeToSound, suspendSounds } from "@/lib/interface-sounds";
+import { useEffect, useId, useRef, useState } from "react";
+import { closeSounds, playSound, setSoundEnabled, setSoundVolume, useSoundSettings, suspendSounds } from "@/lib/interface-sounds";
+import styles from "./interface-sounds.module.css";
 
-const enabledOnServer = () => true;
+export function SoundControl({ className }: { className?: string }) {
+  const { enabled, volume } = useSoundSettings();
+  const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const id = useId();
 
-export function SoundToggle({ className }: { className?: string }) {
-  const enabled = useSyncExternalStore(subscribeToSound, soundEnabled, enabledOnServer);
+  useEffect(() => {
+    if (!open) return;
+    const events = new AbortController();
+    document.addEventListener("pointerdown", event => {
+      if (event.target instanceof Node && !root.current?.contains(event.target)) setOpen(false);
+    }, { signal: events.signal });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") { setOpen(false); trigger.current?.focus(); }
+    }, { signal: events.signal });
+    return () => events.abort();
+  }, [open]);
+
   return (
-    <button type="button" className={className} data-sound-toggle
-      aria-label={enabled ? "Mute interface sounds" : "Unmute interface sounds"}
-      aria-pressed={enabled} onClick={() => setSoundEnabled(!enabled)}>
-      Sound {enabled ? "on" : "off"}
-    </button>
+    <div ref={root} className={`${styles.root} ${className ?? ""}`} data-sound-managed>
+      <button ref={trigger} type="button" className={styles.trigger} aria-expanded={open} aria-controls={`${id}-panel`}
+        onClick={() => { setOpen(!open); playSound("click"); }}>Sound {enabled && volume > 0 ? "on" : "off"}</button>
+      {open && <section className={styles.panel} id={`${id}-panel`} aria-label="Sound settings">
+        <h2>Sound</h2>
+        <label htmlFor={`${id}-volume`}>Volume <output>{Math.round(volume * 100)}%</output></label>
+        <input id={`${id}-volume`} type="range" min="0" max="1" step=".05" value={volume} onChange={event => { setSoundVolume(event.currentTarget.valueAsNumber); playSound("slide"); }} />
+        <div className={styles.actions}>
+          <button type="button" aria-pressed={!enabled} onClick={() => setSoundEnabled(!enabled)}>{enabled ? "Mute" : "Unmute"}</button>
+          <button type="button" disabled={!enabled || volume === 0} onClick={() => playSound("click")}>Test sound</button>
+        </div>
+      </section>}
+    </div>
   );
 }
 
@@ -24,7 +48,7 @@ export function InterfaceSounds() {
     document.addEventListener("click", (event) => {
       if (!(event.target instanceof Element)) return;
       const control = event.target.closest("a, button, summary, input:not([type=range]), select, [role=button], [role=tab], [role=checkbox], [role=switch]");
-      if (!control || control.matches("[data-sound-toggle], [data-festival-feedback], :disabled")) return;
+      if (!control || control.matches("[data-festival-feedback], :disabled") || control.closest("[data-sound-managed]")) return;
       if (control.hasAttribute("data-scene-object") && event.detail !== 0) return;
       const before = control.getAttribute("aria-pressed");
       if (before === null) {
@@ -48,8 +72,7 @@ export function InterfaceSounds() {
     document.addEventListener("input", (event) => {
       const input = event.target;
       if (input instanceof HTMLInputElement && input.type === "range") {
-        const position = (input.valueAsNumber - Number(input.min)) / (Number(input.max) - Number(input.min));
-        playSound("slide", position);
+        if (!input.closest("[data-sound-managed]")) playSound("slide");
       } else if (input instanceof HTMLSelectElement) playSound("click");
     }, { capture: true, signal });
     document.addEventListener("pointerdown", (event) => {
@@ -66,7 +89,7 @@ export function InterfaceSounds() {
       if (distance < 8) return;
       dragging.x = event.clientX;
       dragging.y = event.clientY;
-      playSound("slide", Math.min(1, distance / 80));
+      playSound("slide");
     }, { signal });
     const release = () => { dragging = undefined; };
     document.addEventListener("pointerup", release, { signal });

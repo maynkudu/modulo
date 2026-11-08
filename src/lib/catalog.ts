@@ -102,11 +102,11 @@ export const diwali26 = {
   ],
 } satisfies RegistryItem;
 
-function componentMedia({ name, alt }: { name: string; alt: string }) {
+function componentMedia({ name, alt, height = 630 }: { name: string; alt: string; height?: number }) {
   return {
-    thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height: 630, type: "image/jpeg" },
-    animation: { src: `/media/${name}.gif`, width: 640, height: 336, type: "image/gif" },
-    video: { src: `/media/${name}.mp4`, width: 1200, height: 630, type: "video/mp4", duration: 4 },
+    thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
+    animation: { src: `/media/${name}.gif`, width: 1200, height, type: "image/gif" },
+    video: { src: `/media/${name}.mp4`, width: 1200, height, type: "video/mp4", duration: 4 },
   };
 }
 
@@ -125,7 +125,7 @@ export const catalogItems = [{
   addedAt: "2026-11-06",
   keywords: ["lotus", "garden", "canvas", "growth", "day", "night", "elastic"],
   seoDescription: "An interactive lotus garden for React with elastic stems, a day and night cycle, keyboard controls, and PNG exports. Preview and install the TypeScript source.",
-  media: componentMedia({ name: interactiveArt.name, alt: "White and purple lotus flowers growing above a pond in daylight." }),
+  media: componentMedia({ name: interactiveArt.name, alt: "White and purple lotus flowers growing above a pond in daylight.", height: 816 }),
 }, {
   component: rootInfection,
   addedAt: "2026-11-07",
@@ -137,13 +137,13 @@ export const catalogItems = [{
   addedAt: "2026-11-07",
   keywords: ["blue", "lotus", "kamal", "pond", "weather", "rain", "storm", "snow", "hail", "ice", "water", "interactive", "art", "audio"],
   seoDescription: "An interactive blue lotus for React with rain, storms, snow, and ice. Try the Canvas demo, adjust the weather, and install the TypeScript source.",
-  media: componentMedia({ name: nilkamal.name, alt: "A blue lotus and its reflection on a moonlit pond in the rain." }),
+  media: componentMedia({ name: nilkamal.name, alt: "A blue lotus and its reflection on a moonlit pond in the rain.", height: 816 }),
 }, {
   component: diwali26,
   addedAt: "2026-11-08",
   keywords: ["diwali", "2026", "rangoli", "fireworks", "skyshot", "flowers", "paisley", "mandala", "canvas", "audio", "haptics"],
   seoDescription: "An interactive Diwali scene for React with floral rangoli, pointer wind, skyshots, festival sounds and PNG layer exports. Try the preview and install the TypeScript source.",
-  media: componentMedia({ name: diwali26.name, alt: "Flowers, leafy paisleys, marigold garlands and diyas beneath skyshots in a dark Diwali sky." }),
+  media: componentMedia({ name: diwali26.name, alt: "Flowers, leafy paisleys, marigold garlands and diyas beneath skyshots in a dark Diwali sky.", height: 1072 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";

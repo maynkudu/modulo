@@ -1,0 +1,15 @@
+.root { position: relative; }
+.trigger { min-width: 74px; min-height: 40px; padding: 8px; border: 0; background: #000; color: var(--ui-muted); font: inherit; font-size: 13px; cursor: pointer; }
+.trigger:hover { color: #fff; background: var(--ui-control); }
+.panel { position: absolute; top: 48px; right: 0; z-index: 20; width: 280px; padding: 20px; border: 1px solid #383838; border-radius: 4px; background: #090909; box-shadow: 0 16px 40px #000; }
+.panel h2 { margin: 0 0 18px; font-size: 16px; font-weight: 500; }
+.panel label { display: flex; justify-content: space-between; font-size: 14px; }
+.panel input { display: block; width: 100%; min-height: 40px; margin: 10px 0; accent-color: #e8e8e8; cursor: ew-resize; }
+.actions { display: flex; gap: 8px; }
+.actions button { flex: 1; min-height: 40px; padding: 8px 12px; border: 1px solid var(--ui-border); border-radius: 3px; background: #000; color: #e8e8e8; font: inherit; font-size: 13px; cursor: pointer; transition: background 120ms ease-out, transform 100ms ease-out; }
+.actions button:hover:not(:disabled):not([aria-pressed=true]) { background: var(--ui-control); }
+.actions button[aria-pressed=true] { background: #e8e8e8; color: #000; }
+.actions button:active:not(:disabled) { transform: scale(.97); }
+.actions button:disabled { color: #777; cursor: default; }
+@media (max-width: 700px) { .trigger { font-size: 12px; } .panel { width: 270px; } }
+@media (prefers-reduced-motion: reduce) { .actions button { transition: none; } .actions button:active:not(:disabled) { transform: none; } }

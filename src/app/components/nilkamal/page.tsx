@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
 import { NilkamalDemo } from "@/components/nilkamal-demo";
 import { InstallCommand } from "@/components/install-command";
@@ -24,10 +25,9 @@ export default function NilkamalPage() {
         <div><h1>{nilkamal.title}</h1><p>{nilkamal.description}</p></div>
         <a className={styles.sourceLink} href="#source">View source</a>
       </div>
-      <div className={styles.grid}>
-        <NilkamalDemo />
-        <section className={`${styles.panel} ${styles.install}`} aria-labelledby="installation">
-          <h2 id="installation">Installation</h2>
+      <div className={styles.sections}>
+        <ComponentSection title="Preview" id="preview"><div className={styles.demo}><NilkamalDemo /></div></ComponentSection>
+        <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="nilkamal" />
           <div className={styles.panelDivider} />
           <h3>Usage</h3><pre><code>{nilkamalUsage}</code></pre>
@@ -39,9 +39,8 @@ export default function NilkamalPage() {
           <p>Hover over individual petals or hold and pull the lotus. The stem stays anchored below the water. Brush the pond to make ripples. Tab to the lotus or pond and press Enter for keyboard interaction.</p>
           <p>Snow collects on the petals and pads as the pond freezes. Hail bounces off the water. Clear weather and rain gradually melt the ice.</p>
           <p>Sound starts after interaction. The header sound toggle mutes the scene. Pause, hidden tabs, and scrolling the scene out of view stop animation and sound. Reduced motion shows still weather states without lightning flashes.</p>
-        </section>
-        <section className={`${styles.panel} ${styles.api}`} aria-labelledby="api">
-          <h2 id="api">API</h2>
+        </div></ComponentSection>
+        <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
           <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Nilkamal properties"><table>
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
             <tbody>{nilkamalProps.map(([name, type, value, description]) => <tr key={name}>
@@ -53,7 +52,7 @@ export default function NilkamalPage() {
             <p><code>unlockAudio()</code> can be called from an external control&apos;s gesture. <code>setAudio(enabled, volume)</code> controls the sound. <code>snapshot()</code> reports weather accumulation, stem geometry, runtime status, and audio state.</p>
             <p><code>exportPNG()</code> exports the scene. Pass <code>layers</code> to export sky, landscape, water, ice, lotus, weather, or foreground separately. The component calls <code>destroy()</code> on unmount.</p>
           </details>
-        </section>
+        </div></ComponentSection>
         <ComponentSource name="nilkamal" />
       </div>
     </main>

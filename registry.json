@@ -46,19 +46,19 @@
           "thumbnail": {
             "alt": "White and purple lotus flowers growing above a pond in daylight.",
             "width": 1200,
-            "height": 630,
+            "height": 816,
             "type": "image/jpeg",
             "url": "https://modulo.maynkudu.com/media/interactive-art.jpg"
           },
           "animation": {
-            "width": 640,
-            "height": 336,
+            "width": 1200,
+            "height": 816,
             "type": "image/gif",
             "url": "https://modulo.maynkudu.com/media/interactive-art.gif"
           },
           "video": {
             "width": 1200,
-            "height": 630,
+            "height": 816,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo.maynkudu.com/media/interactive-art.mp4"
@@ -135,8 +135,8 @@
             "url": "https://modulo.maynkudu.com/media/root-infection.jpg"
           },
           "animation": {
-            "width": 640,
-            "height": 336,
+            "width": 1200,
+            "height": 630,
             "type": "image/gif",
             "url": "https://modulo.maynkudu.com/media/root-infection.gif"
           },
@@ -214,19 +214,19 @@
           "thumbnail": {
             "alt": "A blue lotus and its reflection on a moonlit pond in the rain.",
             "width": 1200,
-            "height": 630,
+            "height": 816,
             "type": "image/jpeg",
             "url": "https://modulo.maynkudu.com/media/nilkamal.jpg"
           },
           "animation": {
-            "width": 640,
-            "height": 336,
+            "width": 1200,
+            "height": 816,
             "type": "image/gif",
             "url": "https://modulo.maynkudu.com/media/nilkamal.gif"
           },
           "video": {
             "width": 1200,
-            "height": 630,
+            "height": 816,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo.maynkudu.com/media/nilkamal.mp4"
@@ -283,19 +283,19 @@
           "thumbnail": {
             "alt": "Flowers, leafy paisleys, marigold garlands and diyas beneath skyshots in a dark Diwali sky.",
             "width": 1200,
-            "height": 630,
+            "height": 1072,
             "type": "image/jpeg",
             "url": "https://modulo.maynkudu.com/media/diwali-26.jpg"
           },
           "animation": {
-            "width": 640,
-            "height": 336,
+            "width": 1200,
+            "height": 1072,
             "type": "image/gif",
             "url": "https://modulo.maynkudu.com/media/diwali-26.gif"
           },
           "video": {
             "width": 1200,
-            "height": 630,
+            "height": 1072,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo.maynkudu.com/media/diwali-26.mp4"

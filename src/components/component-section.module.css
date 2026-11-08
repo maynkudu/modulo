@@ -1,0 +1,5 @@
+.section { display: grid; grid-template-columns: 130px minmax(0,1fr); gap: 32px; scroll-margin-top: 32px; }
+.label { margin: 0; padding-top: 12px; color: var(--ui-muted); font-size: 13px; font-weight: 500; }
+.content { min-width: 0; }
+@media (max-width: 1000px) { .section { grid-template-columns: 100px minmax(0,1fr); gap: 20px; } }
+@media (max-width: 700px) { .section { grid-template-columns: 1fr; gap: 14px; } .label { padding-top: 0; } }
