@@ -234,6 +234,75 @@
         }
       },
       "type": "registry:component"
+    },
+    {
+      "name": "diwali-26",
+      "title": "Diwali/26",
+      "description": "Lotus rangoli beneath a night sky. Launch floral bursts, DIWALI and 2026 with a click.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/diwali-26/Diwali26.tsx",
+          "type": "registry:component",
+          "target": "components/diwali-26/Diwali26.tsx"
+        },
+        {
+          "path": "src/registry/diwali-26/create-diwali-26.ts",
+          "type": "registry:lib",
+          "target": "components/diwali-26/create-diwali-26.ts"
+        },
+        {
+          "path": "src/registry/diwali-26/artwork.ts",
+          "type": "registry:lib",
+          "target": "components/diwali-26/artwork.ts"
+        },
+        {
+          "path": "src/registry/diwali-26/fireworks.ts",
+          "type": "registry:lib",
+          "target": "components/diwali-26/fireworks.ts"
+        },
+        {
+          "path": "src/registry/diwali-26/audio.ts",
+          "type": "registry:lib",
+          "target": "components/diwali-26/audio.ts"
+        },
+        {
+          "path": "src/registry/diwali-26/types.ts",
+          "type": "registry:lib",
+          "target": "components/diwali-26/types.ts"
+        },
+        {
+          "path": "src/registry/diwali-26/scene.css",
+          "type": "registry:file",
+          "target": "components/diwali-26/scene.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Flowers, leafy paisleys, marigold garlands and diyas beneath skyshots in a dark Diwali sky.",
+            "width": 1200,
+            "height": 630,
+            "type": "image/jpeg",
+            "url": "https://modulo.maynkudu.com/media/diwali-26.jpg"
+          },
+          "animation": {
+            "width": 640,
+            "height": 336,
+            "type": "image/gif",
+            "url": "https://modulo.maynkudu.com/media/diwali-26.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 630,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo.maynkudu.com/media/diwali-26.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
     }
   ]
 }

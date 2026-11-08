@@ -16,7 +16,7 @@ export function NilkamalDemo() {
   const enabled = useSyncExternalStore(subscribeToSound, soundEnabled, enabledOnServer);
   const [weather, setWeather] = useState<Weather>("clear");
   const [intensity, setIntensity] = useState(.8);
-  const [volume, setVolume] = useState(.45);
+  const [volume, setVolume] = useState(.9);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [bloom, setBloom] = useState(1);

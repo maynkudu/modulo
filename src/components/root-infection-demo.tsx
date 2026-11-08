@@ -20,6 +20,6 @@ export function RootInfectionDemo() {
   }, []);
 
   return <section className={styles.preview} aria-label="Root Infection preview">
-    <RootInfection enableAudio={enabled} className={styles.experience} onReady={onReady} />
+    <RootInfection volume={.85} enableAudio={enabled} className={styles.experience} onReady={onReady} />
   </section>;
 }

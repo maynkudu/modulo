@@ -128,6 +128,41 @@
           "sha256": "13829e65b15b2d3d62fc4f2ba3e9b0d3ea13879d73f8b3fe619a0ccd0de5407c"
         }
       ]
+    },
+    {
+      "name": "diwali-26",
+      "repository": "maynkudu/modulo-diwali-26",
+      "revision": "2d32e9a1d3e517152e8cd49283e406a31f5f0263",
+      "files": [
+        {
+          "path": "Diwali26.tsx",
+          "sha256": "1f90b2defb3820bcd590484918ed048c15aa8801a087ae304a198153f757b879"
+        },
+        {
+          "path": "artwork.ts",
+          "sha256": "49d1f2e76be1f43ea2704765555a63ba15f8a2ee2575c88481136ee4961c53d7"
+        },
+        {
+          "path": "audio.ts",
+          "sha256": "f384b4dfc1e8cb2f060c28c03909ecca0aef27c6edc65d50303853a9561914e2"
+        },
+        {
+          "path": "create-diwali-26.ts",
+          "sha256": "082121c8d183178119f5ff7c5b84c502425a6678994373a1224b52a67233d28e"
+        },
+        {
+          "path": "fireworks.ts",
+          "sha256": "5bc7608f5035937f9f5c2624fcf66bdad44a56644af25914674150792e5ccc22"
+        },
+        {
+          "path": "scene.css",
+          "sha256": "60f050b744c2486d5f0d62d2130ebedd35aa0cc5397e4fe67d172bc7a373f985"
+        },
+        {
+          "path": "types.ts",
+          "sha256": "76b748549e2cb7b61aee83e5a3f654724a1fc273432451de5a37d8c9337a2774"
+        }
+      ]
     }
   ]
 }

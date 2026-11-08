@@ -47,6 +47,7 @@ next-env.d.ts
 /src/registry/interactive-art/
 /src/registry/root-infection/
 /src/registry/nilkamal/
+/src/registry/diwali-26/
 /.private-registry/
 /public/r/
 /.data/

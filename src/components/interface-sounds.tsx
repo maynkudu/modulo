@@ -24,7 +24,7 @@ export function InterfaceSounds() {
     document.addEventListener("click", (event) => {
       if (!(event.target instanceof Element)) return;
       const control = event.target.closest("a, button, summary, input:not([type=range]), select, [role=button], [role=tab], [role=checkbox], [role=switch]");
-      if (!control || control.matches("[data-sound-toggle], :disabled")) return;
+      if (!control || control.matches("[data-sound-toggle], [data-festival-feedback], :disabled")) return;
       if (control.hasAttribute("data-scene-object") && event.detail !== 0) return;
       const before = control.getAttribute("aria-pressed");
       if (before === null) {
@@ -41,7 +41,7 @@ export function InterfaceSounds() {
     document.addEventListener("pointerover", (event) => {
       if (event.pointerType === "touch" || !(event.target instanceof Element)) return;
       const button = event.target.closest("a, button, input, select, summary, [role=button], [role=tab], [role=checkbox], [role=switch], [data-haptic-hover]");
-      if (!button || button.matches(":disabled, [data-scene-object]")) return;
+      if (!button || button.matches(":disabled, [data-scene-object], [data-festival-feedback]")) return;
       if (event.relatedTarget instanceof Node && button.contains(event.relatedTarget)) return;
       playSound("hover");
     }, { signal });

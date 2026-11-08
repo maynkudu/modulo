@@ -7,10 +7,15 @@ import { catalogItems } from "../src/lib/catalog";
 const root = fileURLToPath(new URL("../", import.meta.url));
 const args = process.argv.slice(2);
 let dryRun = false;
+let selectedComponent: string | undefined;
 let outputDirectory: string | undefined;
 for (let index = 0; index < args.length; index++) {
   const argument = args[index];
   if (argument === "--dry-run") dryRun = true;
+  else if (argument === "--component") {
+    selectedComponent = args[++index];
+    if (!selectedComponent || selectedComponent.startsWith("--")) throw new Error("--component requires a name.");
+  }
   else if (argument === "--output-dir") {
     const directory = args[++index];
     if (!directory || directory.startsWith("--")) throw new Error("--output-dir requires a directory.");
@@ -39,11 +44,14 @@ html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#0503
 </style></head><body><main id="root"></main><script>${javascript.replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "diwali-26", flow: "diwali-skyshots", height: 630, pause: 6500, seek: 1.6, movePointer: false },
   { name: "root-infection", flow: "root-growth", height: 630, pause: 32000, seek: 25, movePointer: true },
   { name: "nilkamal", flow: "lotus-rain", height: 816, pause: 8000, seek: 2, movePointer: false },
   { name: "interactive-art", flow: "garden-growth", height: 816, pause: 8000, seek: 2, movePointer: false },
 ];
-const captures = catalogItems.map((entry) => {
+const selectedItems = selectedComponent ? catalogItems.filter(entry => entry.component.name === selectedComponent) : catalogItems;
+if (!selectedItems.length) throw new Error(`Unknown component: ${selectedComponent}`);
+const captures = selectedItems.map((entry) => {
   const specification = specifications.find(({ name }) => name === entry.component.name);
   if (!specification) throw new Error(`Add a media capture for ${entry.component.name}.`);
   return { entry, specification };
@@ -66,11 +74,11 @@ await writeFile(configPath, `${JSON.stringify({
     ],
   }])),
 }, null, 2)}\n`);
-execFileSync("npx", ["webreel", "validate", "-c", configPath], { cwd: root, stdio: "inherit" });
-execFileSync("npx", ["webreel", "record", "-c", configPath, "--dry-run"], { cwd: root, stdio: "inherit" });
+execFileSync("npx", ["--offline", "webreel", "validate", "-c", configPath], { cwd: root, stdio: "inherit" });
+execFileSync("npx", ["--offline", "webreel", "record", "-c", configPath, "--dry-run"], { cwd: root, stdio: "inherit" });
 
 if (!dryRun) {
-  execFileSync("npx", ["webreel", "record", "-c", configPath], { cwd: root, stdio: "inherit" });
+  execFileSync("npx", ["--offline", "webreel", "record", "-c", configPath], { cwd: root, stdio: "inherit" });
   const destination = outputDirectory ?? resolve(root, "public/media");
   await mkdir(destination, { recursive: true });
   for (const { entry: { component, media }, specification } of captures) {
@@ -89,9 +97,11 @@ if (!dryRun) {
     }
     console.log(`Built thumbnail, GIF, and MP4 for ${component.name}.`);
   }
-  const logoPath = outputDirectory ? resolve(outputDirectory, "modulo-og.jpg") : resolve(root, "public/brand/modulo-og.jpg");
-  await mkdir(dirname(logoPath), { recursive: true });
-  execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", resolve(root, "public/brand/modulo-logo.png"),
-    "-vf", "scale=1000:-1,pad=1200:630:(ow-iw)/2:(oh-ih)/2:black", "-frames:v", "1", "-q:v", "2", logoPath]);
-  console.log(`Built logo sharing image: ${logoPath}`);
+  if (!selectedComponent) {
+    const logoPath = outputDirectory ? resolve(outputDirectory, "modulo-og.jpg") : resolve(root, "public/brand/modulo-og.jpg");
+    await mkdir(dirname(logoPath), { recursive: true });
+    execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", resolve(root, "public/brand/modulo-logo.png"),
+      "-vf", "scale=1000:-1,pad=1200:630:(ow-iw)/2:(oh-ih)/2:black", "-frames:v", "1", "-q:v", "2", logoPath]);
+    console.log(`Built logo sharing image: ${logoPath}`);
+  }
 }

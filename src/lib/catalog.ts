@@ -84,6 +84,24 @@ export const nilkamal = {
   ],
 } satisfies RegistryItem;
 
+export const diwali26 = {
+  name: "diwali-26",
+  type: "registry:component",
+  title: "Diwali/26",
+  description: "Lotus rangoli beneath a night sky. Launch floral bursts, DIWALI and 2026 with a click.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/diwali-26/Diwali26.tsx", target: "components/diwali-26/Diwali26.tsx", type: "registry:component" },
+    { path: "src/registry/diwali-26/create-diwali-26.ts", target: "components/diwali-26/create-diwali-26.ts", type: "registry:lib" },
+    { path: "src/registry/diwali-26/artwork.ts", target: "components/diwali-26/artwork.ts", type: "registry:lib" },
+    { path: "src/registry/diwali-26/fireworks.ts", target: "components/diwali-26/fireworks.ts", type: "registry:lib" },
+    { path: "src/registry/diwali-26/audio.ts", target: "components/diwali-26/audio.ts", type: "registry:lib" },
+    { path: "src/registry/diwali-26/types.ts", target: "components/diwali-26/types.ts", type: "registry:lib" },
+    { path: "src/registry/diwali-26/scene.css", target: "components/diwali-26/scene.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 function componentMedia({ name, alt }: { name: string; alt: string }) {
   return {
     thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height: 630, type: "image/jpeg" },
@@ -120,6 +138,12 @@ export const catalogItems = [{
   keywords: ["blue", "lotus", "kamal", "pond", "weather", "rain", "storm", "snow", "hail", "ice", "water", "interactive", "art", "audio"],
   seoDescription: "An interactive blue lotus for React with rain, storms, snow, and ice. Try the Canvas demo, adjust the weather, and install the TypeScript source.",
   media: componentMedia({ name: nilkamal.name, alt: "A blue lotus and its reflection on a moonlit pond in the rain." }),
+}, {
+  component: diwali26,
+  addedAt: "2026-11-08",
+  keywords: ["diwali", "2026", "rangoli", "fireworks", "skyshot", "flowers", "paisley", "mandala", "canvas", "audio", "haptics"],
+  seoDescription: "An interactive Diwali scene for React with floral rangoli, pointer wind, skyshots, festival sounds and PNG layer exports. Try the preview and install the TypeScript source.",
+  media: componentMedia({ name: diwali26.name, alt: "Flowers, leafy paisleys, marigold garlands and diyas beneath skyshots in a dark Diwali sky." }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -184,5 +208,24 @@ export const nilkamalProps = [
   ["className", "string", '""', "Class names for the scene container."],
   ["onReady", "(controller | null) => void", "Optional", "Controller on mount and null on cleanup. Keep callbacks stable."],
   ["onFrame", "(FrameState) => void", "Optional", "Animation, visibility, pause, and reduced-motion status."],
+  ["onError", "(Error) => void", "Optional", "Canvas initialization failure."],
+] as const;
+
+export const diwali26Usage = `import { Diwali26 } from "@/components/diwali-26/Diwali26";
+
+export default function Example() {
+  return <Diwali26 pattern="surprise" volume={0.9} />;
+}`;
+
+export const diwali26Props = [
+  ["pattern", '"surprise" | "chrysanthemum" | "lotus" | "rings" | "willow" | "diwali" | "2026"', '"surprise"', "Pattern for new launches. Surprise cycles through all six."],
+  ["seed", "number", "731", "Repeatable stars, powder and burst geometry. Changing it starts a fresh scene."],
+  ["paused", "boolean", "false", "Stops animation, wind and sound."],
+  ["enableAudio", "boolean", "true", "Sound unlocks after interaction. Mutes sound and haptics when false."],
+  ["volume", "number", "0.9", "Master festival volume from 0 to 1."],
+  ["fallback", "string", "Optional", "Your still image URL, displayed behind the canvas."],
+  ["className", "string", '""', "Class names for the scene container."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller on mount, null on cleanup. Keep callbacks stable."],
+  ["onFrame", "(FrameState) => void", "Optional", "Scene time, visibility, pause and reduced-motion state."],
   ["onError", "(Error) => void", "Optional", "Canvas initialization failure."],
 ] as const;

@@ -1,0 +1,27 @@
+.artwork, .controlsPanel { min-width: 0; border: 1px solid #fff; background: #000; }
+.artwork { grid-column: span 8; overflow: hidden; }
+.artworkHeader { min-height: 56px; padding: 16px 24px; border-bottom: 1px solid #fff; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.artworkHeader h2, .controlsPanel h2 { margin: 0; font-family: var(--font-geist-pixel-square), monospace; font-size: 21px; font-weight: 500; }
+.artworkHeader span { font-size: 11px; color: #aaa; }
+.controlsPanel { grid-column: span 4; padding: 28px; align-self: stretch; display: flex; flex-direction: column; background: #fff; color: #000; }
+.weather { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+.controlsPanel button { min-height: 44px; padding: 10px 13px; border: 1px solid #000; background: #fff; color: #000; font: inherit; font-size: 11px; cursor: pointer; transition: background 120ms, color 120ms, transform 100ms; }
+.controlsPanel button[aria-pressed="true"], .controlsPanel button:hover:not(:disabled) { background: #000; color: #fff; }
+.controlsPanel button:active:not(:disabled) { transform: translateY(1px); }
+.controlsPanel button:disabled { border-color: #ccc; color: #999; cursor: default; }
+.hint { margin: 20px 0 8px; color: #444; font-size: 11px; line-height: 1.9; }
+.field { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; font-size: 11px; }
+.field span { color: #444; }
+.field output { font-variant-numeric: tabular-nums; }
+.slider { display: block; width: 100%; height: 40px; margin: 3px 0; appearance: none; background: transparent; cursor: ew-resize; accent-color: #000; }
+.slider::-webkit-slider-runnable-track { height: 2px; background: #999; }
+.slider::-moz-range-track { height: 2px; background: #999; }
+.slider::-webkit-slider-thumb { appearance: none; width: 17px; height: 21px; margin-top: -9px; border: 2px solid #fff; background: #000; box-shadow: 0 0 0 1px #000; }
+.slider::-moz-range-thumb { width: 13px; height: 17px; border: 2px solid #fff; background: #000; border-radius: 0; box-shadow: 0 0 0 1px #000; }
+.slider:disabled { opacity: .45; cursor: default; }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: auto; padding-top: 20px; }
+.error { margin: 16px 0 0; color: #a32828; font-size: 11px; line-height: 1.8; }
+.controlsPanel :is(button,input):focus-visible { outline: 2px solid #333; outline-offset: 3px; }
+@media (max-width: 1050px) { .artwork { grid-column: span 7; } .controlsPanel { grid-column: span 5; padding: 20px; } }
+@media (max-width: 760px) { .artwork, .controlsPanel { grid-column: 1 / -1; } .controlsPanel { padding: 24px; } .actions { margin-top: 8px; } }
+@media (prefers-reduced-motion: reduce) { .controlsPanel button { transition: none; } .controlsPanel button:active:not(:disabled) { transform: none; } }
