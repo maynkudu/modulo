@@ -1,8 +1,0 @@
-.nilkamal-scene { position: relative; aspect-ratio: 1000 / 680; overflow: clip; background: #081724; isolation: isolate; }
-.nilkamal-scene canvas { position: relative; display: block; width: 100%; height: 100%; touch-action: pan-y; }
-.nilkamal-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.nilkamal-scene .interactive-art-target { border: 1px solid transparent; cursor: grab; }
-.nilkamal-scene .interactive-art-target:active { cursor: grabbing; }
-.nilkamal-scene .interactive-art-target:focus-visible { outline: 2px solid #c0e7fb; outline-offset: 3px; }
-.nilkamal-scene .interactive-art-target:disabled { cursor: default; }
-@media (max-width: 520px) { .nilkamal-scene { aspect-ratio: 4 / 5; } }

@@ -1,8 +1,0 @@
-.interactive-art-scene { position: relative; aspect-ratio: 1000 / 680; overflow: clip; }
-.interactive-art-scene canvas { position: relative; display: block; width: 100%; height: 100%; touch-action: pan-y; }
-.interactive-art-fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.interactive-art-target { border: 1px solid transparent; cursor: grab; }
-.interactive-art-target:active { cursor: grabbing; }
-.interactive-art-target:focus-visible { outline: 2px solid #f1deb0; outline-offset: 3px; }
-.interactive-art-target:disabled { cursor: default; }
-@media (max-width: 520px) { .interactive-art-scene { aspect-ratio: 4 / 5; } }

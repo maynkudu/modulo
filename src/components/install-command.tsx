@@ -1,16 +1,12 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
+import { RegistryConfiguration } from "./registry-configuration";
 import styles from "@/app/page.module.css";
 
-const subscribe = () => () => {};
-const getOrigin = () => window.location.origin;
-const getServerOrigin = () => "<registry-url>";
-
 export function InstallCommand({ name = "interactive-art" }: { name?: string }) {
-  const origin = useSyncExternalStore(subscribe, getOrigin, getServerOrigin);
   const [runner, setRunner] = useState<"bunx" | "npx">("bunx");
-  const command = `${runner} shadcn@latest add ${origin}/r/${name}.json`;
+  const command = `${runner} shadcn@latest add @modulo/${name}`;
   const [status, setStatus] = useState<"idle" | "copied" | "failed">("idle");
 
   async function copy() {
@@ -24,6 +20,7 @@ export function InstallCommand({ name = "interactive-art" }: { name?: string }) 
 
   return (
     <>
+      <details className={styles.details}><summary>Registry setup</summary><RegistryConfiguration /></details>
       <div role="group" aria-label="Installation command" className={styles.commandRunners}>
         {(["bunx", "npx"] as const).map((value) => (
           <button key={value} type="button" aria-pressed={runner === value} onClick={() => {
@@ -39,7 +36,7 @@ export function InstallCommand({ name = "interactive-art" }: { name?: string }) 
       <p role="status">
         {status === "failed"
           ? "Clipboard access is unavailable. Select and copy the command above."
-          : status === "copied" ? "Command copied." : "Run from a project configured for shadcn."}
+          : status === "copied" ? "Command copied." : "Requires an active Modulo key and a project configured for shadcn."}
       </p>
     </>
   );

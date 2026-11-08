@@ -1,4 +1,4 @@
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { registryItemSchema, registrySchema } from "shadcn/schema";
@@ -20,7 +20,7 @@ const sourceItems = catalogItems.map(({ component, media }) => ({
     }])),
   },
 }));
-await mkdir(resolve(root, "public/r"), { recursive: true });
+await mkdir(resolve(root, ".private-registry"), { recursive: true });
 const items = await Promise.all(sourceItems.map(async (component) => {
   const files = await Promise.all(component.files.map(async (file) => ({
     ...file,
@@ -31,7 +31,8 @@ const items = await Promise.all(sourceItems.map(async (component) => {
     ...component,
     files,
   });
-  await writeFile(resolve(root, `public/r/${item.name}.json`), `${JSON.stringify(item, null, 2)}\n`);
+  await writeFile(resolve(root, `.private-registry/${item.name}.json`), `${JSON.stringify(item, null, 2)}\n`);
+  await rm(resolve(root, `public/r/${item.name}.json`), { force: true });
   console.log(`Built ${item.name}, ${files.length} source files.`);
   return item;
 }));
@@ -41,7 +42,8 @@ const catalog = registrySchema.parse({
   homepage,
   items,
 });
-await writeFile(resolve(root, "public/r/registry.json"), `${JSON.stringify(catalog, null, 2)}\n`);
+await writeFile(resolve(root, ".private-registry/registry.json"), `${JSON.stringify(catalog, null, 2)}\n`);
+await rm(resolve(root, "public/r/registry.json"), { force: true });
 const sourceRegistry = registrySchema.parse({
   ...catalog,
   items: sourceItems,

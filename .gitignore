@@ -42,3 +42,11 @@ next-env.d.ts
 
 # isolated plans and verification evidence
 /.plannotator/
+
+# component repositories are fetched at pinned revisions
+/src/registry/interactive-art/
+/src/registry/root-infection/
+/src/registry/nilkamal/
+/.private-registry/
+/public/r/
+/.data/

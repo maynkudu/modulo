@@ -6,7 +6,7 @@ import { ComponentMediaLinks } from "@/components/component-media-links";
 import { StructuredData } from "@/components/structured-data";
 import { getComponentMetadata, getComponentStructuredData } from "@/lib/seo";
 import { nilkamal, nilkamalProps, nilkamalUsage } from "@/lib/catalog";
-import item from "../../../../public/r/nilkamal.json";
+import { ComponentSource } from "@/components/component-source";
 import styles from "../../page.module.css";
 
 export const metadata = getComponentMetadata(nilkamal);
@@ -54,13 +54,7 @@ export default function NilkamalPage() {
             <p><code>exportPNG()</code> exports the scene. Pass <code>layers</code> to export sky, landscape, water, ice, lotus, weather, or foreground separately. The component calls <code>destroy()</code> on unmount.</p>
           </details>
         </section>
-        <section className={`${styles.panel} ${styles.source}`} id="source" aria-labelledby="source-heading">
-          <h2 id="source-heading">Source</h2>
-          <p>The preview runs these same files. Relative imports keep the component independent of Modulo.</p>
-          {item.files.map(file => <details className={styles.details} key={file.path}>
-            <summary>{file.target}</summary><pre><code>{file.content}</code></pre>
-          </details>)}
-        </section>
+        <ComponentSource name="nilkamal" />
       </div>
     </main>
   </div>;

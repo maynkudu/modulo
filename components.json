@@ -21,6 +21,12 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
+    "@modulo": {
+      "url": "https://modulo.maynkudu.com/r/{name}.json",
+      "headers": {
+        "Authorization": "Bearer ${MODULO_REGISTRY_KEY}"
+      }
+    },
     "@compronents": {
       "url": "https://ui.aryank.space/r/{name}.json",
       "headers": {

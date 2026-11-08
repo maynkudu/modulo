@@ -62,6 +62,21 @@
 .details { border-top: 1px solid #333; padding-top: 16px; margin-top: 16px; }
 .details summary { cursor: pointer; font-size: 12px; overflow-wrap: anywhere; }
 .details pre { margin-top: 16px; max-height: 480px; }
+.accessHeading { display: flex; gap: 16px; align-items: start; justify-content: space-between; flex-wrap: wrap; }
+.accessForm { display: grid; gap: 12px; max-width: 440px; color-scheme: dark; }
+.accessForm label { color: #bbb; font-size: 11px; }
+.accessForm input { min-width: 0; width: 100%; min-height: 44px; padding: 12px; border: 1px solid #555; border-radius: 0; background: #000; color: #fff; font: inherit; font-size: 16px; }
+.accessForm button { justify-self: start; }
+.panel button.secondaryButton { background: #000; color: #fff; }
+.panel button:disabled, .sourceLink:disabled { border-color: #555; color: #999; cursor: default; }
+.mintLogin { max-width: 504px; }
+.mintPanels { display: grid; gap: 16px; }
+.newKey { margin-top: 24px; }
+.newKey pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.accessActions { display: flex; gap: 8px; flex-wrap: wrap; }
+.keyRow { display: flex; align-items: start; justify-content: space-between; gap: 16px; border-top: 1px solid #333; padding: 20px 0; }
+.keyRow code { font-size: 11px; overflow-wrap: anywhere; }
+.keyRow p { margin: 8px 0 0; }
 .page :is(a, button, input, select, summary, [tabindex]):not(:global(.interactive-art-target)):focus-visible { outline: 2px solid #999; outline-offset: 4px; }
 .skipLink { position: fixed; top: 8px; left: 8px; z-index: 10; padding: 12px 16px; background: #fff; color: #000; border: 2px solid #999; transform: translateY(-150%); }
 .skipLink:focus { transform: translateY(0); }
@@ -91,5 +106,6 @@
   .catalogSearch { grid-template-columns: minmax(0,1fr); }
   .searchField { grid-column: 1 / -1; }
   .componentName { font-size: 20px; }
+  .keyRow { flex-direction: column; }
 }
 @media (prefers-reduced-motion: reduce) { .header nav a::after, .sourceLink, .panel button, .soundToggle { transition: none; } .soundToggle:active { transform: none; } }

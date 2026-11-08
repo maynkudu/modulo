@@ -6,7 +6,7 @@ import { ComponentMediaLinks } from "@/components/component-media-links";
 import { StructuredData } from "@/components/structured-data";
 import { getComponentMetadata, getComponentStructuredData } from "@/lib/seo";
 import { gardenProps, gardenUsage, interactiveArt } from "@/lib/catalog";
-import item from "../../../../public/r/interactive-art.json";
+import { ComponentSource } from "@/components/component-source";
 import styles from "../../page.module.css";
 
 export const metadata = getComponentMetadata(interactiveArt);
@@ -66,16 +66,7 @@ export default function InteractiveArtPage() {
               <p><code>snapshot()</code> and <code>saveState()</code> return scene state. <code>exportPNG(options)</code> saves the whole scene or selected layers. The React component calls <code>destroy()</code> on unmount.</p>
             </details>
           </section>
-          <section className={`${styles.panel} ${styles.source}`} id="source" aria-labelledby="source-heading">
-            <h2 id="source-heading">Source</h2>
-            <p>The demo uses these same six files. Installation copies them into your project.</p>
-            {item.files.map((file) => (
-              <details className={styles.details} key={file.path}>
-                <summary>{file.target}</summary>
-                <pre><code>{file.content}</code></pre>
-              </details>
-            ))}
-          </section>
+          <ComponentSource name="interactive-art" />
         </div>
       </main>
     </div>

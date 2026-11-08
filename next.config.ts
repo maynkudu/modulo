@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  outputFileTracingIncludes: {
+    "/r/*": ["./.private-registry/*.json"],
+  },
   async headers() {
     return [{
       source: "/r/:path*",

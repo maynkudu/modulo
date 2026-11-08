@@ -6,7 +6,7 @@ import { ComponentMediaLinks } from "@/components/component-media-links";
 import { StructuredData } from "@/components/structured-data";
 import { getComponentMetadata, getComponentStructuredData } from "@/lib/seo";
 import { rootInfection, rootInfectionProps, rootInfectionUsage } from "@/lib/catalog";
-import item from "../../../../public/r/root-infection.json";
+import { ComponentSource } from "@/components/component-source";
 import styles from "../../page.module.css";
 
 export const metadata = getComponentMetadata(rootInfection);
@@ -82,15 +82,7 @@ export default function RootInfectionPage() {
             <p>The sound engine synthesizes filtered noise, small cracks, a beating bass drone, a stereo suction sweep, and a descending sub-bass impact. A compressor and voice limit control overlapping sound.</p>
             <a href="https://youtube.com/shorts/HJas6mdFDqI" target="_blank" rel="noreferrer">Physics inspiration</a>
           </section>
-          <section className={`${styles.panel} ${styles.source}`} id="source" aria-labelledby="source-heading">
-            <h2 id="source-heading">Source</h2>
-            <p>The preview runs these same files. Relative imports keep the component independent of Modulo.</p>
-            {item.files.map((file) => (
-              <details className={styles.details} key={file.path}>
-                <summary>{file.target}</summary><pre><code>{file.content}</code></pre>
-              </details>
-            ))}
-          </section>
+          <ComponentSource name="root-infection" />
         </div>
       </main>
     </div>
