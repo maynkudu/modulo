@@ -48,6 +48,7 @@ next-env.d.ts
 /src/registry/root-infection/
 /src/registry/nilkamal/
 /src/registry/diwali-26/
+/src/registry/textured-glass/
 /.private-registry/
 /public/r/
 /.data/

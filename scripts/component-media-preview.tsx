@@ -3,6 +3,7 @@ import { GardenCanvas } from "../src/registry/interactive-art/examples/GardenCan
 import { Nilkamal } from "../src/registry/nilkamal/Nilkamal";
 import { Diwali26, type Diwali26Controller, type FrameState } from "../src/registry/diwali-26/Diwali26";
 import { RootInfection } from "../src/registry/root-infection/RootInfection";
+import { TexturedGlass } from "../src/registry/textured-glass/TexturedGlass";
 
 function markReady(controller: unknown) {
   if (controller) document.body.dataset.ready = "true";
@@ -24,6 +25,9 @@ function diwaliFrame(frame: FrameState) {
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "textured-glass") {
+    return <TexturedGlass className="media-scene" src="__TEXTURED_GLASS_IMAGE__" depthMap="__TEXTURED_GLASS_DEPTH__" alt="A photograph through textured glass" onDepth={state => { if (state.kind === "ready") markReady(true); }} />;
+  }
   if (name === "diwali-26") {
     return <Diwali26 className="media-scene" enableAudio={false} onReady={diwaliReady} onFrame={diwaliFrame} />;
   }

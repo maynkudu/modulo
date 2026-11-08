@@ -102,6 +102,23 @@ export const diwali26 = {
   ],
 } satisfies RegistryItem;
 
+export const texturedGlass = {
+  name: "textured-glass",
+  type: "registry:component",
+  title: "Textured glass",
+  description: "Textured glass with image depth, mouse parallax, and adjustable focus.",
+  dependencies: ["three@^0.186.0", "@types/three@^0.186.0", "@huggingface/transformers@3.8.1"],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/textured-glass/TexturedGlass.tsx", target: "components/textured-glass/TexturedGlass.tsx", type: "registry:component" },
+    { path: "src/registry/textured-glass/create-textured-glass.ts", target: "components/textured-glass/create-textured-glass.ts", type: "registry:lib" },
+    { path: "src/registry/textured-glass/shaders.ts", target: "components/textured-glass/shaders.ts", type: "registry:lib" },
+    { path: "src/registry/textured-glass/scene.css", target: "components/textured-glass/scene.css", type: "registry:file" },
+    { path: "src/registry/textured-glass/depth-estimation.ts", target: "components/textured-glass/depth-estimation.ts", type: "registry:lib" },
+    { path: "src/registry/textured-glass/depth-worker.ts", target: "components/textured-glass/depth-worker.ts", type: "registry:lib" },
+  ],
+} satisfies RegistryItem;
+
 function componentMedia({ name, alt, height = 630 }: { name: string; alt: string; height?: number }) {
   return {
     thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
@@ -144,6 +161,12 @@ export const catalogItems = [{
   keywords: ["diwali", "2026", "rangoli", "fireworks", "skyshot", "flowers", "paisley", "mandala", "canvas", "audio", "haptics"],
   seoDescription: "An interactive Diwali scene for React with floral rangoli, pointer wind, skyshots, festival sounds and PNG layer exports. Try the preview and install the TypeScript source.",
   media: componentMedia({ name: diwali26.name, alt: "Flowers, leafy paisleys, marigold garlands and diyas beneath skyshots in a dark Diwali sky.", height: 1072 }),
+}, {
+  component: texturedGlass,
+  addedAt: "2026-11-08",
+  keywords: ["threejs", "three", "webgl", "shader", "glass", "frosted", "textured", "refraction", "image", "upload", "light", "grid", "depth", "parallax", "focus"],
+  seoDescription: "A Three.js textured glass effect for React with local image depth estimation, mouse parallax, and adjustable focus blur. Upload a photo and install the component with a mint key.",
+  media: componentMedia({ name: texturedGlass.name, alt: "A photograph seen through rough glass with a fine square grid and a broad light reflection.", height: 800 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -228,4 +251,47 @@ export const diwali26Props = [
   ["onReady", "(controller | null) => void", "Optional", "Controller on mount, null on cleanup. Keep callbacks stable."],
   ["onFrame", "(FrameState) => void", "Optional", "Scene time, visibility, pause and reduced-motion state."],
   ["onError", "(Error) => void", "Optional", "Canvas initialization failure."],
+] as const;
+
+export const texturedGlassUsage = `import { TexturedGlass } from "@/components/textured-glass/TexturedGlass";
+
+export default function Example() {
+  return (
+    <TexturedGlass
+      src="/photo.jpg"
+      alt="Portrait through textured glass"
+      roughness={0.68}
+      distortion={0.012}
+    />
+  );
+}`;
+
+export const texturedGlassProps = [
+  ["src", "string", "Required", "Image URL, including a browser object URL. Remote images need CORS access. Images larger than 4096 pixels are resized for the GPU."],
+  ["alt", "string", "Required", "Accessible description of the image."],
+  ["depthMap", "string", "Optional", "Precomputed depth image URL. White is near, black is far. Skips automatic analysis."],
+  ["estimateDepth", "boolean", "true", "Estimate image depth locally with Depth Anything V2 Small in a worker. The first analysis downloads the model."],
+  ["roughness", "number", "0.68", "Glass normal strength from 0 to 2."],
+  ["distortion", "number", "0.012", "Refraction distance from 0 to 0.08, relative to image height."],
+  ["blur", "number", "5", "Image blur radius from 0 to 30 CSS pixels."],
+  ["textureScale", "number", "2.4", "Glass texture repetitions from 0.25 to 8."],
+  ["grid", "number", "0.65", "Wire grid opacity from 0 to 1."],
+  ["gridSize", "number", "90", "Square grid cells across image height, from 10 to 200."],
+  ["lightIntensity", "number", "0.75", "Reflected light intensity from 0 to 2."],
+  ["lightSize", "number", "0.5", "Highlight radius from 0.1 to 1.5, relative to image height."],
+  ["speed", "number", "0.45", "Automatic light speed from 0 to 3."],
+  ["depth", "number", "0.55", "Distance between the image and glass plane, from 0 to 2 world units."],
+  ["parallax", "number", "0.7", "Pointer camera movement from 0 to 1.5 world units."],
+  ["depthStrength", "number", "0.8", "Depth-map displacement from 0 to 2 world units. Zero flattens the image mesh."],
+  ["focusDepth", "number", "1", "Focus distance from 0 for far objects to 1 for near objects."],
+  ["focusBlur", "number", "12", "Blur away from the focus depth, from 0 to 30 CSS pixels."],
+  ["showDepth", "boolean", "false", "Display the estimated depth map."],
+  ["animate", "boolean", "true", "Move the light automatically. The pointer takes control while over the image."],
+  ["enabled", "boolean", "true", "Turn off the glass to display the original image."],
+  ["paused", "boolean", "false", "Freeze light movement. Settings still apply."],
+  ["className", "string", '""', "Class names for the container."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller after image loading, null on unmount."],
+  ["onFrame", "(GlassFrame) => void", "Optional", "Time, light position, visibility, pause, and reduced-motion status."],
+  ["onError", "(Error) => void", "Optional", "Image loading or WebGL initialization failure."],
+  ["onDepth", "(DepthState) => void", "Optional", "Local depth loading progress, analysis, completion, or failure."],
 ] as const;

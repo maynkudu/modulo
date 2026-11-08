@@ -22,7 +22,7 @@
   "menuAccent": "subtle",
   "registries": {
     "@modulo": {
-      "url": "https://modulo.maynkudu.com/r/{name}.json",
+      "url": "https://modulo-maynkudu.vercel.app/r/{name}.json",
       "headers": {
         "Authorization": "Bearer ${MODULO_REGISTRY_KEY}"
       }

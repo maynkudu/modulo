@@ -98,7 +98,7 @@ Each component owns its original source in a separate private GitHub repository:
 - [Root Infection](https://github.com/maynkudu/modulo-root-infection).
 - [Nilkamal](https://github.com/maynkudu/modulo-nilkamal).
 
-Modulo itself is private because its earlier history contains the component source. The website, live interactive previews, usage examples, and API documentation remain public.
+The main Modulo repository is public. Every new module stores its original implementation in a separate private repository. The website, live interactive previews, usage examples, and API documentation remain public. See `AGENTS.md` for the module integration workflow.
 
 For local source sync, authenticate with `gh auth login`. Deployment builds use `MODULO_COMPONENTS_TOKEN`, a fine-grained GitHub token with read-only Contents access to the three component repositories. Credentials never go in `components.lock.json`.
 
@@ -135,7 +135,7 @@ Add this entry to the consumer project's `components.json`, preserving its exist
 {
   "registries": {
     "@modulo": {
-      "url": "https://modulo.maynkudu.com/r/{name}.json",
+      "url": "https://modulo-maynkudu.vercel.app/r/{name}.json",
       "headers": { "Authorization": "Bearer ${MODULO_REGISTRY_KEY}" }
     }
   }
@@ -156,11 +156,14 @@ Inspect BLANK source with `blank source <name>`. After choosing a component for 
 
 ## SEO and component media
 
-The canonical origin defaults to `https://modulo.maynkudu.com`. Set `NEXT_PUBLIC_SITE_URL` in the deployment environment to select another origin. Until the production domain is connected, the current deployment can use:
+`DOMAIN_ACTIVE` selects the canonical origin used by Open Graph images and videos, structured data, the sitemap, and registry media links. It defaults to false:
 
 ```sh
-NEXT_PUBLIC_SITE_URL=https://modulo-maynkudu.vercel.app bun run build
+DOMAIN_ACTIVE=false # https://modulo-maynkudu.vercel.app
+DOMAIN_ACTIVE=true  # https://modulo.maynkudu.com
 ```
+
+Set the variable in the deployment environment and rebuild after changing it. `NEXT_PUBLIC_SITE_URL` overrides this selection for local verification or another origin. `REGISTRY_BASE_URL` separately overrides generated registry media URLs. Update the consumer's static `components.json` registry URL when switching to the custom domain.
 
 The home, Components, and Registry pages use the Modulo logo for sharing. Each component uses its thumbnail for Open Graph and Twitter images, and its matching MP4 for `og:video`. GIFs play in the home grid on hover or keyboard focus. Reduced motion keeps the thumbnails still.
 

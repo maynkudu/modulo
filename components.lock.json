@@ -1,6 +1,37 @@
 {
   "components": [
     {
+      "name": "textured-glass",
+      "repository": "maynkudu/modulo-textured-glass",
+      "revision": "e46432efb76b7c93b3065f3840a8d076e5b4fb95",
+      "files": [
+        {
+          "path": "TexturedGlass.tsx",
+          "sha256": "54be52b67b54896f567c4f37ca22b34a0598536980669f5c2f2478d8b896fc7f"
+        },
+        {
+          "path": "create-textured-glass.ts",
+          "sha256": "c36b9268a5d6779fd7a03bc6a697f2825beb0af86f8effaad55c2b830cc087de"
+        },
+        {
+          "path": "shaders.ts",
+          "sha256": "011b9e2a8bde46b57d2b659fa2ca113d19a260f0f6660e0a2b5174f29bcbc6a0"
+        },
+        {
+          "path": "scene.css",
+          "sha256": "2f20f61f2c5cb09eab968853be3d968ddee693aaa024ee746b962cba32512b9a"
+        },
+        {
+          "path": "depth-estimation.ts",
+          "sha256": "9a925815ffaf5fd9e1590dcb7a1d6641dfd10b644d8b18f878feb5e3c2d38976"
+        },
+        {
+          "path": "depth-worker.ts",
+          "sha256": "871dcdc1484de30cafbc265a86a59169cb3529503bd3afd8418c53d8e4361f66"
+        }
+      ]
+    },
+    {
       "name": "interactive-art",
       "repository": "maynkudu/modulo-interactive-art",
       "revision": "dbf4b62f5ff4b7addbf705baa2ff61dc6f2b6e60",
@@ -132,7 +163,7 @@
     {
       "name": "diwali-26",
       "repository": "maynkudu/modulo-diwali-26",
-      "revision": "2d32e9a1d3e517152e8cd49283e406a31f5f0263",
+      "revision": "fcecb741d6bdd39718a90385c58a5c7f08f56879",
       "files": [
         {
           "path": "Diwali26.tsx",
@@ -140,7 +171,7 @@
         },
         {
           "path": "artwork.ts",
-          "sha256": "49d1f2e76be1f43ea2704765555a63ba15f8a2ee2575c88481136ee4961c53d7"
+          "sha256": "cb2b5e93890bd1050905b7766ae78c7eb3b1a8180bbe76a8ed0452951f75fd6e"
         },
         {
           "path": "audio.ts",

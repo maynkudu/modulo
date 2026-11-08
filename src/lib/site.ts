@@ -1,4 +1,7 @@
-const origin = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://modulo.maynkudu.com");
+const defaultOrigin = process.env.DOMAIN_ACTIVE === "true"
+  ? "https://modulo.maynkudu.com"
+  : "https://modulo-maynkudu.vercel.app";
+const origin = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? defaultOrigin);
 
 if (
   !["https:", "http:"].includes(origin.protocol) ||
