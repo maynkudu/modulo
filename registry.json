@@ -371,6 +371,67 @@
         }
       },
       "type": "registry:component"
+    },
+    {
+      "name": "2048",
+      "title": "2048",
+      "description": "2048 with grayscale tiles, score meters, and soft merge sounds.",
+      "dependencies": [
+        "runeicons-react@^0.1.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/2048/Game2048.tsx",
+          "type": "registry:component",
+          "target": "components/2048/Game2048.tsx"
+        },
+        {
+          "path": "src/registry/2048/create-game.ts",
+          "type": "registry:lib",
+          "target": "components/2048/create-game.ts"
+        },
+        {
+          "path": "src/registry/2048/game.ts",
+          "type": "registry:lib",
+          "target": "components/2048/game.ts"
+        },
+        {
+          "path": "src/registry/2048/audio.ts",
+          "type": "registry:lib",
+          "target": "components/2048/audio.ts"
+        },
+        {
+          "path": "src/registry/2048/game.css",
+          "type": "registry:file",
+          "target": "components/2048/game.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Grayscale 2048 tiles beneath score and best meters on an almost-white background.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/2048.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/2048.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/2048.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
     }
   ]
 }

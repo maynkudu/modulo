@@ -44,6 +44,7 @@ next-env.d.ts
 /.plannotator/
 
 # component repositories are fetched at pinned revisions
+/src/registry/2048/
 /src/registry/interactive-art/
 /src/registry/root-infection/
 /src/registry/nilkamal/

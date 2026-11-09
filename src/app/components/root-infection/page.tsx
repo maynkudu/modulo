@@ -1,3 +1,4 @@
+import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
@@ -28,7 +29,7 @@ export default function RootInfectionPage() {
         </nav>
         <div className={styles.heading}>
           <div><h1>{rootInfection.title}</h1><p>{rootInfection.description}</p></div>
-          <a className={styles.sourceLink} href="#source">View source</a>
+          <ComponentHeadingActions name="root-infection" />
         </div>
         <div className={styles.sections}>
           <ComponentSection title="Preview" id="preview"><RootInfectionDemo /></ComponentSection>

@@ -13,5 +13,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/components/${component.name}`),
       images: [absoluteUrl(media.thumbnail.src)],
     })),
+    ...catalogItems.map(({ component, media }) => ({
+      url: absoluteUrl(`/view/${component.name}`),
+      images: [absoluteUrl(media.thumbnail.src)],
+    })),
   ];
 }

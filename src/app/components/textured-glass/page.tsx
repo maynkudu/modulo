@@ -1,3 +1,4 @@
+import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
@@ -23,7 +24,7 @@ export default function TexturedGlassPage() {
       </ol></nav>
       <div className={styles.heading}>
         <div><h1>{texturedGlass.title}</h1><p>{texturedGlass.description}</p></div>
-        <a className={styles.sourceLink} href="#source">View source</a>
+        <ComponentHeadingActions name="textured-glass" />
       </div>
       <div className={styles.sections}>
         <ComponentSection title="Preview" id="preview"><div className={styles.demo}><TexturedGlassDemo /></div></ComponentSection>

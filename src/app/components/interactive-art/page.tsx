@@ -1,3 +1,4 @@
+import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
 import Link from "next/link";
@@ -31,7 +32,7 @@ export default function InteractiveArtPage() {
             <h1>{interactiveArt.title}</h1>
             <p>{interactiveArt.description}</p>
           </div>
-          <a className={styles.sourceLink} href="#source">View source</a>
+          <ComponentHeadingActions name="interactive-art" />
         </div>
         <div className={styles.sections}>
           <ComponentSection title="Preview" id="preview"><div className={styles.demo}><GardenDemo /></div></ComponentSection>

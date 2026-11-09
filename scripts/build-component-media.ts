@@ -31,22 +31,25 @@ await mkdir(workspace, { recursive: true });
 execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
   cwd: root, stdio: "inherit",
 });
-const [javascript, css, font, glassImage, glassDepth] = await Promise.all([
+const [javascript, css, font, sansFont, glassImage, glassDepth] = await Promise.all([
   readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
   readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
   readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
+  readFile(resolve(root, "node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2")),
   readFile(resolve(root, "public/artwork/stay.jpeg")),
   readFile(resolve(root, "public/artwork/stay-depth.png")),
 ]);
 const previewPath = resolve(workspace, "capture.html");
 await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
 @font-face{font-family:GeistMono;src:url(data:font/woff2;base64,${font.toString("base64")}) format("woff2")}
+@font-face{font-family:Geist;src:url(data:font/woff2;base64,${sansFont.toString("base64")}) format("woff2");font-weight:100 900}
 html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#050304;color:#c9bfc1;font-family:GeistMono,monospace}
 .media-scene{width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
 .media-scene canvas{width:100%;height:100%}
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "2048", flow: "2048-merges", pause: 8000, seek: .4, movePointer: false },
   { name: "textured-glass", flow: "textured-glass-light", pause: 18000, seek: 2, movePointer: false },
   { name: "diwali-26", flow: "diwali-skyshots", pause: 20000, seek: 1.6, movePointer: false },
   { name: "root-infection", flow: "root-growth", pause: 32000, seek: 25, movePointer: true },

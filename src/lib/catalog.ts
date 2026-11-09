@@ -1,7 +1,7 @@
 import type { RegistryItem } from "shadcn/schema";
 
 export const interactiveArt = {
-  name: "interactive-art",
+  name: "interactive-art" as const,
   type: "registry:component",
   title: "Interactive art",
   description:
@@ -43,7 +43,7 @@ export const interactiveArt = {
 } satisfies RegistryItem;
 
 export const rootInfection = {
-  name: "root-infection",
+  name: "root-infection" as const,
   type: "registry:component",
   title: "Root Infection",
   description: "Stay still. Roots grow from your cursor and spread across the page.",
@@ -64,7 +64,7 @@ export const rootInfection = {
 } satisfies RegistryItem;
 
 export const nilkamal = {
-  name: "nilkamal",
+  name: "nilkamal" as const,
   type: "registry:component",
   title: "Nilkamal",
   description: "A blue lotus on a living pond. Rain, storms, snow, and ice change the scene.",
@@ -85,7 +85,7 @@ export const nilkamal = {
 } satisfies RegistryItem;
 
 export const diwali26 = {
-  name: "diwali-26",
+  name: "diwali-26" as const,
   type: "registry:component",
   title: "Diwali/26",
   description: "Lotus rangoli beneath a night sky. Launch floral bursts, DIWALI and 2026 with a click.",
@@ -103,7 +103,7 @@ export const diwali26 = {
 } satisfies RegistryItem;
 
 export const texturedGlass = {
-  name: "textured-glass",
+  name: "textured-glass" as const,
   type: "registry:component",
   title: "Textured glass",
   description: "Textured glass with image depth, mouse parallax, and adjustable focus.",
@@ -116,6 +116,22 @@ export const texturedGlass = {
     { path: "src/registry/textured-glass/scene.css", target: "components/textured-glass/scene.css", type: "registry:file" },
     { path: "src/registry/textured-glass/depth-estimation.ts", target: "components/textured-glass/depth-estimation.ts", type: "registry:lib" },
     { path: "src/registry/textured-glass/depth-worker.ts", target: "components/textured-glass/depth-worker.ts", type: "registry:lib" },
+  ],
+} satisfies RegistryItem;
+
+export const game2048 = {
+  name: "2048" as const,
+  type: "registry:component",
+  title: "2048",
+  description: "2048 with grayscale tiles, score meters, and soft merge sounds.",
+  dependencies: ["runeicons-react@^0.1.0"],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/2048/Game2048.tsx", target: "components/2048/Game2048.tsx", type: "registry:component" },
+    { path: "src/registry/2048/create-game.ts", target: "components/2048/create-game.ts", type: "registry:lib" },
+    { path: "src/registry/2048/game.ts", target: "components/2048/game.ts", type: "registry:lib" },
+    { path: "src/registry/2048/audio.ts", target: "components/2048/audio.ts", type: "registry:lib" },
+    { path: "src/registry/2048/game.css", target: "components/2048/game.css", type: "registry:file" },
   ],
 } satisfies RegistryItem;
 
@@ -167,6 +183,12 @@ export const catalogItems = [{
   keywords: ["threejs", "three", "webgl", "shader", "glass", "frosted", "textured", "refraction", "image", "upload", "light", "grid", "depth", "parallax", "focus"],
   seoDescription: "A Three.js textured glass effect for React with local image depth estimation, mouse parallax, and adjustable focus blur. Upload a photo and install the component with a mint key.",
   media: componentMedia({ name: texturedGlass.name, alt: "A photograph seen through rough glass with a fine square grid and a broad light reflection.", height: 800 }),
+}, {
+  component: game2048,
+  addedAt: "2026-11-09",
+  keywords: ["2048", "game", "puzzle", "tiles", "merge", "score", "keyboard", "swipe", "audio"],
+  seoDescription: "Play a minimal 2048 game with grayscale tiles, animated merges, score meters, undo, local saves, and procedural sounds. Install the React component with shadcn.",
+  media: componentMedia({ name: game2048.name, alt: "Grayscale 2048 tiles beneath score and best meters on an almost-white background.", height: 800 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -295,3 +317,21 @@ export const texturedGlassProps = [
   ["onError", "(Error) => void", "Optional", "Image loading or WebGL initialization failure."],
   ["onDepth", "(DepthState) => void", "Optional", "Local depth loading progress, analysis, completion, or failure."],
 ] as const;
+
+export const game2048Usage = `import { Game2048 } from "@/components/2048/Game2048";
+
+export default function Example() {
+  return <Game2048 volume={0.45} />;
+}`;
+
+export const game2048Props = [
+  ["seed", "number", "Optional", "Repeatable tile spawns for a new game."],
+  ["initialBoard", "readonly number[]", "Optional", "Sixteen zeros or powers of two. Saved state takes precedence."],
+  ["initialScore", "number", "0", "Starting score when initialBoard is supplied."],
+  ["storageKey", "string | null", '\"2048-game-v1\"', "Local save and sound preference key. Null disables storage."],
+  ["enableAudio", "boolean", "true", "Allow game sounds after a gesture. False stops all voices."],
+  ["volume", "number", "0.45", "Master volume from 0 to 1."],
+  ["className", "string", '\"\"', "Class names for the game container."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller on mount, null on cleanup. Keep callbacks stable."],
+  ["onChange", "(GameSnapshot) => void", "Optional", "Board, score, best, progress, undo, and sound state. Keep callbacks stable."],
+] satisfies readonly (readonly [string, string, string, string])[];

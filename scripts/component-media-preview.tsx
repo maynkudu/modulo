@@ -4,6 +4,8 @@ import { Nilkamal } from "../src/registry/nilkamal/Nilkamal";
 import { Diwali26, type Diwali26Controller, type FrameState } from "../src/registry/diwali-26/Diwali26";
 import { RootInfection } from "../src/registry/root-infection/RootInfection";
 import { TexturedGlass } from "../src/registry/textured-glass/TexturedGlass";
+import { Game2048, type Game2048Controller } from "../src/registry/2048/Game2048";
+import type { Direction } from "../src/registry/2048/game";
 
 function markReady(controller: unknown) {
   if (controller) document.body.dataset.ready = "true";
@@ -23,8 +25,22 @@ function diwaliFrame(frame: FrameState) {
   diwaliController.launch(position[0], position[1]);
 }
 
+const gameBoard = [2, 2, 4, 0, 4, 8, 16, 0, 8, 16, 64, 0, 16, 32, 128, 256];
+let gameTimer: ReturnType<typeof setInterval> | undefined;
+function gameReady(controller: Game2048Controller | null) {
+  clearInterval(gameTimer);
+  if (!controller) return;
+  markReady(controller);
+  const moves: Direction[] = ["left", "up", "right", "down", "left", "up", "left", "down"];
+  let index = 0;
+  gameTimer = setInterval(() => controller.move(moves[index++ % moves.length]), 800);
+}
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "2048") {
+    return <Game2048 className="media-scene" seed={2048} initialBoard={gameBoard} initialScore={1832} storageKey={null} enableAudio={false} onReady={gameReady} />;
+  }
   if (name === "textured-glass") {
     return <TexturedGlass className="media-scene" src="__TEXTURED_GLASS_IMAGE__" depthMap="__TEXTURED_GLASS_DEPTH__" alt="A photograph through textured glass" onDepth={state => { if (state.kind === "ready") markReady(true); }} />;
   }

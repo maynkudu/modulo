@@ -1,3 +1,4 @@
+import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
@@ -23,7 +24,7 @@ export default function Diwali26Page() {
       </ol></nav>
       <div className={styles.heading}>
         <div><h1>{diwali26.title}</h1><p>{diwali26.description}</p></div>
-        <a className={styles.sourceLink} href="#source">View source</a>
+        <ComponentHeadingActions name="diwali-26" />
       </div>
       <div className={styles.sections}>
         <ComponentSection title="Preview" id="preview"><div className={styles.demo}><Diwali26Demo /></div></ComponentSection>

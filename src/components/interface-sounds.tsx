@@ -65,7 +65,7 @@ export function InterfaceSounds() {
     document.addEventListener("pointerover", (event) => {
       if (event.pointerType === "touch" || !(event.target instanceof Element)) return;
       const button = event.target.closest("a, button, input, select, summary, [role=button], [role=tab], [role=checkbox], [role=switch], [data-haptic-hover]");
-      if (!button || button.matches(":disabled, [data-scene-object], [data-festival-feedback]")) return;
+      if (!button || button.matches(":disabled, [data-scene-object], [data-festival-feedback]") || button.closest("[data-sound-managed]")) return;
       if (event.relatedTarget instanceof Node && button.contains(event.relatedTarget)) return;
       playSound("hover");
     }, { signal });
