@@ -198,15 +198,15 @@
     {
       "name": "2048",
       "repository": "maynkudu/modulo-2048",
-      "revision": "13384933a755d7187c4657c02b446d2e65d453e5",
+      "revision": "77ceafdb090341b5b361e7115f4b21c845f6d928",
       "files": [
         {
           "path": "Game2048.tsx",
-          "sha256": "9fcbf2c427e3ea0fc49d6af7ff43f0334bd65b55380d564608f986b5d4edf19c"
+          "sha256": "cc0641d8c60f9c0099dad80262956f37dd3303b3b4c740e535805eea553b56db"
         },
         {
           "path": "create-game.ts",
-          "sha256": "b429e693d2c1b94c46b28e8c182e36bdaa074f3bdbf428540feac4bcf9ba0869"
+          "sha256": "1585c679642872d2735819b2926a928a3615f1a4cd9af94b888ba5f099a4bff0"
         },
         {
           "path": "game.ts",
@@ -214,11 +214,11 @@
         },
         {
           "path": "audio.ts",
-          "sha256": "6fdd84157bfd7bd1655034ddfd469cf1e3c0be9d81cc7d3291ad56b8b14766c5"
+          "sha256": "f32ff3a44f31518511f679d0e4baeb9ae5278fc93c7b6c19632919c05f869c8e"
         },
         {
           "path": "game.css",
-          "sha256": "a4476a9b8c731fee76ac9819df75359d49e86aed98b4370496cbfa059998aa00"
+          "sha256": "cb01c155e5a6f0f9f69133c61b52cd32a8b49960a8e48304e60693a4c2f652aa"
         }
       ]
     }

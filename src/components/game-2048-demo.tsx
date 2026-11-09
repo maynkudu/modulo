@@ -13,5 +13,5 @@ export function Game2048Demo() {
       if (game) window.game2048 = game; else delete window.game2048;
     }
   }, []);
-  return <Game2048 enableAudio={sound.enabled} volume={sound.volume * .45} onReady={onReady} />;
+  return <Game2048 enableAudio={sound.enabled} volume={sound.volume * .75} onReady={onReady} />;
 }

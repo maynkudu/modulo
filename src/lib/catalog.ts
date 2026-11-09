@@ -123,7 +123,7 @@ export const game2048 = {
   name: "2048" as const,
   type: "registry:component",
   title: "2048",
-  description: "2048 with grayscale tiles, score meters, and soft merge sounds.",
+  description: "2048 with grayscale tiles, animated score meters, and merge sounds.",
   dependencies: ["runeicons-react@^0.1.0"],
   registryDependencies: [],
   files: [
@@ -321,7 +321,7 @@ export const texturedGlassProps = [
 export const game2048Usage = `import { Game2048 } from "@/components/2048/Game2048";
 
 export default function Example() {
-  return <Game2048 volume={0.45} />;
+  return <Game2048 volume={0.75} />;
 }`;
 
 export const game2048Props = [
@@ -330,7 +330,7 @@ export const game2048Props = [
   ["initialScore", "number", "0", "Starting score when initialBoard is supplied."],
   ["storageKey", "string | null", '\"2048-game-v1\"', "Local save and sound preference key. Null disables storage."],
   ["enableAudio", "boolean", "true", "Allow game sounds after a gesture. False stops all voices."],
-  ["volume", "number", "0.45", "Master volume from 0 to 1."],
+  ["volume", "number", "0.75", "Master volume from 0 to 1."],
   ["className", "string", '\"\"', "Class names for the game container."],
   ["onReady", "(controller | null) => void", "Optional", "Controller on mount, null on cleanup. Keep callbacks stable."],
   ["onChange", "(GameSnapshot) => void", "Optional", "Board, score, best, progress, undo, and sound state. Keep callbacks stable."],
