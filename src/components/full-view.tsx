@@ -7,6 +7,9 @@ import { Nilkamal } from "@/registry/nilkamal/Nilkamal";
 import { Diwali26 } from "@/registry/diwali-26/Diwali26";
 import { RootInfection } from "@/registry/root-infection/RootInfection";
 import { TexturedGlass } from "@/registry/textured-glass/TexturedGlass";
+import { ElasticSliderDemo } from "./elastic-slider-demo";
+import { SnapRailDemo } from "./snap-rail-demo";
+import { LiquidClusterDemo } from "./liquid-cluster-demo";
 import { catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
 
@@ -23,9 +26,13 @@ const views = {
   "diwali-26": () => <Diwali26 className={styles.scene} fallback="/artwork/diwali-26.png" />,
   "root-infection": () => <RootInfection className={styles.scene} />,
   "textured-glass": () => <TexturedGlass className={styles.scene} src="/artwork/stay.jpeg" depthMap="/artwork/stay-depth.png" alt="A photograph through textured glass" />,
+  "elastic-slider": () => <div className={styles.controls}><ElasticSliderDemo /></div>,
+  "snap-rail": () => <div className={styles.controls}><SnapRailDemo /></div>,
+  "liquid-cluster": () => <div className={styles.controls}><LiquidClusterDemo /></div>,
 } satisfies Record<ComponentName, () => ReactNode>;
 
 export function FullView({ name }: { name: ComponentName }) {
   const View = views[name];
-  return <main className={`${styles.viewport} ${name === "2048" ? styles.game : ""}`}><View /></main>;
+  const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster";
+  return <main className={`${styles.viewport} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""}`}><View /></main>;
 }

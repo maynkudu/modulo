@@ -1,0 +1,7 @@
+.artwork { composes: artwork from "./demo-controls.module.css"; min-height: 420px; }
+.artworkHeader { composes: artworkHeader from "./demo-controls.module.css"; }
+.hint { color: #777; font-size: 12px; line-height: 1.7; margin: 0; }
+.options { display: grid; gap: 10px; padding-top: 18px; border-top: 1px solid #252525; }
+.stage { display: grid; place-items: center; min-height: 420px; padding: 64px 48px; }
+.status { color: var(--ui-muted); font-size: 12px; line-height: 1.6; margin: 0; }
+@media (max-width: 700px) { .stage { min-height: 360px; } .artwork { min-height: 360px; } }

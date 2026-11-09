@@ -1,0 +1,23 @@
+.artwork { composes: artwork from "./demo-controls.module.css"; min-height: 420px; display: flex; flex-direction: column; justify-content: center; }
+.artworkHeader { composes: artworkHeader from "./demo-controls.module.css"; }
+.actions { display: flex; padding: 3px; border: 1px solid #2c2c2c; border-radius: 7px; gap: 3px; }
+.actions button { flex: 1; height: 30px; padding: 0 8px; background: transparent; color: #888; border: 0; font: inherit; border-radius: 4px; cursor: pointer; }
+.actions button[aria-pressed=true] { background: #303030; color: #eee; }
+.actions button:focus-visible { outline: 2px solid #eee; }
+.actions button:disabled { opacity: .4; cursor: default; }
+.groups { position: relative; padding: 52px 12px 35px; }
+.scene { --liquid-cluster-fill: #e7e7e7; --liquid-cluster-color: #222; --liquid-cluster-focus: #777; }
+.notification { display: flex; align-items: center; gap: 12px; }
+.appIcon { display: grid; place-items: center; align-self: flex-start; flex-shrink: 0; width: 30px; height: 30px; border-radius: 8px; background: #d4d4d4; margin-top: 1px; }
+.message { display: grid; gap: 4px; min-width: 0; font-size: 11px; line-height: 1.3; font-weight: 400; }
+.messageHeader { display: flex; justify-content: space-between; gap: 16px; color: #6c6c6c; font-size: 10px; }
+.message strong { font-weight: 600; font-size: 13px; }
+.notificationWrap { opacity: 1; transform: translateY(0); transition: opacity 140ms, transform 180ms cubic-bezier(.16,1,.3,1); }
+.cleared { opacity: 0; transform: translateY(-10px); }
+.notificationWrap[data-reduced-motion=true] { transition: none; transform: none; }
+.empty { position: absolute; inset: 0; display: grid; place-items: center; color: #777; font-size: 13px; pointer-events: none; }
+.options { display: grid; gap: 10px; padding-top: 18px; border-top: 1px solid #252525; }
+.hint { color: #777; font-size: 12px; line-height: 1.7; margin: 0; }
+@container (max-width: 360px) { .appIcon { display: none; } }
+@media (max-width: 700px) { .artwork { min-height: 340px; } .groups { padding-inline: 4px; } }
+@media (prefers-reduced-motion: reduce) { .notificationWrap { transition: none; transform: none; } }

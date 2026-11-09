@@ -136,6 +136,50 @@ export const game2048 = {
   ],
 } satisfies RegistryItem;
 
+export const elasticSlider = {
+  name: "elastic-slider" as const,
+  type: "registry:component",
+  title: "Elastic slider",
+  description: "A bounded slider with elastic endpoint stretch, rigid content, and interruptible settling.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/elastic-slider/ElasticSlider.tsx", target: "components/elastic-slider/ElasticSlider.tsx", type: "registry:component" },
+    { path: "src/registry/elastic-slider/create-elastic-slider.ts", target: "components/elastic-slider/create-elastic-slider.ts", type: "registry:lib" },
+    { path: "src/registry/elastic-slider/slider-math.ts", target: "components/elastic-slider/slider-math.ts", type: "registry:lib" },
+    { path: "src/registry/elastic-slider/elastic-slider.css", target: "components/elastic-slider/elastic-slider.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
+export const snapRail = {
+  name: "snap-rail" as const,
+  type: "registry:component",
+  title: "Snap rail",
+  description: "A draggable rail with velocity-projected detents and continuous spring retargeting.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/snap-rail/SnapRail.tsx", target: "components/snap-rail/SnapRail.tsx", type: "registry:component" },
+    { path: "src/registry/snap-rail/create-snap-rail.ts", target: "components/snap-rail/create-snap-rail.ts", type: "registry:lib" },
+    { path: "src/registry/snap-rail/motion.ts", target: "components/snap-rail/motion.ts", type: "registry:lib" },
+    { path: "src/registry/snap-rail/snap-rail.css", target: "components/snap-rail/snap-rail.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
+export const liquidCluster = {
+  name: "liquid-cluster" as const,
+  type: "registry:component",
+  title: "Liquid cluster",
+  description: "A notification that splits into a card and Clear button through a liquid seam.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/liquid-cluster/LiquidCluster.tsx", target: "components/liquid-cluster/LiquidCluster.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-cluster/create-liquid-cluster.ts", target: "components/liquid-cluster/create-liquid-cluster.ts", type: "registry:lib" },
+    { path: "src/registry/liquid-cluster/liquid-cluster.css", target: "components/liquid-cluster/liquid-cluster.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 function componentMedia({ name, alt, height = 630 }: { name: string; alt: string; height?: number }) {
   return {
     thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
@@ -190,6 +234,24 @@ export const catalogItems = [{
   keywords: ["2048", "game", "puzzle", "tiles", "merge", "score", "keyboard", "swipe", "audio"],
   seoDescription: "Play a minimal 2048 game with grayscale tiles, animated merges, score meters, undo, local saves, and procedural sounds. Install the React component with shadcn.",
   media: componentMedia({ name: game2048.name, alt: "Grayscale 2048 tiles beneath score and best meters on an almost-white background.", height: 800 }),
+}, {
+  component: elasticSlider,
+  addedAt: "2026-11-09",
+  keywords: ["slider", "brightness", "elastic", "spring", "gesture", "keyboard", "controls"],
+  seoDescription: "A React slider with bounded stepped values, horizontal and vertical input, elastic endpoint stretch, keyboard controls, and reduced motion. Preview and install the independent TypeScript component.",
+  media: componentMedia({ name: elasticSlider.name, alt: "A vertical brightness slider stretching beyond its endpoint on a pale background.", height: 800 }),
+}, {
+  component: snapRail,
+  addedAt: "2026-11-09",
+  keywords: ["snap", "rail", "detents", "spring", "velocity", "drag", "gesture", "controls"],
+  seoDescription: "A React snap rail with projected release targets, labeled detents, re-grab continuity, keyboard selection, and reduced motion. Preview and install the independent TypeScript component.",
+  media: componentMedia({ name: snapRail.name, alt: "A rounded draggable marker settling between labeled rail positions.", height: 800 }),
+}, {
+  component: liquidCluster,
+  addedAt: "2026-11-09",
+  keywords: ["liquid", "notification", "clear", "buttons", "cluster", "merge", "separate", "geometry", "canvas", "controls"],
+  seoDescription: "A React notification that separates into a card and Clear action with a liquid seam, keyboard targets, reduced motion, and an opaque fallback. Preview and install the independent TypeScript component.",
+  media: componentMedia({ name: liquidCluster.name, alt: "A notification rectangle separating into a message card and Clear button.", height: 800 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -336,3 +398,75 @@ export const game2048Props = [
   ["onReady", "(controller | null) => void", "Optional", "Controller on mount, null on cleanup. Keep callbacks stable."],
   ["onChange", "(GameSnapshot) => void", "Optional", "Board, score, best, progress, undo, and sound state. Keep callbacks stable."],
 ] satisfies readonly (readonly [string, string, string, string])[];
+
+export const elasticSliderUsage = `import { ElasticSlider } from "@/components/elastic-slider/ElasticSlider";
+
+export default function Example() {
+  return <ElasticSlider label="Brightness" defaultValue={65} orientation="vertical" />;
+}`;
+
+export const elasticSliderProps = [
+  ["label", "string", "Required", "Visible and accessible name for the value."],
+  ["value / defaultValue", "number", "min", "Use value with onValueChange for controlled state, or defaultValue for local state."],
+  ["min / max", "number", "0 / 100", "Finite ordered semantic bounds."],
+  ["step", 'number | "any"', "1", "Value increment counted from min, or continuous pointer values with any."],
+  ["orientation", '"horizontal" | "vertical"', '"horizontal"', "Input direction and shell layout."],
+  ["disabled", "boolean", "false", "Blocks pointer and keyboard changes."],
+  ["reducedMotion", "boolean", "false", "Requests a still alternate path. The system preference also applies."],
+  ["onValueChange", "(value: number) => void", "Optional", "Bounded normalized value requests. Required with controlled value."],
+  ["onValueCommit", "(value: number) => void", "Optional", "Successful user adjustment. Cancellation does not commit."],
+  ["formatValue", "(value: number) => string", "Optional", "Formats the displayed and accessible value."],
+  ["children", "ReactNode", "Optional", "Rigid decorative content outside shell deformation."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller on mount and null on cleanup. Keep callback stable."],
+] as const;
+
+export const snapRailUsage = `import { SnapRail } from "@/components/snap-rail/SnapRail";
+
+const detents = [
+  { id: "left", label: "Left", position: 0 },
+  { id: "center", label: "Center", position: 140 },
+  { id: "right", label: "Right", position: 280 },
+];
+
+export default function Example() {
+  return <SnapRail ariaLabel="Placement" detents={detents} defaultSelectedId="center" />;
+}`;
+
+export const snapRailProps = [
+  ["detents", "readonly SnapDetent[]", "Required", "Stable IDs, labels, and increasing finite relative positions mapped across the track."],
+  ["ariaLabel", "string", '"Snap position"', "Accessible name of the placement control."],
+  ["selectedId / defaultSelectedId", "string", "First detent", "Controlled selection or initial local selection."],
+  ["onSelectionChange", "(id: string) => void", "Optional", "Selection requests. Required with controlled selectedId."],
+  ["onSelectionCommit", "(id: string) => void", "Optional", "Successful user destination request."],
+  ["onSelectionCancel", "() => void", "Optional", "Canceled pointer interaction without a commit."],
+  ["decaySeconds", "number", "0.12", "Projection time constant in seconds."],
+  ["hysteresis", "number", "8", "Preview midpoint margin in pixels."],
+  ["omega / dampingRatio", "number", "20 / 0.85", "Illustrative spring tuning, not Apple constants."],
+  ["disabled / reducedMotion", "boolean", "false", "Input availability and still alternate path."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller on mount and null on cleanup. Keep callback stable."],
+] as const;
+
+export const liquidClusterUsage = `import { LiquidCluster } from "@/components/liquid-cluster/LiquidCluster";
+
+const items = [
+  { id: "notification", label: "Open notification", content: <span>Design review is ready.</span> },
+  { id: "clear", label: "Clear" },
+];
+
+export default function Example() {
+  return <LiquidCluster ariaLabel="Notification actions" layout="notification" items={items} defaultSeparation={0} onSelect={id => console.log(id)} />;
+}`;
+
+export const liquidClusterProps = [
+  ["items", "readonly LiquidClusterItem[]", "Required", "Unique IDs, accessible labels, optional ReactNode content, and per-item disabled state. Notification layout requires two items."],
+  ["layout", '"buttons" | "notification"', '"buttons"', "Notification starts as one rectangle and separates into a wide card and smaller action."],
+  ["ariaLabel", "string", "Required", "Accessible name of the related button group."],
+  ["separation / defaultSeparation", "number", "0.65", "Normalized gap from 0 to 1. Controlled separation requires onSeparationChange."],
+  ["onSeparationChange", "(value: number) => void", "Optional", "Requested normalized separation."],
+  ["selectedId / defaultSelectedId", "string | null", "null", "Controlled or initial local active button. Controlled selection requires onSelect."],
+  ["onSelect", "(id: string) => void", "Optional", "Independent button activation."],
+  ["disabled", "boolean", "false", "Disables all native button targets."],
+  ["opaque", "boolean", "false", "Requests an opaque material adaptation."],
+  ["reducedMotion", "boolean", "false", "Disables automatic settling. System preference also applies."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller on mount and null on cleanup. Keep callback stable."],
+] as const;

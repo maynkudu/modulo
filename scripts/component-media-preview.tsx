@@ -6,6 +6,9 @@ import { RootInfection } from "../src/registry/root-infection/RootInfection";
 import { TexturedGlass } from "../src/registry/textured-glass/TexturedGlass";
 import { Game2048, type Game2048Controller } from "../src/registry/2048/Game2048";
 import type { Direction } from "../src/registry/2048/game";
+import { ElasticSlider, type ElasticSliderController } from "../src/registry/elastic-slider/ElasticSlider";
+import { SnapRail, type SnapRailController } from "../src/registry/snap-rail/SnapRail";
+import { LiquidCluster, type LiquidClusterController } from "../src/registry/liquid-cluster/LiquidCluster";
 
 function markReady(controller: unknown) {
   if (controller) document.body.dataset.ready = "true";
@@ -36,8 +39,25 @@ function gameReady(controller: Game2048Controller | null) {
   gameTimer = setInterval(() => controller.move(moves[index++ % moves.length]), 800);
 }
 
+let capturedControl: ElasticSliderController | SnapRailController | LiquidClusterController | null = null;
+function controlReady(controller: ElasticSliderController | SnapRailController | LiquidClusterController | null) {
+  capturedControl = controller;
+  if (!controller) return;
+  markReady(controller);
+}
+const railDetents = [{ id: "left", label: "Left", position: 0 }, { id: "center", label: "Center", position: 50 }, { id: "right", label: "Right", position: 100 }];
+const clusterItems = [
+  { id: "notification", label: "Design review", content: <span style={{ display: "grid", gap: 6 }}><span style={{ fontSize: 11, color: "#777" }}>Messages</span><strong style={{ fontSize: 14 }}>Design review</strong><span style={{ fontSize: 12 }}>The updated preview is ready.</span></span> },
+  { id: "clear", label: "Clear" },
+];
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster") {
+    return <section className="control-media"><header><span>Modulo</span><h1>{name === "elastic-slider" ? "Elastic slider" : name === "snap-rail" ? "Snap rail" : "Liquid cluster"}</h1><button type="button" data-control-replay onClick={() => capturedControl?.replay()}>Replay</button></header><div className="control-media-stage">
+      {name === "elastic-slider" ? <ElasticSlider label="Brightness" defaultValue={65} orientation="vertical" onReady={controlReady} /> : name === "snap-rail" ? <SnapRail ariaLabel="Placement" detents={railDetents} defaultSelectedId="center" onReady={controlReady} /> : <LiquidCluster ariaLabel="Notification actions" layout="notification" items={clusterItems} defaultSeparation={0} onReady={controlReady} />}
+    </div></section>;
+  }
   if (name === "2048") {
     return <Game2048 className="media-scene" seed={2048} initialBoard={gameBoard} initialScore={1832} storageKey={null} enableAudio={false} onReady={gameReady} />;
   }

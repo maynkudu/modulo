@@ -437,6 +437,163 @@
         }
       },
       "type": "registry:component"
+    },
+    {
+      "name": "elastic-slider",
+      "title": "Elastic slider",
+      "description": "A bounded slider with elastic endpoint stretch, rigid content, and interruptible settling.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/elastic-slider/ElasticSlider.tsx",
+          "type": "registry:component",
+          "target": "components/elastic-slider/ElasticSlider.tsx"
+        },
+        {
+          "path": "src/registry/elastic-slider/create-elastic-slider.ts",
+          "type": "registry:lib",
+          "target": "components/elastic-slider/create-elastic-slider.ts"
+        },
+        {
+          "path": "src/registry/elastic-slider/slider-math.ts",
+          "type": "registry:lib",
+          "target": "components/elastic-slider/slider-math.ts"
+        },
+        {
+          "path": "src/registry/elastic-slider/elastic-slider.css",
+          "type": "registry:file",
+          "target": "components/elastic-slider/elastic-slider.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A vertical brightness slider stretching beyond its endpoint on a pale background.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/elastic-slider.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/elastic-slider.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/elastic-slider.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "snap-rail",
+      "title": "Snap rail",
+      "description": "A draggable rail with velocity-projected detents and continuous spring retargeting.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/snap-rail/SnapRail.tsx",
+          "type": "registry:component",
+          "target": "components/snap-rail/SnapRail.tsx"
+        },
+        {
+          "path": "src/registry/snap-rail/create-snap-rail.ts",
+          "type": "registry:lib",
+          "target": "components/snap-rail/create-snap-rail.ts"
+        },
+        {
+          "path": "src/registry/snap-rail/motion.ts",
+          "type": "registry:lib",
+          "target": "components/snap-rail/motion.ts"
+        },
+        {
+          "path": "src/registry/snap-rail/snap-rail.css",
+          "type": "registry:file",
+          "target": "components/snap-rail/snap-rail.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A rounded draggable marker settling between labeled rail positions.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/snap-rail.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/snap-rail.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/snap-rail.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "liquid-cluster",
+      "title": "Liquid cluster",
+      "description": "A notification that splits into a card and Clear button through a liquid seam.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/liquid-cluster/LiquidCluster.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-cluster/LiquidCluster.tsx"
+        },
+        {
+          "path": "src/registry/liquid-cluster/create-liquid-cluster.ts",
+          "type": "registry:lib",
+          "target": "components/liquid-cluster/create-liquid-cluster.ts"
+        },
+        {
+          "path": "src/registry/liquid-cluster/liquid-cluster.css",
+          "type": "registry:file",
+          "target": "components/liquid-cluster/liquid-cluster.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A notification rectangle separating into a message card and Clear button.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-cluster.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-cluster.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-cluster.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
     }
   ]
 }

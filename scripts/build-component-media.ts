@@ -46,9 +46,17 @@ await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset
 html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#050304;color:#c9bfc1;font-family:GeistMono,monospace}
 .media-scene{width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
 .media-scene canvas{width:100%;height:100%}
+.control-media{height:100%;background:#f7f8fa;color:#20242b;font-family:Geist,sans-serif;padding:72px 100px;display:flex;flex-direction:column}
+.control-media header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #dde1e7;padding-bottom:24px}
+.control-media header span{font-size:22px;color:#646b76}.control-media h1{margin:0;font-size:32px;font-weight:550;letter-spacing:-.035em}
+.control-media header button{border:1px solid #cdd3dc;background:#fff;color:#333b46;border-radius:12px;font:inherit;padding:9px 18px;cursor:pointer}
+.control-media-stage{flex:1;display:flex;align-items:center;justify-content:center}.control-media-stage>.snap-rail{width:600px}.control-media-stage>.liquid-cluster{width:650px}
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "elastic-slider", flow: "elastic-slider-stretch", pause: 8000, seek: .3, movePointer: false },
+  { name: "snap-rail", flow: "snap-rail-retarget", pause: 8000, seek: .3, movePointer: false },
+  { name: "liquid-cluster", flow: "liquid-cluster-separate", pause: 8000, seek: .3, movePointer: false },
   { name: "2048", flow: "2048-merges", pause: 8000, seek: .4, movePointer: false },
   { name: "textured-glass", flow: "textured-glass-light", pause: 18000, seek: 2, movePointer: false },
   { name: "diwali-26", flow: "diwali-skyshots", pause: 20000, seek: 1.6, movePointer: false },
@@ -76,6 +84,7 @@ await writeFile(configPath, `${JSON.stringify({
     fps: 20,
     waitFor: "body[data-ready=true]",
     steps: [
+      ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "click", selector: "[data-control-replay]" }] : []),
       ...(specification.movePointer ? [{ action: "moveTo", selector: ".media-scene" }] : []),
       { action: "pause", ms: specification.pause },
     ],

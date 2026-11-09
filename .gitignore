@@ -50,6 +50,9 @@ next-env.d.ts
 /src/registry/nilkamal/
 /src/registry/diwali-26/
 /src/registry/textured-glass/
+/src/registry/elastic-slider/
+/src/registry/snap-rail/
+/src/registry/liquid-cluster/
 /.private-registry/
 /public/r/
 /.data/

@@ -225,6 +225,71 @@
           "sha256": "8ad66db5b3342d77e4dad24f11e50ccb92705d9fa669900680435d696f6291b1"
         }
       ]
+    },
+    {
+      "name": "elastic-slider",
+      "repository": "maynkudu/modulo-elastic-slider",
+      "revision": "2141ba6049c8234384b30c4419cfc442c896b1ae",
+      "files": [
+        {
+          "path": "ElasticSlider.tsx",
+          "sha256": "7fbcc13178cec0cdac6703a65839102784f3a0e3684db264cb9637eb2ec686f6"
+        },
+        {
+          "path": "create-elastic-slider.ts",
+          "sha256": "7513ca8b5b253591cb9850efea5001e6330cc084598a8cfa30938f7430221f61"
+        },
+        {
+          "path": "slider-math.ts",
+          "sha256": "3d2783849d869a6b5094cf18bc92267f42370589a9ac3f4d2a8f6f499a0e67cf"
+        },
+        {
+          "path": "elastic-slider.css",
+          "sha256": "d2baee8fe7352256752f52fedc4b1e66636f78c9ff3c557030d74cb4e2711893"
+        }
+      ]
+    },
+    {
+      "name": "snap-rail",
+      "repository": "maynkudu/modulo-snap-rail",
+      "revision": "0f74e74b25e15cedfbccaf613b2dcf557ba1f490",
+      "files": [
+        {
+          "path": "SnapRail.tsx",
+          "sha256": "c7780f14a4d6e0d5dc8f76360b7247b8079b60a6792d411a6605c75d7dc5ed3b"
+        },
+        {
+          "path": "create-snap-rail.ts",
+          "sha256": "035848babbcd55f4c8ed65b2bbacb9a91e02bf772488bb7d6051198e22424c60"
+        },
+        {
+          "path": "motion.ts",
+          "sha256": "3f05ebce4cf6b84e85399f7f4d7c3b4044b84ee1e20d8b55bcdf2f1dad089625"
+        },
+        {
+          "path": "snap-rail.css",
+          "sha256": "bbf5926590fb1b710cf810f06df6ff8b98911a9728acf2f0215bf025f76028f7"
+        }
+      ]
+    },
+    {
+      "name": "liquid-cluster",
+      "repository": "maynkudu/modulo-liquid-cluster",
+      "revision": "864372993d59eda5eb237a09f734c199c5116e54",
+      "files": [
+        {
+          "path": "LiquidCluster.tsx",
+          "sha256": "6a43f08a5c8a4caa9eaa1bd2c74288477b73313589e09ac6f357356ae547bc47"
+        },
+        {
+          "path": "create-liquid-cluster.ts",
+          "sha256": "cab7a5eba3d06c83bdd1050516f8a54558454b54e4d0288198b31d6c5fcd1b2a"
+        },
+        {
+          "path": "liquid-cluster.css",
+          "sha256": "5a6bb055ba84c2a9c865e7271e40b67424357a40aed26e5572dfa817bbb17d03"
+        }
+      ]
     }
   ]
 }
