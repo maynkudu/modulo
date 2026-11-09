@@ -32,13 +32,13 @@ export default function Game2048Page() {
           <InstallCommand name="2048" />
           <div className={styles.panelDivider} />
           <h3>Usage</h3><pre><code>{game2048Usage}</code></pre>
-          <p>React, Rune Icons, and Web Audio. All five source files install together. No game or animation package required.</p>
+          <p>React, Rune Icons, and Web Audio. All six source files install together. No game or animation package required.</p>
           <a href="/r/2048.json">Registry JSON</a><ComponentMediaLinks component={game2048} />
           <div className={styles.panelDivider} />
           <h3>Interaction</h3>
           <p>Use arrow keys or WASD without selecting the board. Swipe anywhere in the game on touch screens. Moves start as soon as the swipe direction is clear. Equal tiles merge once per move. Press U or use Undo to take back the last move. Reach 2048, then keep playing.</p>
           <p>Score counts merged values. Best keeps your local record. The segmented meter tracks the highest tile toward 2048. Your board and last move save in this browser.</p>
-          <p>Sound starts after interaction. Use the game control or header sound toggle to mute. Reduced motion updates tiles instantly. Hidden tabs stop sound.</p>
+          <p>Sound starts after interaction. Use the game control or header sound toggle to mute. Reduced motion updates tiles, numbers, meters and panels instantly. Hidden tabs stop sound.</p>
           <p>Visual direction from <a href="https://chess.aryank.space/" target="_blank" rel="noopener">Aryan&apos;s chess game</a>.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>

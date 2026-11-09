@@ -198,7 +198,7 @@
     {
       "name": "2048",
       "repository": "maynkudu/modulo-2048",
-      "revision": "77ceafdb090341b5b361e7115f4b21c845f6d928",
+      "revision": "bda9e05a7b882f70e4e9cd1fe6c8124732971236",
       "files": [
         {
           "path": "Game2048.tsx",
@@ -206,7 +206,11 @@
         },
         {
           "path": "create-game.ts",
-          "sha256": "1585c679642872d2735819b2926a928a3615f1a4cd9af94b888ba5f099a4bff0"
+          "sha256": "f29c302ba5d7b4f00b4fb61c7df7e93a121d04293dca1ed117baac1a404009a2"
+        },
+        {
+          "path": "motion.ts",
+          "sha256": "29b4ff746adbf6e790cfa192f5846296c143b3f7a9d0b64e1fc28962fda3aa27"
         },
         {
           "path": "game.ts",
@@ -218,7 +222,7 @@
         },
         {
           "path": "game.css",
-          "sha256": "cb01c155e5a6f0f9f69133c61b52cd32a8b49960a8e48304e60693a4c2f652aa"
+          "sha256": "8ad66db5b3342d77e4dad24f11e50ccb92705d9fa669900680435d696f6291b1"
         }
       ]
     }

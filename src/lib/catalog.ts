@@ -129,6 +129,7 @@ export const game2048 = {
   files: [
     { path: "src/registry/2048/Game2048.tsx", target: "components/2048/Game2048.tsx", type: "registry:component" },
     { path: "src/registry/2048/create-game.ts", target: "components/2048/create-game.ts", type: "registry:lib" },
+    { path: "src/registry/2048/motion.ts", target: "components/2048/motion.ts", type: "registry:lib" },
     { path: "src/registry/2048/game.ts", target: "components/2048/game.ts", type: "registry:lib" },
     { path: "src/registry/2048/audio.ts", target: "components/2048/audio.ts", type: "registry:lib" },
     { path: "src/registry/2048/game.css", target: "components/2048/game.css", type: "registry:file" },

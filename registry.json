@@ -392,6 +392,11 @@
           "target": "components/2048/create-game.ts"
         },
         {
+          "path": "src/registry/2048/motion.ts",
+          "type": "registry:lib",
+          "target": "components/2048/motion.ts"
+        },
+        {
           "path": "src/registry/2048/game.ts",
           "type": "registry:lib",
           "target": "components/2048/game.ts"
