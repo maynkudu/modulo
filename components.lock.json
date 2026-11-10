@@ -290,6 +290,29 @@
           "sha256": "5a6bb055ba84c2a9c865e7271e40b67424357a40aed26e5572dfa817bbb17d03"
         }
       ]
+    },
+    {
+      "name": "logo-refraction",
+      "repository": "maynkudu/modulo-logo-refraction",
+      "revision": "05bbf31bb81e4f74eb39d998286def179fc6f4d4",
+      "files": [
+        {
+          "path": "LogoRefraction.tsx",
+          "sha256": "4c97ee62c5158c36c04682eca4dfe78463ba37af1a64e34698e95138aa435c4b"
+        },
+        {
+          "path": "create-logo-refraction.ts",
+          "sha256": "23aa80c4dec2333e3bf8e0022b2f268e645fd054aaab4f8e7fceac3d3a4fe31d"
+        },
+        {
+          "path": "shaders.ts",
+          "sha256": "a70945015dcf3402d187b084488d3fc9990b1e26412703b07d061a0b16606f8b"
+        },
+        {
+          "path": "logo-refraction.css",
+          "sha256": "5a2497025f9c55d8c7acb7fc79b07933e3f5c476322fda4cf9eed727568b2685"
+        }
+      ]
     }
   ]
 }

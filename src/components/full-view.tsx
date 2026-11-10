@@ -10,6 +10,7 @@ import { TexturedGlass } from "@/registry/textured-glass/TexturedGlass";
 import { ElasticSliderDemo } from "./elastic-slider-demo";
 import { SnapRailDemo } from "./snap-rail-demo";
 import { LiquidClusterDemo } from "./liquid-cluster-demo";
+import { LogoRefractionDemo } from "./logo-refraction-demo";
 import { catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
 
@@ -29,10 +30,11 @@ const views = {
   "elastic-slider": () => <div className={styles.controls}><ElasticSliderDemo /></div>,
   "snap-rail": () => <div className={styles.controls}><SnapRailDemo /></div>,
   "liquid-cluster": () => <div className={styles.controls}><LiquidClusterDemo /></div>,
+  "logo-refraction": () => <div className={styles.controls}><LogoRefractionDemo /></div>,
 } satisfies Record<ComponentName, () => ReactNode>;
 
 export function FullView({ name }: { name: ComponentName }) {
   const View = views[name];
   const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster";
-  return <main className={`${styles.viewport} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""}`}><View /></main>;
+  return <main className={`${styles.viewport} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""}`}><View /></main>;
 }

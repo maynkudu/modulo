@@ -594,6 +594,60 @@
         }
       },
       "type": "registry:component"
+    },
+    {
+      "name": "logo-refraction",
+      "title": "Logo refraction",
+      "description": "Metallic light across the black field, with an iridescent sweep and outline glint on the n.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/logo-refraction/LogoRefraction.tsx",
+          "type": "registry:component",
+          "target": "components/logo-refraction/LogoRefraction.tsx"
+        },
+        {
+          "path": "src/registry/logo-refraction/create-logo-refraction.ts",
+          "type": "registry:lib",
+          "target": "components/logo-refraction/create-logo-refraction.ts"
+        },
+        {
+          "path": "src/registry/logo-refraction/shaders.ts",
+          "type": "registry:lib",
+          "target": "components/logo-refraction/shaders.ts"
+        },
+        {
+          "path": "src/registry/logo-refraction/logo-refraction.css",
+          "type": "registry:file",
+          "target": "components/logo-refraction/logo-refraction.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "The complete square maynkudu logo, with metallic light on its black field and an iridescent n in the lower right.",
+            "width": 1200,
+            "height": 1200,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/logo-refraction.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 1200,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/logo-refraction.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 1200,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/logo-refraction.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
     }
   ]
 }

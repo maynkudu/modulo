@@ -9,6 +9,7 @@ import type { Direction } from "../src/registry/2048/game";
 import { ElasticSlider, type ElasticSliderController } from "../src/registry/elastic-slider/ElasticSlider";
 import { SnapRail, type SnapRailController } from "../src/registry/snap-rail/SnapRail";
 import { LiquidCluster, type LiquidClusterController } from "../src/registry/liquid-cluster/LiquidCluster";
+import { LogoRefraction } from "../src/registry/logo-refraction/LogoRefraction";
 
 function markReady(controller: unknown) {
   if (controller) document.body.dataset.ready = "true";
@@ -53,6 +54,9 @@ const clusterItems = [
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "logo-refraction") {
+    return <LogoRefraction className="media-scene" src="__LOGO_REFRACTION_IMAGE__" alt="The complete maynkudu logo" onReady={markReady} />;
+  }
   if (name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster") {
     return <section className="control-media"><header><span>Modulo</span><h1>{name === "elastic-slider" ? "Elastic slider" : name === "snap-rail" ? "Snap rail" : "Liquid cluster"}</h1><button type="button" data-control-replay onClick={() => capturedControl?.replay()}>Replay</button></header><div className="control-media-stage">
       {name === "elastic-slider" ? <ElasticSlider label="Brightness" defaultValue={65} orientation="vertical" onReady={controlReady} /> : name === "snap-rail" ? <SnapRail ariaLabel="Placement" detents={railDetents} defaultSelectedId="center" onReady={controlReady} /> : <LiquidCluster ariaLabel="Notification actions" layout="notification" items={clusterItems} defaultSeparation={0} onReady={controlReady} />}

@@ -31,13 +31,14 @@ await mkdir(workspace, { recursive: true });
 execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
   cwd: root, stdio: "inherit",
 });
-const [javascript, css, font, sansFont, glassImage, glassDepth] = await Promise.all([
+const [javascript, css, font, sansFont, glassImage, glassDepth, logoImage] = await Promise.all([
   readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
   readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
   readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
   readFile(resolve(root, "node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2")),
   readFile(resolve(root, "public/artwork/stay.jpeg")),
   readFile(resolve(root, "public/artwork/stay-depth.png")),
+  readFile(resolve(root, "public/artwork/maynkudu-warehouse.png")),
 ]);
 const previewPath = resolve(workspace, "capture.html");
 await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
@@ -51,9 +52,10 @@ html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#0503
 .control-media header span{font-size:22px;color:#646b76}.control-media h1{margin:0;font-size:32px;font-weight:550;letter-spacing:-.035em}
 .control-media header button{border:1px solid #cdd3dc;background:#fff;color:#333b46;border-radius:12px;font:inherit;padding:9px 18px;cursor:pointer}
 .control-media-stage{flex:1;display:flex;align-items:center;justify-content:center}.control-media-stage>.snap-rail{width:600px}.control-media-stage>.liquid-cluster{width:650px}
-</style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
+</style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "logo-refraction", flow: "logo-refraction-sweep", pause: 12000, seek: .5, movePointer: false },
   { name: "elastic-slider", flow: "elastic-slider-stretch", pause: 8000, seek: .3, movePointer: false },
   { name: "snap-rail", flow: "snap-rail-retarget", pause: 8000, seek: .3, movePointer: false },
   { name: "liquid-cluster", flow: "liquid-cluster-separate", pause: 8000, seek: .3, movePointer: false },

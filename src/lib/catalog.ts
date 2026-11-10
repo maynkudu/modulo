@@ -180,6 +180,21 @@ export const liquidCluster = {
   ],
 } satisfies RegistryItem;
 
+export const logoRefraction = {
+  name: "logo-refraction" as const,
+  type: "registry:component",
+  title: "Logo refraction",
+  description: "Metallic light across the black field, with an iridescent sweep and outline glint on the n.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/logo-refraction/LogoRefraction.tsx", target: "components/logo-refraction/LogoRefraction.tsx", type: "registry:component" },
+    { path: "src/registry/logo-refraction/create-logo-refraction.ts", target: "components/logo-refraction/create-logo-refraction.ts", type: "registry:lib" },
+    { path: "src/registry/logo-refraction/shaders.ts", target: "components/logo-refraction/shaders.ts", type: "registry:lib" },
+    { path: "src/registry/logo-refraction/logo-refraction.css", target: "components/logo-refraction/logo-refraction.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 function componentMedia({ name, alt, height = 630 }: { name: string; alt: string; height?: number }) {
   return {
     thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
@@ -252,6 +267,12 @@ export const catalogItems = [{
   keywords: ["liquid", "notification", "clear", "buttons", "cluster", "merge", "separate", "geometry", "canvas", "controls"],
   seoDescription: "A React notification that separates into a card and Clear action with a liquid seam, keyboard targets, reduced motion, and an opaque fallback. Preview and install the independent TypeScript component.",
   media: componentMedia({ name: liquidCluster.name, alt: "A notification rectangle separating into a message card and Clear button.", height: 800 }),
+}, {
+  component: logoRefraction,
+  addedAt: "2026-11-10",
+  keywords: ["logo", "maynkudu", "refraction", "metallic", "iridescent", "sheen", "light", "webgl", "shader", "pointer"],
+  seoDescription: "Logo refraction for React with metallic reflections on a dark field, a separate iridescent logo sweep, fixed image framing, and keyboard controls. Preview and install with a mint key.",
+  media: componentMedia({ name: logoRefraction.name, alt: "The complete square maynkudu logo, with metallic light on its black field and an iridescent n in the lower right.", height: 1200 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -469,4 +490,25 @@ export const liquidClusterProps = [
   ["opaque", "boolean", "false", "Requests an opaque material adaptation."],
   ["reducedMotion", "boolean", "false", "Disables automatic settling. System preference also applies."],
   ["onReady", "(controller | null) => void", "Optional", "Controller on mount and null on cleanup. Keep callback stable."],
+] as const;
+
+export const logoRefractionUsage = `import { LogoRefraction } from "@/components/logo-refraction/LogoRefraction";
+
+export default function Example() {
+  return <LogoRefraction src="/logo.png" alt="My complete logo" />;
+}`;
+
+export const logoRefractionProps = [
+  ["src", "string", "Required", "Opaque square image URL. Use a light mark on a dark field. Remote images require CORS access."],
+  ["alt", "string", "Required", "Accessible description of the complete logo."],
+  ["strength", "number", "1", "Metallic refraction on the dark field, from 0 to 1."],
+  ["dispersion", "number", "0.55", "Colour separation in the dark field's refracted light, from 0 to 1."],
+  ["markSheen", "number", "0.7", "Independent iridescent sweep and outline glint on the light mark, from 0 to 1."],
+  ["speed", "number", "0.4", "Shader time multiplier, from 0 to 3. Zero stops time while pointer control remains available."],
+  ["paused", "boolean", "false", "Freeze time and pointer response. Settings still apply."],
+  ["showOriginal", "boolean", "false", "Display the complete source image and suspend animation."],
+  ["className", "string", '""', "Class names for the square image container."],
+  ["onReady", "(controller | null) => void", "Optional", "Controller after image loading, null on cleanup or graphics failure. Keep callbacks stable."],
+  ["onFrame", "(LogoRefractionFrame) => void", "Optional", "Time, frame count, pointer, visibility, pause, and reduced-motion status. Keep callback stable."],
+  ["onError", "(Error) => void", "Optional", "Image loading or WebGL failure. The original image remains available."],
 ] as const;
