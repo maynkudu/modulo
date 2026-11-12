@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { GardenCanvas } from "../src/registry/interactive-art/examples/GardenCanvas";
 import { Nilkamal } from "../src/registry/nilkamal/Nilkamal";
@@ -10,6 +11,8 @@ import { ElasticSlider, type ElasticSliderController } from "../src/registry/ela
 import { SnapRail, type SnapRailController } from "../src/registry/snap-rail/SnapRail";
 import { LiquidCluster, type LiquidClusterController } from "../src/registry/liquid-cluster/LiquidCluster";
 import { LogoRefraction } from "../src/registry/logo-refraction/LogoRefraction";
+
+import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNavigation";
 
 function markReady(controller: unknown) {
   if (controller) document.body.dataset.ready = "true";
@@ -52,8 +55,16 @@ const clusterItems = [
   { id: "clear", label: "Clear" },
 ];
 
+function NavigationCapture() {
+  useEffect(() => { document.body.dataset.ready = "true"; }, []);
+  return <OverlayNavigation defaultOpen trailing={<span className="india-time inline-block min-w-[10ch] text-[14px] whitespace-nowrap tabular-nums mobile:text-[13px]">IND | 21:45</span>} />;
+}
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "overlay-navigation") {
+    return <NavigationCapture />;
+  }
   if (name === "logo-refraction") {
     return <LogoRefraction className="media-scene" src="__LOGO_REFRACTION_IMAGE__" alt="The complete maynkudu logo" onReady={markReady} />;
   }

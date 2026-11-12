@@ -55,6 +55,7 @@ html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#0503
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "overlay-navigation", flow: "overlay-navigation-open", pause: 8000, seek: 2, movePointer: false },
   { name: "logo-refraction", flow: "logo-refraction-sweep", pause: 12000, seek: .5, movePointer: false },
   { name: "elastic-slider", flow: "elastic-slider-stretch", pause: 8000, seek: .3, movePointer: false },
   { name: "snap-rail", flow: "snap-rail-retarget", pause: 8000, seek: .3, movePointer: false },

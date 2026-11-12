@@ -54,6 +54,7 @@ next-env.d.ts
 /src/registry/snap-rail/
 /src/registry/liquid-cluster/
 /src/registry/logo-refraction/
+/src/registry/overlay-navigation/
 /.private-registry/
 /public/r/
 /.data/

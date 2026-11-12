@@ -648,6 +648,87 @@
         }
       },
       "type": "registry:component"
+    },
+    {
+      "name": "overlay-navigation",
+      "title": "Overlay navigation",
+      "description": "A fixed navbar and full-screen menu with rolling labels, image previews, and coordinated transitions.",
+      "dependencies": [
+        "gsap@^3.15.1"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/overlay-navigation/OverlayNavigation.tsx",
+          "type": "registry:component",
+          "target": "components/overlay-navigation/OverlayNavigation.tsx"
+        },
+        {
+          "path": "src/registry/overlay-navigation/NavigationPanel.tsx",
+          "type": "registry:component",
+          "target": "components/overlay-navigation/NavigationPanel.tsx"
+        },
+        {
+          "path": "src/registry/overlay-navigation/navigation-context.tsx",
+          "type": "registry:lib",
+          "target": "components/overlay-navigation/navigation-context.tsx"
+        },
+        {
+          "path": "src/registry/overlay-navigation/IndiaTime.tsx",
+          "type": "registry:component",
+          "target": "components/overlay-navigation/IndiaTime.tsx"
+        },
+        {
+          "path": "src/registry/overlay-navigation/useReducedMotion.ts",
+          "type": "registry:lib",
+          "target": "components/overlay-navigation/useReducedMotion.ts"
+        },
+        {
+          "path": "src/registry/overlay-navigation/useNavigationFeedback.ts",
+          "type": "registry:lib",
+          "target": "components/overlay-navigation/useNavigationFeedback.ts"
+        },
+        {
+          "path": "src/registry/overlay-navigation/motion.ts",
+          "type": "registry:lib",
+          "target": "components/overlay-navigation/motion.ts"
+        },
+        {
+          "path": "src/registry/overlay-navigation/assets.ts",
+          "type": "registry:lib",
+          "target": "components/overlay-navigation/assets.ts"
+        },
+        {
+          "path": "src/registry/overlay-navigation/navigation.css",
+          "type": "registry:file",
+          "target": "components/overlay-navigation/navigation.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "The portfolio navbar above a light navigation panel and abstract image previews.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/overlay-navigation.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/overlay-navigation.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/overlay-navigation.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
     }
   ]
 }

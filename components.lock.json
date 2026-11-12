@@ -313,6 +313,49 @@
           "sha256": "5a2497025f9c55d8c7acb7fc79b07933e3f5c476322fda4cf9eed727568b2685"
         }
       ]
+    },
+    {
+      "name": "overlay-navigation",
+      "repository": "maynkudu/modulo-overlay-navigation",
+      "revision": "a160698cb327e0996dbc9febf33fa76b2fc69ed3",
+      "files": [
+        {
+          "path": "IndiaTime.tsx",
+          "sha256": "86d214692cf9947ca736c9c81ef7d5083340262aee550b939345fd2c28795e6a"
+        },
+        {
+          "path": "NavigationPanel.tsx",
+          "sha256": "3ca534234aaded8e8825975e517f8c49a85f90e764b7275bfb6d1835f09c837f"
+        },
+        {
+          "path": "OverlayNavigation.tsx",
+          "sha256": "6472ae6e52233d52d8a0ed76ded05e4349d15dfb3edbe483b27e06562de561dc"
+        },
+        {
+          "path": "assets.ts",
+          "sha256": "cf24e3ca463950fba953922333b7c912be49572543a5651f6b449bcd9e42e9ba"
+        },
+        {
+          "path": "motion.ts",
+          "sha256": "b3287a609ea131a50e9af5008ce84700377c9eee405e6a9bfda0d559404cfe9e"
+        },
+        {
+          "path": "navigation-context.tsx",
+          "sha256": "76f8c288535fad03a1e26e84ff19ecdc31e9ce8450b35ca698c8d90ffc3ca67e"
+        },
+        {
+          "path": "navigation.css",
+          "sha256": "f931093759c903dd5310245e97fd0677e39c11c7c822abdeafee64d6841ee93b"
+        },
+        {
+          "path": "useNavigationFeedback.ts",
+          "sha256": "b4d9d1dbdb930955e568bfb71ed761904e352920c813f4e8ba758a307f8c5a6f"
+        },
+        {
+          "path": "useReducedMotion.ts",
+          "sha256": "9e7575009730df1b4c08f7e838eeb834f76fc505ec15468505666b5f526582c9"
+        }
+      ]
     }
   ]
 }

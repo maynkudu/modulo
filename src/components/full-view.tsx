@@ -11,6 +11,7 @@ import { ElasticSliderDemo } from "./elastic-slider-demo";
 import { SnapRailDemo } from "./snap-rail-demo";
 import { LiquidClusterDemo } from "./liquid-cluster-demo";
 import { LogoRefractionDemo } from "./logo-refraction-demo";
+import { OverlayNavigationDemo } from "./overlay-navigation-demo";
 import { catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
 
@@ -21,6 +22,7 @@ function gameReady(game: Game2048Controller | null) {
   }
 }
 const views = {
+  "overlay-navigation": () => <OverlayNavigationDemo full />,
   "2048": () => <Game2048 onReady={gameReady} />,
   "interactive-art": () => <GardenCanvas className={styles.scene} fallback="/artwork/lotus-garden.png" />,
   "nilkamal": () => <Nilkamal className={styles.scene} fallback="/artwork/nilkamal.png" />,

@@ -195,6 +195,26 @@ export const logoRefraction = {
   ],
 } satisfies RegistryItem;
 
+export const overlayNavigation = {
+  name: "overlay-navigation" as const,
+  type: "registry:component",
+  title: "Overlay navigation",
+  description: "A fixed navbar and full-screen menu with rolling labels, image previews, and coordinated transitions.",
+  dependencies: ["gsap@^3.15.1"],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/overlay-navigation/OverlayNavigation.tsx", target: "components/overlay-navigation/OverlayNavigation.tsx", type: "registry:component" },
+    { path: "src/registry/overlay-navigation/NavigationPanel.tsx", target: "components/overlay-navigation/NavigationPanel.tsx", type: "registry:component" },
+    { path: "src/registry/overlay-navigation/navigation-context.tsx", target: "components/overlay-navigation/navigation-context.tsx", type: "registry:lib" },
+    { path: "src/registry/overlay-navigation/IndiaTime.tsx", target: "components/overlay-navigation/IndiaTime.tsx", type: "registry:component" },
+    { path: "src/registry/overlay-navigation/useReducedMotion.ts", target: "components/overlay-navigation/useReducedMotion.ts", type: "registry:lib" },
+    { path: "src/registry/overlay-navigation/useNavigationFeedback.ts", target: "components/overlay-navigation/useNavigationFeedback.ts", type: "registry:lib" },
+    { path: "src/registry/overlay-navigation/motion.ts", target: "components/overlay-navigation/motion.ts", type: "registry:lib" },
+    { path: "src/registry/overlay-navigation/assets.ts", target: "components/overlay-navigation/assets.ts", type: "registry:lib" },
+    { path: "src/registry/overlay-navigation/navigation.css", target: "components/overlay-navigation/navigation.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 function componentMedia({ name, alt, height = 630 }: { name: string; alt: string; height?: number }) {
   return {
     thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
@@ -273,6 +293,12 @@ export const catalogItems = [{
   keywords: ["logo", "maynkudu", "refraction", "metallic", "iridescent", "sheen", "light", "webgl", "shader", "pointer"],
   seoDescription: "Logo refraction for React with metallic reflections on a dark field, a separate iridescent logo sweep, fixed image framing, and keyboard controls. Preview and install with a mint key.",
   media: componentMedia({ name: logoRefraction.name, alt: "The complete square maynkudu logo, with metallic light on its black field and an iridescent n in the lower right.", height: 1200 }),
+}, {
+  component: overlayNavigation,
+  addedAt: "2026-11-12",
+  keywords: ["navbar", "header", "menu", "overlay", "navigation", "gsap", "preview"],
+  seoDescription: "A combined React navbar and overlay menu with animated image previews, route selection, keyboard focus containment, and reduced motion. Preview and install with a mint key.",
+  media: componentMedia({ name: overlayNavigation.name, alt: "The portfolio navbar above a light navigation panel and abstract image previews.", height: 800 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -511,4 +537,23 @@ export const logoRefractionProps = [
   ["onReady", "(controller | null) => void", "Optional", "Controller after image loading, null on cleanup or graphics failure. Keep callbacks stable."],
   ["onFrame", "(LogoRefractionFrame) => void", "Optional", "Time, frame count, pointer, visibility, pause, and reduced-motion status. Keep callback stable."],
   ["onError", "(Error) => void", "Optional", "Image loading or WebGL failure. The original image remains available."],
+] as const;
+
+export const overlayNavigationUsage = `import { OverlayNavigation } from "@/components/overlay-navigation/OverlayNavigation";
+
+export default function Example() {
+  return <OverlayNavigation><main>Your page content</main></OverlayNavigation>;
+}`;
+
+export const overlayNavigationProps = [
+  ["items", "readonly NavigationItem[]", "Portfolio routes", "Nonempty route list with unique keys, labels, image URLs, and preview words."],
+  ["currentHref", "string", "Local selection", "Current route. Update after your navigation callback runs."],
+  ["onNavigate", "(href: string) => void", "Local selection", "Connect to your router. Modified clicks keep native link behavior."],
+  ["brand / trailing", "ReactNode", "Portfolio mark / India clock", "Content at the two ends of the navbar."],
+  ["brandHref / brandLabel", "string", '"/" / "maynkudu, home"', "Brand destination and accessible link name."],
+  ["contact / social", "readonly NavigationLink[]", "Portfolio links", "Footer links with href, label, and optional external flag."],
+  ["layout", '"fine" | "bold"', '"fine"', "Existing light or dark page treatment."],
+  ["defaultOpen", "boolean", "false", "Initial menu state."],
+  ["reducedMotion", "boolean", "false", "Show immediate states. The system preference also applies."],
+  ["children / className", "ReactNode / string", "Optional", "Page content and wrapper class. Mount one navigation instance per page."],
 ] as const;
