@@ -37,8 +37,8 @@ export default function LiquidAnimationsPage() {
           <a href="/r/liquid-animations.json">Registry JSON</a>
           <ComponentMediaLinks component={liquidAnimations} />
           <h3>Interaction</h3>
-          <p>Change the motion speed, open a popup and reverse it while it grows. Text, icons and swatches keep their size while the background changes shape. The Account menu reveals its identity and actions together.</p>
-          <p>Use Arrow keys to move through tabs and choices. Escape closes a popup and returns focus to its trigger. Reduced motion applies the final shape immediately.</p>
+          <p>Change the motion speed, open a popup and reverse it while it grows. Text, icons and swatches keep their size while the background changes shape. The Account menu reveals its identity, then its actions.</p>
+          <p>Use Arrow keys to move through tabs and choices. Escape closes a popup and returns focus to its trigger.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
           <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Liquid Animations properties"><table>

@@ -599,7 +599,7 @@ export default function Example() {
 }`;
 
 export const liquidAnimationsProps = [
-  ["LiquidProvider", "speed / reducedMotion", "1 / false", "Motion rate and optional still mode. The system reduced-motion preference always applies."],
+  ["LiquidProvider", "speed", "1", "Motion rate for liquid controls."],
   ["LiquidMenu", "label / entries", "Required", "Action or toggle entries with callbacks. Optional heading, edge alignment, width and controlled open state."],
   ["LiquidSelect", "value / options / onValueChange", "Required", "Controlled string selection. Use palette for color swatches and triggerValue for custom trigger content."],
   ["LiquidPopover", "label / trigger / children", "Required", "A dialog anchored to its trigger. Supports controlled open state and returns keyboard focus on dismissal."],

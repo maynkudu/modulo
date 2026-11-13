@@ -12,11 +12,13 @@ export function SoundControl({ className }: { className?: string }) {
   return <div className={`${styles.root} ${className ?? ""}`} data-sound-managed>
     <LiquidPopover label="Sound settings" open={open} onOpenChange={next => { setOpen(next); if (next) playSound("click"); }} width={280}
       trigger={<LiquidButton className={styles.trigger}>Sound {enabled && volume > 0 ? "on" : "off"}</LiquidButton>}>
-      <section className={styles.panel} data-sound-managed data-liquid-item="" data-liquid-paint="box">
-        <h2>Sound</h2>
-        <LiquidSlider label="Volume" min={0} max={1} step={.05} value={volume} formatValue={value => `${Math.round(value * 100)}%`}
-          onValueChange={value => { setSoundVolume(value); playSound("slide"); }} />
-        <div className={styles.actions}>
+      <section className={styles.panel} data-sound-managed>
+        <h2 data-liquid-item="">Sound</h2>
+        <div data-liquid-item="" data-liquid-paint="box">
+          <LiquidSlider label="Volume" min={0} max={1} step={.05} value={volume} formatValue={value => `${Math.round(value * 100)}%`}
+            onValueChange={value => { setSoundVolume(value); playSound("slide"); }} />
+        </div>
+        <div className={styles.actions} data-liquid-item="" data-liquid-paint="box">
           <LiquidButton aria-pressed={!enabled} onClick={() => setSoundEnabled(!enabled)}>{enabled ? "Mute" : "Unmute"}</LiquidButton>
           <LiquidButton disabled={!enabled || volume === 0} onClick={() => playSound("click")}>Test sound</LiquidButton>
         </div>
