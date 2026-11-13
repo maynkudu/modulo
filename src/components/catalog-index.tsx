@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef, useState } from "react";
 import { catalogItems } from "@/lib/catalog";
+import { LiquidButton, LiquidInput, LiquidSelect } from "@/registry/liquid-animations/LiquidControls";
 import styles from "./catalog-index.module.css";
 
 const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
@@ -25,16 +26,10 @@ export function CatalogIndex() {
       <form className={styles.catalogSearch} role="search" onSubmit={(event) => event.preventDefault()}>
         <label className={styles.searchField}>
           <span className="sr-only">Search components</span>
-          <input ref={search} type="search" value={query} onChange={(event) => setQuery(event.currentTarget.value)} placeholder="Search titles, keywords, or dates" aria-label="Search components" />
+          <LiquidInput ref={search} type="search" value={query} onChange={(event) => setQuery(event.currentTarget.value)} placeholder="Search titles, keywords, or dates" aria-label="Search components" />
         </label>
-        <label className={styles.sortField}>
-          <span className="sr-only">Sort components</span>
-          <select value={order} onChange={(event) => setOrder(event.currentTarget.value)}>
-            <option value="newest">Newest first</option>
-            <option value="oldest">Oldest first</option>
-            <option value="title">Name A to Z</option>
-          </select>
-        </label>
+        <LiquidSelect label="Sort components" className={styles.sortField} value={order} onValueChange={setOrder} align="end"
+          options={[{ value: "newest", label: "Newest first" }, { value: "oldest", label: "Oldest first" }, { value: "title", label: "Name A to Z" }]} />
       </form>
       <ul className={styles.catalog}>
         {visible.map(({ component, addedAt }) => (
@@ -47,7 +42,7 @@ export function CatalogIndex() {
           </li>
         ))}
       </ul>
-      {visible.length === 0 && <div className={styles.emptyResults}><p>No components found.</p><button type="button" onClick={() => { setQuery(""); search.current?.focus(); }}>Clear search</button></div>}
+      {visible.length === 0 && <div className={styles.emptyResults}><p>No components found.</p><LiquidButton onClick={() => { setQuery(""); search.current?.focus(); }}>Clear search</LiquidButton></div>}
       <p className={styles.status} role="status">{visible.length} {visible.length === 1 ? "component" : "components"}</p>
     </>
   );

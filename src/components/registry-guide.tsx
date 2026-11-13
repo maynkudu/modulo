@@ -1,5 +1,6 @@
 "use client";
 
+import { LiquidCode } from "@/components/liquid-documentation";
 import { InstallCommand } from "./install-command";
 import { RegistryConfiguration } from "./registry-configuration";
 import styles from "@/app/page.module.css";
@@ -15,7 +16,7 @@ export function RegistryGuide() {
       <section className={`${styles.panel} ${styles.api}`}>
         <h2>Use @modulo</h2>
         <RegistryConfiguration />
-        <pre><code>bunx shadcn@latest add @modulo/interactive-art</code></pre>
+        <LiquidCode><code>bunx shadcn@latest add @modulo/interactive-art</code></LiquidCode>
         <p>For npm projects, use <code>npx</code> in place of <code>bunx</code>.</p>
         <a href="/r/registry.json">Registry catalog</a>
         <a href="/r/interactive-art.json">Interactive art manifest</a>

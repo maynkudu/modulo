@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
@@ -23,7 +26,7 @@ export default function SnapRailPage() {
       <div className={styles.sections}>
         <ComponentSection title="Preview" id="preview"><div className={styles.demo}><SnapRailDemo /></div></ComponentSection>
         <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
-          <InstallCommand name="snap-rail" /><div className={styles.panelDivider} /><h3>Usage</h3><pre><code>{snapRailUsage}</code></pre>
+          <InstallCommand name="snap-rail" /><div className={styles.panelDivider} /><h3>Usage</h3><LiquidCode><code>{snapRailUsage}</code></LiquidCode>
           <p>React and browser Pointer Events. All four source files install together. No animation package required.</p><a href="/r/snap-rail.json">Registry JSON</a><ComponentMediaLinks component={snapRail} />
           <div className={styles.panelDivider} /><h3>Interaction</h3>
           <p>Drag the item horizontally. Release speed projects a destination, then the item springs to the nearest detent. Grab it again to interrupt. A hold before release discards stale flick speed.</p>
@@ -31,12 +34,12 @@ export default function SnapRailPage() {
           <p>The spring tuning and projection are original examples. They are not Apple implementation constants.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
-          <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Snap rail properties"><table><thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead><tbody>{snapRailProps.map(([name, type, value, description]) => <tr key={name}><td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td></tr>)}</tbody></table></div>
-          <details className={styles.details}><summary>Selection and controller</summary>
+          <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Snap rail properties"><table><thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead><tbody>{snapRailProps.map(([name, type, value, description]) => <tr key={name}><td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td></tr>)}</tbody></table></LiquidScrollArea>
+          <LiquidDisclosure className={styles.details} label="Selection and controller">
             <p>Detents have stable IDs, labels and strictly increasing finite positions. One detent is supported. Pass either <code>selectedId</code> with <code>onSelectionChange</code>, or <code>defaultSelectedId</code>. The parent owns a controlled selection.</p>
             <p><code>onSelectionCommit(id)</code> fires once after a successful pointer release or keyboard destination request. <code>onSelectionCancel()</code> reports an interrupted gesture. Controller selections and replays emit changes without user commits.</p>
             <p><code>select(id)</code> retargets from the current position and velocity. <code>replay()</code> runs a finite sequence. <code>reset()</code> restores the first uncontrolled selection, or the current controlled selection. <code>snapshot()</code> exposes geometry, velocity, preview, lifecycle and event counts. The component calls <code>destroy()</code> on unmount.</p>
-          </details>
+          </LiquidDisclosure>
         </div></ComponentSection>
         <ComponentSource name="snap-rail" />
       </div>

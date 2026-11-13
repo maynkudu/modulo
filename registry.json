@@ -548,7 +548,7 @@
     },
     {
       "name": "liquid-cluster",
-      "title": "Liquid cluster",
+      "title": "Apple Liquid Cluster",
       "description": "A notification that splits into a card and Clear button through a liquid seam.",
       "dependencies": [],
       "registryDependencies": [],
@@ -725,6 +725,90 @@
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/overlay-navigation.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "liquid-animations",
+      "title": "Liquid Animations",
+      "description": "Menus, tooltips and controls with liquid growth, rigid content and interruptible motion.",
+      "dependencies": [
+        "@base-ui/react@^1.9.0",
+        "runeicons-react@^0.1.0"
+      ],
+      "registryDependencies": [
+        "@modulo/elastic-slider"
+      ],
+      "files": [
+        {
+          "path": "src/registry/liquid-animations/LiquidProvider.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-animations/LiquidProvider.tsx"
+        },
+        {
+          "path": "src/registry/liquid-animations/LiquidSurface.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-animations/LiquidSurface.tsx"
+        },
+        {
+          "path": "src/registry/liquid-animations/LiquidControls.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-animations/LiquidControls.tsx"
+        },
+        {
+          "path": "src/registry/liquid-animations/LiquidTrack.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-animations/LiquidTrack.tsx"
+        },
+        {
+          "path": "src/registry/liquid-animations/LiquidSlider.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-animations/LiquidSlider.tsx"
+        },
+        {
+          "path": "src/registry/liquid-animations/LiquidScrollbar.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-animations/LiquidScrollbar.tsx"
+        },
+        {
+          "path": "src/registry/liquid-animations/liquid-motion.ts",
+          "type": "registry:lib",
+          "target": "components/liquid-animations/liquid-motion.ts"
+        },
+        {
+          "path": "src/registry/liquid-animations/liquid-geometry.ts",
+          "type": "registry:lib",
+          "target": "components/liquid-animations/liquid-geometry.ts"
+        },
+        {
+          "path": "src/registry/liquid-animations/liquid-animations.css",
+          "type": "registry:file",
+          "target": "components/liquid-animations/liquid-animations.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A liquid Account menu growing from a round avatar on a dark background.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-animations.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-animations.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-animations.mp4"
           }
         }
       },

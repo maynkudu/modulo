@@ -1,13 +1,14 @@
 "use client";
 
-import { useCallback, useId, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { LogoRefraction, type LogoRefractionController, type LogoRefractionFrame } from "@/registry/logo-refraction/LogoRefraction";
+import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { InterfaceSlider } from "./interface-slider";
 import styles from "./logo-refraction-demo.module.css";
 
 declare global { interface Window { logoRefraction?: LogoRefractionController; } }
 
 export function LogoRefractionDemo() {
-  const id = useId();
   const lastMotion = useRef(false);
   const [ready, setReady] = useState(false);
   const [paused, setPaused] = useState(false);
@@ -43,14 +44,13 @@ export function LogoRefractionDemo() {
     <LogoRefraction src="/artwork/maynkudu-warehouse.png" alt="The complete maynkudu logo" strength={strength} dispersion={dispersion} markSheen={markSheen} speed={speed} paused={paused} showOriginal={showOriginal} onReady={onReady} onFrame={onFrame} onError={onError} />
     <div className={styles.toolbar}>
       <p>Move over the image</p>
-      <button type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume" : "Pause"}</button>
-      <button type="button" disabled={!ready} aria-pressed={showOriginal} onClick={() => setShowOriginal(!showOriginal)}>{showOriginal ? "Show refraction" : "Show original"}</button>
+      <LiquidButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume" : "Pause"}</LiquidButton>
+      <LiquidButton type="button" disabled={!ready} aria-pressed={showOriginal} onClick={() => setShowOriginal(!showOriginal)}>{showOriginal ? "Show refraction" : "Show original"}</LiquidButton>
     </div>
     <div className={styles.settings}>
-      {controls.map(({ name, label, value, setValue }) => <div className={styles.setting} key={name}>
-        <label htmlFor={`${id}-${name}`}>{label}<output>{Math.round(value * 100)}%</output></label>
-        <input id={`${id}-${name}`} name={name} type="range" min="0" max="100" step="1" value={Math.round(value * 100)} disabled={!ready} onChange={event => setValue(Number(event.currentTarget.value) / 100)} />
-      </div>)}
+      {controls.map(({ name, label, value, setValue }) => <InterfaceSlider className={styles.setting} key={name}
+        label={label} min={0} max={100} step={1} value={Math.round(value * 100)} disabled={!ready}
+        formatValue={next => `${next}%`} onValueChange={next => setValue(next / 100)} />)}
     </div>
     {reducedMotion && <p className={styles.status} role="status">Motion follows your reduced-motion preference.</p>}
     {error && <p className={styles.error} role="alert">{error}</p>}

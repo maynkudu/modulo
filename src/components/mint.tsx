@@ -1,7 +1,9 @@
 "use client";
 
+import { LiquidCode } from "@/components/liquid-documentation";
 import { useEffect, useState, type FormEvent } from "react";
 import { accessRequest, createdKeySchema, keyListSchema, okSchema, sessionStatusSchema, type KeyInfo } from "@/lib/access-schema";
+import { LiquidButton, LiquidInput } from "@/registry/liquid-animations/LiquidControls";
 import styles from "@/app/page.module.css";
 
 type MintState = { kind: "checking" } | { kind: "locked" } | { kind: "unlocked"; keys: KeyInfo[] };
@@ -83,15 +85,15 @@ export function Mint() {
 
   return <>
     <div className={styles.heading}><div><h1>Mint</h1></div>
-      {state.kind === "unlocked" && <button type="button" className={styles.sourceLink} onClick={lock} disabled={pending}>Lock mint</button>}
+      {state.kind === "unlocked" && <LiquidButton type="button" className={styles.sourceLink} onClick={lock} disabled={pending}>Lock mint</LiquidButton>}
     </div>
     {state.kind === "checking" && <p className={styles.emptyResults} role="status">Checking mint access...</p>}
     {state.kind === "locked" && <section className={`${styles.panel} ${styles.mintLogin}`}>
       <h2>Enter passphrase</h2>
       <form className={styles.accessForm} onSubmit={login}>
         <label htmlFor="mint-passphrase">Passphrase</label>
-        <input id="mint-passphrase" name="passphrase" type="password" autoComplete="current-password" required maxLength={256} disabled={pending} />
-        <button type="submit" disabled={pending}>{pending ? "Checking..." : "Unlock mint"}</button>
+        <LiquidInput id="mint-passphrase" name="passphrase" type="password" autoComplete="current-password" required maxLength={256} disabled={pending} />
+        <LiquidButton type="submit" disabled={pending}>{pending ? "Checking..." : "Unlock mint"}</LiquidButton>
       </form>
       {error && <p role="alert">{error}</p>}
     </section>}
@@ -100,12 +102,12 @@ export function Mint() {
         <h2>Create a key</h2>
         <form className={styles.accessForm} onSubmit={create}>
           <label htmlFor="mint-key-name">Key name</label>
-          <input id="mint-key-name" name="label" placeholder="e.g. Studio" required maxLength={80} disabled={pending} />
-          <button type="submit" disabled={pending}>{pending ? "Working..." : "Create key"}</button>
+          <LiquidInput id="mint-key-name" name="label" placeholder="e.g. Studio" required maxLength={80} disabled={pending} />
+          <LiquidButton type="submit" disabled={pending}>{pending ? "Working..." : "Create key"}</LiquidButton>
         </form>
         {newKey && <div className={styles.newKey}>
-          <p>Copy this key now. You will not see it again.</p><pre><code>{newKey}</code></pre>
-          <div className={styles.accessActions}><button type="button" onClick={copy}>Copy key</button><button type="button" className={styles.secondaryButton} onClick={() => setNewKey(null)}>Done</button></div>
+          <p>Copy this key now. You will not see it again.</p><LiquidCode><code>{newKey}</code></LiquidCode>
+          <div className={styles.accessActions}><LiquidButton type="button" onClick={copy}>Copy key</LiquidButton><LiquidButton type="button" className={styles.secondaryButton} onClick={() => setNewKey(null)}>Done</LiquidButton></div>
         </div>}
         {error && <p role="alert">{error}</p>}
         <p role="status">{message}</p>
@@ -116,9 +118,9 @@ export function Mint() {
           <div><h3>{key.label}</h3><code>maynkudu_••••••••{key.suffix}</code>
             <p>{key.revokedAt === null ? "Active" : "Revoked"} · <time dateTime={new Date(key.createdAt).toISOString()}>{new Date(key.createdAt).toISOString().slice(0, 10)}</time></p>
           </div>
-          <button type="button" className={styles.secondaryButton} disabled={pending || key.revokedAt !== null} onClick={() => revoke(key.id)} aria-label={`Revoke ${key.label}`}>
+          <LiquidButton type="button" className={styles.secondaryButton} disabled={pending || key.revokedAt !== null} onClick={() => revoke(key.id)} aria-label={`Revoke ${key.label}`}>
             {key.revokedAt === null ? "Revoke" : "Revoked"}
-          </button>
+          </LiquidButton>
         </div>)}
       </section>
     </div>}

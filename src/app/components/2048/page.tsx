@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
@@ -31,7 +34,7 @@ export default function Game2048Page() {
         <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="2048" />
           <div className={styles.panelDivider} />
-          <h3>Usage</h3><pre><code>{game2048Usage}</code></pre>
+          <h3>Usage</h3><LiquidCode><code>{game2048Usage}</code></LiquidCode>
           <p>React, Rune Icons, and Web Audio. All six source files install together. No game or animation package required.</p>
           <a href="/r/2048.json">Registry JSON</a><ComponentMediaLinks component={game2048} />
           <div className={styles.panelDivider} />
@@ -42,16 +45,16 @@ export default function Game2048Page() {
           <p>Visual direction from <a href="https://chess.aryank.space/" target="_blank" rel="noopener">Aryan&apos;s chess game</a>.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
-          <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="2048 properties"><table>
+          <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="2048 properties"><table>
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
             <tbody>{game2048Props.map(([name, type, value, description]) => <tr key={name}>
               <td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td>
             </tr>)}</tbody>
-          </table></div>
-          <details className={styles.details}><summary>Controller methods</summary>
+          </table></LiquidScrollArea>
+          <LiquidDisclosure className={styles.details} label="Controller methods">
             <p><code>move(direction)</code> accepts left, right, up, or down. <code>undo()</code> restores one move. <code>reset()</code> starts a new game while preserving the best score.</p>
             <p><code>snapshot()</code> reports the board, score, best, highest tile, game status, undo availability, and audio state. <code>setAudio(enabled, volume)</code> controls sound. <code>unlockAudio()</code> unlocks it from an external gesture. The component calls <code>destroy()</code> on unmount.</p>
-          </details>
+          </LiquidDisclosure>
         </div></ComponentSection>
         <ComponentSource name="2048" />
       </div>

@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import { ComponentSection } from "@/components/component-section";
 import { SiteHeader } from "@/components/site-header";
@@ -40,7 +43,7 @@ export default function InteractiveArtPage() {
             <InstallCommand />
             <div className={styles.panelDivider} />
             <h3>Usage</h3>
-            <pre><code>{gardenUsage}</code></pre>
+            <LiquidCode><code>{gardenUsage}</code></LiquidCode>
             <p>React and Canvas 2D. No animation package required.</p>
             <a href="/r/interactive-art.json">Registry JSON</a>
             <a href="/artwork/lotus-garden.png" download>Download still fallback</a>
@@ -48,7 +51,7 @@ export default function InteractiveArtPage() {
           </div></ComponentSection>
           <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
             <p>Pass scene options to <code>GardenCanvas</code>. Use the controller from <code>onReady</code> for live changes.</p>
-            <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="GardenCanvas properties">
+            <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="GardenCanvas properties">
               <table>
                 <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
                 <tbody>{gardenProps.map(([name, type, defaultValue, description]) => (
@@ -59,12 +62,11 @@ export default function InteractiveArtPage() {
                   </tr>
                 ))}</tbody>
               </table>
-            </div>
-            <details className={styles.details}>
-              <summary>Controller methods</summary>
+            </LiquidScrollArea>
+            <LiquidDisclosure className={styles.details} label="Controller methods">
               <p><code>pause()</code>, <code>resume()</code>, <code>seek(seconds)</code>, <code>setTimeScale(value)</code>, and <code>bend(id, direction)</code> control the scene.</p>
               <p><code>snapshot()</code> and <code>saveState()</code> return scene state. <code>exportPNG(options)</code> saves the whole scene or selected layers. The React component calls <code>destroy()</code> on unmount.</p>
-            </details>
+            </LiquidDisclosure>
           </div></ComponentSection>
           <ComponentSource name="interactive-art" />
         </div>

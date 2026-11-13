@@ -1,9 +1,11 @@
 "use client";
 
+import { LiquidCode } from "@/components/liquid-documentation";
 import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { accessRequest, okSchema, sessionStatusSchema, sourceItemSchema } from "@/lib/access-schema";
 import { ComponentSection } from "./component-section";
+import { LiquidButton, LiquidInput, LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
 import styles from "@/app/page.module.css";
 
 type SourceState = { kind: "loading" } | { kind: "locked" } | { kind: "ready"; item: z.infer<typeof sourceItemSchema> };
@@ -53,17 +55,16 @@ export function ComponentSource({ name }: { name: string }) {
 
   return <ComponentSection title="Source" id="source"><div className={`${styles.panel} ${styles.sourceGate}`}>
     <div className={styles.accessHeading}>
-      {state.kind === "ready" && <button type="button" className={styles.secondaryButton} onClick={lock} disabled={pending}>Lock source</button>}
+      {state.kind === "ready" && <LiquidButton type="button" className={styles.secondaryButton} onClick={lock} disabled={pending}>Lock source</LiquidButton>}
     </div>
     {state.kind === "loading" && <p role="status">Checking source access...</p>}
     {state.kind === "locked" && <><p>Enter an active Modulo key to view the source.</p><form className={styles.accessForm} onSubmit={unlock}>
       <label htmlFor={`source-key-${name}`}>Key</label>
-      <input id={`source-key-${name}`} name="key" type="password" placeholder="maynkudu_..." autoComplete="off" autoCapitalize="none" spellCheck={false} required maxLength={128} disabled={pending} />
-      <button type="submit" disabled={pending}>{pending ? "Checking..." : "Unlock source"}</button>
+      <LiquidInput id={`source-key-${name}`} name="key" type="password" placeholder="maynkudu_..." autoComplete="off" autoCapitalize="none" spellCheck={false} required maxLength={128} disabled={pending} />
+      <LiquidButton type="submit" disabled={pending}>{pending ? "Checking..." : "Unlock source"}</LiquidButton>
     </form></>}
     {error && <p role="alert">{error}</p>}
-    {state.kind === "ready" && state.item.files.map(file => <details className={styles.details} key={file.path}>
-      <summary>{file.target ?? file.path}</summary><pre><code>{file.content}</code></pre>
-    </details>)}
+    {state.kind === "ready" && state.item.files.map(file => <LiquidDisclosure className={styles.details} key={file.path} label={file.target ?? file.path}><LiquidCode><code>{file.content}</code></LiquidCode>
+    </LiquidDisclosure>)}
   </div></ComponentSection>;
 }

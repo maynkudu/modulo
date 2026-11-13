@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SoundControl } from "./interface-sounds";
+import { LiquidTrack } from "@/registry/liquid-animations/LiquidTrack";
 import styles from "./site-header.module.css";
 
 export function SiteHeader({ page }: { page: "home" | "catalog" | "component" | "registry" | "mint" }) {
@@ -10,10 +11,12 @@ export function SiteHeader({ page }: { page: "home" | "catalog" | "component" | 
         <Image src="/brand/modulo-logo.png" alt="Modulo" width={130} height={30} priority />
       </Link>
       <nav aria-label="Main navigation">
+        <LiquidTrack className={styles.navigation}>
         <Link href="/" aria-current={page === "home" ? "page" : undefined}>Home</Link>
         <Link href="/components" aria-current={page === "catalog" ? "page" : undefined}>Components</Link>
         <Link href="/registry" aria-current={page === "registry" ? "page" : undefined}>Registry</Link>
         <Link href="/mint" aria-current={page === "mint" ? "page" : undefined}>Mint</Link>
+        </LiquidTrack>
       </nav>
       <SoundControl className={styles.sound} />
     </header>

@@ -169,7 +169,7 @@ export const snapRail = {
 export const liquidCluster = {
   name: "liquid-cluster" as const,
   type: "registry:component",
-  title: "Liquid cluster",
+  title: "Apple Liquid Cluster",
   description: "A notification that splits into a card and Clear button through a liquid seam.",
   dependencies: [],
   registryDependencies: [],
@@ -177,6 +177,26 @@ export const liquidCluster = {
     { path: "src/registry/liquid-cluster/LiquidCluster.tsx", target: "components/liquid-cluster/LiquidCluster.tsx", type: "registry:component" },
     { path: "src/registry/liquid-cluster/create-liquid-cluster.ts", target: "components/liquid-cluster/create-liquid-cluster.ts", type: "registry:lib" },
     { path: "src/registry/liquid-cluster/liquid-cluster.css", target: "components/liquid-cluster/liquid-cluster.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
+export const liquidAnimations = {
+  name: "liquid-animations" as const,
+  type: "registry:component",
+  title: "Liquid Animations",
+  description: "Menus, tooltips and controls with liquid growth, rigid content and interruptible motion.",
+  dependencies: ["@base-ui/react@^1.9.0", "runeicons-react@^0.1.0"],
+  registryDependencies: ["@modulo/elastic-slider"],
+  files: [
+    { path: "src/registry/liquid-animations/LiquidProvider.tsx", target: "components/liquid-animations/LiquidProvider.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-animations/LiquidSurface.tsx", target: "components/liquid-animations/LiquidSurface.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-animations/LiquidControls.tsx", target: "components/liquid-animations/LiquidControls.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-animations/LiquidTrack.tsx", target: "components/liquid-animations/LiquidTrack.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-animations/LiquidSlider.tsx", target: "components/liquid-animations/LiquidSlider.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-animations/LiquidScrollbar.tsx", target: "components/liquid-animations/LiquidScrollbar.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-animations/liquid-motion.ts", target: "components/liquid-animations/liquid-motion.ts", type: "registry:lib" },
+    { path: "src/registry/liquid-animations/liquid-geometry.ts", target: "components/liquid-animations/liquid-geometry.ts", type: "registry:lib" },
+    { path: "src/registry/liquid-animations/liquid-animations.css", target: "components/liquid-animations/liquid-animations.css", type: "registry:file" },
   ],
 } satisfies RegistryItem;
 
@@ -299,6 +319,12 @@ export const catalogItems = [{
   keywords: ["navbar", "header", "menu", "overlay", "navigation", "gsap", "preview"],
   seoDescription: "A combined React navbar and overlay menu with animated image previews, route selection, keyboard focus containment, and reduced motion. Preview and install with a mint key.",
   media: componentMedia({ name: overlayNavigation.name, alt: "The portfolio navbar above a light navigation panel and abstract image previews.", height: 800 }),
+}, {
+  component: liquidAnimations,
+  addedAt: "2026-11-13",
+  keywords: ["liquid", "menu", "tooltip", "select", "tabs", "slider", "scrollbar", "spring", "svg", "controls"],
+  seoDescription: "Liquid controls for React with menus, selects, tooltips, tabs, sliders and real scrollbars. Try interrupted spring motion and install with an active Modulo key.",
+  media: componentMedia({ name: liquidAnimations.name, alt: "A liquid Account menu growing from a round avatar on a dark background.", height: 800 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -557,3 +583,32 @@ export const overlayNavigationProps = [
   ["reducedMotion", "boolean", "false", "Show immediate states. The system preference also applies."],
   ["children / className", "ReactNode / string", "Optional", "Page content and wrapper class. Mount one navigation instance per page."],
 ] as const;
+
+export const liquidAnimationsUsage = `"use client";
+
+import { LiquidProvider } from "@/components/liquid-animations/LiquidProvider";
+import { LiquidMenu } from "@/components/liquid-animations/LiquidControls";
+
+export default function Example() {
+  return <LiquidProvider>
+    <LiquidMenu label="Actions" entries={[
+      { kind: "action", label: "Save", onClick: () => console.log("Save") },
+      { kind: "action", label: "Share", onClick: () => console.log("Share") },
+    ]} />
+  </LiquidProvider>;
+}`;
+
+export const liquidAnimationsProps = [
+  ["LiquidProvider", "speed / reducedMotion", "1 / false", "Motion rate and optional still mode. The system reduced-motion preference always applies."],
+  ["LiquidMenu", "label / entries", "Required", "Action or toggle entries with callbacks. Optional heading, edge alignment, width and controlled open state."],
+  ["LiquidSelect", "value / options / onValueChange", "Required", "Controlled string selection. Use palette for color swatches and triggerValue for custom trigger content."],
+  ["LiquidPopover", "label / trigger / children", "Required", "A dialog anchored to its trigger. Supports controlled open state and returns keyboard focus on dismissal."],
+  ["LiquidTooltip", "label / children", "Required", "Wrap a button. Group adjacent tooltips in LiquidTooltipProvider."],
+  ["LiquidTabs", "value / options / onValueChange", "Required", "A moving selection background with Arrow keys, Home and End. panelId links tabs to their panel."],
+  ["LiquidSlider", "label / value or defaultValue", "Required / min", "Controlled or local state with min, max, step, formatValue and value callbacks. Uses Elastic Slider."],
+  ["LiquidScrollArea", "orientation", '"vertical"', "Wrap a real overflow container. Horizontal and vertical thumbs support drag, wheel and keyboard input."],
+  ["LiquidScrollbar", "viewport / controls", "Document", "Attach to a ref for a container or omit viewport for document scrolling. controls names the scroll container."],
+  ["LiquidButton / LiquidInput", "Native props", "Native defaults", "Keep native form, disabled and keyboard behavior."],
+  ["LiquidSwitch", "checked / onCheckedChange", "Optional", "Base UI switch semantics with a deforming thumb."],
+  ["LiquidDisclosure", "label / children", "Required", "Native details behavior with a liquid trigger and readable content."],
+] satisfies readonly (readonly [string, string, string, string])[];

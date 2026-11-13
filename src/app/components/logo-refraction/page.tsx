@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import Link from "next/link";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import { ComponentSection } from "@/components/component-section";
@@ -31,7 +34,7 @@ export default function LogoRefractionPage() {
         <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="logo-refraction" />
           <div className={styles.panelDivider} />
-          <h3>Usage</h3><pre><code>{logoRefractionUsage}</code></pre>
+          <h3>Usage</h3><LiquidCode><code>{logoRefractionUsage}</code></LiquidCode>
           <p>React and WebGL. The component, renderer, shader, and stylesheet install together. Use an opaque square image with a light mark on a dark field. Remote images require CORS access.</p>
           <a href="/r/logo-refraction.json">Registry JSON</a><a href="/artwork/maynkudu-warehouse.png" download>Download original logo</a>
           <ComponentMediaLinks component={logoRefraction} />
@@ -42,16 +45,16 @@ export default function LogoRefractionPage() {
           <p>Pause freezes time and pointer response. Reduced motion, hidden tabs, and scrolling the image out of view stop animation. The original image appears when WebGL is unavailable.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
-          <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Logo refraction properties"><table>
+          <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Logo refraction properties"><table>
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
             <tbody>{logoRefractionProps.map(([name, type, value, description]) => <tr key={name}>
               <td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td>
             </tr>)}</tbody>
-          </table></div>
-          <details className={styles.details}><summary>Controller methods</summary>
+          </table></LiquidScrollArea>
+          <LiquidDisclosure className={styles.details} label="Controller methods">
             <p><code>configure(settings)</code> updates the effect. <code>pause()</code> and <code>resume()</code> control playback. <code>seek(time)</code> selects a shader time in seconds. <code>setPointer(x, y)</code> sets a normalized light target while motion is enabled.</p>
             <p><code>snapshot()</code> reports time, pointer position, settings, runtime status, and GPU resource counts. The component calls <code>destroy()</code> on unmount.</p>
-          </details>
+          </LiquidDisclosure>
         </div></ComponentSection>
         <ComponentSource name="logo-refraction" />
       </div>

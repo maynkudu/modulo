@@ -10,6 +10,7 @@ import type { Direction } from "../src/registry/2048/game";
 import { ElasticSlider, type ElasticSliderController } from "../src/registry/elastic-slider/ElasticSlider";
 import { SnapRail, type SnapRailController } from "../src/registry/snap-rail/SnapRail";
 import { LiquidCluster, type LiquidClusterController } from "../src/registry/liquid-cluster/LiquidCluster";
+import { LiquidAnimationsDemo } from "../src/components/liquid-animations-demo";
 import { LogoRefraction } from "../src/registry/logo-refraction/LogoRefraction";
 
 import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNavigation";
@@ -60,8 +61,16 @@ function NavigationCapture() {
   return <OverlayNavigation defaultOpen trailing={<span className="india-time inline-block min-w-[10ch] text-[14px] whitespace-nowrap tabular-nums mobile:text-[13px]">IND | 21:45</span>} />;
 }
 
+function LiquidAnimationsCapture() {
+  useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
+  return <section className="liquid-media"><LiquidAnimationsDemo initialExample="Account" compact /></section>;
+}
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "liquid-animations") {
+    return <LiquidAnimationsCapture />;
+  }
   if (name === "overlay-navigation") {
     return <NavigationCapture />;
   }

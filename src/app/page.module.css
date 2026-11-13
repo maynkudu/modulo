@@ -1,4 +1,4 @@
-.page { background: #000; color: #e8e8e8; font-family: var(--font-geist-sans), Arial, sans-serif; font-size: 14px; line-height: 1.5; }
+.page { background: #000; color: #e8e8e8; font-family: var(--font-sans); font-size: 14px; line-height: 1.5; }
 .main { width: calc(100% - 80px); max-width: 1280px; margin: 0 auto; padding: 64px 0 80px; }
 .authorTitle { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 44px; font-size: 24px; line-height: 1.35; font-weight: 560; letter-spacing: -.7px; }
 .authorTitle img { display: block; width: 154px; height: 48px; object-fit: contain; mix-blend-mode: screen; }
@@ -13,8 +13,7 @@
 .heading { display: flex; align-items: start; justify-content: space-between; gap: 24px; margin-bottom: 48px; scroll-margin-top: 32px; }
 .heading h1 { margin: 0 0 12px; font-size: 36px; font-weight: 560; line-height: 1.2; letter-spacing: -1px; }
 .heading p { max-width: 660px; margin: 0; color: #aaa; font-size: 15px; }
-.sourceLink { flex-shrink: 0; padding: 10px 16px; border: 1px solid var(--ui-border); border-radius: 3px; background: #000; color: #e8e8e8; font-size: 13px; text-decoration: none; transition: background 120ms ease-out, border-color 120ms ease-out; }
-.sourceLink:hover { background: var(--ui-control); border-color: #555; }
+.sourceLink { composes: liquid-button from global; flex-shrink: 0; font-size: 13px; }
 .headingActions { display: flex; flex-wrap: wrap; flex-shrink: 0; gap: 8px; }
 .gameDemo { border: 1px solid var(--ui-border); }
 .sections { display: flex; flex-direction: column; gap: 40px; }
@@ -25,33 +24,28 @@
 .install { grid-column: span 5; }
 .api { grid-column: span 7; }
 .source { grid-column: 1 / -1; scroll-margin-top: 32px; }
-.sourceGate { padding: 20px; }
+.sourceGate { padding: 20px; border: 0; }
 .panel h2 { margin: 0 0 24px; font-size: 24px; font-weight: 500; }
 .panel h3 { margin: 24px 0 10px; font-size: 14px; font-weight: 500; }
 .panel p { color: var(--ui-muted); font-size: 13px; line-height: 1.8; margin: 16px 0; }
 .panel pre { overflow: auto; max-width: 100%; margin: 0 0 16px; padding: 20px; background: #080808; border-left: 1px solid #555; font-size: 12px; line-height: 1.9; }
 .install pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 .panel :is(pre, p, td) code { font-family: var(--font-geist-mono), monospace; }
-.panel button { min-height: 40px; padding: 8px 13px; border: 1px solid var(--ui-border); border-radius: 3px; background: #000; color: #e8e8e8; font: inherit; font-size: 13px; cursor: pointer; transition: background 120ms ease-out, border-color 120ms ease-out, transform 100ms ease-out; }
-.panel button:hover:not(:disabled):not([aria-pressed=true]) { background: var(--ui-control); border-color: #555; }
-.panel button[aria-pressed=true] { background: #e8e8e8; color: #000; border-color: #e8e8e8; }
-.panel button:active:not(:disabled) { transform: scale(.97); }
 .panel a { display: inline-block; margin-right: 16px; font-size: 13px; text-underline-offset: 4px; text-decoration: underline; }
-.panelDivider { margin: 32px 0; border-top: 1px solid var(--ui-border); }
-.tableScroll { overflow: auto; border: 1px solid var(--ui-border); border-radius: 3px; }
+.panelDivider { margin: 32px 0; }
+.tableScroll { overflow: auto; }
 .api table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
 .api th { padding: 14px 16px; color: var(--ui-muted); font-weight: 400; }
 .api td { padding: 14px 16px; vertical-align: top; border-top: 1px solid var(--ui-border); }
 .api td span { display: block; max-width: 320px; margin-top: 5px; color: var(--ui-muted); font-size: 12px; line-height: 1.6; }
-.details { border-top: 1px solid var(--ui-border); padding-top: 16px; margin-top: 16px; }
+.details { margin-top: 16px; }
 .details summary { cursor: pointer; font-size: 13px; overflow-wrap: anywhere; }
-.details pre { margin-top: 16px; max-height: 480px; }
+.details pre { margin-top: 0; max-height: 480px; }
 .accessHeading { display: flex; gap: 16px; align-items: start; justify-content: space-between; flex-wrap: wrap; }
 .accessForm { display: grid; gap: 12px; max-width: 440px; color-scheme: dark; }
 .accessForm label { color: #bbb; font-size: 13px; }
-.accessForm input { min-width: 0; width: 100%; min-height: 44px; padding: 12px; border: 1px solid #555; border-radius: 3px; background: #000; color: #fff; font: inherit; font-size: 16px; }
+.accessForm input { min-width: 0; width: 100%; font-size: 16px; }
 .accessForm button { justify-self: start; }
-.panel button.secondaryButton { background: #000; color: #e8e8e8; }
 .panel button:disabled, .sourceLink:disabled { color: #777; cursor: default; }
 .mintLogin { max-width: 504px; }
 .mintPanels { display: grid; gap: 16px; }

@@ -2,6 +2,9 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { DEFAULT_GLASS_SETTINGS, TexturedGlass, type DepthState, type GlassFrame, type TexturedGlassController } from "@/registry/textured-glass/TexturedGlass";
+import { LiquidButton, LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { InterfaceSlider } from "./interface-slider";
+import { LiquidTrack } from "@/registry/liquid-animations/LiquidTrack";
 import styles from "./textured-glass-demo.module.css";
 
 declare global { interface Window { texturedGlass?: TexturedGlassController; } }
@@ -76,10 +79,8 @@ export function TexturedGlassDemo() {
   }
   function range(key: keyof typeof ranges) {
     const config = ranges[key];
-    return <div key={key}>
-      <label className={styles.field} htmlFor={`${id}-${key}`}><span>{config.label}</span><output>{settings[key]}</output></label>
-      <input className={styles.slider} id={`${id}-${key}`} type="range" min={config.min} max={config.max} step={config.step} value={settings[key]} disabled={!ready} onChange={event => { const value = Number(event.currentTarget.value); setSettings(current => ({ ...current, [key]: value })); }} />
-    </div>;
+    return <InterfaceSlider key={key} className={styles.slider} label={config.label} min={config.min} max={config.max} step={config.step}
+      value={settings[key]} disabled={!ready} onValueChange={value => setSettings(current => ({ ...current, [key]: value }))} />;
   }
 
   return <>
@@ -91,25 +92,25 @@ export function TexturedGlassDemo() {
     <section className={styles.controlsPanel} aria-labelledby={`${id}-controls`}>
       <h2 id={`${id}-controls`}>Glass</h2>
       <div className={styles.actionsTop}>
-        <button type="button" onClick={() => input.current?.click()}>Upload image</button>
-        <button type="button" disabled={image.src === DEFAULT_IMAGE} onClick={() => { setImage({ src: DEFAULT_IMAGE, name: "stay.jpeg" }); setError(""); }}>Use default</button>
+        <LiquidButton type="button" onClick={() => input.current?.click()}>Upload image</LiquidButton>
+        <LiquidButton type="button" disabled={image.src === DEFAULT_IMAGE} onClick={() => { setImage({ src: DEFAULT_IMAGE, name: "stay.jpeg" }); setError(""); }}>Use default</LiquidButton>
       </div>
       <input ref={input} className={styles.fileInput} type="file" accept="image/*" aria-label="Upload an image" onChange={event => { upload(event.currentTarget.files?.[0]); event.currentTarget.value = ""; }} />
-      <div className={styles.modes}>
-        <button type="button" disabled={!ready} aria-pressed={settings.enabled} onClick={() => setSettings(current => ({ ...current, enabled: !current.enabled }))}>{settings.enabled ? "Glass on" : "Original"}</button>
-        <button type="button" disabled={!ready || reducedMotion} aria-pressed={settings.animate} onClick={() => setSettings(current => ({ ...current, animate: !current.animate }))}>Auto light</button>
-      </div>
+      <LiquidTrack className={styles.modes}>
+        <LiquidButton type="button" disabled={!ready} aria-pressed={settings.enabled} onClick={() => setSettings(current => ({ ...current, enabled: !current.enabled }))}>{settings.enabled ? "Glass on" : "Original"}</LiquidButton>
+        <LiquidButton type="button" disabled={!ready || reducedMotion} aria-pressed={settings.animate} onClick={() => setSettings(current => ({ ...current, animate: !current.animate }))}>Auto light</LiquidButton>
+      </LiquidTrack>
       {basicRanges.map(range)}
       <div className={styles.depthStatus} role="status">
         {depthState.kind === "ready" ? "Depth ready" : ""}
       </div>
-      <button type="button" className={styles.depthMap} disabled={depthState.kind !== "ready"} aria-pressed={settings.showDepth} onClick={() => setSettings(current => ({ ...current, showDepth: !current.showDepth }))}>Depth map</button>
-      {depthState.kind === "error" && <div className={styles.error} role="alert"><p>{depthState.message}</p><button type="button" onClick={() => { void instance.current?.estimateDepth(); }}>Retry depth</button></div>}
-      <details className={styles.advanced}><summary>More settings</summary>{advancedRanges.map(range)}</details>
+      <LiquidButton type="button" className={styles.depthMap} disabled={depthState.kind !== "ready"} aria-pressed={settings.showDepth} onClick={() => setSettings(current => ({ ...current, showDepth: !current.showDepth }))}>Depth map</LiquidButton>
+      {depthState.kind === "error" && <div className={styles.error} role="alert"><p>{depthState.message}</p><LiquidButton type="button" onClick={() => { void instance.current?.estimateDepth(); }}>Retry depth</LiquidButton></div>}
+      <LiquidDisclosure className={styles.advanced} label="More settings">{advancedRanges.map(range)}</LiquidDisclosure>
       <div className={styles.actions}>
-        <button type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => setPaused(current => !current)}>{paused ? "Resume" : "Pause"}</button>
-        <button type="button" disabled={!ready} onClick={reset}>Reset</button>
-        <button className={styles.save} type="button" disabled={!ready || saving} onClick={save}>{saving ? "Saving..." : "Save PNG"}</button>
+        <LiquidButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => setPaused(current => !current)}>{paused ? "Resume" : "Pause"}</LiquidButton>
+        <LiquidButton type="button" disabled={!ready} onClick={reset}>Reset</LiquidButton>
+        <LiquidButton className={styles.save} type="button" disabled={!ready || saving} onClick={save}>{saving ? "Saving..." : "Save PNG"}</LiquidButton>
       </div>
       {error && <p className={styles.error} role="alert">{error}</p>}
     </section>

@@ -1,7 +1,8 @@
 "use client";
 
 import { Game2048, type Game2048Controller } from "@/registry/2048/Game2048";
-import type { ReactNode } from "react";
+import { useId, useRef, type ReactNode } from "react";
+import { LiquidScrollbar } from "@/registry/liquid-animations/LiquidScrollbar";
 import { GardenCanvas } from "@/registry/interactive-art/examples/GardenCanvas";
 import { Nilkamal } from "@/registry/nilkamal/Nilkamal";
 import { Diwali26 } from "@/registry/diwali-26/Diwali26";
@@ -10,6 +11,7 @@ import { TexturedGlass } from "@/registry/textured-glass/TexturedGlass";
 import { ElasticSliderDemo } from "./elastic-slider-demo";
 import { SnapRailDemo } from "./snap-rail-demo";
 import { LiquidClusterDemo } from "./liquid-cluster-demo";
+import { LiquidAnimationsDemo } from "./liquid-animations-demo";
 import { LogoRefractionDemo } from "./logo-refraction-demo";
 import { OverlayNavigationDemo } from "./overlay-navigation-demo";
 import { catalogItems } from "@/lib/catalog";
@@ -32,11 +34,17 @@ const views = {
   "elastic-slider": () => <div className={styles.controls}><ElasticSliderDemo /></div>,
   "snap-rail": () => <div className={styles.controls}><SnapRailDemo /></div>,
   "liquid-cluster": () => <div className={styles.controls}><LiquidClusterDemo /></div>,
+  "liquid-animations": () => <div className={styles.controls}><LiquidAnimationsDemo /></div>,
   "logo-refraction": () => <div className={styles.controls}><LogoRefractionDemo /></div>,
 } satisfies Record<ComponentName, () => ReactNode>;
 
 export function FullView({ name }: { name: ComponentName }) {
+  const id = useId(), viewport = useRef<HTMLElement>(null);
   const View = views[name];
   const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster";
-  return <main className={`${styles.viewport} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""}`}><View /></main>;
+  const scrollable = control || name === "logo-refraction" || name === "liquid-animations";
+  return <div className={styles.frame}>
+    <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" ? styles.liquidViewport : ""}`}><View /></main>
+    {scrollable && <LiquidScrollbar viewport={viewport} controls={id} />}
+  </div>;
 }

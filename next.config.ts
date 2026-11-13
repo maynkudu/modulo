@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  distDir: process.env.MODULO_DIST_DIR ?? ".next",
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,

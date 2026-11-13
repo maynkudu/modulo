@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
@@ -37,7 +40,7 @@ export default function RootInfectionPage() {
             <InstallCommand name="root-infection" />
             <div className={styles.panelDivider} />
             <h3>Usage</h3>
-            <pre><code>{rootInfectionUsage}</code></pre>
+            <LiquidCode><code>{rootInfectionUsage}</code></LiquidCode>
             <p>React, WebGL 2 with a Canvas 2D fallback, and Web Audio. No physics or animation package required. All ten source files install together.</p>
             <a href="/r/root-infection.json">Registry JSON</a>
             <ComponentMediaLinks component={rootInfection} />
@@ -50,7 +53,7 @@ export default function RootInfectionPage() {
             <p>Moving outside the preview stops new infections while you read the documentation. The overlay never intercepts links or controls.</p>
           </div></ComponentSection>
           <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
-            <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Root Infection properties">
+            <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Root Infection properties">
               <table>
                 <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
                 <tbody>{rootInfectionProps.map(([name, type, defaultValue, description]) => (
@@ -60,12 +63,11 @@ export default function RootInfectionPage() {
                   </tr>
                 ))}</tbody>
               </table>
-            </div>
-            <details className={styles.details}>
-              <summary>Controller methods</summary>
+            </LiquidScrollArea>
+            <LiquidDisclosure className={styles.details} label="Controller methods">
             <p><code>snapshot()</code> reports particle counts, branch counts, solver error, audio state, rendering backend, and measured frame timings. WebGL body timings measure CPU submission, while frame intervals include browser scheduling. <code>reset()</code> clears the infection. <code>setAudio(enabled, volume)</code> changes audio immediately.</p>
               <p>Keep <code>onReady</code> stable. Physics prop changes create a fresh simulation. Audio and class changes preserve the current infection. Cleanup calls <code>destroy()</code> automatically.</p>
-            </details>
+            </LiquidDisclosure>
           </div></ComponentSection>
           <ComponentSection title="How it works" id="physics"><div className={`${styles.panel} ${styles.docPanel} ${styles.source}`}>
             <p>Each root is a chain of pooled particles. Verlet integration derives velocity from position history. Distance constraints keep neighboring joints connected, and angular constraints resist sharp folds more strongly as the roots thicken. Branches share a parent joint.</p>

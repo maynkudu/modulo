@@ -1,3 +1,5 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import Link from "next/link";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import { ComponentSection } from "@/components/component-section";
@@ -25,7 +27,7 @@ export default function OverlayNavigationPage() {
         <ComponentSection title="Preview" id="preview"><div className={`${styles.demo} ${localStyles.preview}`}><OverlayNavigationDemo /></div></ComponentSection>
         <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="overlay-navigation" />
-          <h3>Usage</h3><pre><code>{overlayNavigationUsage}</code></pre>
+          <h3>Usage</h3><LiquidCode><code>{overlayNavigationUsage}</code></LiquidCode>
           <p>The navbar, menu, CSS, fonts, and preview images install together. Requires React 19 and GSAP. Mount once around your page content.</p>
           <p>Pass your pathname to <code>currentHref</code> and route through <code>onNavigate</code>. Supply <code>items</code>, <code>brand</code>, <code>trailing</code>, <code>contact</code>, and <code>social</code> to replace the portfolio defaults.</p>
           <ComponentMediaLinks component={overlayNavigation} />
@@ -33,7 +35,7 @@ export default function OverlayNavigationPage() {
           <p>Open the menu to reveal the route list. Hover or focus a route to change its preview. Escape closes the menu and restores focus. Tab stays within the menu while it is open. Reduced motion shows the same states immediately.</p>
           <p>This component preserves the portfolio navigation before its redesign, including the original toggle, link dimming, and map circles.</p>
         </div></ComponentSection>
-        <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}><div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Overlay navigation properties"><table><thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead><tbody>{overlayNavigationProps.map(([name, type, value, description]) => <tr key={name}><td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td></tr>)}</tbody></table></div></div></ComponentSection>
+        <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}><LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Overlay navigation properties"><table><thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead><tbody>{overlayNavigationProps.map(([name, type, value, description]) => <tr key={name}><td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td></tr>)}</tbody></table></LiquidScrollArea></div></ComponentSection>
         <ComponentSource name="overlay-navigation" />
       </div>
     </main>

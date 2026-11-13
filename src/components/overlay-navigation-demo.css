@@ -1,0 +1,1 @@
+.liquid-overlay-switch::before, .liquid-overlay-switch:hover::before { background: color-mix(in srgb,currentColor 12%,transparent); }

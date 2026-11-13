@@ -1,0 +1,5 @@
+.liquid-code-block { position: relative; min-width: 0; }
+.liquid-code-block > pre.liquid-scroll-viewport { height: auto; border: 0; }
+.liquid-scroll-area table td { border: 0; }
+html[data-liquid-scrolling] { scrollbar-width: none; }
+html[data-liquid-scrolling]::-webkit-scrollbar { display: none; }

@@ -356,6 +356,49 @@
           "sha256": "9e7575009730df1b4c08f7e838eeb834f76fc505ec15468505666b5f526582c9"
         }
       ]
+    },
+    {
+      "name": "liquid-animations",
+      "repository": "maynkudu/modulo-liquid-animations",
+      "revision": "494a02670d01867c2990c3b03f5f19f50781fbff",
+      "files": [
+        {
+          "path": "liquid-motion.ts",
+          "sha256": "aa40e72bd340e2072813fc33eafdf74757e0c0f311f7a53aa41018285548872f"
+        },
+        {
+          "path": "liquid-geometry.ts",
+          "sha256": "b40a17fbd92c869ef7e8eab1ce479fbe96c79f136a68becc47ae97668d7a45ce"
+        },
+        {
+          "path": "LiquidProvider.tsx",
+          "sha256": "b8eb90d5dbbc6698c39de110cd1416819a5fee24e0d911c6fe4ccae2055cf523"
+        },
+        {
+          "path": "LiquidSurface.tsx",
+          "sha256": "66111d8ac7cda03680707999f44660175cea50ff7d172f0a5438dfedb58abb73"
+        },
+        {
+          "path": "LiquidControls.tsx",
+          "sha256": "59d7d779f14a6582ac897f81a26c314303704d544357d74dabbaf5e89b90b6ab"
+        },
+        {
+          "path": "LiquidTrack.tsx",
+          "sha256": "853178c5457e5c43559edfe5087dacfa9606c3c24b80782492f6eb53d8ea9c16"
+        },
+        {
+          "path": "LiquidSlider.tsx",
+          "sha256": "5882ac544e71e4c11372e59f5534fdf241fd62ba98dd67afc6760fb651063f73"
+        },
+        {
+          "path": "LiquidScrollbar.tsx",
+          "sha256": "c981989b9f38a9e72f1a7cd63fe95ab8dfc0a71fcb346b5f1318b02a5f90b70c"
+        },
+        {
+          "path": "liquid-animations.css",
+          "sha256": "04617c4135b1fd2cad5a727be6925a0630a4d1cc6f6a9b572950560a6f716efa"
+        }
+      ]
     }
   ]
 }

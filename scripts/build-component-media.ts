@@ -35,7 +35,7 @@ const [javascript, css, font, sansFont, glassImage, glassDepth, logoImage] = awa
   readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
   readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
   readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
-  readFile(resolve(root, "node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2")),
+  readFile(resolve(root, "src/app/fonts/InterVariable.woff2")),
   readFile(resolve(root, "public/artwork/stay.jpeg")),
   readFile(resolve(root, "public/artwork/stay-depth.png")),
   readFile(resolve(root, "public/artwork/maynkudu-warehouse.png")),
@@ -43,18 +43,21 @@ const [javascript, css, font, sansFont, glassImage, glassDepth, logoImage] = awa
 const previewPath = resolve(workspace, "capture.html");
 await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
 @font-face{font-family:GeistMono;src:url(data:font/woff2;base64,${font.toString("base64")}) format("woff2")}
-@font-face{font-family:Geist;src:url(data:font/woff2;base64,${sansFont.toString("base64")}) format("woff2");font-weight:100 900}
+@font-face{font-family:Inter;src:url(data:font/woff2;base64,${sansFont.toString("base64")}) format("woff2");font-weight:100 900}
 html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#050304;color:#c9bfc1;font-family:GeistMono,monospace}
 .media-scene{width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
 .media-scene canvas{width:100%;height:100%}
-.control-media{height:100%;background:#f7f8fa;color:#20242b;font-family:Geist,sans-serif;padding:72px 100px;display:flex;flex-direction:column}
+.control-media{height:100%;background:#f7f8fa;color:#20242b;font-family:Inter,sans-serif;padding:72px 100px;display:flex;flex-direction:column}
 .control-media header{display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid #dde1e7;padding-bottom:24px}
 .control-media header span{font-size:22px;color:#646b76}.control-media h1{margin:0;font-size:32px;font-weight:550;letter-spacing:-.035em}
 .control-media header button{border:1px solid #cdd3dc;background:#fff;color:#333b46;border-radius:12px;font:inherit;padding:9px 18px;cursor:pointer}
 .control-media-stage{flex:1;display:flex;align-items:center;justify-content:center}.control-media-stage>.snap-rail{width:600px}.control-media-stage>.liquid-cluster{width:650px}
+.liquid-media{height:100%;padding:32px;box-sizing:border-box;background:#000;color:#e8e8e8;font-family:Inter,sans-serif;--font-sans:Inter,sans-serif;--foreground:#e8e8e8;--background:#000;--muted-foreground:#999}
+.liquid-media .liquid-demo{height:100%}.liquid-media .liquid-demo-stage{height:100%;min-height:0}
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "liquid-animations", flow: "liquid-account-retarget", pause: 8000, seek: .6, thumbnailSeek: 2, movePointer: false },
   { name: "overlay-navigation", flow: "overlay-navigation-open", pause: 8000, seek: 2, movePointer: false },
   { name: "logo-refraction", flow: "logo-refraction-sweep", pause: 12000, seek: .5, movePointer: false },
   { name: "elastic-slider", flow: "elastic-slider-stretch", pause: 8000, seek: .3, movePointer: false },
@@ -87,6 +90,13 @@ await writeFile(configPath, `${JSON.stringify({
     fps: 20,
     waitFor: "body[data-ready=true]",
     steps: [
+      ...(entry.component.name === "liquid-animations" ? [
+        { action: "click", selector: 'button[aria-label="Jane Doe account"]' },
+        { action: "pause", ms: 1200 },
+        { action: "click", selector: 'button[aria-label="Jane Doe account"]' },
+        { action: "pause", ms: 160 },
+        { action: "click", selector: 'button[aria-label="Jane Doe account"]' },
+      ] : []),
       ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "click", selector: "[data-control-replay]" }] : []),
       ...(specification.movePointer ? [{ action: "moveTo", selector: ".media-scene" }] : []),
       { action: "pause", ms: specification.pause },
@@ -107,7 +117,7 @@ if (!dryRun) {
     const animation = resolve(destination, basename(media.animation.src));
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-ss", String(specification.seek), "-i", recording,
       "-t", String(media.video.duration), "-an", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-movflags", "+faststart", video]);
-    execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", video, "-frames:v", "1", "-q:v", "2", thumbnail]);
+    execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-ss", String(specification.thumbnailSeek ?? 0), "-i", video, "-frames:v", "1", "-q:v", "2", thumbnail]);
     const palette = `fps=10,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=sierra2_4a`;
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", video, "-filter_complex", palette, "-loop", "0", animation]);
     for (const asset of [thumbnail, animation, video]) {

@@ -3,6 +3,9 @@
 import { useCallback, useId, useRef, useState } from "react";
 import { Diwali26, type Diwali26Controller, type Pattern, type FrameState } from "@/registry/diwali-26/Diwali26";
 import { useSoundSettings } from "@/lib/interface-sounds";
+import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { InterfaceSlider } from "./interface-slider";
+import { LiquidTrack } from "@/registry/liquid-animations/LiquidTrack";
 import styles from "./diwali-26-demo.module.css";
 
 declare global { interface Window { diwali26?: Diwali26Controller; } }
@@ -36,15 +39,15 @@ export function Diwali26Demo() {
   </section>
   <section className={styles.controlsPanel} aria-labelledby={`${id}-controls`}>
    <h2 id={`${id}-controls`}>Skyshots</h2>
-   <div className={styles.weather} role="group" aria-label="Skyshot pattern">{patterns.map(({value,label})=><button type="button" key={value} aria-pressed={pattern===value} disabled={!ready} onClick={()=>{unlock();setPattern(value);}}>{label}</button>)}</div>
+   <LiquidTrack className={styles.weather} role="group" aria-label="Skyshot pattern">{patterns.map(({value,label})=><LiquidButton type="button" key={value} aria-pressed={pattern===value} disabled={!ready} onClick={()=>{unlock();setPattern(value);}}>{label}</LiquidButton>)}</LiquidTrack>
    <p className={styles.hint}>{reduced?"Click the sky for a still skyshot. Motion follows your reduced-motion preference.":"Click the sky to launch. Brush the petals and powder, or Tab to a flower and press Enter."}</p>
-   <label className={styles.field} htmlFor={`${id}-volume`}><span>Volume</span><output>{enabled?`${Math.round(volume*100)}%`:"Muted"}</output></label>
-   <input id={`${id}-volume`} className={styles.slider} type="range" min="0" max="1" step=".05" value={volume} disabled={!ready||!enabled} onChange={event=>{unlock();setVolume(Number(event.currentTarget.value));}}/>
+   <InterfaceSlider className={styles.slider} label="Volume" min={0} max={1} step={.05} value={volume} disabled={!ready || !enabled}
+     formatValue={value => enabled ? `${Math.round(value * 100)}%` : "Muted"} onValueChange={value => { unlock(); setVolume(value); }} />
    <div className={styles.actions}>
-    <button type="button" disabled={!ready||paused} data-festival-feedback onClick={launch}>Launch</button>
-    <button type="button" disabled={!ready||(reduced&&!paused)} aria-pressed={paused} onClick={()=>{pendingLaunch.current=false;setPaused(!paused);}}>{paused?"Resume":"Pause"}</button>
-    <button type="button" disabled={!ready} onClick={()=>{pendingLaunch.current=false;controller.current?.clear();}}>Clear sky</button>
-    <button type="button" disabled={!ready||saving} onClick={save}>{saving?"Saving...":"Save PNG"}</button>
+    <LiquidButton type="button" disabled={!ready||paused} data-festival-feedback onClick={launch}>Launch</LiquidButton>
+    <LiquidButton type="button" disabled={!ready||(reduced&&!paused)} aria-pressed={paused} onClick={()=>{pendingLaunch.current=false;setPaused(!paused);}}>{paused?"Resume":"Pause"}</LiquidButton>
+    <LiquidButton type="button" disabled={!ready} onClick={()=>{pendingLaunch.current=false;controller.current?.clear();}}>Clear sky</LiquidButton>
+    <LiquidButton type="button" disabled={!ready||saving} onClick={save}>{saving?"Saving...":"Save PNG"}</LiquidButton>
    </div>
    {error&&<p className={styles.error} role="alert">{error}</p>}
   </section>

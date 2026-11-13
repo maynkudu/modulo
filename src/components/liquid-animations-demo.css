@@ -1,0 +1,23 @@
+.liquid-demo { width: 100%; min-width: 0; }
+.liquid-demo-stage { position: relative; height: 460px; min-width: 0; background: #101010; border-radius: 20px; }
+.liquid-demo-example { position: absolute; top: 46%; left: 50%; transform: translate(-50%,-50%); width: 320px; height: 300px; }
+.liquid-demo-example:focus-visible { outline: 2px solid var(--ring,#aaa); outline-offset: 4px; border-radius: 20px; }
+.liquid-demo-anchor { position: absolute; top: 96px; left: 80px; }
+.liquid-demo-trigger { width: 160px; }
+.liquid-demo-account-anchor { position: absolute; top: 40px; left: clamp(136px,calc(320px - 50vw),160px); }
+.liquid-demo-identity { display: grid; gap: 4px; white-space: nowrap; }
+.liquid-demo-identity strong { font-size: 14px; font-weight: 450; }
+.liquid-demo-identity > span { font-size: 12px; color: var(--muted-foreground,#999); }
+.liquid-demo-account .liquid-item:last-child { margin-top: 6px; }
+.liquid-demo-tools { position: absolute; top: 126px; left: 84px; display: flex; gap: 10px; }
+.liquid-demo-tools .liquid-button { color: var(--muted-foreground,#999); }
+.liquid-demo-tools .liquid-button:hover,.liquid-demo-tools .liquid-button:focus-visible,.liquid-demo-tools .liquid-button[aria-pressed=true] { color: var(--foreground,#e8e8e8); }
+.liquid-demo-tools .liquid-button::before,.liquid-demo-tools .liquid-button:hover::before,.liquid-demo-tools .liquid-button[aria-pressed=true]::before { background: var(--liquid-surface-color,color-mix(in srgb,var(--foreground,#e8e8e8) 14%,var(--background,#000))); transform: none; }
+.liquid-demo-color { display: flex; align-items: center; gap: 8px; }
+.liquid-demo-dot { width: 15px; height: 15px; flex: none; border-radius: 50%; }
+.liquid-demo-tabs { position: absolute; bottom: 28px; left: 24px; right: 24px; display: flex; justify-content: center; }
+.liquid-demo-speed { width: min(100%,320px); margin: 24px auto 0; font-size: 13px; }
+.liquid-demo-speed label { color: var(--muted-foreground,#999); }
+.liquid-demo-status { min-height: 20px; margin: 16px 0 0; color: var(--muted-foreground,#999); font-size: 13px; }
+.liquid-demo-compact .liquid-demo-stage { height: 100%; min-height: 460px; }
+@media(max-width:550px) { .liquid-demo-example { top: 43%; } .liquid-demo-tabs { left: 12px; right: 12px; bottom: 18px; } }

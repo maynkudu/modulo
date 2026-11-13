@@ -1,3 +1,4 @@
+.frame { position: relative; height: 100dvh; }
 .viewport { width: 100%; min-height: 100dvh; height: 100dvh; overflow: hidden; background: #050304; }
 .scene { width: 100% !important; height: 100% !important; min-height: 0 !important; aspect-ratio: auto !important; border-radius: 0 !important; }
 .scene canvas { width: 100%; height: 100%; }
@@ -6,3 +7,4 @@
 .controlViewport { background: #fdfdfd; overflow: auto; }
 .logoViewport { background: #000; color: #e8e8e8; overflow: auto; }
 .controls { width: min(100%, 760px); margin: 0 auto; padding: 32px 20px; display: grid; gap: 24px; }
+.liquidViewport { background: #000; color: #e8e8e8; overflow: auto; }

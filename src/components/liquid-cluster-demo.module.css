@@ -1,8 +1,8 @@
 .artwork { composes: artwork from "./demo-controls.module.css"; min-height: 420px; display: flex; flex-direction: column; justify-content: center; }
 .artworkHeader { composes: artworkHeader from "./demo-controls.module.css"; }
-.actions { display: flex; padding: 3px; border: 1px solid #2c2c2c; border-radius: 7px; gap: 3px; }
+.actions { display: flex; padding: 3px; border-radius: 20px; gap: 3px; }
 .actions button { flex: 1; height: 30px; padding: 0 8px; background: transparent; color: #888; border: 0; font: inherit; border-radius: 4px; cursor: pointer; }
-.actions button[aria-pressed=true] { background: #303030; color: #eee; }
+.actions button[aria-pressed=true] { color: #eee; }
 .actions button:focus-visible { outline: 2px solid #eee; }
 .actions button:disabled { opacity: .4; cursor: default; }
 .groups { position: relative; padding: 52px 12px 35px; }
@@ -16,7 +16,7 @@
 .cleared { opacity: 0; transform: translateY(-10px); }
 .notificationWrap[data-reduced-motion=true] { transition: none; transform: none; }
 .empty { position: absolute; inset: 0; display: grid; place-items: center; color: #777; font-size: 13px; pointer-events: none; }
-.options { display: grid; gap: 10px; padding-top: 18px; border-top: 1px solid #252525; }
+.options { display: grid; gap: 10px; padding-top: 18px; }
 .hint { color: #777; font-size: 12px; line-height: 1.7; margin: 0; }
 @container (max-width: 360px) { .appIcon { display: none; } }
 @media (max-width: 700px) { .artwork { min-height: 340px; } .groups { padding-inline: 4px; } }

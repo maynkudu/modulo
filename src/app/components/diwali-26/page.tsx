@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
@@ -31,7 +34,7 @@ export default function Diwali26Page() {
         <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="diwali-26" />
           <div className={styles.panelDivider} />
-          <h3>Usage</h3><pre><code>{diwali26Usage}</code></pre>
+          <h3>Usage</h3><LiquidCode><code>{diwali26Usage}</code></LiquidCode>
           <p>React, Canvas 2D, and Web Audio. All seven source files install together. No runtime artwork or audio downloads.</p>
           <a href="/r/diwali-26.json">Registry JSON</a><a href="/artwork/diwali-26.png" download>Download still fallback</a>
           <ComponentMediaLinks component={diwali26} />
@@ -42,17 +45,17 @@ export default function Diwali26Page() {
           <p>Pause, hidden tabs and scrolling the scene out of view stop animation and sound. Reduced motion keeps the rangoli still and draws skyshots without rocket motion or flashes.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
-          <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Diwali/26 properties"><table>
+          <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Diwali/26 properties"><table>
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
             <tbody>{diwali26Props.map(([name, type, value, description]) => <tr key={name}>
               <td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td>
             </tr>)}</tbody>
-          </table></div>
-          <details className={styles.details}><summary>Controller methods</summary>
+          </table></LiquidScrollArea>
+          <LiquidDisclosure className={styles.details} label="Controller methods">
             <p><code>launch(x, y)</code> launches at normalized sky coordinates. <code>gust({"{ x, y }"})</code> disturbs the rangoli. <code>clear()</code>, <code>pause()</code>, <code>resume()</code> and <code>seek(seconds)</code> control playback.</p>
             <p><code>setPattern(pattern)</code> changes new skyshots. <code>unlockAudio()</code> unlocks sound from an external gesture. <code>setAudio(enabled, volume)</code> controls sound and haptics. <code>snapshot()</code> reports geometry, skyshots and runtime state.</p>
             <p><code>exportPNG()</code> exports the current pose. Pass <code>layers</code> to export sky, fireworks, rangoli, powder or lamps separately. All layers share coordinates. The component calls <code>destroy()</code> on unmount.</p>
-          </details>
+          </LiquidDisclosure>
         </div></ComponentSection>
         <ComponentSource name="diwali-26" />
       </div>

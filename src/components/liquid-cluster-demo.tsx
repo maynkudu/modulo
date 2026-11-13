@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LiquidCluster, type LiquidClusterController } from "@/registry/liquid-cluster/LiquidCluster";
 import { RuneIcon } from "runeicons-react";
+import { LiquidTrack } from "@/registry/liquid-animations/LiquidTrack";
 import { DemoPanel, DemoRange, DemoSurface, DemoToggle, type DemoMenuEntry } from "./demo-controls";
 import styles from "./liquid-cluster-demo.module.css";
 
@@ -45,7 +46,7 @@ export function LiquidClusterDemo() {
   ] satisfies DemoMenuEntry[];
 
   return <>
-    <DemoSurface className={styles.artwork} label="Liquid cluster preview" menu={menu}>
+    <DemoSurface className={styles.artwork} label="Apple Liquid Cluster preview" menu={menu}>
       <header className={styles.artworkHeader}><h2>Notification</h2><span>{cleared ? "Cleared" : separation > .5 ? "Separated" : "Joined"}</span></header>
       <div className={styles.groups}>
         <div className={`${styles.notificationWrap} ${cleared ? styles.cleared : ""}`} data-reduced-motion={reducedMotion} inert={cleared}>
@@ -59,10 +60,10 @@ export function LiquidClusterDemo() {
     <DemoPanel menu={menu} onReplay={replay} onReset={reset} replayDisabled={!ready || disabled}>
       <DemoRange label="Separation" min={0} max={1} step={.01} value={separation} format={value => `${Math.round(value * 100)}%`}
         disabled={!ready || cleared} onValueChange={value => instance.current?.setSeparation(value)} />
-      <div className={styles.actions}>
+      <LiquidTrack className={styles.actions}>
         <button type="button" aria-pressed={separation === 0} disabled={!ready || cleared} onClick={() => instance.current?.setSeparation(0)}>Join</button>
         <button type="button" aria-pressed={separation === 1} disabled={!ready || cleared} onClick={() => instance.current?.setSeparation(1)}>Separate</button>
-      </div>
+      </LiquidTrack>
       <div className={styles.options}>
         <DemoToggle label="Opaque background" checked={opaque} onCheckedChange={setOpaque} />
         <DemoToggle label="Reduce motion" checked={reducedMotion} onCheckedChange={setReducedMotion} />

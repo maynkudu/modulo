@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
@@ -31,7 +34,7 @@ export default function NilkamalPage() {
         <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="nilkamal" />
           <div className={styles.panelDivider} />
-          <h3>Usage</h3><pre><code>{nilkamalUsage}</code></pre>
+          <h3>Usage</h3><LiquidCode><code>{nilkamalUsage}</code></LiquidCode>
           <p>React, Canvas 2D, and Web Audio. All ten source files install together. No animation package required.</p>
           <a href="/r/nilkamal.json">Registry JSON</a><a href="/artwork/nilkamal.png" download>Download still fallback</a>
           <ComponentMediaLinks component={nilkamal} />
@@ -42,17 +45,17 @@ export default function NilkamalPage() {
           <p>Sound starts after interaction. The header sound toggle mutes the scene. Pause, hidden tabs, and scrolling the scene out of view stop animation and sound. Reduced motion shows still weather states without lightning flashes.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
-          <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Nilkamal properties"><table>
+          <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Nilkamal properties"><table>
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
             <tbody>{nilkamalProps.map(([name, type, value, description]) => <tr key={name}>
               <td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td>
             </tr>)}</tbody>
-          </table></div>
-          <details className={styles.details}><summary>Controller methods</summary>
+          </table></LiquidScrollArea>
+          <LiquidDisclosure className={styles.details} label="Controller methods">
             <p><code>setWeather(weather)</code>, <code>setIntensity(value)</code>, <code>setBloom(value)</code>, <code>lightning()</code>, and <code>reset()</code> change the scene. <code>pause()</code> and <code>resume()</code> control playback.</p>
             <p><code>unlockAudio()</code> can be called from an external control&apos;s gesture. <code>setAudio(enabled, volume)</code> controls the sound. <code>snapshot()</code> reports weather accumulation, stem geometry, runtime status, and audio state.</p>
             <p><code>exportPNG()</code> exports the scene. Pass <code>layers</code> to export sky, landscape, water, ice, lotus, weather, or foreground separately. The component calls <code>destroy()</code> on unmount.</p>
-          </details>
+          </LiquidDisclosure>
         </div></ComponentSection>
         <ComponentSource name="nilkamal" />
       </div>

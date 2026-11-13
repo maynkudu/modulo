@@ -1,17 +1,12 @@
 .preview { grid-column: 1 / -1; width: min(100%, 720px); min-width: 0; margin: 0 auto; padding-bottom: 18px; }
 .toolbar { display: flex; align-items: center; gap: 8px; padding: 14px 16px; }
 .toolbar p { margin: 0 auto 0 0; color: var(--ui-muted); font-size: 13px; }
-.toolbar button { min-height: 40px; padding: 8px 12px; border: 1px solid var(--ui-border, #333); border-radius: 3px; background: #000; color: inherit; font: inherit; font-size: 13px; cursor: pointer; transition: background 120ms ease-out, border-color 120ms ease-out; }
-.toolbar button:hover:not(:disabled) { background: var(--ui-control, #161616); border-color: #555; }
-.toolbar button[aria-pressed=true] { border-color: #e8e8e8; }
+.toolbar button { min-height: 40px; padding: 8px 12px; font-size: 13px; }
 .toolbar button:disabled { color: #777; cursor: default; }
 .settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 24px; padding: 4px 16px 0; }
-.setting label { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; font-size: 13px; }
-.setting output { color: var(--ui-muted, #aaa); font-variant-numeric: tabular-nums; }
-.setting input { display: block; width: 100%; min-height: 32px; margin: 0; padding: 0; accent-color: #b9c4ce; cursor: ew-resize; }
-.setting input:disabled { opacity: .45; cursor: default; }
 .preview :is(button, input):focus-visible { outline: 2px solid #ddd; outline-offset: 4px; }
 .status, .error { margin: 12px 16px 0; color: var(--ui-muted, #aaa); font-size: 12px; line-height: 1.7; }
 .error { color: #ff8d8d; }
 @media (max-width: 440px) { .settings { gap: 12px; } .setting label { flex-direction: column; gap: 5px; } .toolbar { padding: 14px 12px; gap: 6px; } .toolbar p { font-size: 12px; } .toolbar button { padding: 8px; font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { .toolbar button { transition: none; } }
+.setting { font-size: 13px; }

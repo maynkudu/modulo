@@ -10,7 +10,7 @@
 .actionsTop, .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .modes { margin: 16px 0 8px; }
 .fileInput { display: none; }
-.advanced { margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--ui-border); }
+.advanced { margin-top: 12px; padding-top: 16px; }
 .advanced summary { font-size: 13px; cursor: pointer; }
 .save { grid-column: 1 / -1; }
 .depthStatus { min-height: 20px; margin: 12px 0 8px; font-size: 12px; color: var(--ui-muted); }
@@ -18,3 +18,6 @@
 .processing { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; background: rgb(0 0 0 / 48%); color: #fff; }
 .processing span { padding: 14px 18px; border: 1px solid rgb(255 255 255 / 20%); background: rgb(0 0 0 / 65%); font-size: 14px; }
 @media (max-width: 700px) { .artwork, .scene { min-height: 340px; height: 340px; } }
+
+.modes button::before { background: transparent !important; transform: none !important; }
+.modes button[aria-pressed=true] { color: var(--foreground); }

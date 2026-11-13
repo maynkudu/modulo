@@ -7,6 +7,8 @@ import {
 } from "@/registry/interactive-art/examples/GardenCanvas";
 import { GARDEN_LAYERS, gardenLighting } from "@/registry/interactive-art/scenes/garden";
 import type { FrameState } from "@/registry/interactive-art/engine/runtime";
+import { LiquidButton, LiquidSelect } from "@/registry/liquid-animations/LiquidControls";
+import { InterfaceSlider } from "./interface-slider";
 import styles from "./garden-demo.module.css";
 
 declare global {
@@ -102,50 +104,41 @@ export function GardenDemo() {
             : "Hover over a flower, or hold and pull it. The stem returns when you let go."}
         </p>
         <div className={styles.controls} role="group" aria-label="Garden controls">
-          <button type="button" disabled={!ready || reducedMotion} aria-pressed={paused}
+          <LiquidButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused}
             onClick={() => paused ? garden.current?.resume() : garden.current?.pause()}>
             {paused ? "Resume" : "Pause"}
-          </button>
-          <button type="button" disabled={!ready || paused || reducedMotion}
+          </LiquidButton>
+          <LiquidButton type="button" disabled={!ready || paused || reducedMotion}
             onClick={() => {
               garden.current?.bend("flower-4", direction.current);
               direction.current *= -1;
             }}>
             Bend lotus
-          </button>
-          <button type="button" disabled={!ready} onClick={() => {
+          </LiquidButton>
+          <LiquidButton type="button" disabled={!ready} onClick={() => {
             const instance = garden.current;
             if (instance) instance.seek(instance.snapshot().elapsed + 20);
           }}>
             Advance 20 seconds
-          </button>
-          <button type="button" disabled={!ready} onClick={() => garden.current?.seek(0)}>
+          </LiquidButton>
+          <LiquidButton type="button" disabled={!ready} onClick={() => garden.current?.seek(0)}>
             Start again
-          </button>
+          </LiquidButton>
         </div>
-        <div className={styles.field}>
-          <label htmlFor={`${id}-speed`}>Speed</label>
-          <output htmlFor={`${id}-speed`}>{speed}x</output>
-        </div>
-        <input className={styles.slider} type="range" id={`${id}-speed`} min="1" max="6" step="1" value={speed} disabled={!ready} onChange={(event) => {
-            setSpeed(event.currentTarget.value);
-            garden.current?.setTimeScale(Number(event.currentTarget.value));
-          }} />
+        <InterfaceSlider className={styles.slider} label="Speed" min={1} max={6} step={1} value={Number(speed)} disabled={!ready}
+          formatValue={value => `${value}x`} onValueChange={value => { setSpeed(String(value)); garden.current?.setTimeScale(value); }} />
         <div className={styles.export}>
           <h3>Export artwork</h3>
           <div className={styles.field}>
             <label htmlFor={`${id}-layer`}>Layer</label>
-            <select id={`${id}-layer`} value={layer} onChange={(event) => setLayer(event.currentTarget.value)}>
-              <option value="whole">Whole scene</option>
-              <option value="plants">Plants</option>
-              {GARDEN_LAYERS.map((name) => (
-                <option key={name} value={name}>{name.charAt(0).toUpperCase() + name.slice(1)}</option>
-              ))}
-            </select>
+            <LiquidSelect id={`${id}-layer`} label="Layer" value={layer} onValueChange={setLayer} align="end" options={[
+              { value: "whole", label: "Whole scene" }, { value: "plants", label: "Plants" },
+              ...GARDEN_LAYERS.map(value => ({ value, label: value.charAt(0).toUpperCase() + value.slice(1) })),
+            ]} />
           </div>
-          <button className={styles.save} type="button" disabled={!ready || saving} onClick={saveImage}>
+          <LiquidButton className={styles.save} type="button" disabled={!ready || saving} onClick={saveImage}>
             {saving ? "Saving..." : "Save PNG"}
-          </button>
+          </LiquidButton>
         </div>
         {error && <p className={styles.error} role="alert">{error}</p>}
       </section>

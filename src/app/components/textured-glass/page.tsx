@@ -1,3 +1,6 @@
+import { LiquidCode } from "@/components/liquid-documentation";
+import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
@@ -31,7 +34,7 @@ export default function TexturedGlassPage() {
         <ComponentSection title="Installation" id="installation"><div className={`${styles.panel} ${styles.docPanel} ${styles.install}`}>
           <InstallCommand name="textured-glass" />
           <div className={styles.panelDivider} />
-          <h3>Usage</h3><pre><code>{texturedGlassUsage}</code></pre>
+          <h3>Usage</h3><LiquidCode><code>{texturedGlassUsage}</code></LiquidCode>
           <p>React, Three.js, and Transformers.js. All six source files install together. Give the component an image URL and a bounded container.</p>
           <a href="/r/textured-glass.json">Registry JSON</a>
           <ComponentMediaLinks component={texturedGlass} />
@@ -45,16 +48,16 @@ export default function TexturedGlassPage() {
           <p>Reconstructed from <a href="https://x.com/neilsonks/status/2118757539957633115" target="_blank" rel="noreferrer">Neilson Koerner-Safrata&apos;s video</a>. The original shader is unpublished, so exact fidelity has not been verified.</p>
         </div></ComponentSection>
         <ComponentSection title="API" id="api"><div className={`${styles.panel} ${styles.docPanel} ${styles.api}`}>
-          <div className={styles.tableScroll} tabIndex={0} role="region" aria-label="Textured glass properties"><table>
+          <LiquidScrollArea orientation="horizontal" viewportClassName={styles.tableScroll} role="region" aria-label="Textured glass properties"><table>
             <thead><tr><th>Prop</th><th>Type</th><th>Default</th></tr></thead>
             <tbody>{texturedGlassProps.map(([name, type, value, description]) => <tr key={name}>
               <td><code>{name}</code><span>{description}</span></td><td><code>{type}</code></td><td><code>{value}</code></td>
             </tr>)}</tbody>
-          </table></div>
-          <details className={styles.details}><summary>Controller methods</summary>
+          </table></LiquidScrollArea>
+          <LiquidDisclosure className={styles.details} label="Controller methods">
             <p><code>configure(settings)</code> updates the effect. <code>setImage(url)</code> replaces the image without rebuilding the renderer. <code>setLight(x, y)</code> sets a normalized light position.</p>
             <p><code>pause()</code>, <code>resume()</code>, and <code>reset()</code> control the scene. <code>estimateDepth()</code> retries local image analysis. <code>snapshot()</code> reports camera position, depth-map status, settings and GPU resource counts. <code>exportPNG()</code> returns a PNG blob. The component calls <code>destroy()</code> on unmount.</p>
-          </details>
+          </LiquidDisclosure>
         </div></ComponentSection>
         <ComponentSource name="textured-glass" />
       </div>

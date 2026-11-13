@@ -1,5 +1,6 @@
 "use client";
 
+import { LiquidCode } from "@/components/liquid-documentation";
 import { useSyncExternalStore } from "react";
 
 const subscribe = () => () => {};
@@ -13,6 +14,6 @@ export function RegistryConfiguration() {
   } } }, null, 2);
   return <>
     <p>Set <code>MODULO_REGISTRY_KEY</code> to your key. Add this registry entry to <code>components.json</code>.</p>
-    <pre><code>{config}</code></pre>
+    <LiquidCode><code>{config}</code></LiquidCode>
   </>;
 }

@@ -1,8 +1,10 @@
-.command { min-width: 0; border: 1px solid var(--ui-border); border-radius: 3px; }
-.command .runners { display: flex; gap: 3px; padding: 5px 7px; border-bottom: 1px solid var(--ui-border); }
-.command .runners button { min-height: 34px; padding: 7px 11px; border: 0; font-size: 12px; }
+.command { min-width: 0; }
+.command .runners { display: flex; gap: 8px; align-items: center; }
+.runnerChoices { display: flex; gap: 3px; }
+.runnerChoices button { min-height: 34px; padding: 7px 11px; border: 0; border-radius: 18px; background: transparent; color: var(--ui-muted); font: inherit; font-size: 12px; cursor: pointer; }
+.runnerChoices button[aria-pressed=true] { color: var(--foreground); }
 .command .runners .copy { margin-left: auto; }
 .command .code { margin: 0; padding: 20px; border: 0; background: #000; font: 12px/1.9 var(--font-geist-mono), monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
-.setup { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--ui-border); }
+.setup { margin-top: 16px; }
 .setup summary { cursor: pointer; font-size: 13px; }
 @media (max-width: 380px) { .command .runners button { padding: 7px 8px; } }

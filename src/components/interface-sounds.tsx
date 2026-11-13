@@ -1,43 +1,28 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { LiquidButton, LiquidPopover } from "@/registry/liquid-animations/LiquidControls";
+import { LiquidSlider } from "@/registry/liquid-animations/LiquidSlider";
 import { closeSounds, playSound, setSoundEnabled, setSoundVolume, useSoundSettings, suspendSounds } from "@/lib/interface-sounds";
 import styles from "./interface-sounds.module.css";
 
 export function SoundControl({ className }: { className?: string }) {
   const { enabled, volume } = useSoundSettings();
   const [open, setOpen] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
-  const trigger = useRef<HTMLButtonElement>(null);
-  const id = useId();
-
-  useEffect(() => {
-    if (!open) return;
-    const events = new AbortController();
-    document.addEventListener("pointerdown", event => {
-      if (event.target instanceof Node && !root.current?.contains(event.target)) setOpen(false);
-    }, { signal: events.signal });
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") { setOpen(false); trigger.current?.focus(); }
-    }, { signal: events.signal });
-    return () => events.abort();
-  }, [open]);
-
-  return (
-    <div ref={root} className={`${styles.root} ${className ?? ""}`} data-sound-managed>
-      <button ref={trigger} type="button" className={styles.trigger} aria-expanded={open} aria-controls={`${id}-panel`}
-        onClick={() => { setOpen(!open); playSound("click"); }}>Sound {enabled && volume > 0 ? "on" : "off"}</button>
-      {open && <section className={styles.panel} id={`${id}-panel`} aria-label="Sound settings">
+  return <div className={`${styles.root} ${className ?? ""}`} data-sound-managed>
+    <LiquidPopover label="Sound settings" open={open} onOpenChange={next => { setOpen(next); if (next) playSound("click"); }} width={280}
+      trigger={<LiquidButton className={styles.trigger}>Sound {enabled && volume > 0 ? "on" : "off"}</LiquidButton>}>
+      <section className={styles.panel} data-sound-managed data-liquid-item="" data-liquid-paint="box">
         <h2>Sound</h2>
-        <label htmlFor={`${id}-volume`}>Volume <output>{Math.round(volume * 100)}%</output></label>
-        <input id={`${id}-volume`} type="range" min="0" max="1" step=".05" value={volume} onChange={event => { setSoundVolume(event.currentTarget.valueAsNumber); playSound("slide"); }} />
+        <LiquidSlider label="Volume" min={0} max={1} step={.05} value={volume} formatValue={value => `${Math.round(value * 100)}%`}
+          onValueChange={value => { setSoundVolume(value); playSound("slide"); }} />
         <div className={styles.actions}>
-          <button type="button" aria-pressed={!enabled} onClick={() => setSoundEnabled(!enabled)}>{enabled ? "Mute" : "Unmute"}</button>
-          <button type="button" disabled={!enabled || volume === 0} onClick={() => playSound("click")}>Test sound</button>
+          <LiquidButton aria-pressed={!enabled} onClick={() => setSoundEnabled(!enabled)}>{enabled ? "Mute" : "Unmute"}</LiquidButton>
+          <LiquidButton disabled={!enabled || volume === 0} onClick={() => playSound("click")}>Test sound</LiquidButton>
         </div>
-      </section>}
-    </div>
-  );
+      </section>
+    </LiquidPopover>
+  </div>;
 }
 
 export function InterfaceSounds() {
@@ -47,10 +32,11 @@ export function InterfaceSounds() {
     let dragging: { pointer: number; x: number; y: number } | undefined;
     document.addEventListener("click", (event) => {
       if (!(event.target instanceof Element)) return;
-      const control = event.target.closest("a, button, summary, input:not([type=range]), select, [role=button], [role=tab], [role=checkbox], [role=switch]");
-      if (!control || control.matches("[data-festival-feedback], :disabled") || control.closest("[data-sound-managed]")) return;
+      const control = event.target.closest("a, button, summary, input:not([type=range]), select, [role=button], [role=tab], [role=checkbox], [role=switch], [role=menuitem], [role=menuitemcheckbox], [role=menuitemradio], [role=option]");
+      if (!control || control.matches("[data-festival-feedback], :disabled, [aria-disabled=true], [data-disabled]") || control.closest("[data-sound-managed]")) return;
       if (control.hasAttribute("data-scene-object") && event.detail !== 0) return;
-      const before = control.getAttribute("aria-pressed");
+      const stateAttribute = control.hasAttribute("aria-checked") ? "aria-checked" : "aria-pressed";
+      const before = control.getAttribute(stateAttribute);
       if (before === null) {
         playSound("click");
         return;
@@ -58,14 +44,14 @@ export function InterfaceSounds() {
       // React commits a discrete state change after the capture listener returns.
       setTimeout(() => {
         if (signal.aborted) return;
-        const after = control.getAttribute("aria-pressed");
+        const after = control.getAttribute(stateAttribute);
         playSound(before !== after && after !== null ? after === "true" ? "on" : "off" : "click");
       }, 0);
     }, { capture: true, signal });
     document.addEventListener("pointerover", (event) => {
       if (event.pointerType === "touch" || !(event.target instanceof Element)) return;
-      const button = event.target.closest("a, button, input, select, summary, [role=button], [role=tab], [role=checkbox], [role=switch], [data-haptic-hover]");
-      if (!button || button.matches(":disabled, [data-scene-object], [data-festival-feedback]") || button.closest("[data-sound-managed]")) return;
+      const button = event.target.closest("a, button, input, select, summary, [role=button], [role=tab], [role=checkbox], [role=switch], [role=menuitem], [role=menuitemcheckbox], [role=menuitemradio], [role=option], [data-haptic-hover]");
+      if (!button || button.matches(":disabled, [aria-disabled=true], [data-disabled], [data-scene-object], [data-festival-feedback]") || button.closest("[data-sound-managed]")) return;
       if (event.relatedTarget instanceof Node && button.contains(event.relatedTarget)) return;
       playSound("hover");
     }, { signal });
