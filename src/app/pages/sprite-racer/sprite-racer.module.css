@@ -1,0 +1,4 @@
+.preview { display: block; width: 100%; height: min(800px, 85svh); min-height: 520px; border: 0; background: #17201d; }
+.api { display: grid; grid-template-columns: minmax(130px, .35fr) 1fr; gap: 18px 24px; margin: 0; }
+.api dd { margin: 0; line-height: 1.65; }
+@media (max-width: 700px) { .preview { height: 740px; min-height: 0; } .api { grid-template-columns: 1fr; gap: 9px; } .api dd { margin-bottom: 16px; } }

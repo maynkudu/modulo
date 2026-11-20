@@ -1,4 +1,6 @@
 import type { RegistryItem } from "shadcn/schema";
+import { spriteRacer } from "./page-catalog";
+export { spriteRacer } from "./page-catalog";
 
 export const interactiveArt = {
   name: "interactive-art" as const,
@@ -363,6 +365,20 @@ export const catalogItems = [{
   seoDescription: "A React download button with a clockwise progress ring, moving down arrow and animated success check. Try the preview and install the controlled component with an active Modulo key.",
   media: componentMedia({ name: multiStepDownload.name, alt: "A raised circular download button with a clockwise black progress ring on a pale background.", height: 800, duration: 5 }),
 }] satisfies CatalogItem[];
+
+export const pageCatalogItems = [{
+  component: spriteRacer,
+  addedAt: "2026-11-21",
+  keywords: ["page", "game", "racing", "drift", "delivery", "sprite", "stack", "layered", "canvas", "audio"],
+  seoDescription: "Play Switchback, a layered pixel driving game with six original vehicles, five circuits, a drift yard, engine audio and an exploded-world inspector. Install the complete React page with an active Modulo key.",
+  media: componentMedia({ name: spriteRacer.name, alt: "A pixel car driving on a raised road through a layered forest world.", height: 800, duration: 6 }),
+}] satisfies CatalogItem[];
+
+export const allCatalogItems = [...catalogItems, ...pageCatalogItems];
+
+export function getCatalogPath(name: string) {
+  return `${pageCatalogItems.some(item => item.component.name === name) ? "/pages" : "/components"}/${name}`;
+}
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
 

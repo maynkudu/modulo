@@ -6,10 +6,11 @@ import { ModuloLogo } from "./modulo-logo";
 import styles from "./site-header.module.css";
 
 /** Provides site navigation and sound controls outside the dedicated homepage. */
-export function SiteHeader({ page }: { page: "home" | "catalog" | "component" | "studio" | "registry" | "mint" }) {
+export function SiteHeader({ page }: { page: "home" | "catalog" | "component" | "pages" | "studio" | "registry" | "mint" }) {
   const navigation = <>
     {page !== "home" ? <Link href="/">Home</Link> : null}
     <Link href="/components" aria-current={page === "catalog" || page === "component" ? "page" : undefined}>Work</Link>
+    <Link href="/pages" aria-current={page === "pages" ? "page" : undefined}>Pages</Link>
     <Link href="/studio" aria-current={page === "studio" ? "page" : undefined}>Studio</Link>
     <Link href="/registry" aria-current={page === "registry" ? "page" : undefined}>Library</Link>
     <Link href="/mint" aria-current={page === "mint" ? "page" : undefined}>Mint</Link>

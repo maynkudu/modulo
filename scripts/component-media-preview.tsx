@@ -17,6 +17,13 @@ import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNav
 import { LiquidTextReveal } from "../src/registry/liquid-text-reveal/LiquidTextReveal";
 import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
 import { useDownloadPreview } from "../src/components/use-download-preview";
+import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
+
+const switchbackReady: SwitchbackPageProps["onReady"] = controller => {
+  if (!controller) return;
+  controller.start();
+  markReady(controller);
+};
 
 function markReady(controller: unknown) {
   if (controller) document.body.dataset.ready = "true";
@@ -71,6 +78,7 @@ function LiquidAnimationsCapture() {
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "sprite-racer") return <SwitchbackPage initialMap="pine" initialCar="turbo" demo onReady={switchbackReady} />;
   if (name === "multi-step-download") return <DownloadCapture />;
   if (name === "liquid-text-reveal") return <LiquidTextCapture />;
   if (name === "liquid-animations") {

@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { NextRequest } from "next/server";
 import { registryItemSchema, registrySchema } from "shadcn/schema";
 import { accessJson, AccessError, handleAccessRequest, requireSourceAccess } from "@/lib/access";
-import { catalogItems } from "@/lib/catalog";
+import { allCatalogItems as catalogItems } from "@/lib/catalog";
 
 export async function GET(request: NextRequest, context: RouteContext<"/r/[name]">) {
   return handleAccessRequest(async () => {

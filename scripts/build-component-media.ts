@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { catalogItems } from "../src/lib/catalog";
+import { allCatalogItems as catalogItems } from "../src/lib/catalog";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const args = process.argv.slice(2);
@@ -64,6 +64,7 @@ body:has(.liquid-text-media),html:has(.liquid-text-media){overflow:visible;backg
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "sprite-racer", flow: "switchback-driving", pause: 11500, seek: 4, thumbnailSeek: 2, movePointer: false },
   { name: "multi-step-download", flow: "download-complete", pause: 6500, seek: .1, thumbnailSeek: 1.5, movePointer: false },
   { name: "liquid-text-reveal", flow: "liquid-text-sharpen", pause: 2200, seek: 0, thumbnailSeek: .5, movePointer: false },
   { name: "liquid-animations", flow: "liquid-account-retarget", pause: 8000, seek: .6, thumbnailSeek: 2, movePointer: false },

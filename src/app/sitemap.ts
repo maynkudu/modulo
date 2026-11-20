@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { catalogItems } from "@/lib/catalog";
+import { catalogItems, pageCatalogItems } from "@/lib/catalog";
 import { sitePages } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
@@ -17,5 +17,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl(`/view/${component.name}`),
       images: [absoluteUrl(media.thumbnail.src)],
     })),
+    ...pageCatalogItems.flatMap(({ component, media }) => ["pages", "play"].map(category => ({
+      url: absoluteUrl(`/${category}/${component.name}`),
+      images: [absoluteUrl(media.thumbnail.src)],
+    }))),
   ];
 }

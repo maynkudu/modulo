@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { RegistryItem } from "shadcn/schema";
-import { catalogItems, type ComponentMedia } from "./catalog";
+import { allCatalogItems, catalogItems, pageCatalogItems, getCatalogPath, type CatalogItem, type ComponentMedia } from "./catalog";
 import { absoluteUrl, siteUrl } from "./site";
 
 export const sitePages = {
@@ -13,6 +13,11 @@ export const sitePages = {
     path: "/components",
     title: "Components",
     description: "Explore Modulo's interactive interface studies. Search the collection, try the live demos, and install original React source with shadcn.",
+  },
+  pages: {
+    path: "/pages",
+    title: "Pages",
+    description: "Complete interactive pages from Modulo. Play the public previews and install the original React source with an active key.",
   },
   studio: {
     path: "/studio",
@@ -87,7 +92,7 @@ export const defaultMetadata: Metadata = {
 };
 
 export function getComponentDetails(component: RegistryItem) {
-  const entry = catalogItems.find((item) => item.component.name === component.name);
+  const entry = allCatalogItems.find((item) => item.component.name === component.name);
   if (!entry) throw new Error(`Missing catalog entry for ${component.name}.`);
   return entry;
 }
@@ -97,7 +102,7 @@ export function getComponentMetadata(component: RegistryItem) {
   return createMetadata({
     title: component.title ?? component.name,
     description: seoDescription,
-    path: `/components/${component.name}`,
+    path: getCatalogPath(component.name),
     image: media.thumbnail,
     video: media.video,
   });
@@ -117,9 +122,9 @@ export const siteStructuredData = {
   }],
 };
 
-function componentSource(entry: (typeof catalogItems)[number]) {
+function componentSource(entry: CatalogItem) {
   const { component, addedAt, media, seoDescription } = entry;
-  const url = absoluteUrl(`/components/${component.name}`);
+  const url = absoluteUrl(getCatalogPath(component.name));
   return {
     "@type": "SoftwareSourceCode",
     "@id": `${url}#component`,
@@ -135,8 +140,9 @@ function componentSource(entry: (typeof catalogItems)[number]) {
   };
 }
 
-export function getCollectionStructuredData(page: "home" | "components") {
+export function getCollectionStructuredData(page: "home" | "components" | "pages") {
   const { title, description, path } = sitePages[page];
+  const entries = page === "pages" ? pageCatalogItems : catalogItems;
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -147,8 +153,8 @@ export function getCollectionStructuredData(page: "home" | "components") {
     isPartOf: { "@id": absoluteUrl("/#website") },
     mainEntity: {
       "@type": "ItemList",
-      numberOfItems: catalogItems.length,
-      itemListElement: catalogItems.map((entry, index) => ({
+      numberOfItems: entries.length,
+      itemListElement: entries.map((entry, index) => ({
         "@type": "ListItem",
         position: index + 1,
         item: componentSource(entry),
@@ -159,6 +165,7 @@ export function getCollectionStructuredData(page: "home" | "components") {
 
 export function getComponentStructuredData(component: RegistryItem) {
   const source = componentSource(getComponentDetails(component));
+  const pages = pageCatalogItems.some(item => item.component.name === component.name);
   return {
     "@context": "https://schema.org",
     "@graph": [source, {
@@ -173,7 +180,7 @@ export function getComponentStructuredData(component: RegistryItem) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-          { "@type": "ListItem", position: 2, name: "Components", item: absoluteUrl("/components") },
+          { "@type": "ListItem", position: 2, name: pages ? "Pages" : "Components", item: absoluteUrl(pages ? "/pages" : "/components") },
           { "@type": "ListItem", position: 3, name: component.title, item: source.url },
         ],
       },

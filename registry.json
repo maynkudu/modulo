@@ -896,6 +896,175 @@
         }
       },
       "type": "registry:component"
+    },
+    {
+      "name": "sprite-racer",
+      "title": "Switchback",
+      "description": "A sprite-stacked driving game with six cars, five circuits and a drift yard.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/sprite-racer/engine/layered-raster.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/layered-raster.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/engine/motor-audio.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/motor-audio.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/engine/motor-synth.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/motor-synth.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/engine/sprite-stack.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/sprite-stack.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/engine/surface-vehicle.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/surface-vehicle.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/engine/terrain-grid.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/terrain-grid.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/engine/vehicle-simulation.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/vehicle-simulation.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/delivery-session.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/delivery-session.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/driving-world.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/driving-world.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/engine-voices.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/engine-voices.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/garage-artwork.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/garage-artwork.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/layered-world.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/layered-world.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/race-artwork.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/race-artwork.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/race-pilot.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/race-pilot.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/race-session.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/race-session.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/race-track.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/race-track.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/racer-content.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/racer-content.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/session-contract.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/session-contract.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/switchback-markup.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/switchback-markup.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/world-assets.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/world-assets.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/world-terrain.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/world-terrain.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/mount-switchback.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/mount-switchback.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/SwitchbackPage.tsx",
+          "type": "registry:component",
+          "target": "components/sprite-racer/SwitchbackPage.tsx"
+        },
+        {
+          "path": "src/registry/sprite-racer/switchback.css",
+          "type": "registry:file",
+          "target": "components/sprite-racer/switchback.css"
+        },
+        {
+          "path": "src/registry/sprite-racer/sprite-racer.manifest.json",
+          "type": "registry:file",
+          "target": "components/sprite-racer/sprite-racer.manifest.json"
+        },
+        {
+          "path": "src/registry/sprite-racer/verify-game.mjs",
+          "type": "registry:file",
+          "target": "components/sprite-racer/verify-game.mjs"
+        },
+        {
+          "path": "src/registry/sprite-racer/page.tsx",
+          "type": "registry:page",
+          "target": "app/switchback/page.tsx"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A pixel car driving on a raised road through a layered forest world.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/sprite-racer.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/sprite-racer.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 6,
+            "url": "https://modulo-maynkudu.vercel.app/media/sprite-racer.mp4"
+          }
+        }
+      },
+      "type": "registry:block"
     }
   ]
 }

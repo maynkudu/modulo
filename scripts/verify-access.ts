@@ -12,7 +12,7 @@ import { GET as sourceStatus, POST as unlockSource } from "../src/app/api/source
 import { GET as registry } from "../src/app/r/[name]/route";
 import { createdKeySchema, keyListSchema, sessionStatusSchema, sourceItemSchema } from "../src/lib/access-schema";
 import { getMintStore } from "../src/lib/mint-store";
-import { catalogItems } from "../src/lib/catalog";
+import { allCatalogItems as catalogItems } from "../src/lib/catalog";
 
 const directory = await mkdtemp(resolve(tmpdir(), "modulo-access-"));
 const databaseUrl = `file:${directory}/mint.db`;
@@ -86,6 +86,7 @@ try {
   check((await revokeKey(request(`/api/mint/keys/${first.info.id}`, { method: "DELETE", cookie: mintCookie }), context)).status === 200, "Mint administrators can revoke keys.");
   check((await source("nilkamal", { key: first.key })).status === 401, "Revocation immediately denies CLI access.");
   check((await source("nilkamal", { cookie: sourceCookie })).status === 401, "Revocation immediately denies existing browser sessions.");
+  check((await source("sprite-racer", { key: first.key })).status === 401, "Revocation immediately denies Switchback source.");
   check(!sessionStatusSchema.parse(await (await sourceStatus(request("/api/source-access", { cookie: sourceCookie }))).json()).authenticated, "Revoked source sessions report locked status.");
   check((await unlockSource(request("/api/source-access", { method: "POST", body: { key: first.key } }))).status === 401, "Revoked keys cannot open new sessions.");
   check((await source("nilkamal", { key: second.key })).status === 200, "Another active key survives revocation.");
