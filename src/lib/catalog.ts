@@ -235,6 +235,17 @@ export const overlayNavigation = {
   ],
 } satisfies RegistryItem;
 
+/** Installable scroll-driven typography with an SVG liquid filter. */
+export const liquidTextReveal = {
+  name: "liquid-text-reveal" as const,
+  type: "registry:component",
+  title: "Liquid Text Reveal",
+  description: "Colored liquid shapes resolve into sharp text as you scroll. Scroll back to reverse the reveal.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [{ path: "src/registry/liquid-text-reveal/LiquidTextReveal.tsx", target: "components/liquid-text-reveal/LiquidTextReveal.tsx", type: "registry:component" }],
+} satisfies RegistryItem;
+
 /** Installable multi-step download feedback with caller-owned operation state. */
 export const multiStepDownload = {
   name: "multi-step-download" as const,
@@ -259,7 +270,7 @@ function componentMedia({ name, alt, height = 630, duration = 4 }: { name: strin
 
 export type ComponentMedia = ReturnType<typeof componentMedia>;
 
-type CatalogItem = {
+export type CatalogItem = {
   component: RegistryItem;
   addedAt: string;
   keywords: string[];
@@ -339,6 +350,12 @@ export const catalogItems = [{
   keywords: ["liquid", "menu", "tooltip", "select", "tabs", "slider", "scrollbar", "spring", "svg", "controls"],
   seoDescription: "Liquid controls for React with menus, selects, tooltips, tabs, sliders and real scrollbars. Try interrupted spring motion and install with an active Modulo key.",
   media: componentMedia({ name: liquidAnimations.name, alt: "A liquid Account menu growing from a round avatar on a dark background.", height: 800 }),
+}, {
+  component: liquidTextReveal,
+  addedAt: "2026-11-20",
+  keywords: ["liquid", "typography", "text", "scroll", "svg", "blur", "heading"],
+  seoDescription: "A reversible SVG liquid text reveal for React. Try four color presets in the full-page demo and install its source with a Modulo key.",
+  media: componentMedia({ name: liquidTextReveal.name, alt: "Text on warm paper with sharp letters on the left and liquid red letters on the right.", height: 800 }),
 }, {
   component: multiStepDownload,
   addedAt: "2026-11-20",

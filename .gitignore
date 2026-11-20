@@ -57,6 +57,7 @@ next-env.d.ts
 /src/registry/logo-refraction/
 /src/registry/overlay-navigation/
 /src/registry/liquid-animations/
+/src/registry/liquid-text-reveal/
 /src/registry/multi-step-download/
 /.private-registry/
 /public/r/

@@ -401,6 +401,17 @@
       ]
     },
     {
+      "name": "liquid-text-reveal",
+      "repository": "maynkudu/modulo-liquid-text-reveal",
+      "revision": "42799344a7c5275a75f360473f02dc9a16a87f88",
+      "files": [
+        {
+          "path": "LiquidTextReveal.tsx",
+          "sha256": "a3b125970cd24bc996954e726e8459a2779be5cf197b460748c34252462d83f9"
+        }
+      ]
+    },
+    {
       "name": "multi-step-download",
       "repository": "maynkudu/modulo-multi-step-download",
       "revision": "8fb09b7e9f1e093b5df8a235a918df7fee83d8bd",

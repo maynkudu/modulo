@@ -1,0 +1,11 @@
+.page { color: var(--ink, #f6efed); background: var(--paper, #000); }
+.main { width: min(100% - 40px, 1040px); margin-inline: auto; padding-block: 48px 96px; }
+.breadcrumbs { margin-bottom: 22px; color: var(--ink-soft, #d2c9c7); }
+.heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 36px; }
+.heading h1 { font-size: 56px; line-height: 1; }
+.heading p { margin-top: 12px; max-width: 52ch; color: var(--ink-soft, #d2c9c7); }
+.main section + section { margin-top: 28px; }
+.api { display: grid; gap: 16px; }
+.api dt { font-weight: 600; }
+.api dd { color: var(--ink-soft, #d2c9c7); }
+@media (max-width: 550px) { .heading h1 { font-size: 40px; } }

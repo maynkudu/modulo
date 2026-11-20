@@ -14,7 +14,7 @@ import { LiquidAnimationsDemo } from "../src/components/liquid-animations-demo";
 import { LogoRefraction } from "../src/registry/logo-refraction/LogoRefraction";
 
 import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNavigation";
-
+import { LiquidTextReveal } from "../src/registry/liquid-text-reveal/LiquidTextReveal";
 import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 
@@ -72,6 +72,7 @@ function LiquidAnimationsCapture() {
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
   if (name === "multi-step-download") return <DownloadCapture />;
+  if (name === "liquid-text-reveal") return <LiquidTextCapture />;
   if (name === "liquid-animations") {
     return <LiquidAnimationsCapture />;
   }
@@ -105,6 +106,13 @@ function MediaPreview() {
     return <GardenCanvas className="media-scene" initialTime={34} timeScale={1} wind={1} onReady={markReady} />;
   }
   throw new Error("Select a component for media capture.");
+}
+
+function LiquidTextCapture() {
+  useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
+  return <section className="liquid-text-media">
+    <LiquidTextReveal as="h1" text={["Good identity is felt", "before it is explained."]} revealMode="proximity" />
+  </section>;
 }
 
 function DownloadCapture() {

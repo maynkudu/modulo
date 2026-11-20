@@ -815,6 +815,45 @@
       "type": "registry:component"
     },
     {
+      "name": "liquid-text-reveal",
+      "title": "Liquid Text Reveal",
+      "description": "Colored liquid shapes resolve into sharp text as you scroll. Scroll back to reverse the reveal.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/liquid-text-reveal/LiquidTextReveal.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-text-reveal/LiquidTextReveal.tsx"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Text on warm paper with sharp letters on the left and liquid red letters on the right.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-text-reveal.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-text-reveal.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-text-reveal.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "multi-step-download",
       "title": "Multi-step download",
       "description": "A circular download button with an expanding progress ring, a moving arrow and a green success check.",

@@ -14,6 +14,7 @@ import { LiquidClusterDemo } from "./liquid-cluster-demo";
 import { LiquidAnimationsDemo } from "./liquid-animations-demo";
 import { LogoRefractionDemo } from "./logo-refraction-demo";
 import { OverlayNavigationDemo } from "./overlay-navigation-demo";
+import { LiquidTextDemo } from "./liquid-text-demo";
 import { MultiStepDownloadDemo } from "./multi-step-download-demo";
 import { catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
@@ -38,11 +39,13 @@ const views = {
   "liquid-cluster": () => <div className={styles.controls}><LiquidClusterDemo /></div>,
   "liquid-animations": () => <div className={styles.controls}><LiquidAnimationsDemo /></div>,
   "logo-refraction": () => <div className={styles.controls}><LogoRefractionDemo /></div>,
+  "liquid-text-reveal": LiquidTextDemo,
 } satisfies Record<ComponentName, () => ReactNode>;
 
 export function FullView({ name }: { name: ComponentName }) {
   const id = useId(), viewport = useRef<HTMLElement>(null);
   const View = views[name];
+  if (name === "liquid-text-reveal") return <View />;
   const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download";
   const scrollable = control || name === "logo-refraction" || name === "liquid-animations";
   return <div className={styles.frame}>

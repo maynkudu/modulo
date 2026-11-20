@@ -54,12 +54,18 @@ html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#0503
 .control-media-stage{flex:1;display:flex;align-items:center;justify-content:center}.control-media-stage>.snap-rail{width:600px}.control-media-stage>.liquid-cluster{width:650px}
 .liquid-media{height:100%;padding:32px;box-sizing:border-box;background:#000;color:#e8e8e8;font-family:Inter,sans-serif;--font-sans:Inter,sans-serif;--foreground:#e8e8e8;--background:#000;--muted-foreground:#999}
 .liquid-media .liquid-demo{height:100%}.liquid-media .liquid-demo-stage{height:100%;min-height:0}
+.liquid-text-media{height:100%;display:grid;align-content:center;padding:0 85px;background:#f6efed;color:#0f0000;font-family:Inter,sans-serif}
+.liquid-text-media h1{font-size:80px;line-height:1.02;font-weight:400;margin:0}
+body:has(.liquid-text-media),html:has(.liquid-text-media){overflow:visible;background:#f6efed}
+#root:has(.liquid-text-media){overflow:visible;min-height:200vh;background:#f6efed}
+.liquid-text-media{height:100vh;align-content:start;padding-top:385px}
 .download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#f1f1f1}
 .download-media-rest{position:absolute;left:78%;top:75%;width:1px;height:1px;pointer-events:none}
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
   { name: "multi-step-download", flow: "download-complete", pause: 6500, seek: .1, thumbnailSeek: 1.5, movePointer: false },
+  { name: "liquid-text-reveal", flow: "liquid-text-sharpen", pause: 2200, seek: 0, thumbnailSeek: .5, movePointer: false },
   { name: "liquid-animations", flow: "liquid-account-retarget", pause: 8000, seek: .6, thumbnailSeek: 2, movePointer: false },
   { name: "overlay-navigation", flow: "overlay-navigation-open", pause: 8000, seek: 2, movePointer: false },
   { name: "logo-refraction", flow: "logo-refraction-sweep", pause: 12000, seek: .5, movePointer: false },
@@ -97,6 +103,14 @@ await writeFile(configPath, `${JSON.stringify({
         { action: "pause", ms: 200 },
         { action: "click", selector: ".msd-button" },
         { action: "moveTo", selector: ".download-media-rest" },
+      ] : []),
+      ...(entry.component.name === "liquid-text-reveal" ? [
+        { action: "pause", ms: 600 },
+        { action: "scroll", y: 165 },
+        { action: "pause", ms: 700 },
+        { action: "scroll", y: -125 },
+        { action: "pause", ms: 700 },
+        { action: "scroll", y: 380 },
       ] : []),
       ...(entry.component.name === "liquid-animations" ? [
         { action: "click", selector: 'button[aria-label="Jane Doe account"]' },
