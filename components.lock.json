@@ -403,11 +403,11 @@
     {
       "name": "liquid-text-reveal",
       "repository": "maynkudu/modulo-liquid-text-reveal",
-      "revision": "42799344a7c5275a75f360473f02dc9a16a87f88",
+      "revision": "f3606a11204d628c1adc6617b66539dc83ab4ce4",
       "files": [
         {
           "path": "LiquidTextReveal.tsx",
-          "sha256": "a3b125970cd24bc996954e726e8459a2779be5cf197b460748c34252462d83f9"
+          "sha256": "579d89b4e0fae8fc79b6775b920ee7bbab4fac3fb9fda21e20e24900973d6282"
         }
       ]
     },
