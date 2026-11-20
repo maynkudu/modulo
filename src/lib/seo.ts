@@ -6,13 +6,18 @@ import { absoluteUrl, siteUrl } from "./site";
 export const sitePages = {
   home: {
     path: "/",
-    title: "Modulo | Interactive React components",
-    description: "Interactive React components with live previews, TypeScript source, and shadcn installation. Built by maynkudu.",
+    title: "Modulo | Independent design studio",
+    description: "Modulo designs and builds brand identities and launch websites, then carries them into motion, print, and merch.",
   },
   components: {
     path: "/components",
     title: "Components",
-    description: "Browse Modulo's React components. Search by name, keyword, or date, try the live demos, and install the TypeScript source with shadcn.",
+    description: "Explore Modulo's interactive interface studies. Search the collection, try the live demos, and install original React source with shadcn.",
+  },
+  studio: {
+    path: "/studio",
+    title: "Studio",
+    description: "Modulo designs and builds launch websites, interactive product experiences, and frontend systems for software teams.",
   },
   registry: {
     path: "/registry",

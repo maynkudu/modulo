@@ -1,0 +1,10 @@
+.loading { position: fixed; inset: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 13px; color: var(--ink); background: var(--paper); animation: loaderLeave 300ms 1.2s var(--ease-out) both; }
+.mark { width: 48px; height: 48px; color: var(--ink); --mark-accent: var(--coral); --mark-core: var(--violet); animation: loaderMark 1.2s var(--ease-out) both; }
+.wordmark { font-size: 24px; font-weight: 720; letter-spacing: -.09em; animation: loaderWord 700ms 100ms var(--ease-out) both; }
+.track { position: relative; width: 90px; height: 3px; margin-top: 6px; overflow: hidden; border-radius: 99px; background: color-mix(in srgb, var(--violet) 13%, transparent); }
+.track i { position: absolute; inset: 0 auto 0 0; width: 36%; border-radius: inherit; background: var(--violet); animation: loaderTrack 850ms var(--ease-out) both; }
+@keyframes loaderMark { from { opacity: 0; transform: scale(.66) rotate(-45deg); } to { opacity: 1; transform: scale(1) rotate(0); } }
+@keyframes loaderWord { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes loaderTrack { from { transform: translateX(-105%); } to { transform: translateX(205%); } }
+@keyframes loaderLeave { to { opacity: 0; visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .loading, .mark, .wordmark, .track i { animation-duration: 1ms; animation-delay: 0ms; } }
