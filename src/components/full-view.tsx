@@ -14,6 +14,7 @@ import { LiquidClusterDemo } from "./liquid-cluster-demo";
 import { LiquidAnimationsDemo } from "./liquid-animations-demo";
 import { LogoRefractionDemo } from "./logo-refraction-demo";
 import { OverlayNavigationDemo } from "./overlay-navigation-demo";
+import { MultiStepDownloadDemo } from "./multi-step-download-demo";
 import { catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
 
@@ -24,6 +25,7 @@ function gameReady(game: Game2048Controller | null) {
   }
 }
 const views = {
+  "multi-step-download": () => <div className={styles.controls}><MultiStepDownloadDemo /></div>,
   "overlay-navigation": () => <OverlayNavigationDemo full />,
   "2048": () => <Game2048 onReady={gameReady} />,
   "interactive-art": () => <GardenCanvas className={styles.scene} fallback="/artwork/lotus-garden.png" />,
@@ -41,7 +43,7 @@ const views = {
 export function FullView({ name }: { name: ComponentName }) {
   const id = useId(), viewport = useRef<HTMLElement>(null);
   const View = views[name];
-  const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster";
+  const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download";
   const scrollable = control || name === "logo-refraction" || name === "liquid-animations";
   return <div className={styles.frame}>
     <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" ? styles.liquidViewport : ""}`}><View /></main>

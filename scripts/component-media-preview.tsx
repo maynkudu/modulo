@@ -15,6 +15,9 @@ import { LogoRefraction } from "../src/registry/logo-refraction/LogoRefraction";
 
 import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNavigation";
 
+import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
+import { useDownloadPreview } from "../src/components/use-download-preview";
+
 function markReady(controller: unknown) {
   if (controller) document.body.dataset.ready = "true";
 }
@@ -68,6 +71,7 @@ function LiquidAnimationsCapture() {
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "multi-step-download") return <DownloadCapture />;
   if (name === "liquid-animations") {
     return <LiquidAnimationsCapture />;
   }
@@ -101,6 +105,15 @@ function MediaPreview() {
     return <GardenCanvas className="media-scene" initialTime={34} timeScale={1} wind={1} onReady={markReady} />;
   }
   throw new Error("Select a component for media capture.");
+}
+
+function DownloadCapture() {
+  const { state, start } = useDownloadPreview();
+  useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
+  return <section className="download-media">
+    <MultiStepDownload size={204} state={state} onActivate={() => start()} />
+    <span className="download-media-rest" aria-hidden="true" />
+  </section>;
 }
 
 const root = document.getElementById("root");

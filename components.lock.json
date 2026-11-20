@@ -399,6 +399,21 @@
           "sha256": "8adec817b93bddb3c737ebf68742c31d05f35676063c84bfc7f52b478dc3c092"
         }
       ]
+    },
+    {
+      "name": "multi-step-download",
+      "repository": "maynkudu/modulo-multi-step-download",
+      "revision": "8fb09b7e9f1e093b5df8a235a918df7fee83d8bd",
+      "files": [
+        {
+          "path": "MultiStepDownload.tsx",
+          "sha256": "4299ba480b7fd4cb41622782e53ce8a80154fc749b985409e4404cb8a658bd89"
+        },
+        {
+          "path": "multi-step-download.css",
+          "sha256": "326b7c3e0fc08ba90b76dd482196cd4ec96cccc42cf0d7d5ee195820fffa4c1f"
+        }
+      ]
     }
   ]
 }

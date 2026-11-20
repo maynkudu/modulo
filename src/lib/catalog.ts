@@ -235,11 +235,25 @@ export const overlayNavigation = {
   ],
 } satisfies RegistryItem;
 
-function componentMedia({ name, alt, height = 630 }: { name: string; alt: string; height?: number }) {
+/** Installable multi-step download feedback with caller-owned operation state. */
+export const multiStepDownload = {
+  name: "multi-step-download" as const,
+  type: "registry:component",
+  title: "Multi-step download",
+  description: "A circular download button with an expanding progress ring, a moving arrow and a green success check.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/multi-step-download/MultiStepDownload.tsx", target: "components/multi-step-download/MultiStepDownload.tsx", type: "registry:component" },
+    { path: "src/registry/multi-step-download/multi-step-download.css", target: "components/multi-step-download/multi-step-download.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
+function componentMedia({ name, alt, height = 630, duration = 4 }: { name: string; alt: string; height?: number; duration?: number }) {
   return {
     thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
     animation: { src: `/media/${name}.gif`, width: 1200, height, type: "image/gif" },
-    video: { src: `/media/${name}.mp4`, width: 1200, height, type: "video/mp4", duration: 4 },
+    video: { src: `/media/${name}.mp4`, width: 1200, height, type: "video/mp4", duration },
   };
 }
 
@@ -325,6 +339,12 @@ export const catalogItems = [{
   keywords: ["liquid", "menu", "tooltip", "select", "tabs", "slider", "scrollbar", "spring", "svg", "controls"],
   seoDescription: "Liquid controls for React with menus, selects, tooltips, tabs, sliders and real scrollbars. Try interrupted spring motion and install with an active Modulo key.",
   media: componentMedia({ name: liquidAnimations.name, alt: "A liquid Account menu growing from a round avatar on a dark background.", height: 800 }),
+}, {
+  component: multiStepDownload,
+  addedAt: "2026-11-20",
+  keywords: ["download", "button", "progress", "ring", "success", "check", "microinteraction", "nitish", "khagwal"],
+  seoDescription: "A React download button with a clockwise progress ring, moving down arrow and animated success check. Try the preview and install the controlled component with an active Modulo key.",
+  media: componentMedia({ name: multiStepDownload.name, alt: "A raised circular download button with a clockwise black progress ring on a pale background.", height: 800, duration: 5 }),
 }] satisfies CatalogItem[];
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";
@@ -611,4 +631,27 @@ export const liquidAnimationsProps = [
   ["LiquidButton / LiquidInput", "Native props", "Native defaults", "Keep native form, disabled and keyboard behavior."],
   ["LiquidSwitch", "checked / onCheckedChange", "Optional", "Base UI switch semantics with a deforming thumb."],
   ["LiquidDisclosure", "label / children", "Required", "Native details behavior with a liquid trigger and readable content."],
+] satisfies readonly (readonly [string, string, string, string])[];
+
+/** Usage connects the multi-step download button to the caller's operation state. */
+export const multiStepDownloadUsage = `"use client";
+
+import { MultiStepDownload, type MultiStepDownloadState } from "@/components/multi-step-download/MultiStepDownload";
+
+export function DownloadButton({ state, onDownload }: {
+  state: MultiStepDownloadState;
+  onDownload: () => void;
+}) {
+  return <MultiStepDownload state={state} onActivate={onDownload} />;
+}`;
+
+/** Public properties for the controlled multi-step download button. */
+export const multiStepDownloadProps = [
+  ["state", "MultiStepDownloadState", '{ kind: "idle" }', "Idle, loading with progress from 0 to 1, success, or error with a message. Your operation owns these transitions."],
+  ["onActivate", "() => void", "Optional", "Starts or retries your operation. Repeated activation while loading is ignored."],
+  ["label", "string", '"Download"', "Accessible action label. Progress, completion and errors update the button's accessible name."],
+  ["size", "number", "68", "Face diameter in CSS pixels, with a 44 px minimum. The progress ring extends outside the face."],
+  ["disabled", "boolean", "false", "Native disabled button state."],
+  ["reducedMotion", "boolean", "false", "Show immediate states without travel, blur transitions or particles. The system preference also applies."],
+  ["className / style", "string / CSSProperties", "Optional", "Style the native button. Internal SVG shapes scale with its size."],
 ] satisfies readonly (readonly [string, string, string, string])[];

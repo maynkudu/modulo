@@ -813,6 +813,50 @@
         }
       },
       "type": "registry:component"
+    },
+    {
+      "name": "multi-step-download",
+      "title": "Multi-step download",
+      "description": "A circular download button with an expanding progress ring, a moving arrow and a green success check.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/multi-step-download/MultiStepDownload.tsx",
+          "type": "registry:component",
+          "target": "components/multi-step-download/MultiStepDownload.tsx"
+        },
+        {
+          "path": "src/registry/multi-step-download/multi-step-download.css",
+          "type": "registry:file",
+          "target": "components/multi-step-download/multi-step-download.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A raised circular download button with a clockwise black progress ring on a pale background.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/multi-step-download.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/multi-step-download.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 5,
+            "url": "https://modulo-maynkudu.vercel.app/media/multi-step-download.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
     }
   ]
 }

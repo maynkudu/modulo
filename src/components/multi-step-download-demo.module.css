@@ -1,0 +1,6 @@
+.artwork { position: relative; min-width: 0; overflow: hidden; background: #f1f1f1; }
+.stage { min-height: 440px; display: grid; place-items: center; padding: 56px; }
+.options { display: grid; gap: 14px; }
+.status { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; min-height: 20px; }
+.hint { margin: 0; color: var(--ui-muted); font-size: 12px; line-height: 1.6; }
+@media (max-width: 700px) { .stage { min-height: 320px; padding: 42px; } }
