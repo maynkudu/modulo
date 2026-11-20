@@ -1,0 +1,17 @@
+.frame {
+  position: relative;
+  display: block;
+  aspect-ratio: 1258 / 386;
+  overflow: clip;
+}
+
+/* The actual lettering occupies x=374..1632, y=111..497 in the original 2000x681 export. */
+.image {
+  position: absolute;
+  top: calc(-100% * 111 / 386);
+  left: calc(-100% * 374 / 1258);
+  width: calc(100% * 2000 / 1258);
+  max-width: none;
+  height: auto;
+  user-select: none;
+}

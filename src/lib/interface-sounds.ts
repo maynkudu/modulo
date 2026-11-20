@@ -5,10 +5,12 @@ import { useSyncExternalStore } from "react";
 const preferenceKey = "modulo-sound";
 const volumeKey = "modulo-volume";
 const listeners = new Set<() => void>();
-const defaultSettings = { enabled: true, volume: 1 };
+const defaultSettings = { enabled: true, volume: 1, equalizer: { low: 0, mid: 0, high: 0 } };
+export type SoundEqualizerBand = keyof typeof defaultSettings.equalizer;
 let settings: typeof defaultSettings | undefined;
 let context: AudioContext | undefined;
 let master: GainNode | undefined;
+let equalizerNodes: Record<SoundEqualizerBand, BiquadFilterNode> | undefined;
 const voices = new Set<OscillatorNode>();
 let lastSlide = 0;
 let lastHover = 0;
@@ -29,7 +31,15 @@ export function getSoundSettings() {
   try {
     const storedVolume = localStorage.getItem(volumeKey);
     const volume = storedVolume === null ? 1 : Number(storedVolume);
-    settings = { enabled: localStorage.getItem(preferenceKey) !== "off", volume: Number.isFinite(volume) ? Math.max(0, Math.min(1, volume)) : 1 };
+    const readBand = (band: SoundEqualizerBand) => {
+      const value = Number(localStorage.getItem(`${volumeKey}-${band}`) ?? 0);
+      return Number.isFinite(value) ? Math.max(-12, Math.min(12, value)) : 0;
+    };
+    settings = {
+      enabled: localStorage.getItem(preferenceKey) !== "off",
+      volume: Number.isFinite(volume) ? Math.max(0, Math.min(1, volume)) : 1,
+      equalizer: { low: readBand("low"), mid: readBand("mid"), high: readBand("high") },
+    };
   } catch { settings = defaultSettings; }
   return settings;
 }
@@ -43,12 +53,17 @@ export function useSoundSettings() {
 function applySettings() {
   const current = getSoundSettings();
   if (master && context) master.gain.setValueAtTime(current.enabled ? current.volume : 0, context.currentTime);
+  if (equalizerNodes && context) {
+    for (const band of ["low", "mid", "high"] as const) {
+      equalizerNodes[band].gain.setTargetAtTime(current.equalizer[band], context.currentTime, .035);
+    }
+  }
   if (!current.enabled || current.volume === 0) suspendSounds();
   for (const listener of listeners) listener();
 }
 
 function onStorage(event: StorageEvent) {
-  if (event.key === preferenceKey || event.key === volumeKey || event.key === null) {
+  if (event.key === preferenceKey || event.key === volumeKey || event.key?.startsWith(`${volumeKey}-`) || event.key === null) {
     settings = undefined;
     applySettings();
   }
@@ -77,6 +92,17 @@ export function setSoundVolume(value: number) {
   settings = { ...getSoundSettings(), volume };
   try { localStorage.setItem(volumeKey, String(volume)); }
   catch { /* Settings remain available in this tab when storage is blocked. */ }
+  applySettings();
+}
+
+/** Persists a low, mid, or high tone adjustment between -12 and +12 dB. */
+export function setSoundEqualizerBand(band: SoundEqualizerBand, value: number) {
+  if (!Number.isFinite(value)) return;
+  const gain = Math.round(Math.max(-12, Math.min(12, value)));
+  const current = getSoundSettings();
+  settings = { ...current, equalizer: { ...current.equalizer, [band]: gain } };
+  try { localStorage.setItem(`${volumeKey}-${band}`, String(gain)); }
+  catch { /* Equalizer values remain available in this tab if storage is blocked. */ }
   applySettings();
 }
 
@@ -115,6 +141,20 @@ async function playTone(name: keyof typeof soundProfiles) {
     if (!context) {
       context = new AudioContext();
       master = context.createGain();
+      const low = context.createBiquadFilter();
+      low.type = "lowshelf";
+      low.frequency.value = 180;
+      const mid = context.createBiquadFilter();
+      mid.type = "peaking";
+      mid.frequency.value = 1100;
+      mid.Q.value = .8;
+      const high = context.createBiquadFilter();
+      high.type = "highshelf";
+      high.frequency.value = 4800;
+      equalizerNodes = { low, mid, high };
+      for (const band of ["low", "mid", "high"] as const) {
+        equalizerNodes[band].gain.value = getSoundSettings().equalizer[band];
+      }
       const compressor = context.createDynamicsCompressor();
       compressor.threshold.value = -4;
       compressor.ratio.value = 12;
@@ -122,7 +162,10 @@ async function playTone(name: keyof typeof soundProfiles) {
       const curve = new Float32Array(1024);
       for (let i = 0; i < curve.length; i++) curve[i] = Math.tanh((i / (curve.length - 1) * 2 - 1) * 1.3) * .95;
       limiter.curve = curve;
-      master.connect(compressor);
+      master.connect(low);
+      low.connect(mid);
+      mid.connect(high);
+      high.connect(compressor);
       compressor.connect(limiter);
       limiter.connect(context.destination);
     }
@@ -164,4 +207,5 @@ export function closeSounds() {
   if (context) void context.close().catch(() => {});
   context = undefined;
   master = undefined;
+  equalizerNodes = undefined;
 }
