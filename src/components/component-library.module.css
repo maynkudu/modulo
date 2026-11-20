@@ -1,0 +1,20 @@
+.library { margin-top: 34px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 24px; }
+.card { min-width: 0; color: var(--ink); }
+.preview { position: relative; display: block; overflow: hidden; aspect-ratio: 1.4; color: #fff; background: #000; }
+.preview::after { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 52%, rgb(0 0 0 / 65%)), rgb(0 0 0 / 23%); content: ""; pointer-events: none; }
+.preview img { object-fit: cover; transition: transform 800ms var(--ease-out), filter 800ms var(--ease-out); }
+.preview > span:first-of-type { position: absolute; right: 18px; bottom: 17px; z-index: 1; padding: 9px 13px; border-radius: 999px; color: #050505; background: var(--coral); font-size: 11px; opacity: 0; transform: translateY(10px); transition: opacity 220ms, transform 450ms var(--ease-out); }
+.preview:hover img, .preview:focus-visible img { transform: scale(1.04); filter: saturate(1.1); }
+.preview:hover > span:first-of-type, .preview:focus-visible > span:first-of-type { opacity: 1; transform: translateY(0); }
+.privateMarker { position: absolute; top: 15px; right: 15px; z-index: 1; display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; color: #fff; background: rgb(0 0 0 / 66%); }
+.preview[data-private-source="true"] .privateMarker { opacity: 1; transform: none; }
+.privateMarker svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.4; }
+.cardBody { display: flex; min-height: 115px; flex-direction: column; justify-content: space-between; padding-top: 15px; }
+.cardBody h2 { margin: 0; font-size: 20px; font-weight: 560; letter-spacing: -.045em; }
+.cardBody h2 a { text-decoration: none; }
+.cardBody p { max-width: 32ch; margin: 7px 0 0; color: var(--ui-muted); font-size: 12px; line-height: 1.55; }
+.cardFoot { display: flex; justify-content: space-between; gap: 12px; margin-top: 19px; color: var(--ui-muted); font-family: var(--font-geist-mono), monospace; font-size: 9px; letter-spacing: .03em; text-transform: uppercase; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .library { margin-top: 25px; } .grid { grid-template-columns: 1fr; gap: 38px; } .preview { aspect-ratio: 1.45; } .cardBody { min-height: 0; } }
+@media (prefers-reduced-motion: reduce) { .preview img, .preview span { transition: none; } }

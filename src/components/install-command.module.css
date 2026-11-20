@@ -4,7 +4,7 @@
 .runnerChoices button { min-height: 34px; padding: 7px 11px; border: 0; border-radius: 18px; background: transparent; color: var(--ui-muted); font: inherit; font-size: 12px; cursor: pointer; }
 .runnerChoices button[aria-pressed=true] { color: var(--foreground); }
 .command .runners .copy { margin-left: auto; }
-.command .code { margin: 0; padding: 20px; border: 0; background: #000; font: 12px/1.9 var(--font-geist-mono), monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+.command .code { margin: 0; padding: 20px; border: 0; border-radius: 13px; background: var(--night-surface); color: #f6f4fa; font: 12px/1.9 var(--font-geist-mono), monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
 .setup { margin-top: 16px; }
 .setup summary { cursor: pointer; font-size: 13px; }
 @media (max-width: 380px) { .command .runners button { padding: 7px 8px; } }

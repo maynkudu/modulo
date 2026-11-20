@@ -11,10 +11,10 @@ export function RegistryGuide() {
       <section className={`${styles.panel} ${styles.install}`}>
         <h2>Install a component</h2>
         <InstallCommand />
-        <p>Shadcn copies the source files into your project. The garden requires React and Canvas 2D.</p>
+        <p>The CLI copies the selected component and its supporting files into your project. Requirements are listed on each component page.</p>
       </section>
       <section className={`${styles.panel} ${styles.api}`}>
-        <h2>Use @modulo</h2>
+        <h2>Configure the registry</h2>
         <RegistryConfiguration />
         <LiquidCode><code>bunx shadcn@latest add @modulo/interactive-art</code></LiquidCode>
         <p>For npm projects, use <code>npx</code> in place of <code>bunx</code>.</p>

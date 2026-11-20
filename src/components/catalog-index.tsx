@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useRef, useState } from "react";
 import { catalogItems } from "@/lib/catalog";
 import { LiquidButton, LiquidInput, LiquidSelect } from "@/registry/liquid-animations/LiquidControls";
+import { ComponentLibrary } from "./component-library";
 import styles from "./catalog-index.module.css";
 
 const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
@@ -31,17 +31,7 @@ export function CatalogIndex() {
         <LiquidSelect label="Sort components" className={styles.sortField} value={order} onValueChange={setOrder} align="end"
           options={[{ value: "newest", label: "Newest first" }, { value: "oldest", label: "Oldest first" }, { value: "title", label: "Name A to Z" }]} />
       </form>
-      <ul className={styles.catalog}>
-        {visible.map(({ component, addedAt }) => (
-          <li key={component.name}>
-            <Link className={styles.componentName} href={`/components/${component.name}`}>
-              <span className={styles.year}>{addedAt.slice(0, 4)}</span>
-              <span>{component.title}</span>
-              <time dateTime={addedAt}>{dateFormat.format(new Date(addedAt)).replace(/ \d{4}$/, "")}</time>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <ComponentLibrary items={visible} />
       {visible.length === 0 && <div className={styles.emptyResults}><p>No components found.</p><LiquidButton onClick={() => { setQuery(""); search.current?.focus(); }}>Clear search</LiquidButton></div>}
       <p className={styles.status} role="status">{visible.length} {visible.length === 1 ? "component" : "components"}</p>
     </>

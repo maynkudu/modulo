@@ -84,12 +84,12 @@ export function Mint() {
   }
 
   return <>
-    <div className={styles.heading}><div><h1>Mint</h1></div>
+    <div className={styles.heading}><div><h1>Source access</h1><p>Create and revoke the keys that unlock component source. New keys are shown once.</p></div>
       {state.kind === "unlocked" && <LiquidButton type="button" className={styles.sourceLink} onClick={lock} disabled={pending}>Lock mint</LiquidButton>}
     </div>
     {state.kind === "checking" && <p className={styles.emptyResults} role="status">Checking mint access...</p>}
     {state.kind === "locked" && <section className={`${styles.panel} ${styles.mintLogin}`}>
-      <h2>Enter passphrase</h2>
+      <h2>Unlock the mint</h2>
       <form className={styles.accessForm} onSubmit={login}>
         <label htmlFor="mint-passphrase">Passphrase</label>
         <LiquidInput id="mint-passphrase" name="passphrase" type="password" autoComplete="current-password" required maxLength={256} disabled={pending} />
@@ -99,7 +99,7 @@ export function Mint() {
     </section>}
     {state.kind === "unlocked" && <div className={styles.mintPanels}>
       <section className={styles.panel}>
-        <h2>Create a key</h2>
+        <h2>Create a source key</h2>
         <form className={styles.accessForm} onSubmit={create}>
           <label htmlFor="mint-key-name">Key name</label>
           <LiquidInput id="mint-key-name" name="label" placeholder="e.g. Studio" required maxLength={80} disabled={pending} />
@@ -112,7 +112,7 @@ export function Mint() {
         {error && <p role="alert">{error}</p>}
         <p role="status">{message}</p>
       </section>
-      <section className={styles.panel}><h2>Keys</h2>
+      <section className={styles.panel}><h2>Source keys</h2>
         {state.keys.length === 0 && <p>No keys yet.</p>}
         {state.keys.map(key => <div className={styles.keyRow} key={key.id}>
           <div><h3>{key.label}</h3><code>maynkudu_••••••••{key.suffix}</code>
