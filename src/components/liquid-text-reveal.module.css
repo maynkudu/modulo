@@ -1,4 +1,0 @@
-.filters { position: absolute; width: 0; height: 0; overflow: hidden; }
-.text { color: inherit; }
-.word { display: inline-block; vertical-align: baseline; }
-@media (prefers-reduced-motion: reduce) { .word { filter: none !important; color: inherit !important; } }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { collectionStatementText } from "@/lib/collection-statement-text";
 import { LiquidTextReveal } from "@/registry/liquid-text-reveal/LiquidTextReveal";
 import styles from "./liquid-text-demo.module.css";
 
@@ -11,7 +12,7 @@ const colors = [
   { name: "Green", value: "#1c7747" },
 ];
 
-/** Uses document scroll so the reveal can be reversed at any point. */
+/** Demonstrates the collection statement's liquid text reveal. */
 export function LiquidTextDemo() {
   const [color, setColor] = useState(colors[0].value);
   return <main className={styles.page} id="demo-top">
@@ -27,7 +28,7 @@ export function LiquidTextDemo() {
     </header>
     <section className={styles.intro}><h1>Liquid Text Reveal</h1><a href="#sample">Scroll to the reveal</a></section>
     <section className={styles.sample} id="sample">
-      <LiquidTextReveal className={styles.heading} text={["Good identity is felt", "before it is explained."]} color={color} revealMode="proximity" wrapLines />
+      <LiquidTextReveal as="h2" className={styles.heading} text={collectionStatementText} color={color} profile="studio" revealMode="scroll" />
     </section>
     <footer className={styles.end}><a href="#demo-top">Back to top</a></footer>
   </main>;

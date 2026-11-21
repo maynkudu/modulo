@@ -15,6 +15,7 @@ import { LogoRefraction } from "../src/registry/logo-refraction/LogoRefraction";
 
 import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNavigation";
 import { LiquidTextReveal } from "../src/registry/liquid-text-reveal/LiquidTextReveal";
+import { collectionStatementText } from "../src/lib/collection-statement-text";
 import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
@@ -119,7 +120,7 @@ function MediaPreview() {
 function LiquidTextCapture() {
   useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
   return <section className="liquid-text-media">
-    <LiquidTextReveal as="h1" text={["Good identity is felt", "before it is explained."]} revealMode="proximity" />
+    <LiquidTextReveal as="h1" text={collectionStatementText} profile="studio" revealMode="scroll" />
   </section>;
 }
 

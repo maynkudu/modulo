@@ -14,7 +14,13 @@ export const metadata = getComponentMetadata(liquidTextReveal);
 
 const usage = `import { LiquidTextReveal } from "@/components/liquid-text-reveal/LiquidTextReveal";
 
-<LiquidTextReveal as="h2" text="Good identity is felt before it is explained." color="#a50d3e" />`;
+<LiquidTextReveal
+  as="h2"
+  text="Modulo is a collection of interactive components. Living gardens, liquid controls, playful details. Open a preview, try it for yourself, and bring it into your own project."
+  color="#ff0000"
+  profile="studio"
+  revealMode="scroll"
+/>`;
 
 export default function LiquidTextRevealPage() {
   return <div className={styles.page}>

@@ -9,7 +9,7 @@ export const metadata = getSiteMetadata("components");
 
 export default function Components() {
   return (
-    <WorkCollectionLayout page="catalog" title={<LiquidTextReveal as="h1" text="Components" className={styles.title} trigger="entrance" revealMode="proximity" profile="studio" />} description="Search the collection and try each preview. Source and installation require an active Modulo key.">
+    <WorkCollectionLayout page="catalog" title={<LiquidTextReveal as="h1" text="Components" className={styles.title} color="#ff0000" profile="studio" revealMode="scroll" />} description="Search the collection and try each preview. Source and installation require an active Modulo key.">
       <StructuredData data={getCollectionStructuredData("components")} />
       <CatalogIndex />
     </WorkCollectionLayout>
