@@ -9,6 +9,21 @@ export const sitePages = {
     title: "Modulo | Independent design studio",
     description: "Modulo designs and builds brand identities and launch websites, then carries them into motion, print, and merch.",
   },
+  work: {
+    path: "/work",
+    title: "Work",
+    description: "Explore Modulo's work in interactive art, typography and motion, plus the studio's interactive pages and React components.",
+  },
+  services: {
+    path: "/services",
+    title: "Services",
+    description: "Modulo designs brand identities, websites, motion, print and merch for product launches and campaigns.",
+  },
+  contact: {
+    path: "/contact",
+    title: "Contact",
+    description: "Email Modulo about a design project. Tell the studio what you're making, when it needs to launch and the budget you have in mind.",
+  },
   components: {
     path: "/components",
     title: "Components",

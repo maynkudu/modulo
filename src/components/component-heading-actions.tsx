@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "@/app/page.module.css";
+import styles from "@/app/(site)/page.module.css";
 
 export function ComponentHeadingActions({ name }: { name: string }) {
   return <div className={styles.headingActions}>

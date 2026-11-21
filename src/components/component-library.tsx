@@ -18,7 +18,7 @@ export function ComponentLibrary({ items }: ComponentLibraryProps) {
         {items.map(({ component, media, addedAt }) => (
           <article className={styles.card} key={component.name}>
             <Link className={styles.preview} href={getCatalogPath(component.name)} aria-label={`Open ${component.title} preview`} data-private-source="true">
-              <Image src={media.thumbnail.src} alt={media.thumbnail.alt} fill sizes="(max-width: 700px) 100vw, 33vw" unoptimized />
+              <Image src={media.thumbnail.src} alt={media.thumbnail.alt} fill sizes="(max-width: 600px) 90vw, (max-width: 800px) 46vw, 36vw" unoptimized />
               <span>Preview</span>
               <span className={styles.privateMarker} title="Source requires a Modulo key" aria-label="Source requires a Modulo key"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 7V5.5a3 3 0 0 1 6 0V7M4 7h8v7H4z" /></svg></span>
             </Link>

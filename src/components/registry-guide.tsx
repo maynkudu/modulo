@@ -3,7 +3,7 @@
 import { LiquidCode } from "@/components/liquid-documentation";
 import { InstallCommand } from "./install-command";
 import { RegistryConfiguration } from "./registry-configuration";
-import styles from "@/app/page.module.css";
+import styles from "@/app/(site)/page.module.css";
 
 export function RegistryGuide() {
   return (

@@ -1,34 +1,35 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SoundControl } from "./interface-sounds";
-import { LiquidTrack } from "@/registry/liquid-animations/LiquidTrack";
-import { ModuloMark } from "./modulo-mark";
 import { ModuloLogo } from "./modulo-logo";
 import styles from "./site-header.module.css";
 
-/** Provides site navigation and sound controls outside the dedicated homepage. */
-export function SiteHeader({ page }: { page: "home" | "catalog" | "component" | "pages" | "studio" | "registry" | "mint" }) {
-  const navigation = <>
-    {page !== "home" ? <Link href="/">Home</Link> : null}
-    <Link href="/components" aria-current={page === "catalog" || page === "component" ? "page" : undefined}>Work</Link>
-    <Link href="/pages" aria-current={page === "pages" ? "page" : undefined}>Pages</Link>
-    <Link href="/studio" aria-current={page === "studio" ? "page" : undefined}>Studio</Link>
-    <Link href="/registry" aria-current={page === "registry" ? "page" : undefined}>Library</Link>
-    <Link href="/mint" aria-current={page === "mint" ? "page" : undefined}>Mint</Link>
+function SiteNavLabel({ label, count }: { label: string; count?: number }) {
+  return <>
+    <span className={styles.roll}><span>{label}</span><span aria-hidden="true">{label}</span></span>
+    {count !== undefined ? <sup aria-hidden="true">{count}</sup> : null}
   </>;
+}
 
+/** Links the public site routes and marks the Work section on catalog and detail pages. */
+export function SiteHeader({ workCount, serviceCount }: { workCount: number; serviceCount: number }) {
+  const pathname = usePathname();
+  const section = pathname.split("/")[1];
+  const insideWork = section === "components" || section === "pages";
   return (
-    <header className={styles.header} data-page={page}>
-      <Link className={styles.brand} href="/" aria-label="Modulo home" aria-current={page === "home" ? "page" : undefined}>
-        {page === "home" ? <ModuloLogo className={styles.wordmark} /> : <><ModuloMark className={styles.mark} /><span>modulo</span></>}
+    <header className={styles.header}>
+      <Link className={styles.brand} href="/" aria-label="Modulo home" aria-current={pathname === "/" ? "page" : undefined}>
+        <ModuloLogo />
       </Link>
-      <nav aria-label="Main navigation">
-        {page === "home"
-          ? <div className={styles.navigation}>{navigation}</div>
-          : <LiquidTrack className={styles.navigation}>{navigation}</LiquidTrack>}
-      </nav>
-      <div className={styles.controls}>
-        <Link className={styles.projectLink} href="mailto:maynkudu@gmail.com">Start a project</Link>
-        <SoundControl className={styles.sound} />
+      <div className={styles.actions}>
+        <nav className={styles.navigation} aria-label="Main navigation">
+          <Link href="/work" aria-label={`Work, ${workCount} items`} aria-current={pathname === "/work" ? "page" : insideWork ? "location" : undefined}><SiteNavLabel label="Work" count={workCount} /></Link>
+          <Link href="/services" aria-label={`Services, ${serviceCount} items`} aria-current={pathname === "/services" ? "page" : undefined}><SiteNavLabel label="Services" count={serviceCount} /></Link>
+          <Link href="/contact" aria-current={pathname === "/contact" ? "page" : undefined}><SiteNavLabel label="Contact" /></Link>
+        </nav>
+        <SoundControl label="Ambience" placement="drawer" />
       </div>
     </header>
   );

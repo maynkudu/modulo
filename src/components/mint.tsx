@@ -4,7 +4,7 @@ import { LiquidCode } from "@/components/liquid-documentation";
 import { useEffect, useState, type FormEvent } from "react";
 import { accessRequest, createdKeySchema, keyListSchema, okSchema, sessionStatusSchema, type KeyInfo } from "@/lib/access-schema";
 import { LiquidButton, LiquidInput } from "@/registry/liquid-animations/LiquidControls";
-import styles from "@/app/page.module.css";
+import styles from "@/app/(site)/page.module.css";
 
 type MintState = { kind: "checking" } | { kind: "locked" } | { kind: "unlocked"; keys: KeyInfo[] };
 

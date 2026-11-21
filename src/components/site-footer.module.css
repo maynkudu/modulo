@@ -1,14 +1,19 @@
-.footer { display: grid; grid-template-columns: 1.1fr .9fr auto; gap: 72px 48px; padding: 86px max(56px, calc((100vw - 1328px) / 2)) 22px; color: #f6efed; background: var(--night-surface); --mark-core: var(--coral); --mark-accent: var(--coral); --mark-cross: var(--ink); }
-.identity p { max-width: 280px; margin: 15px 0 0; color: #b9aead; font-size: 12px; line-height: 1.7; }
-.brand { display: inline-flex; align-items: center; gap: 10px; color: inherit; font-size: 25px; font-weight: 680; letter-spacing: -.09em; text-decoration: none; }
-.mark { width: 39px; height: 39px; color: #f6efed; }
-.contact { display: flex; flex-direction: column; gap: 12px; padding-top: 4px; }
-.contact span { color: #887d7c; font-size: 11px; }
-.contact a { color: #f6efed; font-size: 24px; text-decoration: none; transition: color 180ms; }
-.contact a:hover { color: var(--coral); }
-.links { display: flex; flex-direction: column; align-items: start; gap: 12px; padding-top: 4px; }
-.links a { color: #c3b8b6; font-size: 12px; text-decoration: none; transition: color 180ms; }
-.links a:hover { color: var(--coral); }
-.footnote { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: 16px; padding-top: 16px; color: #887d7c; font-size: 10px; }
-@media (max-width: 800px) { .footer { grid-template-columns: 1fr; gap: 32px; padding: 58px 28px 18px; } .contact { padding-top: 0; } .links { flex-direction: row; flex-wrap: wrap; gap: 16px 20px; padding-top: 0; } .footnote { font-size: 10px; } }
-@media (prefers-reduced-motion: reduce) { .links a { transition: none; } }
+.footer {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 24px;
+  width: var(--site-width);
+  margin-inline: auto;
+  padding-block: 24px 28px;
+  color: var(--ui-muted);
+  font: 13px/1.5 var(--site-body-font);
+}
+
+.links { display: flex; flex-wrap: wrap; gap: 10px 20px; }
+.footer a { color: inherit; text-decoration: none; transition: color 180ms ease; }
+.footer a:hover { color: var(--accent); }
+.footer a:focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
+
+@media (max-width: 550px) { .footer { flex-direction: column; gap: 16px; } }
+@media (prefers-reduced-motion: reduce) { .footer a { transition: none; } }

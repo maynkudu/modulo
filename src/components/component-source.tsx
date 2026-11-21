@@ -6,7 +6,7 @@ import { z } from "zod";
 import { accessRequest, okSchema, sessionStatusSchema, sourceItemSchema } from "@/lib/access-schema";
 import { ComponentSection } from "./component-section";
 import { LiquidButton, LiquidInput, LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
-import styles from "@/app/page.module.css";
+import styles from "@/app/(site)/page.module.css";
 
 type SourceState = { kind: "loading" } | { kind: "locked" } | { kind: "ready"; item: z.infer<typeof sourceItemSchema> };
 
