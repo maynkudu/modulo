@@ -1,0 +1,20 @@
+{
+  "license": "https://unsplash.com/license",
+  "use": "Temporary public preview portraits, not normalized preparation outputs.",
+  "photos": [
+    {
+      "file": "christopher-campbell.jpg",
+      "author": "Christopher Campbell",
+      "page": "https://unsplash.com/photos/rDEOVtE7vOs",
+      "media": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80",
+      "derivative": "401 by 301 face crop"
+    },
+    {
+      "file": "michael-dam.jpg",
+      "author": "Michael Dam",
+      "page": "https://unsplash.com/photos/mEZ3PoFGs_k",
+      "media": "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+      "derivative": "401 by 301 face crop"
+    }
+  ]
+}

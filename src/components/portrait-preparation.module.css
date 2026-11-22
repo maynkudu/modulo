@@ -1,0 +1,5 @@
+.prompt { display: grid; gap: 16px; min-width: 0; }
+.prompt button { justify-self: start; min-height: 44px; padding: 8px 16px; }
+.prompt textarea { display: block; box-sizing: border-box; width: 100%; min-width: 0; resize: vertical; border: 0; padding: 16px; border-radius: 12px; background: var(--card); color: var(--foreground); font: 14px/1.7 var(--site-body-font, var(--font-sans)); }
+.prompt :is(button, textarea):focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
+.prompt p { margin: 0; color: var(--ui-muted); }

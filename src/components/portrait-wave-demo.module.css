@@ -1,0 +1,16 @@
+.preview { grid-column: 1 / -1; width: min(100%, 640px); min-width: 0; margin-inline: auto; padding-bottom: 18px; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-block: 16px; }
+.toolbar button { min-height: 44px; padding: 8px 14px; }
+.settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+/* Reserve half of the slider's 48px pointer readout at each end of its track. */
+.deformation :global(.liquid-range-target) { width: calc(100% - 48px); margin-inline: 24px; }
+.time { display: grid; grid-template-columns: 1fr auto; align-content: start; gap: 12px; font-size: 13px; }
+.time output { color: var(--ui-muted); font-variant-numeric: tabular-nums; }
+.time input { grid-column: 1 / -1; width: 100%; margin: 0; accent-color: var(--foreground); }
+.upload { display: grid; gap: 12px; margin-top: 22px; font-size: 13px; }
+.upload input { min-width: 0; width: 100%; font: inherit; color: var(--ui-muted); }
+.upload input::file-selector-button { border: 0; border-radius: 8px; background: var(--card); color: var(--foreground); font: inherit; padding: 10px 14px; margin-right: 12px; cursor: pointer; }
+.preview :is(button, input):focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
+.status, .error { margin: 12px 0 0; color: var(--ui-muted); font-size: 13px; line-height: 1.7; }
+.error { color: #ff8d8d; }
+@media (max-width: 440px) { .settings { grid-template-columns: 1fr; gap: 20px; } }

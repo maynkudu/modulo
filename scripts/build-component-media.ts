@@ -23,7 +23,7 @@ for (let index = 0; index < args.length; index++) {
   } else throw new Error(`Unknown media build argument: ${argument}`);
 }
 
-const workspace = resolve(root, ".plannotator/component-media");
+const workspace = resolve(root, process.env.MODULO_MEDIA_WORKSPACE ?? ".plannotator/component-media");
 const bundle = resolve(workspace, "bundle");
 const ffmpeg = process.env.FFMPEG_PATH ?? "ffmpeg";
 const ffprobe = process.env.FFPROBE_PATH ?? "ffprobe";
@@ -31,7 +31,7 @@ await mkdir(workspace, { recursive: true });
 execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
   cwd: root, stdio: "inherit",
 });
-const [javascript, css, font, sansFont, glassImage, glassDepth, logoImage] = await Promise.all([
+const [javascript, css, font, sansFont, glassImage, glassDepth, logoImage, portraitA, portraitB] = await Promise.all([
   readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
   readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
   readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
@@ -39,6 +39,8 @@ const [javascript, css, font, sansFont, glassImage, glassDepth, logoImage] = awa
   readFile(resolve(root, "public/artwork/stay.jpeg")),
   readFile(resolve(root, "public/artwork/stay-depth.png")),
   readFile(resolve(root, "public/artwork/maynkudu-warehouse.png")),
+  readFile(resolve(root, "public/artwork/portrait-wave/christopher-campbell.jpg")),
+  readFile(resolve(root, "public/artwork/portrait-wave/michael-dam.jpg")),
 ]);
 const previewPath = resolve(workspace, "capture.html");
 await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
@@ -61,9 +63,10 @@ body:has(.liquid-text-media),html:has(.liquid-text-media){overflow:visible;backg
 .liquid-text-media{height:100vh;align-content:start;padding-top:385px}
 .download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#f1f1f1}
 .download-media-rest{position:absolute;left:78%;top:75%;width:1px;height:1px;pointer-events:none}
-</style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
+</style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "brick-noise", flow: "brick-noise-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "sprite-racer", flow: "switchback-driving", pause: 11500, seek: 4, thumbnailSeek: 2, movePointer: false },
   { name: "multi-step-download", flow: "download-complete", pause: 6500, seek: .1, thumbnailSeek: 1.5, movePointer: false },

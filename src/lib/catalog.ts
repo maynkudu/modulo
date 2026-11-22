@@ -374,6 +374,23 @@ export const pageCatalogItems = [{
   media: componentMedia({ name: spriteRacer.name, alt: "A pixel car driving on a raised road through a layered forest world.", height: 800, duration: 6 }),
 }] satisfies CatalogItem[];
 
+/** Image-array portrait morphing with a diagonal tile clock. */
+export const portraitWave = {
+  name: "portrait-wave" as const,
+  type: "registry:component",
+  title: "Portrait wave",
+  description: "Portraits morph through a diagonal wave of tiles. Supply your own image array.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/portrait-wave/PortraitWave.tsx", target: "components/portrait-wave/PortraitWave.tsx", type: "registry:component" },
+    { path: "src/registry/portrait-wave/portrait-shader.ts", target: "components/portrait-wave/portrait-shader.ts", type: "registry:lib" },
+    { path: "src/registry/portrait-wave/flow-worker.ts", target: "components/portrait-wave/flow-worker.ts", type: "registry:lib" },
+    { path: "src/registry/portrait-wave/portrait-wave.css", target: "components/portrait-wave/portrait-wave.css", type: "registry:file" },
+    { path: "src/registry/portrait-wave/align_portrait.py", target: "components/portrait-wave/align_portrait.py", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 export const shaderCatalogItems = [{
   component: {
     name: "brick-noise" as const,
@@ -393,6 +410,12 @@ export const shaderCatalogItems = [{
   keywords: ["shader", "webgl", "brick", "noise", "grayscale", "grid", "tiles", "loop"],
   seoDescription: "A WebGL brick noise shader for React, reconstructed from a 45-frame reference. Try playback controls and install the source with an active Modulo key.",
   media: componentMedia({ name: "brick-noise", alt: "Staggered grayscale tiles separated by thin black lines.", height: 1200, duration: 4.05 }),
+}, {
+  component: portraitWave,
+  addedAt: "2026-11-23",
+  keywords: ["shader", "portrait", "faces", "morph", "wave", "tiles", "images", "webgl", "optical flow"],
+  seoDescription: "A React portrait morph shader with an image-array API, local correspondence computation and a diagonal tile wave. Try your images, prepare aligned portraits and install with a Modulo key.",
+  media: componentMedia({ name: "portrait-wave", alt: "Two grayscale portraits morphing through diagonally delayed rectangular tiles.", height: 900, duration: 3.88 }),
 }] satisfies CatalogItem[];
 
 export const brickNoise = shaderCatalogItems[0].component;

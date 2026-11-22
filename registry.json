@@ -952,6 +952,65 @@
       "type": "registry:component"
     },
     {
+      "name": "portrait-wave",
+      "title": "Portrait wave",
+      "description": "Portraits morph through a diagonal wave of tiles. Supply your own image array.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/portrait-wave/PortraitWave.tsx",
+          "type": "registry:component",
+          "target": "components/portrait-wave/PortraitWave.tsx"
+        },
+        {
+          "path": "src/registry/portrait-wave/portrait-shader.ts",
+          "type": "registry:lib",
+          "target": "components/portrait-wave/portrait-shader.ts"
+        },
+        {
+          "path": "src/registry/portrait-wave/flow-worker.ts",
+          "type": "registry:lib",
+          "target": "components/portrait-wave/flow-worker.ts"
+        },
+        {
+          "path": "src/registry/portrait-wave/portrait-wave.css",
+          "type": "registry:file",
+          "target": "components/portrait-wave/portrait-wave.css"
+        },
+        {
+          "path": "src/registry/portrait-wave/align_portrait.py",
+          "type": "registry:file",
+          "target": "components/portrait-wave/align_portrait.py"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Two grayscale portraits morphing through diagonally delayed rectangular tiles.",
+            "width": 1200,
+            "height": 900,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/portrait-wave.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 900,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/portrait-wave.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 900,
+            "type": "video/mp4",
+            "duration": 3.88,
+            "url": "https://modulo-maynkudu.vercel.app/media/portrait-wave.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "sprite-racer",
       "title": "Switchback",
       "description": "A sprite-stacked driving game with six cars, five circuits and a drift yard.",

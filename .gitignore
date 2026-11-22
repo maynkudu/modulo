@@ -61,6 +61,7 @@ next-env.d.ts
 /src/registry/multi-step-download/
 /src/registry/sprite-racer/
 /src/registry/brick-noise/
+/src/registry/portrait-wave/
 /.private-registry/
 /public/r/
 /.data/

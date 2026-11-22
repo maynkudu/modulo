@@ -1,6 +1,18 @@
 {
   "components": [
     {
+      "name": "portrait-wave",
+      "repository": "maynkudu/modulo-portrait-wave",
+      "revision": "4e3cd64c9048eafb97c4eebc66df47b6421b9184",
+      "files": [
+        { "path": "PortraitWave.tsx", "sha256": "f7d4c5a595c30c92aa878ae4f06d4a5135d6a4afee501550b94d2ceb174afda7" },
+        { "path": "portrait-shader.ts", "sha256": "e033f37badeed965957ac929c5374eac2babdd6318e7ce5801e75abccb504403" },
+        { "path": "flow-worker.ts", "sha256": "1c1288e259870371b59cadcc3b8826cb73deda0dc9385d1be07f02efa4dceba6" },
+        { "path": "portrait-wave.css", "sha256": "ca5378eefc2f713697b0f458bc6b001ba0efc30418c72550800c4c75f913b8ef" },
+        { "path": "align_portrait.py", "sha256": "280755f9ab6df3a47e88f6ec789b5fbb5d1f80eecdcda6e28c712b0d583188a3" }
+      ]
+    },
+    {
       "name": "brick-noise",
       "repository": "maynkudu/modulo-brick-noise",
       "revision": "42a84915724f3801a32715e9b5cfc747c3fec06e",
