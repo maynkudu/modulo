@@ -6,6 +6,7 @@ const workCategories = [
   { href: "/work", label: "Projects", page: "work" },
   { href: "/pages", label: "Pages", page: "pages" },
   { href: "/components", label: "Components", page: "catalog" },
+  { href: "/shaders", label: "Shaders", page: "shaders" },
 ] as const;
 
 type WorkCategoryPage = (typeof workCategories)[number]["page"];

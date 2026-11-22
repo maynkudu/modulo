@@ -1,6 +1,17 @@
 {
   "components": [
     {
+      "name": "brick-noise",
+      "repository": "maynkudu/modulo-brick-noise",
+      "revision": "42a84915724f3801a32715e9b5cfc747c3fec06e",
+      "files": [
+        { "path": "BrickNoise.tsx", "sha256": "6d692288146888cd69d54290cfe2713f6f10a6e105c867540c627b6e96081955" },
+        { "path": "create-brick-noise.ts", "sha256": "ee2efc79be6a0b6d0a734dbed027d89a57ea41a528526e95e7d53bd6434cd8b1" },
+        { "path": "brick-noise-data.ts", "sha256": "94a1fb3b39c18bc5b95c86297239ff61b3fe17b61243bae6c28ddc45f9c879ed" },
+        { "path": "brick-noise.css", "sha256": "ea20f9be24141cd99d624f0446a6a7ced3ab3e773686adde0006b885c016d40a" }
+      ]
+    },
+    {
       "name": "sprite-racer",
       "repository": "maynkudu/modulo-sprite-racer",
       "revision": "663687bc10e795e66873f0d5ba03153d5e809bc8",

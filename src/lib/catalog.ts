@@ -374,10 +374,35 @@ export const pageCatalogItems = [{
   media: componentMedia({ name: spriteRacer.name, alt: "A pixel car driving on a raised road through a layered forest world.", height: 800, duration: 6 }),
 }] satisfies CatalogItem[];
 
-export const allCatalogItems = [...catalogItems, ...pageCatalogItems];
+export const shaderCatalogItems = [{
+  component: {
+    name: "brick-noise" as const,
+    type: "registry:component",
+    title: "Brick noise",
+    description: "A staggered grayscale grid with a repeating wave of tile brightness.",
+    dependencies: [],
+    registryDependencies: [],
+    files: [
+      { path: "src/registry/brick-noise/BrickNoise.tsx", target: "components/brick-noise/BrickNoise.tsx", type: "registry:component" },
+      { path: "src/registry/brick-noise/create-brick-noise.ts", target: "components/brick-noise/create-brick-noise.ts", type: "registry:lib" },
+      { path: "src/registry/brick-noise/brick-noise-data.ts", target: "components/brick-noise/brick-noise-data.ts", type: "registry:lib" },
+      { path: "src/registry/brick-noise/brick-noise.css", target: "components/brick-noise/brick-noise.css", type: "registry:file" },
+    ],
+  } satisfies RegistryItem,
+  addedAt: "2026-11-22",
+  keywords: ["shader", "webgl", "brick", "noise", "grayscale", "grid", "tiles", "loop"],
+  seoDescription: "A WebGL brick noise shader for React, reconstructed from a 45-frame reference. Try playback controls and install the source with an active Modulo key.",
+  media: componentMedia({ name: "brick-noise", alt: "Staggered grayscale tiles separated by thin black lines.", height: 1200, duration: 4.05 }),
+}] satisfies CatalogItem[];
+
+export const brickNoise = shaderCatalogItems[0].component;
+export const previewCatalogItems = [...catalogItems, ...shaderCatalogItems];
+export const allCatalogItems = [...previewCatalogItems, ...pageCatalogItems];
 
 export function getCatalogPath(name: string) {
-  return `${pageCatalogItems.some(item => item.component.name === name) ? "/pages" : "/components"}/${name}`;
+  const category = pageCatalogItems.some(item => item.component.name === name) ? "/pages"
+    : shaderCatalogItems.some(item => item.component.name === name) ? "/shaders" : "/components";
+  return `${category}/${name}`;
 }
 
 export const gardenUsage = `import { GardenCanvas } from "@/components/interactive-art/examples/GardenCanvas";

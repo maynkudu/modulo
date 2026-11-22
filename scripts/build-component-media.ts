@@ -64,6 +64,7 @@ body:has(.liquid-text-media),html:has(.liquid-text-media){overflow:visible;backg
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "brick-noise", flow: "brick-noise-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "sprite-racer", flow: "switchback-driving", pause: 11500, seek: 4, thumbnailSeek: 2, movePointer: false },
   { name: "multi-step-download", flow: "download-complete", pause: 6500, seek: .1, thumbnailSeek: 1.5, movePointer: false },
   { name: "liquid-text-reveal", flow: "liquid-text-sharpen", pause: 2200, seek: 0, thumbnailSeek: .5, movePointer: false },

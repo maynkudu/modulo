@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { RegistryItem } from "shadcn/schema";
-import { allCatalogItems, catalogItems, pageCatalogItems, getCatalogPath, type CatalogItem, type ComponentMedia } from "./catalog";
+import { allCatalogItems, catalogItems, pageCatalogItems, shaderCatalogItems, getCatalogPath, type CatalogItem, type ComponentMedia } from "./catalog";
 import { absoluteUrl, siteUrl } from "./site";
 
 export const sitePages = {
@@ -33,6 +33,11 @@ export const sitePages = {
     path: "/pages",
     title: "Pages",
     description: "Complete interactive pages from Modulo. Play the public previews and install the original React source with an active key.",
+  },
+  shaders: {
+    path: "/shaders",
+    title: "Shaders",
+    description: "WebGL shaders from Modulo. Try the live previews and install the React source with an active key.",
   },
   studio: {
     path: "/studio",
@@ -155,9 +160,9 @@ function componentSource(entry: CatalogItem) {
   };
 }
 
-export function getCollectionStructuredData(page: "home" | "components" | "pages") {
+export function getCollectionStructuredData(page: "home" | "components" | "pages" | "shaders") {
   const { title, description, path } = sitePages[page];
-  const entries = page === "pages" ? pageCatalogItems : catalogItems;
+  const entries = page === "pages" ? pageCatalogItems : page === "shaders" ? shaderCatalogItems : catalogItems;
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -180,7 +185,8 @@ export function getCollectionStructuredData(page: "home" | "components" | "pages
 
 export function getComponentStructuredData(component: RegistryItem) {
   const source = componentSource(getComponentDetails(component));
-  const pages = pageCatalogItems.some(item => item.component.name === component.name);
+  const categoryPath = getCatalogPath(component.name).split("/")[1];
+  const categoryTitle = categoryPath === "pages" ? "Pages" : categoryPath === "shaders" ? "Shaders" : "Components";
   return {
     "@context": "https://schema.org",
     "@graph": [source, {
@@ -195,7 +201,7 @@ export function getComponentStructuredData(component: RegistryItem) {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-          { "@type": "ListItem", position: 2, name: pages ? "Pages" : "Components", item: absoluteUrl(pages ? "/pages" : "/components") },
+          { "@type": "ListItem", position: 2, name: categoryTitle, item: absoluteUrl(`/${categoryPath}`) },
           { "@type": "ListItem", position: 3, name: component.title, item: source.url },
         ],
       },

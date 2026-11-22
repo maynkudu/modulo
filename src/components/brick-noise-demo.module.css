@@ -1,0 +1,8 @@
+.preview { grid-column: 1 / -1; width: min(100%, 500px); min-width: 0; margin-inline: auto; padding-bottom: 18px; }
+.toolbar { display: flex; align-items: center; gap: 8px; padding-block: 16px; }
+.toolbar button { min-height: 44px; padding: 8px 16px; }
+.settings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.preview :is(button, input):focus-visible { outline: 2px solid var(--foreground, #ddd); outline-offset: 4px; }
+.status, .error { margin: 16px 0 0; color: var(--ui-muted, #aaa); font-size: 13px; line-height: 1.7; }
+.error { color: #ff8d8d; }
+@media (max-width: 440px) { .settings { grid-template-columns: 1fr; gap: 18px; } }

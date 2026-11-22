@@ -898,6 +898,60 @@
       "type": "registry:component"
     },
     {
+      "name": "brick-noise",
+      "title": "Brick noise",
+      "description": "A staggered grayscale grid with a repeating wave of tile brightness.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/brick-noise/BrickNoise.tsx",
+          "type": "registry:component",
+          "target": "components/brick-noise/BrickNoise.tsx"
+        },
+        {
+          "path": "src/registry/brick-noise/create-brick-noise.ts",
+          "type": "registry:lib",
+          "target": "components/brick-noise/create-brick-noise.ts"
+        },
+        {
+          "path": "src/registry/brick-noise/brick-noise-data.ts",
+          "type": "registry:lib",
+          "target": "components/brick-noise/brick-noise-data.ts"
+        },
+        {
+          "path": "src/registry/brick-noise/brick-noise.css",
+          "type": "registry:file",
+          "target": "components/brick-noise/brick-noise.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Staggered grayscale tiles separated by thin black lines.",
+            "width": 1200,
+            "height": 1200,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/brick-noise.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 1200,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/brick-noise.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 1200,
+            "type": "video/mp4",
+            "duration": 4.05,
+            "url": "https://modulo-maynkudu.vercel.app/media/brick-noise.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "sprite-racer",
       "title": "Switchback",
       "description": "A sprite-stacked driving game with six cars, five circuits and a drift yard.",

@@ -1,3 +1,4 @@
+import { BrickNoise } from "../src/registry/brick-noise/BrickNoise";
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { GardenCanvas } from "../src/registry/interactive-art/examples/GardenCanvas";
@@ -79,6 +80,7 @@ function LiquidAnimationsCapture() {
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "brick-noise") return <BrickNoise onReady={markReady} />;
   if (name === "sprite-racer") return <SwitchbackPage initialMap="pine" initialCar="turbo" demo onReady={switchbackReady} />;
   if (name === "multi-step-download") return <DownloadCapture />;
   if (name === "liquid-text-reveal") return <LiquidTextCapture />;

@@ -1,0 +1,11 @@
+{
+  "size": [
+    500,
+    500
+  ],
+  "changedPixels": 0,
+  "maxChannelError": 0,
+  "threshold": 0,
+  "masks": [],
+  "method": "Crop the ordinary viewport screenshot using measured canvas bounds. Element-only screenshots were invalid captures and are retained separately under .plannotator."
+}

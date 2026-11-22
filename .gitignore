@@ -60,6 +60,7 @@ next-env.d.ts
 /src/registry/liquid-text-reveal/
 /src/registry/multi-step-download/
 /src/registry/sprite-racer/
+/src/registry/brick-noise/
 /.private-registry/
 /public/r/
 /.data/

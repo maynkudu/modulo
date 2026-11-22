@@ -17,7 +17,7 @@ function SiteNavLabel({ label, count }: { label: string; count?: number }) {
 export function SiteHeader({ workCount, serviceCount }: { workCount: number; serviceCount: number }) {
   const pathname = usePathname();
   const section = pathname.split("/")[1];
-  const insideWork = section === "components" || section === "pages";
+  const insideWork = section === "components" || section === "pages" || section === "shaders";
   return (
     <header className={styles.header}>
       <Link className={styles.brand} href="/" aria-label="Modulo home" aria-current={pathname === "/" ? "page" : undefined}>

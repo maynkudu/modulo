@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { catalogItems, pageCatalogItems } from "@/lib/catalog";
+import { previewCatalogItems as catalogItems, pageCatalogItems, getCatalogPath } from "@/lib/catalog";
 import { sitePages } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [absoluteUrl("/brand/modulo-og.jpg")],
     })),
     ...catalogItems.map(({ component, media }) => ({
-      url: absoluteUrl(`/components/${component.name}`),
+      url: absoluteUrl(getCatalogPath(component.name)),
       images: [absoluteUrl(media.thumbnail.src)],
     })),
     ...catalogItems.map(({ component, media }) => ({

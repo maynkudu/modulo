@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { InterfaceSounds } from "@/components/interface-sounds";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { catalogItems } from "@/lib/catalog";
+import { allCatalogItems } from "@/lib/catalog";
 import { studioServices } from "@/lib/studio-content";
 import styles from "./site-layout.module.css";
 
@@ -16,7 +16,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
     <div className={`${styles.site} ${rethink.variable} ${stackNotch.variable}`}>
       <a className={styles.skipLink} href="#content">Skip to content</a>
       <InterfaceSounds />
-      <SiteHeader workCount={catalogItems.length} serviceCount={studioServices.length} />
+      <SiteHeader workCount={allCatalogItems.length} serviceCount={studioServices.length} />
       <div className={styles.content}>{children}</div>
       <SiteFooter />
     </div>

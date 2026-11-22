@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { FullView } from "@/components/full-view";
-import { catalogItems } from "@/lib/catalog";
+import { previewCatalogItems as catalogItems } from "@/lib/catalog";
 import { getComponentMetadata } from "@/lib/seo";
 import { absoluteUrl } from "@/lib/site";
 
