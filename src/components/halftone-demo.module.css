@@ -1,0 +1,12 @@
+.preview { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) 290px; align-items: start; width: 100%; min-width: 0; gap: 28px; }
+.stage { min-width: 0; }
+.scene { width: 100%; aspect-ratio: 1; }
+.stage p { color: var(--ui-muted); font-size: 13px; line-height: 1.7; margin: 18px 0 0; }
+.group { display: grid; gap: 20px; padding-block: 12px; }
+.paletteButtons { display: flex; flex-wrap: wrap; gap: 8px; margin-block: 12px; }
+.colors { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-block: 16px; }
+.colors label, .background { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; }
+.background { margin-top: 16px; }
+.colors input, .background input { width: 44px; height: 36px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.preview input:focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
+@media (max-width: 850px) { .preview { grid-template-columns: 1fr; gap: 24px; } .scene { max-width: 620px; margin-inline: auto; } }

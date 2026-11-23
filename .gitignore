@@ -63,6 +63,7 @@ next-env.d.ts
 /src/registry/brick-noise/
 /src/registry/portrait-wave/
 /src/registry/eyespice/
+/src/registry/halftone/
 /.private-registry/
 /public/r/
 /.data/

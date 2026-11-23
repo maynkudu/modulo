@@ -1083,6 +1083,60 @@
       "type": "registry:component"
     },
     {
+      "name": "halftone",
+      "title": "Halftone",
+      "description": "Flowing light on a dot grid, with an eased liquid trail that follows your pointer.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/halftone/Halftone.tsx",
+          "type": "registry:component",
+          "target": "components/halftone/Halftone.tsx"
+        },
+        {
+          "path": "src/registry/halftone/ShaderSurface.tsx",
+          "type": "registry:component",
+          "target": "components/halftone/ShaderSurface.tsx"
+        },
+        {
+          "path": "src/registry/halftone/halftone.css",
+          "type": "registry:file",
+          "target": "components/halftone/halftone.css"
+        },
+        {
+          "path": "src/registry/halftone/LICENSE",
+          "type": "registry:file",
+          "target": "components/halftone/LICENSE"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Copper and cream dots tracing flowing light and a soft pointer trail on a dark background.",
+            "width": 1200,
+            "height": 1200,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/halftone.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 1200,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/halftone.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 1200,
+            "type": "video/mp4",
+            "duration": 6,
+            "url": "https://modulo-maynkudu.vercel.app/media/halftone.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "sprite-racer",
       "title": "Switchback",
       "description": "A sprite-stacked driving game with six cars, five circuits and a drift yard.",

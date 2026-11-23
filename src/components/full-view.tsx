@@ -18,6 +18,7 @@ import { LiquidTextDemo } from "./liquid-text-demo";
 import { MultiStepDownloadDemo } from "./multi-step-download-demo";
 import { EyeSpiceDemo } from "./eyespice-demo";
 import { PortraitWaveDemo } from "./portrait-wave-demo";
+import { HalftoneDemo } from "./halftone-demo";
 import { BrickNoiseDemo } from "./brick-noise-demo";
 import { previewCatalogItems as catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
@@ -29,6 +30,7 @@ function gameReady(game: Game2048Controller | null) {
   }
 }
 const views = {
+  "halftone": () => <div className={styles.controls}><HalftoneDemo /></div>,
   "eyespice": () => <div className={styles.controls}><EyeSpiceDemo /></div>,
   "portrait-wave": () => <div className={styles.controls}><PortraitWaveDemo /></div>,
   "brick-noise": () => <div className={styles.controls}><BrickNoiseDemo /></div>,
@@ -53,7 +55,7 @@ export function FullView({ name }: { name: ComponentName }) {
   const View = views[name];
   if (name === "liquid-text-reveal") return <View />;
   const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download";
-  const scrollable = control || name === "portrait-wave" || name === "eyespice" || name === "brick-noise" || name === "logo-refraction" || name === "liquid-animations";
+  const scrollable = control || name === "halftone" || name === "portrait-wave" || name === "eyespice" || name === "brick-noise" || name === "logo-refraction" || name === "liquid-animations";
   return <div className={styles.frame}>
     <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" ? styles.liquidViewport : ""}`}><View /></main>
     {scrollable && <LiquidScrollbar viewport={viewport} controls={id} />}

@@ -63,10 +63,12 @@ body:has(.liquid-text-media),html:has(.liquid-text-media){overflow:visible;backg
 .liquid-text-media{height:100vh;align-content:start;padding-top:385px}
 .download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#f1f1f1}
 .eyespice-media{width:100%;height:100%;display:grid;place-items:center;background:#000}.eyespice-media .eyespice{width:88%;height:88%;aspect-ratio:1}.eyespice-rest{position:absolute;left:3%;top:3%;width:2px;height:2px}
+.halftone-media{position:relative;width:100%;height:100%;background:#0a0403}.halftone-start,.halftone-end{position:absolute;width:2px;height:2px;pointer-events:none}.halftone-start{left:15%;top:25%}.halftone-end{left:80%;top:70%}
 .download-media-rest{position:absolute;left:78%;top:75%;width:1px;height:1px;pointer-events:none}
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
+  { name: "halftone", flow: "halftone-hover-trail", pause: 7000, seek: .1, thumbnailSeek: 2, movePointer: false },
   { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "eyespice", flow: "eyespice-gaze-close-retreat", pause: 4500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "brick-noise", flow: "brick-noise-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
@@ -106,6 +108,13 @@ await writeFile(configPath, `${JSON.stringify({
     fps: entry.component.name === "multi-step-download" ? 60 : entry.component.name === "eyespice" ? 30 : 20,
     waitFor: "body[data-ready=true]",
     steps: [
+      ...(entry.component.name === "halftone" ? [
+        { action: "moveTo", selector: ".halftone-start" },
+        { action: "pause", ms: 800 },
+        { action: "moveTo", selector: ".halftone-end" },
+        { action: "pause", ms: 800 },
+        { action: "moveTo", selector: ".halftone-start" },
+      ] : []),
       ...(entry.component.name === "eyespice" ? [
         { action: "pause", ms: 1000 },
         { action: "moveTo", selector: ".eyespice-rest" },
@@ -155,7 +164,9 @@ if (!dryRun) {
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-ss", String(specification.seek), "-i", recording,
       "-t", String(media.video.duration), "-an", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "18", "-movflags", "+faststart", video]);
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-ss", String(specification.thumbnailSeek ?? 0), "-i", video, "-frames:v", "1", "-q:v", "2", thumbnail]);
-    const palette = `fps=10,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=sierra2_4a`;
+    const palette = component.name === "halftone"
+      ? "fps=10,split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=none"
+      : "fps=10,split[s0][s1];[s0]palettegen=max_colors=256[p];[s1][p]paletteuse=dither=sierra2_4a";
     execFileSync(ffmpeg, ["-hide_banner", "-loglevel", "error", "-y", "-i", video, "-filter_complex", palette, "-loop", "0", animation]);
     for (const asset of [thumbnail, animation, video]) {
       if ((await stat(asset)).size === 0) throw new Error(`Empty component media: ${asset}`);

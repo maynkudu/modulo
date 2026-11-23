@@ -1,6 +1,17 @@
 {
   "components": [
     {
+      "name": "halftone",
+      "repository": "maynkudu/modulo-halftone",
+      "revision": "0cb8175be798d2164924e426baddc71413a5c2f4",
+      "files": [
+        { "path": "Halftone.tsx", "sha256": "703efd85de941fa4a74fd9e51c24c2a7af8c2e7c9993175b671a4956a7dc9e77" },
+        { "path": "ShaderSurface.tsx", "sha256": "0cdce4f51a03b890524997beba263f1bdb25a03001544d70304c6c3f98d6ad1a" },
+        { "path": "halftone.css", "sha256": "9e011df07e83780c6dc39e419f521d3c1b05cf38221b41efc77a39b0dd717ce5" },
+        { "path": "LICENSE", "sha256": "414298fb8ee034f664c3177a0f3b6e1a76c8ce1f7e806fa935896f56825e566a" }
+      ]
+    },
+    {
       "name": "portrait-wave",
       "repository": "maynkudu/modulo-portrait-wave",
       "revision": "4e3cd64c9048eafb97c4eebc66df47b6421b9184",

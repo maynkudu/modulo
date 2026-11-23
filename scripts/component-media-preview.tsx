@@ -1,3 +1,4 @@
+import { Halftone } from "../src/registry/halftone/Halftone";
 import { PortraitWave } from "../src/registry/portrait-wave/PortraitWave";
 import { EyeSpice, type EyeSpiceController } from "../src/registry/eyespice/EyeSpice";
 import { BrickNoise } from "../src/registry/brick-noise/BrickNoise";
@@ -93,6 +94,10 @@ const portraitCaptureImages = ["__PORTRAIT_WAVE_A__", "__PORTRAIT_WAVE_B__"];
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "halftone") return <section className="halftone-media">
+    <Halftone className="media-scene" onReady={markReady} />
+    <span className="halftone-start" aria-hidden="true" /><span className="halftone-end" aria-hidden="true" />
+  </section>;
   if (name === "portrait-wave") return <PortraitWave className="media-scene" images={portraitCaptureImages} onState={state => { if (state.kind === "ready") markReady(true); }} />;
   if (name === "eyespice") return <EyeSpiceCapture />;
   if (name === "brick-noise") return <BrickNoise onReady={markReady} />;

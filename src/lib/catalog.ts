@@ -416,6 +416,21 @@ export const portraitWave = {
   ],
 } satisfies RegistryItem;
 
+export const halftone = {
+  name: "halftone" as const,
+  type: "registry:component",
+  title: "Halftone",
+  description: "Flowing light on a dot grid, with an eased liquid trail that follows your pointer.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/halftone/Halftone.tsx", target: "components/halftone/Halftone.tsx", type: "registry:component" },
+    { path: "src/registry/halftone/ShaderSurface.tsx", target: "components/halftone/ShaderSurface.tsx", type: "registry:component" },
+    { path: "src/registry/halftone/halftone.css", target: "components/halftone/halftone.css", type: "registry:file" },
+    { path: "src/registry/halftone/LICENSE", target: "components/halftone/LICENSE", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 export const shaderCatalogItems = [{
   component: {
     name: "brick-noise" as const,
@@ -441,6 +456,12 @@ export const shaderCatalogItems = [{
   keywords: ["shader", "portrait", "faces", "morph", "wave", "tiles", "images", "webgl", "optical flow"],
   seoDescription: "A React portrait morph shader with an image-array API, local correspondence computation and a diagonal tile wave. Try your images, prepare aligned portraits and install with a Modulo key.",
   media: componentMedia({ name: "portrait-wave", alt: "Two grayscale portraits morphing through diagonally delayed rectangular tiles.", height: 900, duration: 3.88 }),
+}, {
+  component: halftone,
+  addedAt: "2026-11-23",
+  keywords: ["shader", "halftone", "webgl", "dots", "noise", "pointer", "hover", "trail", "palette", "background"],
+  seoDescription: "A React halftone shader with flowing dot patterns, an eased pointer trail and editable colors. Try the live controls and install with an active Modulo key.",
+  media: componentMedia({ name: "halftone", alt: "Copper and cream dots tracing flowing light and a soft pointer trail on a dark background.", height: 1200, duration: 6 }),
 }] satisfies CatalogItem[];
 
 export const brickNoise = shaderCatalogItems[0].component;
