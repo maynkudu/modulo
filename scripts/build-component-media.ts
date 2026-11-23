@@ -62,11 +62,13 @@ body:has(.liquid-text-media),html:has(.liquid-text-media){overflow:visible;backg
 #root:has(.liquid-text-media){overflow:visible;min-height:200vh;background:#f6efed}
 .liquid-text-media{height:100vh;align-content:start;padding-top:385px}
 .download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#f1f1f1}
+.eyespice-media{width:100%;height:100%;display:grid;place-items:center;background:#000}.eyespice-media .eyespice{width:88%;height:88%;aspect-ratio:1}.eyespice-rest{position:absolute;left:3%;top:3%;width:2px;height:2px}
 .download-media-rest{position:absolute;left:78%;top:75%;width:1px;height:1px;pointer-events:none}
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
   { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
+  { name: "eyespice", flow: "eyespice-gaze-close-retreat", pause: 4500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "brick-noise", flow: "brick-noise-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "sprite-racer", flow: "switchback-driving", pause: 11500, seek: 4, thumbnailSeek: 2, movePointer: false },
   { name: "multi-step-download", flow: "download-complete", pause: 6500, seek: .1, thumbnailSeek: 1.5, movePointer: false },
@@ -101,9 +103,17 @@ await writeFile(configPath, `${JSON.stringify({
     url: `${pathToFileURL(previewPath).href}?component=${entry.component.name}`,
     output: `${entry.component.name}.mp4`,
     viewport: { width: entry.media.video.width, height: entry.media.video.height },
-    fps: entry.component.name === "multi-step-download" ? 60 : 20,
+    fps: entry.component.name === "multi-step-download" ? 60 : entry.component.name === "eyespice" ? 30 : 20,
     waitFor: "body[data-ready=true]",
     steps: [
+      ...(entry.component.name === "eyespice" ? [
+        { action: "pause", ms: 1000 },
+        { action: "moveTo", selector: ".eyespice-rest" },
+        { action: "pause", ms: 1000 },
+        { action: "moveTo", selector: ".eyespice canvas" },
+        { action: "pause", ms: 600 },
+        { action: "moveTo", selector: ".eyespice-rest" },
+      ] : []),
       ...(entry.component.name === "multi-step-download" ? [
         { action: "pause", ms: 200 },
         { action: "click", selector: ".msd-button" },

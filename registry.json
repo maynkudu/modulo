@@ -4,6 +4,78 @@
   "homepage": "https://modulo-maynkudu.vercel.app",
   "items": [
     {
+      "name": "eyespice",
+      "title": "EyeSpice",
+      "description": "A textured 3D eye that follows your cursor and closes when you get too close.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@types/three@^0.186.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/eyespice/EyeSpice.tsx",
+          "type": "registry:component",
+          "target": "components/eyespice/EyeSpice.tsx"
+        },
+        {
+          "path": "src/registry/eyespice/create-eyespice.ts",
+          "type": "registry:lib",
+          "target": "components/eyespice/create-eyespice.ts"
+        },
+        {
+          "path": "src/registry/eyespice/eye-material.ts",
+          "type": "registry:lib",
+          "target": "components/eyespice/eye-material.ts"
+        },
+        {
+          "path": "src/registry/eyespice/eye-lids.ts",
+          "type": "registry:lib",
+          "target": "components/eyespice/eye-lids.ts"
+        },
+        {
+          "path": "src/registry/eyespice/eye-motion.ts",
+          "type": "registry:lib",
+          "target": "components/eyespice/eye-motion.ts"
+        },
+        {
+          "path": "src/registry/eyespice/eye-surface-data.ts",
+          "type": "registry:lib",
+          "target": "components/eyespice/eye-surface-data.ts"
+        },
+        {
+          "path": "src/registry/eyespice/eyespice.css",
+          "type": "registry:file",
+          "target": "components/eyespice/eyespice.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A textured monochrome 3D eye with a dark iris and bright silhouette rim.",
+            "width": 1200,
+            "height": 1200,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/eyespice.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 1200,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/eyespice.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 1200,
+            "type": "video/mp4",
+            "duration": 6,
+            "url": "https://modulo-maynkudu.vercel.app/media/eyespice.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "interactive-art",
       "title": "Interactive art",
       "description": "A growing lotus garden with flexible stems, a day and night cycle, and PNG layer exports.",

@@ -62,6 +62,7 @@ next-env.d.ts
 /src/registry/sprite-racer/
 /src/registry/brick-noise/
 /src/registry/portrait-wave/
+/src/registry/eyespice/
 /.private-registry/
 /public/r/
 /.data/

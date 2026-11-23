@@ -1,4 +1,5 @@
 import { PortraitWave } from "../src/registry/portrait-wave/PortraitWave";
+import { EyeSpice, type EyeSpiceController } from "../src/registry/eyespice/EyeSpice";
 import { BrickNoise } from "../src/registry/brick-noise/BrickNoise";
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
@@ -79,11 +80,21 @@ function LiquidAnimationsCapture() {
   return <section className="liquid-media"><LiquidAnimationsDemo initialExample="Account" compact /></section>;
 }
 
+function EyeSpiceCapture() {
+  function ready(controller: EyeSpiceController | null) {
+    if (!controller) return;
+    Object.defineProperty(window, "eyeSpiceCapture", { value: controller, configurable: true });
+    markReady(controller);
+  }
+  return <section className="eyespice-media"><EyeSpice onReady={ready} /><span className="eyespice-rest" /></section>;
+}
+
 const portraitCaptureImages = ["__PORTRAIT_WAVE_A__", "__PORTRAIT_WAVE_B__"];
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
   if (name === "portrait-wave") return <PortraitWave className="media-scene" images={portraitCaptureImages} onState={state => { if (state.kind === "ready") markReady(true); }} />;
+  if (name === "eyespice") return <EyeSpiceCapture />;
   if (name === "brick-noise") return <BrickNoise onReady={markReady} />;
   if (name === "sprite-racer") return <SwitchbackPage initialMap="pine" initialCar="turbo" demo onReady={switchbackReady} />;
   if (name === "multi-step-download") return <DownloadCapture />;

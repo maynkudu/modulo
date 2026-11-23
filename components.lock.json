@@ -13,6 +13,20 @@
       ]
     },
     {
+      "name": "eyespice",
+      "repository": "maynkudu/modulo-eyespice",
+      "revision": "41a3a9155a6fe1e05ebfe142543214587317d4fc",
+      "files": [
+        { "path": "EyeSpice.tsx", "sha256": "758a8c5f6a36cef10f74bde9061f0be2340a7e34c5c1f6a86f25170fd85a119a" },
+        { "path": "create-eyespice.ts", "sha256": "a2c9637dc4b82d26f135c9a46a5fd350abbba9312335592e4460dc3316c9301f" },
+        { "path": "eye-material.ts", "sha256": "ec0a09200332d189b92e600d96e5f47cb7bfcd4161a4c3559a99971b7f31923a" },
+        { "path": "eye-lids.ts", "sha256": "78270a39563f3e1e988b9e4f6fd510f9557fe2d0f37ab3f25c20471ee590d90a" },
+        { "path": "eye-motion.ts", "sha256": "96f6f207a45012a4e7d54cf9eda0ae016080005e271f9aa283b89ec7f3a5caca" },
+        { "path": "eye-surface-data.ts", "sha256": "b33e92ad3d3cb2faa46db81513c2158e8f1e734872dc3e8e5c6b94d557f484cf" },
+        { "path": "eyespice.css", "sha256": "082ae60b13f702d31783d099ea23f87464bc0f9fbac1b384ed652ed8313f327e" }
+      ]
+    },
+    {
       "name": "brick-noise",
       "repository": "maynkudu/modulo-brick-noise",
       "revision": "42a84915724f3801a32715e9b5cfc747c3fec06e",

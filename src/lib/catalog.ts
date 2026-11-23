@@ -262,6 +262,25 @@ export const multiStepDownload = {
   ],
 } satisfies RegistryItem;
 
+/** Cursor-tracked spherical eye with modeled proximity eyelids. */
+export const eyeSpice = {
+  name: "eyespice" as const,
+  type: "registry:component",
+  title: "EyeSpice",
+  description: "A textured 3D eye that follows your cursor and closes when you get too close.",
+  dependencies: ["three@^0.186.0", "@types/three@^0.186.0"],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/eyespice/EyeSpice.tsx", target: "components/eyespice/EyeSpice.tsx", type: "registry:component" },
+    { path: "src/registry/eyespice/create-eyespice.ts", target: "components/eyespice/create-eyespice.ts", type: "registry:lib" },
+    { path: "src/registry/eyespice/eye-material.ts", target: "components/eyespice/eye-material.ts", type: "registry:lib" },
+    { path: "src/registry/eyespice/eye-lids.ts", target: "components/eyespice/eye-lids.ts", type: "registry:lib" },
+    { path: "src/registry/eyespice/eye-motion.ts", target: "components/eyespice/eye-motion.ts", type: "registry:lib" },
+    { path: "src/registry/eyespice/eye-surface-data.ts", target: "components/eyespice/eye-surface-data.ts", type: "registry:lib" },
+    { path: "src/registry/eyespice/eyespice.css", target: "components/eyespice/eyespice.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 function componentMedia({ name, alt, height = 630, duration = 4 }: { name: string; alt: string; height?: number; duration?: number }) {
   return {
     thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
@@ -281,6 +300,12 @@ export type CatalogItem = {
 };
 
 export const catalogItems = [{
+  component: eyeSpice,
+  addedAt: "2026-11-23",
+  keywords: ["eye", "eyespice", "3d", "three", "webgl", "cursor", "gaze", "eyelids", "proximity"],
+  seoDescription: "A textured monochrome 3D eye for React with global cursor tracking, modeled proximity eyelids, keyboard demo controls and reduced motion. Preview EyeSpice and install with an active Modulo key.",
+  media: componentMedia({ name: eyeSpice.name, alt: "A textured monochrome 3D eye with a dark iris and bright silhouette rim.", height: 1200, duration: 6 }),
+}, {
   component: interactiveArt,
   addedAt: "2026-11-06",
   keywords: ["lotus", "garden", "canvas", "growth", "day", "night", "elastic"],
