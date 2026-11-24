@@ -1,6 +1,5 @@
 "use client";
 
-import { Game2048, type Game2048Controller } from "@/registry/2048/Game2048";
 import { useId, useRef, type ReactNode } from "react";
 import { LiquidScrollbar } from "@/registry/liquid-animations/LiquidScrollbar";
 import { GardenCanvas } from "@/registry/interactive-art/examples/GardenCanvas";
@@ -24,11 +23,6 @@ import { previewCatalogItems as catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
 
 type ComponentName = (typeof catalogItems)[number]["component"]["name"];
-function gameReady(game: Game2048Controller | null) {
-  if (process.env.NODE_ENV === "development") {
-    if (game) window.game2048 = game; else delete window.game2048;
-  }
-}
 const views = {
   "halftone": () => <div className={styles.controls}><HalftoneDemo /></div>,
   "eyespice": () => <div className={styles.controls}><EyeSpiceDemo /></div>,
@@ -36,7 +30,6 @@ const views = {
   "brick-noise": () => <div className={styles.controls}><BrickNoiseDemo /></div>,
   "multi-step-download": () => <div className={styles.controls}><MultiStepDownloadDemo /></div>,
   "overlay-navigation": () => <OverlayNavigationDemo full />,
-  "2048": () => <Game2048 onReady={gameReady} />,
   "interactive-art": () => <GardenCanvas className={styles.scene} fallback="/artwork/lotus-garden.png" />,
   "nilkamal": () => <Nilkamal className={styles.scene} fallback="/artwork/nilkamal.png" />,
   "diwali-26": () => <Diwali26 className={styles.scene} fallback="/artwork/diwali-26.png" />,
@@ -57,7 +50,7 @@ export function FullView({ name }: { name: ComponentName }) {
   const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download";
   const scrollable = control || name === "halftone" || name === "portrait-wave" || name === "eyespice" || name === "brick-noise" || name === "logo-refraction" || name === "liquid-animations";
   return <div className={styles.frame}>
-    <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${name === "2048" ? styles.game : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" ? styles.liquidViewport : ""}`}><View /></main>
+    <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" ? styles.liquidViewport : ""}`}><View /></main>
     {scrollable && <LiquidScrollbar viewport={viewport} controls={id} />}
   </div>;
 }

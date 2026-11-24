@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       headers: [{ key: "X-Robots-Tag", value: "noindex" }],
     }];
   },
+  async redirects() {
+    return [{ source: "/components/2048", destination: "/pages/2048", permanent: true }];
+  },
   turbopack: {
     rules: {
       "globals.css": {

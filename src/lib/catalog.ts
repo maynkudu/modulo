@@ -336,12 +336,6 @@ export const catalogItems = [{
   seoDescription: "A Three.js textured glass effect for React with local image depth estimation, mouse parallax, and adjustable focus blur. Upload a photo and install the component with a mint key.",
   media: componentMedia({ name: texturedGlass.name, alt: "A photograph seen through rough glass with a fine square grid and a broad light reflection.", height: 800 }),
 }, {
-  component: game2048,
-  addedAt: "2026-11-09",
-  keywords: ["2048", "game", "puzzle", "tiles", "merge", "score", "keyboard", "swipe", "audio"],
-  seoDescription: "Play a minimal 2048 game with grayscale tiles, animated merges, score meters, undo, local saves, and procedural sounds. Install the React component with shadcn.",
-  media: componentMedia({ name: game2048.name, alt: "Grayscale 2048 tiles beneath score and best meters on an almost-white background.", height: 800 }),
-}, {
   component: elasticSlider,
   addedAt: "2026-11-09",
   keywords: ["slider", "brightness", "elastic", "spring", "gesture", "keyboard", "controls"],
@@ -392,6 +386,12 @@ export const catalogItems = [{
 }] satisfies CatalogItem[];
 
 export const pageCatalogItems = [{
+  component: game2048,
+  addedAt: "2026-11-09",
+  keywords: ["2048", "game", "puzzle", "tiles", "merge", "score", "keyboard", "swipe", "audio"],
+  seoDescription: "Play a minimal 2048 game with grayscale tiles, animated merges, score meters, undo, local saves, and procedural sounds. Install the complete React page with an active Modulo key.",
+  media: componentMedia({ name: game2048.name, alt: "Grayscale 2048 tiles beneath score and best meters on an almost-white background.", height: 800 }),
+}, {
   component: spriteRacer,
   addedAt: "2026-11-21",
   keywords: ["page", "game", "racing", "drift", "delivery", "sprite", "stack", "layered", "canvas", "audio"],

@@ -3,7 +3,6 @@ import { LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
 import { LiquidScrollArea } from "@/registry/liquid-animations/LiquidScrollbar";
 import Link from "next/link";
 import { ComponentSection } from "@/components/component-section";
-import { ComponentHeadingActions } from "@/components/component-heading-actions";
 import { Game2048Demo } from "@/components/game-2048-demo";
 import { InstallCommand } from "@/components/install-command";
 import { ComponentMediaLinks } from "@/components/component-media-links";
@@ -20,11 +19,11 @@ export default function Game2048Page() {
     <main className={styles.main} id="content">
       <StructuredData data={getComponentStructuredData(game2048)} />
       <nav className={styles.breadcrumbs} aria-label="Breadcrumb"><ol>
-        <li><Link href="/">Home</Link></li><li><Link href="/components">Components</Link></li><li aria-current="page">2048</li>
+        <li><Link href="/">Home</Link></li><li><Link href="/pages">Pages</Link></li><li aria-current="page">2048</li>
       </ol></nav>
       <div className={styles.heading}>
         <div><h1>{game2048.title}</h1><p>{game2048.description}</p></div>
-        <ComponentHeadingActions name="2048" />
+        <div className={styles.headingActions}><Link className={styles.sourceLink} href="/play/2048" target="_blank" rel="noopener">Play full game</Link><a className={styles.sourceLink} href="#source">View source</a></div>
       </div>
       <div className={styles.sections}>
         <ComponentSection title="Preview" id="preview"><div className={styles.gameDemo}><Game2048Demo /></div></ComponentSection>
