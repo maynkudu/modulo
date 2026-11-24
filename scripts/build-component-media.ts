@@ -65,6 +65,8 @@ body:has(.liquid-text-media),html:has(.liquid-text-media){overflow:visible;backg
 .eyespice-media{width:100%;height:100%;display:grid;place-items:center;background:#000}.eyespice-media .eyespice{width:88%;height:88%;aspect-ratio:1}.eyespice-rest{position:absolute;left:3%;top:3%;width:2px;height:2px}
 .halftone-media{position:relative;width:100%;height:100%;background:#0a0403}.halftone-start,.halftone-end{position:absolute;width:2px;height:2px;pointer-events:none}.halftone-start{left:15%;top:25%}.halftone-end{left:80%;top:70%}
 .download-media-rest{position:absolute;left:78%;top:75%;width:1px;height:1px;pointer-events:none}
+.inline-download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#050505}
+.inline-download-media-rest{position:absolute;left:10%;top:14%;width:1px;height:1px;pointer-events:none}
 </style></head><body><main id="root"></main><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
 const specifications = [
@@ -74,6 +76,7 @@ const specifications = [
   { name: "brick-noise", flow: "brick-noise-loop", pause: 6500, seek: .1, thumbnailSeek: 0, movePointer: false },
   { name: "sprite-racer", flow: "switchback-driving", pause: 11500, seek: 4, thumbnailSeek: 2, movePointer: false },
   { name: "multi-step-download", flow: "download-complete", pause: 6500, seek: .1, thumbnailSeek: 1.5, movePointer: false },
+  { name: "inline-download", flow: "inline-download-run", pause: 6600, seek: .2, thumbnailSeek: 1.7, movePointer: false },
   { name: "liquid-text-reveal", flow: "liquid-text-sharpen", pause: 2200, seek: 0, thumbnailSeek: .5, movePointer: false },
   { name: "liquid-animations", flow: "liquid-account-retarget", pause: 8000, seek: .6, thumbnailSeek: 2, movePointer: false },
   { name: "overlay-navigation", flow: "overlay-navigation-open", pause: 8000, seek: 2, movePointer: false },
@@ -122,6 +125,11 @@ await writeFile(configPath, `${JSON.stringify({
         { action: "moveTo", selector: ".eyespice canvas" },
         { action: "pause", ms: 600 },
         { action: "moveTo", selector: ".eyespice-rest" },
+      ] : []),
+      ...(entry.component.name === "inline-download" ? [
+        { action: "pause", ms: 200 },
+        { action: "click", selector: ".inline-download" },
+        { action: "moveTo", selector: ".inline-download-media-rest" },
       ] : []),
       ...(entry.component.name === "multi-step-download" ? [
         { action: "pause", ms: 200 },

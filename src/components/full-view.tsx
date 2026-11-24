@@ -15,6 +15,7 @@ import { LogoRefractionDemo } from "./logo-refraction-demo";
 import { OverlayNavigationDemo } from "./overlay-navigation-demo";
 import { LiquidTextDemo } from "./liquid-text-demo";
 import { MultiStepDownloadDemo } from "./multi-step-download-demo";
+import { InlineDownloadDemo } from "./inline-download-demo";
 import { EyeSpiceDemo } from "./eyespice-demo";
 import { PortraitWaveDemo } from "./portrait-wave-demo";
 import { HalftoneDemo } from "./halftone-demo";
@@ -29,6 +30,7 @@ const views = {
   "portrait-wave": () => <div className={styles.controls}><PortraitWaveDemo /></div>,
   "brick-noise": () => <div className={styles.controls}><BrickNoiseDemo /></div>,
   "multi-step-download": () => <div className={styles.controls}><MultiStepDownloadDemo /></div>,
+  "inline-download": () => <div className={styles.controls}><InlineDownloadDemo /></div>,
   "overlay-navigation": () => <OverlayNavigationDemo full />,
   "interactive-art": () => <GardenCanvas className={styles.scene} fallback="/artwork/lotus-garden.png" />,
   "nilkamal": () => <Nilkamal className={styles.scene} fallback="/artwork/nilkamal.png" />,
@@ -47,7 +49,7 @@ export function FullView({ name }: { name: ComponentName }) {
   const id = useId(), viewport = useRef<HTMLElement>(null);
   const View = views[name];
   if (name === "liquid-text-reveal") return <View />;
-  const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download";
+  const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download" || name === "inline-download";
   const scrollable = control || name === "halftone" || name === "portrait-wave" || name === "eyespice" || name === "brick-noise" || name === "logo-refraction" || name === "liquid-animations";
   return <div className={styles.frame}>
     <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" ? styles.liquidViewport : ""}`}><View /></main>

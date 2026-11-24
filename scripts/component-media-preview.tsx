@@ -21,6 +21,7 @@ import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNav
 import { LiquidTextReveal } from "../src/registry/liquid-text-reveal/LiquidTextReveal";
 import { collectionStatementText } from "../src/lib/collection-statement-text";
 import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
+import { InlineDownload } from "../src/registry/inline-download/InlineDownload";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
 
@@ -92,6 +93,14 @@ function EyeSpiceCapture() {
 
 const portraitCaptureImages = ["__PORTRAIT_WAVE_A__", "__PORTRAIT_WAVE_B__"];
 
+function InlineDownloadCapture() {
+  useEffect(() => { document.body.dataset.ready = "true"; }, []);
+  return <section className="inline-download-media">
+    <InlineDownload />
+    <span className="inline-download-media-rest" aria-hidden="true" />
+  </section>;
+}
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
   if (name === "halftone") return <section className="halftone-media">
@@ -103,6 +112,7 @@ function MediaPreview() {
   if (name === "brick-noise") return <BrickNoise onReady={markReady} />;
   if (name === "sprite-racer") return <SwitchbackPage initialMap="pine" initialCar="turbo" demo onReady={switchbackReady} />;
   if (name === "multi-step-download") return <DownloadCapture />;
+  if (name === "inline-download") return <InlineDownloadCapture />;
   if (name === "liquid-text-reveal") return <LiquidTextCapture />;
   if (name === "liquid-animations") {
     return <LiquidAnimationsCapture />;

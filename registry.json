@@ -4,6 +4,55 @@
   "homepage": "https://modulo-maynkudu.vercel.app",
   "items": [
     {
+      "name": "inline-download",
+      "title": "Inline download",
+      "description": "A download button that fills with progress, counts up, then offers Open.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/inline-download/InlineDownload.tsx",
+          "type": "registry:component",
+          "target": "components/inline-download/InlineDownload.tsx"
+        },
+        {
+          "path": "src/registry/inline-download/create-progress-track.ts",
+          "type": "registry:lib",
+          "target": "components/inline-download/create-progress-track.ts"
+        },
+        {
+          "path": "src/registry/inline-download/inline-download.css",
+          "type": "registry:file",
+          "target": "components/inline-download/inline-download.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A light download pill on black, part-filled with progress and counting up.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/inline-download.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/inline-download.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 6,
+            "url": "https://modulo-maynkudu.vercel.app/media/inline-download.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "eyespice",
       "title": "EyeSpice",
       "description": "A textured 3D eye that follows your cursor and closes when you get too close.",

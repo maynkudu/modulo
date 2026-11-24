@@ -262,6 +262,21 @@ export const multiStepDownload = {
   ],
 } satisfies RegistryItem;
 
+/** Pill download button that carries its own progress readout. */
+export const inlineDownload = {
+  name: "inline-download" as const,
+  type: "registry:component",
+  title: "Inline download",
+  description: "A download button that fills with progress, counts up, then offers Open.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/inline-download/InlineDownload.tsx", target: "components/inline-download/InlineDownload.tsx", type: "registry:component" },
+    { path: "src/registry/inline-download/create-progress-track.ts", target: "components/inline-download/create-progress-track.ts", type: "registry:lib" },
+    { path: "src/registry/inline-download/inline-download.css", target: "components/inline-download/inline-download.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 /** Cursor-tracked spherical eye with modeled proximity eyelids. */
 export const eyeSpice = {
   name: "eyespice" as const,
@@ -300,6 +315,12 @@ export type CatalogItem = {
 };
 
 export const catalogItems = [{
+  component: inlineDownload,
+  addedAt: "2026-11-24",
+  keywords: ["download", "button", "progress", "percentage", "pill", "cancel", "check", "open"],
+  seoDescription: "A pill download button that fills with progress, counts the percentage up, and turns into Open. Cancel by pressing again. Preview the React component and install the source with an active Modulo key.",
+  media: componentMedia({ name: inlineDownload.name, alt: "A light download pill on black, part-filled with progress and counting up.", height: 800, duration: 6 }),
+}, {
   component: eyeSpice,
   addedAt: "2026-11-23",
   keywords: ["eye", "eyespice", "3d", "three", "webgl", "cursor", "gaze", "eyelids", "proximity"],
@@ -771,6 +792,39 @@ export function DownloadButton({ state, onDownload }: {
 }) {
   return <MultiStepDownload state={state} onActivate={onDownload} />;
 }`;
+
+/** Usage shows both the simulated run and a caller-driven progress value. */
+export const inlineDownloadUsage = `import { InlineDownload } from "@/components/inline-download/InlineDownload";
+
+// Simulated: the button runs its own timed download.
+<InlineDownload label="Download invoice" onOpen={() => openInvoice()} />
+
+// Controlled: your operation owns the value.
+<InlineDownload
+  progress={bytesWritten / bytesTotal}
+  label="Export report"
+  doneLabel="Open report"
+  error={failure}
+  onDownload={startExport}
+  onCancel={cancelExport}
+  onOpen={() => openReport()}
+/>`;
+
+/** Public properties for the inline download button. */
+export const inlineDownloadProps = [
+  ["label", "string", '"Download"', "Label at rest. It also names the button when nothing is running."],
+  ["doneLabel", "string", '"Open"', "Shown once the download finishes. Pressing it calls onOpen."],
+  ["retryLabel", "string", '"Try again"', "Shown while error is set. Pressing it calls onDownload again."],
+  ["error", "string | null", "null", "Failure message. A string stops the run, names the failure and holds the button in its failed state until you clear it."],
+  ["progress", "number", "Unset", "Real progress from 0 to 1. Leave it out to simulate a download of duration seconds."],
+  ["duration", "number", "2.8", "Seconds a simulated download takes."],
+  ["resetAfter", "number", "3", "Seconds the finished state shows before returning to the start. Zero keeps it. The timer waits while the button holds focus."],
+  ["successColor", "string", '"#43dc84"', "Colour of the check, the label and the finished surface."],
+  ["size", '"sm" | "md" | "lg"', '"md"', "Height, padding, label size and glyph size."],
+  ["reducedMotion", "boolean", "false", "Show immediate states without travel, blur or digit swaps. The system preference also applies."],
+  ["onDownload / onCancel / onOpen", "() => void", "Optional", "Pressed at rest or to retry, pressed while loading to cancel, pressed once finished. Escape cancels too."],
+  ["className / style / disabled / ref", "string / CSSProperties / boolean / Ref", "Optional", "Style, disable, or reach the native button. The ref points at the button element."],
+] satisfies readonly (readonly [string, string, string, string])[];
 
 /** Public properties for the controlled multi-step download button. */
 export const multiStepDownloadProps = [

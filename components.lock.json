@@ -1,6 +1,16 @@
 {
   "components": [
     {
+      "name": "inline-download",
+      "repository": "maynkudu/modulo-inline-download",
+      "revision": "51afab5f1ec9af983bd3587eaa70ad1e96abc01c",
+      "files": [
+        { "path": "InlineDownload.tsx", "sha256": "8d807457944b542da21988ee896c3414f9bc9b0bbce74b3dd61fe12114b1413e" },
+        { "path": "create-progress-track.ts", "sha256": "d4797dbe3974727deb19aab5ceaaaa429ac84fe997a171ace9098ae83406ac93" },
+        { "path": "inline-download.css", "sha256": "40c128b8a8d46ddd369dfb1958ca678c70e4963e6435c0ac62db3f36574f65a4" }
+      ]
+    },
+    {
       "name": "halftone",
       "repository": "maynkudu/modulo-halftone",
       "revision": "0cb8175be798d2164924e426baddc71413a5c2f4",
