@@ -4,6 +4,55 @@
   "homepage": "https://modulo-maynkudu.vercel.app",
   "items": [
     {
+      "name": "state-buttons",
+      "title": "State buttons",
+      "description": "A customizable button for loading, thinking, pending, success and error states.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/state-buttons/StateButton.tsx",
+          "type": "registry:component",
+          "target": "components/state-buttons/StateButton.tsx"
+        },
+        {
+          "path": "src/registry/state-buttons/state-matrix.ts",
+          "type": "registry:lib",
+          "target": "components/state-buttons/state-matrix.ts"
+        },
+        {
+          "path": "src/registry/state-buttons/state-button.css",
+          "type": "registry:file",
+          "target": "components/state-buttons/state-button.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A dark button labeled Thinking with a red light matrix rippling outward.",
+            "width": 1200,
+            "height": 800,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/state-buttons.jpg"
+          },
+          "animation": {
+            "width": 1200,
+            "height": 800,
+            "type": "image/gif",
+            "url": "https://modulo-maynkudu.vercel.app/media/state-buttons.gif"
+          },
+          "video": {
+            "width": 1200,
+            "height": 800,
+            "type": "video/mp4",
+            "duration": 5,
+            "url": "https://modulo-maynkudu.vercel.app/media/state-buttons.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "inline-download",
       "title": "Inline download",
       "description": "A download button that fills with progress, counts up, then offers Open.",

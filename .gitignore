@@ -44,6 +44,12 @@ next-env.d.ts
 # isolated plans and verification evidence
 /.plannotator/
 
+# Local reference captures and fetched third-party implementation stay unpublished.
+/reference/*/raw/
+/reference/*/captures/
+/reference/*/comparisons/
+/reference/*/observations/
+
 # component repositories are fetched at pinned revisions
 /src/registry/2048/
 /src/registry/interactive-art/
@@ -65,6 +71,7 @@ next-env.d.ts
 /src/registry/eyespice/
 /src/registry/halftone/
 /src/registry/inline-download/
+/src/registry/state-buttons/
 /.private-registry/
 /public/r/
 /.data/

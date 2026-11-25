@@ -22,6 +22,7 @@ import { LiquidTextReveal } from "../src/registry/liquid-text-reveal/LiquidTextR
 import { collectionStatementText } from "../src/lib/collection-statement-text";
 import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
 import { InlineDownload } from "../src/registry/inline-download/InlineDownload";
+import { StateButton } from "../src/registry/state-buttons/StateButton";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
 
@@ -101,6 +102,13 @@ function InlineDownloadCapture() {
   </section>;
 }
 
+function StateButtonsCapture() {
+  useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
+  return <section className="state-buttons-media">
+    <StateButton state="thinking" animation="ripple" size={120} color="#ff4a3e" label="Thinking" />
+  </section>;
+}
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
   if (name === "halftone") return <section className="halftone-media">
@@ -113,6 +121,7 @@ function MediaPreview() {
   if (name === "sprite-racer") return <SwitchbackPage initialMap="pine" initialCar="turbo" demo onReady={switchbackReady} />;
   if (name === "multi-step-download") return <DownloadCapture />;
   if (name === "inline-download") return <InlineDownloadCapture />;
+  if (name === "state-buttons") return <StateButtonsCapture />;
   if (name === "liquid-text-reveal") return <LiquidTextCapture />;
   if (name === "liquid-animations") {
     return <LiquidAnimationsCapture />;

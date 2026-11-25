@@ -262,6 +262,21 @@ export const multiStepDownload = {
   ],
 } satisfies RegistryItem;
 
+/** Caller-controlled operation states with a stationary animated light matrix. */
+export const stateButtons = {
+  name: "state-buttons" as const,
+  type: "registry:component",
+  title: "State buttons",
+  description: "A customizable button for loading, thinking, pending, success and error states.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/state-buttons/StateButton.tsx", target: "components/state-buttons/StateButton.tsx", type: "registry:component" },
+    { path: "src/registry/state-buttons/state-matrix.ts", target: "components/state-buttons/state-matrix.ts", type: "registry:lib" },
+    { path: "src/registry/state-buttons/state-button.css", target: "components/state-buttons/state-button.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 /** Pill download button that carries its own progress readout. */
 export const inlineDownload = {
   name: "inline-download" as const,
@@ -315,6 +330,12 @@ export type CatalogItem = {
 };
 
 export const catalogItems = [{
+  component: stateButtons,
+  addedAt: "2026-11-25",
+  keywords: ["button", "state", "status", "loading", "thinking", "pending", "success", "error", "animation", "canvas", "matrix"],
+  seoDescription: "A controlled React button with loading, thinking, pending, success and error states. Choose six stationary light-matrix animations, accent color, size, speed and reduced motion. Preview it and install with an active Modulo key.",
+  media: componentMedia({ name: stateButtons.name, alt: "A dark button labeled Thinking with a red light matrix rippling outward.", height: 800, duration: 5 }),
+}, {
   component: inlineDownload,
   addedAt: "2026-11-24",
   keywords: ["download", "button", "progress", "percentage", "pill", "cancel", "check", "open"],
@@ -792,6 +813,36 @@ export function DownloadButton({ state, onDownload }: {
 }) {
   return <MultiStepDownload state={state} onActivate={onDownload} />;
 }`;
+
+/** Usage leaves operation state and cancellation with the application. */
+export const stateButtonsUsage = `"use client";
+
+import { StateButton, type StateButtonState } from "@/components/state-buttons/StateButton";
+
+export function SaveButton({ state, onSave, onCancel }: {
+  state: StateButtonState;
+  onSave: () => void;
+  onCancel?: () => void;
+}) {
+  return <StateButton state={state} label="Save changes" onClick={onSave} onCancel={onCancel} />;
+}`;
+
+/** Public properties for the controlled State Buttons component. */
+export const stateButtonsProps = [
+  ["state", '"idle" | "loading" | "thinking" | "pending" | "success" | "error" | "disabled"', '"idle"', "Controlled operation state. Active states set aria-busy and prevent duplicate activation."],
+  ["label", "string", "State label", "Visible text and default accessible name. Defaults to Continue, Loading, Thinking, Pending, Complete, Try again or Unavailable by state."],
+  ["animation", '"ripple" | "orbit" | "scan" | "wave" | "spark" | "breathe"', "Depends on state", "Select a matrix motion independently from loading, thinking or pending."],
+  ["color", "string", '"#ff4a3e"', "CSS color for the matrix and focus indicator. The preview provides five presets and a custom hex color."],
+  ["surface", '"dark" | "light"', '"dark"', "Button face and label contrast."],
+  ["size", '"sm" | "md" | "lg" | number', '"lg"', "Target height. Numeric values are clamped from 44 to 120 CSS pixels."],
+  ["speed", "number", "1", "Motion and label-sheen speed, clamped from 0.25 to 2.5."],
+  ["glow", "number", "0.65", "Matrix glow strength from 0 to 1."],
+  ["reducedMotion", "boolean", "false", "Use a stable matrix frame. The system reduced-motion preference also applies."],
+  ["disabled", "boolean", "false", "Native disabled button state. State \"disabled\" also disables the button."],
+  ["onClick", "(event: MouseEvent<HTMLButtonElement>) => void", "Optional", "Called for idle, success and error. Active states ignore activation."],
+  ["onCancel", "() => void", "Optional", "Called by a second click or Escape while loading, thinking or pending."],
+  ["type / className / style / aria-label", "Native button props", '"button" / Optional', "Other native button attributes are forwarded."],
+] satisfies readonly (readonly [string, string, string, string])[];
 
 /** Usage shows both the simulated run and a caller-driven progress value. */
 export const inlineDownloadUsage = `import { InlineDownload } from "@/components/inline-download/InlineDownload";
