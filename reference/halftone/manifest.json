@@ -1,0 +1,38 @@
+{
+  "artifact": "halftone",
+  "source_post": "https://x.com/pmalay694/status/2124541484338966808",
+  "source_component": "https://uibrik.com/components/halftone",
+  "captured_with": "curl with a browser user agent",
+  "files": [
+    {
+      "path": "raw/video-1600x1200.mp4",
+      "origin": "https://video.twimg.com/amplify_video/2124541372078399489/vid/avc1/1600x1200/qNj0uRzcavukAlxN.mp4",
+      "bytes": 15382937,
+      "sha256": "1df0929c75f3423e344615c6796634faeb7fa0cbe00a2d98517bf8b40580eafe"
+    },
+    {
+      "path": "raw/uibrik/halftone.html",
+      "origin": "https://uibrik.com/components/halftone",
+      "bytes": 306801,
+      "sha256": "63c949a3be608dbd2613fefe0bf1d53adbdc26bf267cab2bf80fcd29f21f80bd"
+    },
+    {
+      "path": "raw/uibrik/registry-item.json",
+      "origin": "https://uibrik.com/r/halftone.json",
+      "bytes": 49847,
+      "sha256": "d15a37594364597f68365b57c8493aecba829ea059eb52ec2733a29f1983ad3b"
+    },
+    {
+      "path": "raw/uibrik/registry__halftone__halftone.tsx",
+      "origin": "https://uibrik.com/r/halftone.json (files[0], registry/halftone/halftone.tsx)",
+      "bytes": 7375,
+      "sha256": "ede13764328e66185b246cbdbe84fd0cb36161e9a746e457850566aadca7c4df"
+    },
+    {
+      "path": "raw/uibrik/registry___shader-background__ShaderSurface.tsx",
+      "origin": "https://uibrik.com/r/halftone.json (files[1], registry/_shader-background/ShaderSurface.tsx)",
+      "bytes": 40213,
+      "sha256": "4998ec6d58b37d33443acfcf520f3e3602795bb04813ccf3515d2f0208684dd0"
+    }
+  ]
+}

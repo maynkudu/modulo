@@ -1,0 +1,43 @@
+{
+  "source": "https://x.com/uixamjad/status/2125155886922625241",
+  "captured": "2026-11-25",
+  "manifestGeneratedAtUtc": "2026-11-25T00:29:35.081519+00:00",
+  "resources": [
+    {
+      "path": "raw/init.mp4",
+      "origin": "https://video.twimg.com/amplify_video/2125155320184127488/vid/avc1/0/0/1600x1200/i93gd0MYl2CsIXwd.mp4",
+      "method": "curl binary download",
+      "contentType": "video/mp4",
+      "sha256": "a057d557d51b03e8fcd02a55729c1872a12158f783c5f8e11f20331702613277",
+      "bytes": 903,
+      "terms": "Unknown. Local visual reference only; not licensed for redistribution."
+    },
+    {
+      "path": "raw/segment.m4s",
+      "origin": "https://video.twimg.com/amplify_video/2125155320184127488/vid/avc1/0/4000/1600x1200/4EBl2m__Tt8-ZeCr.m4s",
+      "method": "curl binary download",
+      "contentType": "video/mp4",
+      "sha256": "0ae132bad9bd68fce541a82a04cb7eb32525fd71cd996baf82367aa59517ff25",
+      "bytes": 746159,
+      "terms": "Unknown. Local visual reference only; not licensed for redistribution."
+    },
+    {
+      "path": "raw/source.m3u8",
+      "origin": "https://video.twimg.com/amplify_video/2125155320184127488/pl/avc1/1600x1200/8loedCHH4lfkz233.m3u8",
+      "method": "curl binary download",
+      "contentType": "application/vnd.apple.mpegurl",
+      "sha256": "8bed7d4574560d8d1646620dd66f73a8940277ce48df62be71e96b236c112fde",
+      "bytes": 306,
+      "terms": "Unknown. Local visual reference only; not licensed for redistribution."
+    },
+    {
+      "path": "raw/source.mp4",
+      "origin": "Local codec-copy remux of source.m3u8",
+      "method": "ffmpeg -c copy, no video re-encoding",
+      "contentType": "video/mp4",
+      "sha256": "516cade2151a9a79e2f6089fda4ed8c0f42166c823e4d1f38dd4abc5b808d92a",
+      "bytes": 746893,
+      "terms": "Unknown. Local visual reference only; not licensed for redistribution."
+    }
+  ]
+}

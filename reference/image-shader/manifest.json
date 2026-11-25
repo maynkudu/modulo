@@ -1,0 +1,32 @@
+{
+  "sourceUrl": "https://pin.it/24VEWvBBt",
+  "sourcePage": "https://www.pinterest.com/pin/1061653312183436925/",
+  "reference": {
+    "path": "raw/source.gif",
+    "url": "https://i.pinimg.com/originals/44/e1/f5/44e1f590924eca94fe86067a4cf44c72.gif",
+    "sha256": "e210e0d2b71cac628d5154a1ac0dcc462fe4a0583e5dedb5a4bce9de904d1ee1",
+    "sizeBytes": 7128689,
+    "contentType": "image/gif",
+    "width": 401,
+    "height": 301,
+    "frames": 97,
+    "frameDurationMs": 20,
+    "loopDurationMs": 1940,
+    "terms": "Not established by the delivered pin."
+  },
+  "originalImplementation": {
+    "status": "unavailable",
+    "linkedQuestion": "https://graphicdesign.stackexchange.com/questions/15512/how-to-create-the-effect-in-this-animated-gif-of-morphing-faces",
+    "linkedOriginalMedia": "http://www.quilime.com/aggregate/agg/Internetism2_Micael_Reynaud.gif",
+    "oldDownloadStatus": "Error document, not a GIF.",
+    "attribution": "Micael Reynaud is named in the linked filename. Not independently confirmed against an accessible original project."
+  },
+  "existingComparison": {
+    "path": ".plannotator/image-shader/metrics.json",
+    "inputs": "Eight decoded GIF keyframes, not original unmorphed photographs.",
+    "changedPixelFraction": 0.9044050831239536,
+    "meanAbsoluteChannelError": 13.678949951900398,
+    "threshold": 0,
+    "status": "failed"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "captured_at": "2026-11-21T17:23:27.994862+00:00",
+  "resources": [
+    {
+      "path": "raw/reference.gif",
+      "url": "https://i.pinimg.com/originals/bf/36/76/bf3676d6107b8953decfb33ad16ebf9b.gif",
+      "method": "ordinary anonymous HTTPS download from the media URL delivered by the pin",
+      "sha256": "279d162172bc9bc009adc02561416e7d632b12831e6604684e3cea0bb6d68b94",
+      "content_type": "image/gif",
+      "size_bytes": 1944486,
+      "terms": "not specified in delivered pin"
+    }
+  ],
+  "source_code": {
+    "status": "unavailable",
+    "reason": "Pinterest supplies the GIF and no external source link."
+  }
+}
