@@ -3,11 +3,11 @@ import type { RegistryItem } from "shadcn/schema";
 const runtimeFiles = [
   "engine/layered-raster.ts", "engine/motor-audio.ts", "engine/motor-synth.ts",
   "engine/sprite-stack.ts", "engine/surface-vehicle.ts", "engine/terrain-grid.ts",
-  "engine/vehicle-simulation.ts", "game/delivery-session.ts", "game/driving-world.ts",
+  "engine/vehicle-simulation.ts", "engine/world-collision.ts", "game/delivery-session.ts", "game/driving-world.ts",
   "game/engine-voices.ts", "game/garage-artwork.ts", "game/layered-world.ts",
   "game/race-artwork.ts", "game/race-pilot.ts", "game/race-session.ts",
   "game/race-track.ts", "game/racer-content.ts", "game/session-contract.ts",
-  "game/switchback-markup.ts", "game/world-assets.ts", "game/world-terrain.ts",
+  "game/switchback-markup.ts", "game/world-assets.ts", "game/world-layout.ts", "game/world-terrain.ts",
   "mount-switchback.ts",
 ];
 

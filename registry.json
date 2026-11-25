@@ -1228,6 +1228,11 @@
           "target": "components/sprite-racer/engine/vehicle-simulation.ts"
         },
         {
+          "path": "src/registry/sprite-racer/engine/world-collision.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/engine/world-collision.ts"
+        },
+        {
           "path": "src/registry/sprite-racer/game/delivery-session.ts",
           "type": "registry:lib",
           "target": "components/sprite-racer/game/delivery-session.ts"
@@ -1291,6 +1296,11 @@
           "path": "src/registry/sprite-racer/game/world-assets.ts",
           "type": "registry:lib",
           "target": "components/sprite-racer/game/world-assets.ts"
+        },
+        {
+          "path": "src/registry/sprite-racer/game/world-layout.ts",
+          "type": "registry:lib",
+          "target": "components/sprite-racer/game/world-layout.ts"
         },
         {
           "path": "src/registry/sprite-racer/game/world-terrain.ts",
