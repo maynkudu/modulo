@@ -1,5 +1,5 @@
-.page { color: #0f0000; background: #f6efed; font-family: var(--font-inter), sans-serif; }
-.controls { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 9px 25px; padding: 12px 6%; background: #f6efed; }
+.page { color: var(--ink, var(--foreground, #f6efed)); background: var(--paper, var(--background, #000)); font-family: var(--site-body-font, var(--font-geist-sans, var(--font-inter, sans-serif))); }
+.controls { position: sticky; top: 0; z-index: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 9px 25px; padding: 12px 6%; background: var(--paper, var(--background, #000)); }
 .controls a, .intro a, .end a { text-decoration: underline; text-underline-offset: 5px; }
 .colors { display: flex; flex-wrap: wrap; gap: 6px 13px; align-items: center; min-width: 0; }
 .colors legend { float: left; margin-inline-end: 12px; font-weight: 550; }
@@ -9,13 +9,14 @@
 .swatch { width: 11px; height: 11px; border-radius: 50%; }
 .colors input:checked + .choice { text-decoration: underline; text-underline-offset: 4px; }
 .colors input:focus-visible + .choice, .page a:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
-.intro, .sample, .end { padding-inline: 6%; display: grid; align-content: center; }
+.intro, .sample, .end { padding-inline: 6%; }
+.intro, .end { display: grid; align-content: center; }
 .intro { min-height: 56svh; gap: 15px; }
-.intro, .end { background: #0f0000; color: #f6efed; }
-.sample { min-height: 100svh; scroll-margin-top: 72px; }
-.heading, .intro h1 { font-size: 76px; line-height: 1.015; font-weight: 400; letter-spacing: 0; }
-.heading > [data-liquid-line] { display: block; }
-.end { min-height: 66svh; }
-@media (max-width: 850px) { .heading, .intro h1 { font-size: 56px; } .heading > [data-liquid-line] { display: inline; } }
-@media (max-width: 550px) { .heading, .intro h1 { font-size: 42px; } .controls { font-size: 14px; } }
-@media (max-width: 360px) { .heading, .intro h1 { font-size: 36px; } }
+.intro h1 { font-size: 76px; line-height: 1.015; font-weight: 400; letter-spacing: 0; }
+.sample { display: grid; gap: clamp(96px, 18svh, 200px); padding-block: clamp(96px, 18svh, 200px); scroll-margin-top: 112px; }
+.paragraph { width: 100%; max-width: 1120px; margin: 0 auto; font-size: clamp(32px, 4.8vw, 66px); line-height: 1.18; font-weight: 400; letter-spacing: -.025em; }
+.end { min-height: 50svh; gap: 20px; }
+.end p { max-width: 32ch; }
+@media (max-width: 850px) { .intro h1 { font-size: 56px; } }
+@media (max-width: 550px) { .intro h1 { font-size: 42px; } .controls { font-size: 14px; } .colors legend { float: none; margin-inline-end: 0; margin-bottom: 4px; } }
+@media (max-width: 360px) { .intro h1 { font-size: 36px; } }
