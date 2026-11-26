@@ -540,6 +540,24 @@
         { "path": "state-matrix.ts", "sha256": "5b9f8a6128338aff452966bcc29bec1accf3b679a0f3c4e8a22a41aca66e7a7f" },
         { "path": "state-button.css", "sha256": "5f2c11b6c3dfaaeae28ba677978cb8f27ff2a02e0d75241b880ba498dac1fe7f" }
       ]
+    },
+    {
+      "name": "image-mosaic",
+      "repository": "maynkudu/modulo-image-mosaic",
+      "revision": "2ea63f46624349b50f11852f8dafab126f87b474",
+      "files": [
+        { "path": "ImageMosaic.tsx", "sha256": "9a03c2c12dfd3d04d35d126f6d0ef93b2e861a7a7086d03dc3b120f2f7a17bf6" },
+        { "path": "create-image-mosaic.ts", "sha256": "51b35a3573b7b76a3419e15e4b9102dbe2b7f82398f88ffe576492b0d71cca5b" },
+        { "path": "mosaic-shader.ts", "sha256": "87dfc70fb4ffdfaf5fd95d1b9634d3f003a7363f119f621a682d995bb38f2996" },
+        { "path": "element-mosaic.ts", "sha256": "15809a298897ee5384305dc118ce8fda709cd9fc859e35208a10e8809201f04b" },
+        { "path": "elements.ts", "sha256": "9a3feb27c6dc1b5c70424a635f01eea8c7e37b220c4645932d8111438c94714e" },
+        { "path": "idle-comparison.ts", "sha256": "001b63d04002a64a91e2a26a0491bfc349f4f25154d037ec58521b2f3dac6757" },
+        { "path": "optical-pointer.ts", "sha256": "6d57a63b5f4591901e21267df75ce0ebdf0efc7a61e82a44e6d0205c516a6157" },
+        { "path": "image-mosaic.css", "sha256": "59187f7b17661d15fefbd3168102b67704a6a78a212e79b3e79f9221f15d7c4c" },
+        { "path": "OFL.txt", "sha256": "021caa749f89fecd7c2e40a50499de29e84d2bc19251659b47d499c2fbfffc17" },
+        { "path": "element-sources.json", "sha256": "52169915b343a0ade4a5ba1964a2a576b14e82197cfe501d60d95cf2aa3b5fc8" },
+        { "path": "font-sources.json", "sha256": "d9ad50334117982797d8b89576a31beb65db149edb3ebdcc758a8f4db6e57a75" }
+      ]
     }
   ]
 }

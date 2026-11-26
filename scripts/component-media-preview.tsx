@@ -1,4 +1,5 @@
 import { Halftone } from "../src/registry/halftone/Halftone";
+import { ImageMosaic } from "../src/registry/image-mosaic/ImageMosaic";
 import { PortraitWave } from "../src/registry/portrait-wave/PortraitWave";
 import { EyeSpice, type EyeSpiceController } from "../src/registry/eyespice/EyeSpice";
 import { BrickNoise } from "../src/registry/brick-noise/BrickNoise";
@@ -151,9 +152,26 @@ function StateButtonsCapture() {
   </section>;
 }
 
+function ImageMosaicCapture() {
+  useEffect(() => {
+    function checkReady() {
+      if (document.querySelector('.image-mosaic-media canvas[data-ready="true"]')) { observer.disconnect(); markReady(true); }
+    }
+    const observer = new MutationObserver(checkReady);
+    observer.observe(document.body, { subtree: true, attributes: true, attributeFilter: ["data-ready"] });
+    checkReady();
+    return () => observer.disconnect();
+  }, []);
+  return <section className="image-mosaic-media">
+    <ImageMosaic className="media-scene" src="__IMAGE_MOSAIC_IMAGE__" alt="People assembling a large horse sculpture outdoors"
+      cellSize={12} detail={.6} seed={7} autoPlay={false} />
+  </section>;
+}
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
   if (name === "dot-orb") return <DotOrbCapture />;
+  if (name === "image-mosaic") return <ImageMosaicCapture />;
   if (name === "halftone") return <section className="halftone-media">
     <Halftone className="media-scene" onReady={markReady} />
     <span className="halftone-start" aria-hidden="true" /><span className="halftone-end" aria-hidden="true" />

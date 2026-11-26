@@ -1103,6 +1103,89 @@
       "type": "registry:component"
     },
     {
+      "name": "image-mosaic",
+      "title": "Image mosaic",
+      "description": "A photo becomes a periodic-table mosaic, with metallic light, refraction and a comparison slider.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/image-mosaic/ImageMosaic.tsx",
+          "type": "registry:component",
+          "target": "components/image-mosaic/ImageMosaic.tsx"
+        },
+        {
+          "path": "src/registry/image-mosaic/create-image-mosaic.ts",
+          "type": "registry:lib",
+          "target": "components/image-mosaic/create-image-mosaic.ts"
+        },
+        {
+          "path": "src/registry/image-mosaic/mosaic-shader.ts",
+          "type": "registry:lib",
+          "target": "components/image-mosaic/mosaic-shader.ts"
+        },
+        {
+          "path": "src/registry/image-mosaic/element-mosaic.ts",
+          "type": "registry:lib",
+          "target": "components/image-mosaic/element-mosaic.ts"
+        },
+        {
+          "path": "src/registry/image-mosaic/elements.ts",
+          "type": "registry:lib",
+          "target": "components/image-mosaic/elements.ts"
+        },
+        {
+          "path": "src/registry/image-mosaic/idle-comparison.ts",
+          "type": "registry:lib",
+          "target": "components/image-mosaic/idle-comparison.ts"
+        },
+        {
+          "path": "src/registry/image-mosaic/optical-pointer.ts",
+          "type": "registry:lib",
+          "target": "components/image-mosaic/optical-pointer.ts"
+        },
+        {
+          "path": "src/registry/image-mosaic/image-mosaic.css",
+          "type": "registry:file",
+          "target": "components/image-mosaic/image-mosaic.css"
+        },
+        {
+          "path": "src/registry/image-mosaic/OFL.txt",
+          "type": "registry:file",
+          "target": "components/image-mosaic/OFL.txt"
+        },
+        {
+          "path": "src/registry/image-mosaic/element-sources.json",
+          "type": "registry:file",
+          "target": "components/image-mosaic/element-sources.json"
+        },
+        {
+          "path": "src/registry/image-mosaic/font-sources.json",
+          "type": "registry:file",
+          "target": "components/image-mosaic/font-sources.json"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A horse-sculpture photograph compared with its metallic periodic-table mosaic.",
+            "width": 720,
+            "height": 960,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/image-mosaic.jpg"
+          },
+          "video": {
+            "width": 720,
+            "height": 960,
+            "type": "video/mp4",
+            "duration": 6,
+            "url": "https://modulo-maynkudu.vercel.app/media/image-mosaic.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "2048",
       "title": "2048",
       "description": "2048 with grayscale tiles, animated score meters, and merge sounds.",

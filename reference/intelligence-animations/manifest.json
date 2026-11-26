@@ -1,0 +1,31 @@
+{
+  "capturedAt": "2026-11-26T19:43:13.214Z",
+  "source": "https://x.com/praveenisomer/status/2125658274762498408",
+  "status": "Image Mosaic adaptation integrated locally into Modulo. Original media stays local; exact visual parity remains unverified.",
+  "resources": [
+    {
+      "path": "raw/original.mp4",
+      "origin": "https://video.twimg.com/amplify_video/2125652747433504768/vid/avc1/3840x1706/pUiYt43Ydke0TzRR.mp4?tag=29",
+      "contentType": "video/mp4",
+      "terms": "Unknown redistribution terms. Local reference only.",
+      "sizeBytes": 48983807,
+      "sha256": "cbdaf977c594ac8e9d8f614a06a6f0242367c066e967f6d561da87ff997c2f7f"
+    },
+    {
+      "path": "raw/post.json",
+      "origin": "https://api.fxtwitter.com/status/2125658274762498408",
+      "contentType": "application/json",
+      "terms": "Public metadata retrieved through FXTwitter.",
+      "sizeBytes": 6613,
+      "sha256": "9b623575f8c1f8131ca05011429445e588f301f1b201919e0c95577c7ee5d86b"
+    },
+    {
+      "path": "../../.plannotator/intelligence-animations/assets/default.jpg",
+      "origin": "User-provided image.jpeg attachment",
+      "contentType": "image/jpeg",
+      "terms": "User explicitly requested this as the local default.",
+      "sizeBytes": 281145,
+      "sha256": "044817b1faa02ceb2d32ee8f04619d40f799f3cded8e335ef4cc2f2b6217ba35"
+    }
+  ]
+}

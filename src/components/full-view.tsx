@@ -21,6 +21,7 @@ import { EyeSpiceDemo } from "./eyespice-demo";
 import { PortraitWaveDemo } from "./portrait-wave-demo";
 import { HalftoneDemo } from "./halftone-demo";
 import { BrickNoiseDemo } from "./brick-noise-demo";
+import { ImageMosaicDemo } from "./image-mosaic-demo";
 import { DotOrbDemo } from "./dot-orb-demo";
 import { previewCatalogItems as catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
@@ -28,6 +29,7 @@ import styles from "./full-view.module.css";
 type ComponentName = (typeof catalogItems)[number]["component"]["name"];
 const views = {
   "dot-orb": () => <div className={styles.controls}><DotOrbDemo /></div>,
+  "image-mosaic": () => <div className={styles.controls}><ImageMosaicDemo /></div>,
   "halftone": () => <div className={styles.controls}><HalftoneDemo /></div>,
   "eyespice": () => <div className={styles.controls}><EyeSpiceDemo /></div>,
   "portrait-wave": () => <div className={styles.controls}><PortraitWaveDemo /></div>,
@@ -54,9 +56,9 @@ export function FullView({ name }: { name: ComponentName }) {
   const View = views[name];
   if (name === "liquid-text-reveal") return <View />;
   const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download" || name === "inline-download" || name === "state-buttons";
-  const scrollable = control || name === "dot-orb" || name === "halftone" || name === "portrait-wave" || name === "eyespice" || name === "brick-noise" || name === "logo-refraction" || name === "liquid-animations";
+  const scrollable = control || name === "dot-orb" || name === "image-mosaic" || name === "halftone" || name === "portrait-wave" || name === "eyespice" || name === "brick-noise" || name === "logo-refraction" || name === "liquid-animations";
   return <div className={styles.frame}>
-    <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" || name === "dot-orb" ? styles.liquidViewport : ""}`}><View /></main>
+    <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" || name === "dot-orb" ? styles.liquidViewport : ""} ${name === "image-mosaic" ? styles.mosaicViewport : ""}`}><View /></main>
     {scrollable && <LiquidScrollbar viewport={viewport} controls={id} />}
   </div>;
 }

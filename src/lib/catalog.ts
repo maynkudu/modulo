@@ -494,6 +494,28 @@ export const halftone = {
   ],
 } satisfies RegistryItem;
 
+export const imageMosaicItem = {
+  name: "image-mosaic" as const,
+  type: "registry:component",
+  title: "Image mosaic",
+  description: "A photo becomes a periodic-table mosaic, with metallic light, refraction and a comparison slider.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/image-mosaic/ImageMosaic.tsx", target: "components/image-mosaic/ImageMosaic.tsx", type: "registry:component" },
+    { path: "src/registry/image-mosaic/create-image-mosaic.ts", target: "components/image-mosaic/create-image-mosaic.ts", type: "registry:lib" },
+    { path: "src/registry/image-mosaic/mosaic-shader.ts", target: "components/image-mosaic/mosaic-shader.ts", type: "registry:lib" },
+    { path: "src/registry/image-mosaic/element-mosaic.ts", target: "components/image-mosaic/element-mosaic.ts", type: "registry:lib" },
+    { path: "src/registry/image-mosaic/elements.ts", target: "components/image-mosaic/elements.ts", type: "registry:lib" },
+    { path: "src/registry/image-mosaic/idle-comparison.ts", target: "components/image-mosaic/idle-comparison.ts", type: "registry:lib" },
+    { path: "src/registry/image-mosaic/optical-pointer.ts", target: "components/image-mosaic/optical-pointer.ts", type: "registry:lib" },
+    { path: "src/registry/image-mosaic/image-mosaic.css", target: "components/image-mosaic/image-mosaic.css", type: "registry:file" },
+    { path: "src/registry/image-mosaic/OFL.txt", target: "components/image-mosaic/OFL.txt", type: "registry:file" },
+    { path: "src/registry/image-mosaic/element-sources.json", target: "components/image-mosaic/element-sources.json", type: "registry:file" },
+    { path: "src/registry/image-mosaic/font-sources.json", target: "components/image-mosaic/font-sources.json", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 export const shaderCatalogItems = [{
   component: {
     name: "brick-noise" as const,
@@ -525,6 +547,12 @@ export const shaderCatalogItems = [{
   keywords: ["shader", "halftone", "webgl", "dots", "noise", "pointer", "hover", "trail", "palette", "background"],
   seoDescription: "A React halftone shader with flowing dot patterns, an eased pointer trail and editable colors. Try the live controls and install with an active Modulo key.",
   media: componentMedia({ name: "halftone", alt: "Copper and cream dots tracing flowing light and a soft pointer trail on a dark background.", height: 1200, duration: 3.5 }),
+}, {
+  component: imageMosaicItem,
+  addedAt: "2026-11-26",
+  keywords: ["shader", "image", "mosaic", "periodic table", "elements", "metallic", "refraction", "comparison", "upload", "pointer", "trail", "webgl"],
+  seoDescription: "Turn a photo into an adaptive periodic-table mosaic in React. Upload images, compare before and after, and try metallic finishes, refraction and a fading pointer trail. Install with an active Modulo key.",
+  media: componentMedia({ name: imageMosaicItem.name, alt: "A horse-sculpture photograph compared with its metallic periodic-table mosaic.", height: 1600, duration: 6 }),
 }] satisfies CatalogItem[];
 
 export const brickNoise = shaderCatalogItems[0].component;
