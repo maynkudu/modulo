@@ -2,7 +2,7 @@ import { Halftone } from "../src/registry/halftone/Halftone";
 import { PortraitWave } from "../src/registry/portrait-wave/PortraitWave";
 import { EyeSpice, type EyeSpiceController } from "../src/registry/eyespice/EyeSpice";
 import { BrickNoise } from "../src/registry/brick-noise/BrickNoise";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { GardenCanvas } from "../src/registry/interactive-art/examples/GardenCanvas";
 import { Nilkamal } from "../src/registry/nilkamal/Nilkamal";
@@ -10,7 +10,6 @@ import { Diwali26, type Diwali26Controller, type FrameState } from "../src/regis
 import { RootInfection } from "../src/registry/root-infection/RootInfection";
 import { TexturedGlass } from "../src/registry/textured-glass/TexturedGlass";
 import { Game2048, type Game2048Controller } from "../src/registry/2048/Game2048";
-import type { Direction } from "../src/registry/2048/game";
 import { ElasticSlider, type ElasticSliderController } from "../src/registry/elastic-slider/ElasticSlider";
 import { SnapRail, type SnapRailController } from "../src/registry/snap-rail/SnapRail";
 import { LiquidCluster, type LiquidClusterController } from "../src/registry/liquid-cluster/LiquidCluster";
@@ -18,11 +17,10 @@ import { LiquidAnimationsDemo } from "../src/components/liquid-animations-demo";
 import { LogoRefraction } from "../src/registry/logo-refraction/LogoRefraction";
 
 import { OverlayNavigation } from "../src/registry/overlay-navigation/OverlayNavigation";
-import { LiquidTextReveal } from "../src/registry/liquid-text-reveal/LiquidTextReveal";
-import { collectionStatementText } from "../src/lib/collection-statement-text";
+import { LiquidTextDemo } from "../src/components/liquid-text-demo";
 import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
 import { InlineDownload } from "../src/registry/inline-download/InlineDownload";
-import { StateButton } from "../src/registry/state-buttons/StateButton";
+import { StateButton, type StateButtonState } from "../src/registry/state-buttons/StateButton";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
 
@@ -55,10 +53,15 @@ let gameTimer: ReturnType<typeof setInterval> | undefined;
 function gameReady(controller: Game2048Controller | null) {
   clearInterval(gameTimer);
   if (!controller) return;
+  // Establish the best score before the loop, since undo retains it.
+  controller.move("left");
+  controller.undo();
   markReady(controller);
-  const moves: Direction[] = ["left", "up", "right", "down", "left", "up", "left", "down"];
   let index = 0;
-  gameTimer = setInterval(() => controller.move(moves[index++ % moves.length]), 800);
+  gameTimer = setInterval(() => {
+    if (index++ % 2 === 0) controller.move("left");
+    else controller.undo();
+  }, 1000);
 }
 
 let capturedControl: ElasticSliderController | SnapRailController | LiquidClusterController | null = null;
@@ -67,6 +70,17 @@ function controlReady(controller: ElasticSliderController | SnapRailController |
   if (!controller) return;
   markReady(controller);
 }
+window.addEventListener("modulo-media-replay", () => capturedControl?.replay());
+window.addEventListener("keydown", event => { if (event.key === "r") capturedControl?.replay(); });
+window.addEventListener("keydown", event => {
+  if (event.key !== "0" || !capturedControl) return;
+  if ("select" in capturedControl) capturedControl.select("center");
+  else if ("setSeparation" in capturedControl) capturedControl.setSeparation(0);
+  else capturedControl.update({ label: "Brightness", value: 65, onValueChange: () => {}, orientation: "vertical" });
+});
+window.addEventListener("modulo-media-time", () => {
+  if (document.activeElement instanceof HTMLElement && document.activeElement.closest(".inline-download,.liquid-media")) document.activeElement.blur();
+});
 const railDetents = [{ id: "left", label: "Left", position: 0 }, { id: "center", label: "Center", position: 50 }, { id: "right", label: "Right", position: 100 }];
 const clusterItems = [
   { id: "notification", label: "Design review", content: <span style={{ display: "grid", gap: 6 }}><span style={{ fontSize: 11, color: "#777" }}>Messages</span><strong style={{ fontSize: 14 }}>Design review</strong><span style={{ fontSize: 12 }}>The updated preview is ready.</span></span> },
@@ -79,7 +93,24 @@ function NavigationCapture() {
 }
 
 function LiquidAnimationsCapture() {
-  useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
+  useEffect(() => {
+    void document.fonts.ready.then(() => markReady(true));
+    let opened = false;
+    let closed = false;
+    function update(event: Event) {
+      const seconds: unknown = event instanceof CustomEvent ? event.detail : null;
+      if (typeof seconds !== "number") return;
+      if (!opened && seconds >= .7) {
+        document.querySelector<HTMLButtonElement>('button[aria-label="Jane Doe account"]')?.click();
+        opened = true;
+      } else if (!closed && seconds >= 2.7) {
+        document.querySelector<HTMLButtonElement>('button[aria-label="Jane Doe account"]')?.click();
+        closed = true;
+      }
+    }
+    window.addEventListener("modulo-media-time", update);
+    return () => window.removeEventListener("modulo-media-time", update);
+  }, []);
   return <section className="liquid-media"><LiquidAnimationsDemo initialExample="Account" compact /></section>;
 }
 
@@ -97,15 +128,25 @@ const portraitCaptureImages = ["__PORTRAIT_WAVE_A__", "__PORTRAIT_WAVE_B__"];
 function InlineDownloadCapture() {
   useEffect(() => { document.body.dataset.ready = "true"; }, []);
   return <section className="inline-download-media">
-    <InlineDownload />
+    <InlineDownload size="lg" resetAfter={1.2} />
     <span className="inline-download-media-rest" aria-hidden="true" />
   </section>;
 }
 
 function StateButtonsCapture() {
-  useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
+  const [state, setState] = useState<StateButtonState>("idle");
+  useEffect(() => {
+    void document.fonts.ready.then(() => markReady(true));
+    function update(event: Event) {
+      const seconds: unknown = event instanceof CustomEvent ? event.detail : null;
+      if (typeof seconds !== "number") return;
+      setState(seconds < .7 || seconds >= 4.3 ? "idle" : seconds < 1.4 ? "loading" : seconds < 2.1 ? "thinking" : seconds < 2.8 ? "pending" : "success");
+    }
+    window.addEventListener("modulo-media-time", update);
+    return () => window.removeEventListener("modulo-media-time", update);
+  }, []);
   return <section className="state-buttons-media">
-    <StateButton state="thinking" animation="ripple" size={120} color="#ff4a3e" label="Thinking" />
+    <StateButton state={state} size={120} color="#ff4a3e" />
   </section>;
 }
 
@@ -133,7 +174,7 @@ function MediaPreview() {
     return <LogoRefraction className="media-scene" src="__LOGO_REFRACTION_IMAGE__" alt="The complete maynkudu logo" onReady={markReady} />;
   }
   if (name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster") {
-    return <section className="control-media"><header><span>Modulo</span><h1>{name === "elastic-slider" ? "Elastic slider" : name === "snap-rail" ? "Snap rail" : "Liquid cluster"}</h1><button type="button" data-control-replay onClick={() => capturedControl?.replay()}>Replay</button></header><div className="control-media-stage">
+    return <section className="control-media"><div className="control-media-stage">
       {name === "elastic-slider" ? <ElasticSlider label="Brightness" defaultValue={65} orientation="vertical" onReady={controlReady} /> : name === "snap-rail" ? <SnapRail ariaLabel="Placement" detents={railDetents} defaultSelectedId="center" onReady={controlReady} /> : <LiquidCluster ariaLabel="Notification actions" layout="notification" items={clusterItems} defaultSeparation={0} onReady={controlReady} />}
     </div></section>;
   }
@@ -159,17 +200,27 @@ function MediaPreview() {
 }
 
 function LiquidTextCapture() {
-  useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
-  return <section className="liquid-text-media">
-    <LiquidTextReveal as="h1" text={collectionStatementText} profile="studio" revealMode="scroll" />
-  </section>;
+  useEffect(() => {
+    void document.fonts.ready.then(() => markReady(true));
+    function update(event: Event) {
+      const seconds: unknown = event instanceof CustomEvent ? event.detail : null;
+      if (typeof seconds !== "number") return;
+      const progress = seconds < .2 ? 0 : seconds < 1.8 ? (seconds - .2) / 1.6 : seconds < 2.1 ? 1 : seconds < 3.8 ? 1 - (seconds - 2.1) / 1.7 : 0;
+      const eased = (1 - Math.cos(progress * Math.PI)) / 2;
+      window.scrollTo({ top: eased * (document.documentElement.scrollHeight - innerHeight), behavior: "instant" });
+      window.dispatchEvent(new Event("scroll"));
+    }
+    window.addEventListener("modulo-media-time", update);
+    return () => window.removeEventListener("modulo-media-time", update);
+  }, []);
+  return <section className="liquid-text-media"><LiquidTextDemo /></section>;
 }
 
 function DownloadCapture() {
   const { state, start } = useDownloadPreview();
   useEffect(() => { void document.fonts.ready.then(() => markReady(true)); }, []);
   return <section className="download-media">
-    <MultiStepDownload size={204} state={state} onActivate={() => start()} />
+    <MultiStepDownload size={153} state={state} onActivate={() => start()} />
     <span className="download-media-rest" aria-hidden="true" />
   </section>;
 }

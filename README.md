@@ -24,7 +24,7 @@ bun run build
 
 ## Structure
 
-- `src/app/page.tsx` shows one thumbnail per component at `/`, with GIF previews on hover and keyboard focus.
+- `src/app/(site)/page.tsx` shows project thumbnails at `/`, with looping MP4 previews on hover and keyboard focus.
 - `src/app/components/page.tsx` lists component names and added dates, with keyword and date filters.
 - `src/app/components/interactive-art/page.tsx` contains the garden preview, controls, installation, API, and source.
 - `src/registry/interactive-art/` contains fetched source from its private component repository, including six installable garden files.
@@ -32,7 +32,7 @@ bun run build
 - `src/registry/root-infection/` contains fetched source from its private repository, including the ten installable files for the independent Verlet solver, mesh renderer, audio engine, and React lifecycle.
 - `src/lib/catalog.ts` contains component metadata, installation targets, and API documentation.
 - `src/lib/seo.ts` and `src/lib/site.ts` set page metadata, structured data, and the site origin.
-- `public/media/` contains each component's thumbnail, GIF, and MP4.
+- `public/media/` contains each component's JPG thumbnail and silent MP4 loop.
 - `src/app/registry/page.tsx` documents authenticated installation through `@modulo`.
 - `components.lock.json` pins private component repositories and source checksums. `scripts/sync-components.ts` fetches their files into ignored local directories.
 - `scripts/build-registry.ts` generates source manifests under ignored `.private-registry/`. Authenticated `/r/<name>.json` routes serve them. The root `registry.json` contains metadata and file paths only.
@@ -165,17 +165,25 @@ DOMAIN_ACTIVE=true  # https://modulo.maynkudu.com
 
 Set the variable in the deployment environment and rebuild after changing it. `NEXT_PUBLIC_SITE_URL` overrides this selection for local verification or another origin. `REGISTRY_BASE_URL` separately overrides generated registry media URLs. Update the consumer's static `components.json` registry URL when switching to the custom domain.
 
-The home, Components, and Registry pages use the Modulo logo for sharing. Each component uses its thumbnail for Open Graph and Twitter images, and its matching MP4 for `og:video`. GIFs play in the home grid on hover or keyboard focus. Reduced motion keeps the thumbnails still.
+The home, Components, and Registry pages use the Modulo logo for sharing. Each component uses its thumbnail for Open Graph and Twitter images, and its matching MP4 for `og:video`. MP4s play in the home grid on hover or keyboard focus. Reduced motion, video failure, and loading keep the thumbnails visible.
 
 `/sitemap.xml` lists the six public pages and their images. `/robots.txt` points to the sitemap. Vercel preview deployments have `noindex` metadata. Registry JSON responses have a `noindex` header.
 
-Regenerate the component media with FFmpeg installed:
+Regenerate the component media with Node.js 24, Bun, FFmpeg, and FFprobe installed:
 
 ```sh
+bun run components:sync
 bun run media:build --dry-run
 bun run media:build
+bun run media:verify
 ```
 
-The command bundles the existing components into a local capture page and uses Webreel to record them. Capture files and the recording config live in `.plannotator/component-media/`. JPGs and MP4s are 1200 by 630 pixels. GIFs are 640 by 336 pixels and four seconds long. Use `--output-dir <directory>` to inspect regenerated assets in a separate directory.
+The command bundles the synced components into a local capture page. The pinned Webreel adapter advances the browser animation clock once per captured frame. Capture can take longer than playback on a slow machine. It records every frame instead of repeating screenshots to fill a 60 fps timeline.
 
-Add a capture scenario in `scripts/build-component-media.ts` and its preview in `scripts/component-media-preview.tsx` when adding a component. The registry build checks that every component has nonempty media files before generating the manifests.
+Each output is a silent, 60 fps H.264 MP4 with `yuv420p` pixels and fast-start metadata. Videos are 720 pixels wide and preserve each preview's aspect ratio to the nearest even pixel. The encoder trims startup time, joins ambient loops, and compresses each video below 1,000,000 bytes. Simple controls can be much smaller. JPG posters use the matching dimensions. GIFs are not generated.
+
+Capture files, configuration, and reports live in `~/.webreel/modulo-component-media/`. `MODULO_MEDIA_WORKSPACE` overrides this location. Keep it on the same filesystem as `~/.webreel`, because Webreel moves its temporary recordings there. Set `MODULO_MEDIA_SOFTWARE_GL=1` on a headless host without a graphics driver. `FFMPEG_PATH` and `FFPROBE_PATH` select existing binaries.
+
+Use `--component <name>` to record one preview, or pass comma-separated names. Use `--output-dir <directory>` to inspect replacements before publishing them. After changing encoding settings, `--encode-only` reuses the existing raw captures.
+
+Add a capture scenario in `scripts/build-component-media.ts` and its preview in `scripts/component-media-preview.tsx` when adding a component. Generation verifies frame counts, frame rate, codec, dimensions, duration, size, and complete decoding before replacing each output. The registry build rejects missing media and MP4s larger than 1,000,000 bytes.

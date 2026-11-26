@@ -10,6 +10,7 @@ const homepage = process.env.REGISTRY_BASE_URL ?? siteUrl;
 await Promise.all(catalogItems.flatMap(({ media }) => Object.values(media).map(async ({ src }) => {
   const asset = await stat(resolve(root, `public${src}`));
   if (!asset.isFile() || asset.size === 0) throw new Error(`Missing component media: ${src}`);
+  if (src.endsWith(".mp4") && asset.size > 1_000_000) throw new Error(`Component video exceeds 1 MB: ${src}`);
 })));
 const sourceItems = catalogItems.map(({ component, media }) => ({
   ...component,

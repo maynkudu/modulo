@@ -312,10 +312,10 @@ export const eyeSpice = {
 } satisfies RegistryItem;
 
 function componentMedia({ name, alt, height = 630, duration = 4 }: { name: string; alt: string; height?: number; duration?: number }) {
+  const outputHeight = Math.round(height * .6 / 2) * 2;
   return {
-    thumbnail: { src: `/media/${name}.jpg`, alt, width: 1200, height, type: "image/jpeg" },
-    animation: { src: `/media/${name}.gif`, width: 1200, height, type: "image/gif" },
-    video: { src: `/media/${name}.mp4`, width: 1200, height, type: "video/mp4", duration },
+    thumbnail: { src: `/media/${name}.jpg`, alt, width: 720, height: outputHeight, type: "image/jpeg" },
+    video: { src: `/media/${name}.mp4`, width: 720, height: outputHeight, type: "video/mp4", duration },
   };
 }
 
@@ -497,13 +497,13 @@ export const shaderCatalogItems = [{
   addedAt: "2026-11-23",
   keywords: ["shader", "portrait", "faces", "morph", "wave", "tiles", "images", "webgl", "optical flow"],
   seoDescription: "A React portrait morph shader with an image-array API, local correspondence computation and a diagonal tile wave. Try your images, prepare aligned portraits and install with a Modulo key.",
-  media: componentMedia({ name: "portrait-wave", alt: "Two grayscale portraits morphing through diagonally delayed rectangular tiles.", height: 900, duration: 3.88 }),
+  media: componentMedia({ name: "portrait-wave", alt: "Two grayscale portraits morphing through diagonally delayed rectangular tiles.", height: 900, duration: 4 }),
 }, {
   component: halftone,
   addedAt: "2026-11-23",
   keywords: ["shader", "halftone", "webgl", "dots", "noise", "pointer", "hover", "trail", "palette", "background"],
   seoDescription: "A React halftone shader with flowing dot patterns, an eased pointer trail and editable colors. Try the live controls and install with an active Modulo key.",
-  media: componentMedia({ name: "halftone", alt: "Copper and cream dots tracing flowing light and a soft pointer trail on a dark background.", height: 1200, duration: 6 }),
+  media: componentMedia({ name: "halftone", alt: "Copper and cream dots tracing flowing light and a soft pointer trail on a dark background.", height: 1200, duration: 3.5 }),
 }] satisfies CatalogItem[];
 
 export const brickNoise = shaderCatalogItems[0].component;

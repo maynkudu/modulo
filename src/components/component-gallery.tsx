@@ -82,8 +82,6 @@ function ComponentTile({ item, canAnimate, eager }: {
       <video ref={video} className={`${styles.scene} ${styles.animation} ${playing && videoReady && !failed ? styles.playing : ""}`}
         src={media.video.src} muted loop playsInline preload="none" aria-hidden="true"
         onPlaying={() => setVideoReady(true)} onError={() => setFailed(true)} />
-      {playing && failed && <Image className={styles.scene} src={media.animation.src} alt="" aria-hidden="true"
-        fill sizes={thumbnailSizes} unoptimized loading="eager" />}
     </div>
     <Link className={styles.tileLink} href={`/components/${component.name}`} aria-label={`Open ${component.title}`} />
   </article>;

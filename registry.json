@@ -30,20 +30,14 @@
         "media": {
           "thumbnail": {
             "alt": "A dark button labeled Thinking with a red light matrix rippling outward.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/state-buttons.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/state-buttons.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 5,
             "url": "https://modulo-maynkudu.vercel.app/media/state-buttons.mp4"
@@ -79,20 +73,14 @@
         "media": {
           "thumbnail": {
             "alt": "A light download pill on black, part-filled with progress and counting up.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/inline-download.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/inline-download.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 6,
             "url": "https://modulo-maynkudu.vercel.app/media/inline-download.mp4"
@@ -151,20 +139,14 @@
         "media": {
           "thumbnail": {
             "alt": "A textured monochrome 3D eye with a dark iris and bright silhouette rim.",
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/eyespice.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 1200,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/eyespice.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "video/mp4",
             "duration": 6,
             "url": "https://modulo-maynkudu.vercel.app/media/eyespice.mp4"
@@ -215,20 +197,14 @@
         "media": {
           "thumbnail": {
             "alt": "White and purple lotus flowers growing above a pond in daylight.",
-            "width": 1200,
-            "height": 816,
+            "width": 720,
+            "height": 490,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/interactive-art.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 816,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/interactive-art.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 816,
+            "width": 720,
+            "height": 490,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/interactive-art.mp4"
@@ -299,20 +275,14 @@
         "media": {
           "thumbnail": {
             "alt": "Maroon roots branching from the cursor across a dark page.",
-            "width": 1200,
-            "height": 630,
+            "width": 720,
+            "height": 378,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/root-infection.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 630,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/root-infection.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 630,
+            "width": 720,
+            "height": 378,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/root-infection.mp4"
@@ -383,20 +353,14 @@
         "media": {
           "thumbnail": {
             "alt": "A blue lotus and its reflection on a moonlit pond in the rain.",
-            "width": 1200,
-            "height": 816,
+            "width": 720,
+            "height": 490,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/nilkamal.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 816,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/nilkamal.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 816,
+            "width": 720,
+            "height": 490,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/nilkamal.mp4"
@@ -452,20 +416,14 @@
         "media": {
           "thumbnail": {
             "alt": "Flowers, leafy paisleys, marigold garlands and diyas beneath skyshots in a dark Diwali sky.",
-            "width": 1200,
-            "height": 1072,
+            "width": 720,
+            "height": 644,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/diwali-26.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 1072,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/diwali-26.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 1072,
+            "width": 720,
+            "height": 644,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/diwali-26.mp4"
@@ -520,20 +478,14 @@
         "media": {
           "thumbnail": {
             "alt": "A photograph seen through rough glass with a fine square grid and a broad light reflection.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/textured-glass.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/textured-glass.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/textured-glass.mp4"
@@ -574,20 +526,14 @@
         "media": {
           "thumbnail": {
             "alt": "A vertical brightness slider stretching beyond its endpoint on a pale background.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/elastic-slider.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/elastic-slider.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/elastic-slider.mp4"
@@ -628,20 +574,14 @@
         "media": {
           "thumbnail": {
             "alt": "A rounded draggable marker settling between labeled rail positions.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/snap-rail.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/snap-rail.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/snap-rail.mp4"
@@ -677,20 +617,14 @@
         "media": {
           "thumbnail": {
             "alt": "A notification rectangle separating into a message card and Clear button.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/liquid-cluster.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/liquid-cluster.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/liquid-cluster.mp4"
@@ -731,20 +665,14 @@
         "media": {
           "thumbnail": {
             "alt": "The complete square maynkudu logo, with metallic light on its black field and an iridescent n in the lower right.",
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/logo-refraction.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 1200,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/logo-refraction.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/logo-refraction.mp4"
@@ -812,20 +740,14 @@
         "media": {
           "thumbnail": {
             "alt": "The portfolio navbar above a light navigation panel and abstract image previews.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/overlay-navigation.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/overlay-navigation.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/overlay-navigation.mp4"
@@ -896,20 +818,14 @@
         "media": {
           "thumbnail": {
             "alt": "A liquid Account menu growing from a round avatar on a dark background.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/liquid-animations.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/liquid-animations.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/liquid-animations.mp4"
@@ -935,20 +851,14 @@
         "media": {
           "thumbnail": {
             "alt": "Text on warm paper with sharp letters on the left and liquid red letters on the right.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/liquid-text-reveal.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/liquid-text-reveal.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/liquid-text-reveal.mp4"
@@ -979,20 +889,14 @@
         "media": {
           "thumbnail": {
             "alt": "A raised circular download button with a clockwise black progress ring on a pale background.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/multi-step-download.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/multi-step-download.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 5,
             "url": "https://modulo-maynkudu.vercel.app/media/multi-step-download.mp4"
@@ -1033,20 +937,14 @@
         "media": {
           "thumbnail": {
             "alt": "Staggered grayscale tiles separated by thin black lines.",
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/brick-noise.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 1200,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/brick-noise.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "video/mp4",
             "duration": 4.05,
             "url": "https://modulo-maynkudu.vercel.app/media/brick-noise.mp4"
@@ -1092,22 +990,16 @@
         "media": {
           "thumbnail": {
             "alt": "Two grayscale portraits morphing through diagonally delayed rectangular tiles.",
-            "width": 1200,
-            "height": 900,
+            "width": 720,
+            "height": 540,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/portrait-wave.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 900,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/portrait-wave.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 900,
+            "width": 720,
+            "height": 540,
             "type": "video/mp4",
-            "duration": 3.88,
+            "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/portrait-wave.mp4"
           }
         }
@@ -1146,22 +1038,16 @@
         "media": {
           "thumbnail": {
             "alt": "Copper and cream dots tracing flowing light and a soft pointer trail on a dark background.",
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/halftone.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 1200,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/halftone.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 1200,
+            "width": 720,
+            "height": 720,
             "type": "video/mp4",
-            "duration": 6,
+            "duration": 3.5,
             "url": "https://modulo-maynkudu.vercel.app/media/halftone.mp4"
           }
         }
@@ -1212,20 +1098,14 @@
         "media": {
           "thumbnail": {
             "alt": "Grayscale 2048 tiles beneath score and best meters on an almost-white background.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/2048.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/2048.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 4,
             "url": "https://modulo-maynkudu.vercel.app/media/2048.mp4"
@@ -1391,20 +1271,14 @@
         "media": {
           "thumbnail": {
             "alt": "A pixel car driving on a raised road through a layered forest world.",
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/sprite-racer.jpg"
           },
-          "animation": {
-            "width": 1200,
-            "height": 800,
-            "type": "image/gif",
-            "url": "https://modulo-maynkudu.vercel.app/media/sprite-racer.gif"
-          },
           "video": {
-            "width": 1200,
-            "height": 800,
+            "width": 720,
+            "height": 480,
             "type": "video/mp4",
             "duration": 6,
             "url": "https://modulo-maynkudu.vercel.app/media/sprite-racer.mp4"
