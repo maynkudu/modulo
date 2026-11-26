@@ -1,6 +1,6 @@
 # Modulo
 
-A component library by maynkudu, inspired by Compronents' preview, documentation, and source installation model.
+A library of interactive pages, components, and shaders by maynkudu, inspired by Compronents' preview, documentation, and source installation model.
 
 Compronents' verified implementation stores its source in a public monorepo and gates website downloads. Modulo stores its original component files in separate private repositories.
 
@@ -25,21 +25,30 @@ bun run build
 ## Structure
 
 - `src/app/(site)/page.tsx` shows project thumbnails at `/`, with looping MP4 previews on hover and keyboard focus.
-- `src/app/components/page.tsx` lists component names and added dates, with keyword and date filters.
-- `src/app/components/interactive-art/page.tsx` contains the garden preview, controls, installation, API, and source.
+- `src/app/(site)/components/page.tsx` lists Components with keyword and date filters through `CatalogIndex`.
+- `src/app/(site)/pages/page.tsx` and `src/app/(site)/shaders/page.tsx` show Pages and Shaders through `ComponentLibrary`.
+- `src/components/work-collection-layout.tsx` supplies the shared category navigation. `src/app/(site)/layout.tsx` supplies the site header, footer, fonts, and theme.
+- `src/app/(site)/components/interactive-art/page.tsx` contains the garden preview, controls, installation, API, and source.
 - `src/registry/interactive-art/` contains fetched source from its private component repository, including six installable garden files.
-- `src/app/components/root-infection/page.tsx` contains the text-only horror preview, installation, API, implementation notes, and source.
+- `src/app/(site)/components/root-infection/page.tsx` contains the text-only horror preview, installation, API, implementation notes, and source.
 - `src/registry/root-infection/` contains fetched source from its private repository, including the ten installable files for the independent Verlet solver, mesh renderer, audio engine, and React lifecycle.
-- `src/lib/catalog.ts` contains component metadata, installation targets, and API documentation.
+- `src/lib/catalog.ts` contains separate `catalogItems`, `pageCatalogItems`, and `shaderCatalogItems` arrays, installation targets, and API documentation. `getCatalogPath` returns each module's documentation URL.
+- `src/app/view/[slug]/page.tsx` and `FullView` host standalone Component and Shader previews. `src/app/play/<slug>/page.tsx` hosts a complete Page preview.
 - `src/lib/seo.ts` and `src/lib/site.ts` set page metadata, structured data, and the site origin.
 - `public/media/` contains each component's JPG thumbnail and silent MP4 loop.
-- `src/app/registry/page.tsx` documents authenticated installation through `@modulo`.
+- `src/app/(site)/registry/page.tsx` documents authenticated installation through `@modulo`.
 - `components.lock.json` pins private component repositories and source checksums. `scripts/sync-components.ts` fetches their files into ignored local directories.
 - `scripts/build-registry.ts` generates source manifests under ignored `.private-registry/`. Authenticated `/r/<name>.json` routes serve them. The root `registry.json` contains metadata and file paths only.
 - `/mint` creates and revokes source keys. `src/lib/access.ts` verifies passphrases and sessions, and `src/lib/mint-store.ts` persists key hashes and revocation state.
 - `src/components/interface-sounds.tsx` and `src/lib/interface-sounds.ts` handle soft interaction sounds and the saved sound preference.
 - `public/brand/` contains the supplied Modulo logo.
 - `components.json` configures shadcn and source registries.
+
+## Add a Page, Component, or Shader
+
+Follow [the module workflow in AGENTS.md](AGENTS.md#add-or-update-a-page-component-or-shader). It defines category placement, current layout references, private source handling, preview routes, and verification.
+
+Choose Pages for a complete installed page, Components for a reusable interface element, and Shaders for a visual shader. Category placement is separate from individual files' shadcn registry types. Keep each module in one category and use `getCatalogPath` for its documentation links.
 
 ## Install the first component
 
@@ -51,7 +60,7 @@ bunx shadcn@latest add @modulo/interactive-art
 
 Import `GardenCanvas` from `@/components/interactive-art/examples/GardenCanvas`. Its canvas engine handles growth, elastic stems, keyboard interaction, reduced motion, and PNG layer exports. The component page documents its props and controller methods. The registry contains source files and requires no animation dependency.
 
-The site uses the supplied black and white logo, Geist Pixel Square headings, Geist Mono body text, and square panels. Use Rune Icons when adding icons.
+Inherit typography and colors from the shared site layout and CSS tokens. Follow the current category reference in `AGENTS.md` when adding a demo or documentation page. Use Rune Icons for new icons.
 
 Sound feedback starts after user interaction. The header's sound toggle mutes clicks, slider ticks, and drag feedback, and remembers the choice. Press motion stays small and stops under reduced motion.
 
@@ -92,7 +101,7 @@ The component page at `/components/nilkamal` includes controls, installation, AP
 
 ## Private component repositories
 
-Each component owns its original source in a separate private GitHub repository:
+Each module owns its original source in a separate private GitHub repository. `components.lock.json` lists every repository and pinned revision. Examples include:
 
 - [Interactive art](https://github.com/maynkudu/modulo-interactive-art).
 - [Root Infection](https://github.com/maynkudu/modulo-root-infection).
@@ -100,7 +109,7 @@ Each component owns its original source in a separate private GitHub repository:
 
 The main Modulo repository is public. Every new module stores its original implementation in a separate private repository. The website, live interactive previews, usage examples, and API documentation remain public. See `AGENTS.md` for the module integration workflow.
 
-For local source sync, authenticate with `gh auth login`. Deployment builds use `MODULO_COMPONENTS_TOKEN`, a fine-grained GitHub token with read-only Contents access to the three component repositories. Credentials never go in `components.lock.json`.
+For local source sync, authenticate with `gh auth login`. Deployment builds use `MODULO_COMPONENTS_TOKEN`, a fine-grained GitHub token with read-only Contents access to the repositories listed in `components.lock.json`. Credentials never go in that file.
 
 `bun run components:sync` verifies existing files and downloads missing ones. It refuses to overwrite modified source. `bun run components:sync --force` explicitly fetches all pinned files again. Develop component changes in their private repository, update its pinned revision and SHA-256 checksums in `components.lock.json`, then sync. Build and typecheck run source sync automatically. A fresh checkout needs private GitHub access.
 
@@ -167,23 +176,47 @@ Set the variable in the deployment environment and rebuild after changing it. `N
 
 The home, Components, and Registry pages use the Modulo logo for sharing. Each component uses its thumbnail for Open Graph and Twitter images, and its matching MP4 for `og:video`. MP4s play in the home grid on hover or keyboard focus. Reduced motion, video failure, and loading keep the thumbnails visible.
 
-`/sitemap.xml` lists the six public pages and their images. `/robots.txt` points to the sitemap. Vercel preview deployments have `noindex` metadata. Registry JSON responses have a `noindex` header.
+`/sitemap.xml` lists site pages, category documentation, full previews, and their images. `/robots.txt` points to the sitemap. Vercel preview deployments have `noindex` metadata. Registry JSON responses have a `noindex` header.
 
-Regenerate the component media with Node.js 24, Bun, FFmpeg, and FFprobe installed:
+## Record a compact preview
+
+Use this workflow for Pages, Components, and Shaders. Install Node.js 24, Bun, FFmpeg, and FFprobe before recording.
+
+1. Add the slug to its category in `src/lib/catalog.ts`. Set its real aspect ratio and a short duration. `componentMedia` scales the existing 1200 px reference dimensions to a 720 px output with an even height.
+2. Add its actual interactive implementation to `scripts/component-media-preview.tsx`. Mark the page ready after fonts, images, and the renderer initialize. Keep demo data deterministic and disable audio.
+3. Add a named shot specification and any scripted interaction to `scripts/build-component-media.ts`. Start with the subject ready, show one interaction and its outcome, then return to the starting state. For ambient scenes, use the existing wrap blend. Omit startup waits, unrelated controls, tutorial key overlays, and added captions. Match the current demo's fonts, colors, and background.
+4. Aim for a 3.5 to 6 second loop. Keep duration within six seconds and on a whole 60 fps frame boundary. Preserve 60 fps when compressing. Trim the shot or simplify its framing when it exceeds the size limit.
+5. Sync source and inspect a targeted dry-run. Replace `state-buttons` in these commands with the new slug:
 
 ```sh
 bun run components:sync
-bun run media:build --dry-run
-bun run media:build
-bun run media:verify
+bun run media:build --component state-buttons --dry-run
+bun run media:build --component state-buttons --output-dir .plannotator/media-preview
 ```
 
-The command bundles the synced components into a local capture page. The pinned Webreel adapter advances the browser animation clock once per captured frame. Capture can take longer than playback on a slow machine. It records every frame instead of repeating screenshots to fill a 60 fps timeline.
+6. Play the generated MP4 in a browser and inspect its JPG poster. Check framing, readable details, the interaction's outcome, and several loop joins. Before publishing, generation checks actual frames, fully decodes the video, and checks the poster dimensions. A frame-rate label alone does not prove a valid recording.
+7. Publish only the inspected `<slug>.mp4` and `<slug>.jpg` pair into `public/media/`. Run the checks below. Keep the full interactive preview working; a video supplements it.
 
-Each output is a silent, 60 fps H.264 MP4 with `yuv420p` pixels and fast-start metadata. Videos are 720 pixels wide and preserve each preview's aspect ratio to the nearest even pixel. The encoder trims startup time, joins ambient loops, and compresses each video below 1,000,000 bytes. Simple controls can be much smaller. JPG posters use the matching dimensions. GIFs are not generated.
+```sh
+bun scripts/component-media-policy.ts
+bun run media:verify
+bun run registry:build
+```
 
-Capture files, configuration, and reports live in `~/.webreel/modulo-component-media/`. `MODULO_MEDIA_WORKSPACE` overrides this location. Keep it on the same filesystem as `~/.webreel`, because Webreel moves its temporary recordings there. Set `MODULO_MEDIA_SOFTWARE_GL=1` on a headless host without a graphics driver. `FFMPEG_PATH` and `FFPROBE_PATH` select existing binaries.
+The shared limits live in `scripts/component-media-policy.ts`. Each output is a silent 60 fps H.264 MP4 with `yuv420p` pixels and fast-start metadata. Videos are 720 px wide and preserve the aspect ratio. JPG posters have matching dimensions. The hard video limit is **1,000,000 bytes**, with an 850,000-byte encoding target for headroom. Keep simple previews below 500,000 bytes when possible. The encoder retries oversized output with two-pass compression and refuses to publish files that still exceed the limit.
 
-Use `--component <name>` to record one preview, or pass comma-separated names. Use `--output-dir <directory>` to inspect replacements before publishing them. After changing encoding settings, `--encode-only` reuses the existing raw captures.
+Registry generation, typecheck, and production builds run a lightweight check for the file list, sizes, and catalog metadata. This rejects GIFs, raw captures, missing files, uncataloged files, and invalid dimensions or duration without requiring FFmpeg on the deployment host. `media:verify` additionally probes the real codecs, frame counts, dimensions, and duration, then decodes every video with FFmpeg.
 
-Add a capture scenario in `scripts/build-component-media.ts` and its preview in `scripts/component-media-preview.tsx` when adding a component. Generation verifies frame counts, frame rate, codec, dimensions, duration, size, and complete decoding before replacing each output. The registry build rejects missing media and MP4s larger than 1,000,000 bytes.
+Record only changed slugs. Comma-separated `--component` names select a small batch; omit the flag only for an intentional full refresh. After changing encoding settings, reuse the original raw frames:
+
+```sh
+bun run media:build --component state-buttons --encode-only --output-dir .plannotator/media-preview
+```
+
+`--encode-only` skips browser capture, bundling, and capture-page preparation. Use a fresh capture after implementation or interaction changes. `--dry-run` and `--encode-only` are separate modes.
+
+The pinned Webreel adapter advances the animation clock once per captured frame. Capture can take longer than playback on a slow host. It samples each frame instead of duplicating screenshots to fill a timeline. This is an offline rendering workflow, not a runtime performance benchmark.
+
+Raw recordings, configuration, and reports live in `~/.webreel/modulo-component-media/`. `MODULO_MEDIA_WORKSPACE` overrides that path. Keep it on the same filesystem as `~/.webreel` to avoid a cross-filesystem rename failure. Run one capture or encode process per workspace. Use a different workspace for independent concurrent work. Keep raw captures, GIFs, WebM files, and review artifacts out of `public/media/` and Git.
+
+Set `MODULO_MEDIA_SOFTWARE_GL=1` on a headless host without a graphics driver. `FFMPEG_PATH` and `FFPROBE_PATH` select existing binaries. Run `bun test scripts/component-media-policy.test.ts` after changing the policy or its enforcement.

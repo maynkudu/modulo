@@ -5,7 +5,10 @@ import { basename, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { allCatalogItems as catalogItems } from "../src/lib/catalog";
 
-import { maxVideoBytes, verifyComponentMedia } from "./verify-component-media";
+import { verifyComponentMedia } from "./verify-component-media";
+import { componentMediaPolicy, verifyMediaMetadata } from "./component-media-policy";
+
+const { fps, maxVideoBytes, targetVideoBytes } = componentMediaPolicy;
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const args = process.argv.slice(2);
@@ -28,56 +31,7 @@ for (let index = 0; index < args.length; index++) {
   } else throw new Error(`Unknown media build argument: ${argument}`);
 }
 
-const workspace = resolve(root, process.env.MODULO_MEDIA_WORKSPACE ?? resolve(homedir(), ".webreel/modulo-component-media"));
-const bundle = resolve(workspace, "bundle");
-const ffmpeg = process.env.FFMPEG_PATH ?? "ffmpeg";
-const ffprobe = process.env.FFPROBE_PATH ?? "ffprobe";
-await mkdir(workspace, { recursive: true });
-execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
-  cwd: root, stdio: "inherit",
-});
-const [javascript, css, font, sansFont, geistFont, glassImage, glassDepth, logoImage, portraitA, portraitB] = await Promise.all([
-  readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
-  readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
-  readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
-  readFile(resolve(root, "src/app/fonts/InterVariable.woff2")),
-  readFile(resolve(root, "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2")),
-  readFile(resolve(root, "public/artwork/stay.jpeg")),
-  readFile(resolve(root, "public/artwork/stay-depth.png")),
-  readFile(resolve(root, "public/artwork/maynkudu-warehouse.png")),
-  readFile(resolve(root, "public/artwork/portrait-wave/christopher-campbell.jpg")),
-  readFile(resolve(root, "public/artwork/portrait-wave/michael-dam.jpg")),
-]);
-const captureClock = await readFile(resolve(root, "scripts/media-capture-clock.js"), "utf8");
-const previewPath = resolve(workspace, "capture.html");
-await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
-@font-face{font-family:GeistMono;src:url(data:font/woff2;base64,${font.toString("base64")}) format("woff2")}
-@font-face{font-family:Inter;src:url(data:font/woff2;base64,${sansFont.toString("base64")}) format("woff2");font-weight:100 900}
-@font-face{font-family:GeistSans;src:url(data:font/woff2;base64,${geistFont.toString("base64")}) format("woff2")}
-*{box-sizing:border-box}html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#050304;color:#c9bfc1;font-family:GeistMono,monospace}
-.media-scene{width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
-.media-scene canvas{width:100%;height:100%}
-.control-media{height:100%;background:#f7f8fa;color:#20242b;font-family:Inter,sans-serif;padding:32px;display:flex;flex-direction:column}
-.control-media-stage{flex:1;display:flex;align-items:center;justify-content:center}.control-media-stage>.snap-rail{width:480px}.control-media-stage>.liquid-cluster{width:500px}
-.liquid-media{height:100%;padding:32px;box-sizing:border-box;background:#000;color:#e8e8e8;font-family:Inter,sans-serif;--font-sans:Inter,sans-serif;--foreground:#e8e8e8;--background:#000;--muted-foreground:#999}
-.liquid-media .liquid-demo-tabs{display:none}
-.liquid-media .liquid-demo{height:100%}.liquid-media .liquid-demo-stage{height:100%;min-height:0}
-.liquid-text-media{min-height:100%;background:#000;--paper:#000;--background:#000;--ink:#f6efed;--foreground:#f6efed;--font-geist-sans:GeistSans,sans-serif}
-.liquid-text-media>main>header,.liquid-text-media>main>section,.liquid-text-media>main>footer{display:none}
-.liquid-text-media article{padding-block:70px}
-body:has(.liquid-text-media),html:has(.liquid-text-media),#root:has(.liquid-text-media){overflow:visible;background:#000}
-.download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#f1f1f1}
-.eyespice-media{width:100%;height:100%;display:grid;place-items:center;background:#000}.eyespice-media .eyespice{width:88%;height:88%;aspect-ratio:1}.eyespice-rest{position:absolute;left:3%;top:3%;width:2px;height:2px}
-.halftone-media{position:relative;width:100%;height:100%;background:#0a0403}.halftone-start,.halftone-end{position:absolute;width:2px;height:2px;pointer-events:none}.halftone-start{left:15%;top:25%}.halftone-end{left:80%;top:70%}
-.download-media-rest{position:absolute;left:78%;top:75%;width:1px;height:1px;pointer-events:none}
-.inline-download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#050505}
-.inline-download-media>.inline-download{scale:2.4}
-.inline-download-media-rest{position:absolute;left:10%;top:14%;width:1px;height:1px;pointer-events:none}
-.state-buttons-media{width:100%;height:100%;display:grid;place-items:center;background:#080808}
-.state-buttons-media .state-button{gap:22px;padding-inline:30px;border-radius:32px}
-.state-buttons-media .state-button canvas{width:50px;height:50px}
-.state-buttons-media .state-button-label{min-width:155px;font-size:30px;letter-spacing:-.8px}
-</style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
+if (dryRun && encodeOnly) throw new Error("--dry-run and --encode-only cannot be combined.");
 
 const specifications = [
   { name: "halftone", flow: "halftone-hover-trail", pause: 7000, seek: .1, thumbnailSeek: 2, movePointer: false },
@@ -113,61 +67,116 @@ const captures = selectedItems.map((entry) => {
   return { entry, specification };
 });
 const ambient = new Set(["halftone", "portrait-wave", "eyespice", "brick-noise", "sprite-racer", "logo-refraction", "textured-glass", "diwali-26", "root-infection", "nilkamal", "interactive-art"]);
-const budgets = Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, Math.max(Math.round(specification.seek * 60) + Math.round(entry.media.video.duration * 60) + (ambient.has(entry.component.name) ? 15 : 0), entry.component.name === "liquid-text-reveal" ? 420 : 300)]));
-await writeFile(resolve(workspace, "capture-frame-budgets.json"), JSON.stringify(budgets, null, 2));
+for (const { entry } of captures) verifyMediaMetadata(entry);
+
+const workspace = resolve(root, process.env.MODULO_MEDIA_WORKSPACE ?? resolve(homedir(), ".webreel/modulo-component-media"));
+const bundle = resolve(workspace, "bundle");
+const ffmpeg = process.env.FFMPEG_PATH ?? "ffmpeg";
+const ffprobe = process.env.FFPROBE_PATH ?? "ffprobe";
+await mkdir(workspace, { recursive: true });
+const previewPath = resolve(workspace, "capture.html");
 const configPath = resolve(workspace, "webreel.config.json");
-await writeFile(configPath, `${JSON.stringify({
-  $schema: "https://webreel.dev/schema/v1.json",
-  outDir: "./recordings",
-  defaultDelay: 0,
-  theme: { cursor: { size: 1 } },
-  videos: Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, {
-    url: `${pathToFileURL(previewPath).href}?component=${entry.component.name}`,
-    output: `${entry.component.name}.mp4`,
-    viewport: { width: entry.media.video.width, height: entry.media.video.height },
-    fps: 60,
-    waitFor: "body[data-ready=true]",
-    steps: [
-      ...(entry.component.name === "halftone" ? [
-        { action: "moveTo", selector: ".halftone-start" },
-        { action: "pause", ms: 800 },
-        { action: "moveTo", selector: ".halftone-end" },
-        { action: "pause", ms: 800 },
-        { action: "moveTo", selector: ".halftone-start" },
-      ] : []),
-      ...(entry.component.name === "eyespice" ? [
-        { action: "pause", ms: 1000 },
-        { action: "moveTo", selector: ".eyespice-rest" },
-        { action: "pause", ms: 1000 },
-        { action: "moveTo", selector: ".eyespice canvas" },
-        { action: "pause", ms: 600 },
-        { action: "moveTo", selector: ".eyespice-rest" },
-      ] : []),
-      ...(entry.component.name === "inline-download" ? [
-        { action: "pause", ms: 200 },
-        { action: "click", selector: ".inline-download" },
-        { action: "moveTo", selector: ".inline-download-media-rest" },
-      ] : []),
-      ...(entry.component.name === "multi-step-download" ? [
-        { action: "pause", ms: 200 },
-        { action: "click", selector: ".msd-button" },
-        { action: "moveTo", selector: ".download-media-rest" },
-      ] : []),
-      ...(entry.component.name === "overlay-navigation" ? [
-        { action: "pause", ms: 2200 },
-        { action: "click", selector: '.site-header-menu[aria-expanded="true"]' },
-        { action: "pause", ms: 700 },
-        { action: "click", selector: '.site-header-menu[aria-expanded="false"]' },
-      ] : []),
-      ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "key", key: "r" }] : []),
-      ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "pause", ms: 2400 }, { action: "key", key: "0" }] : []),
-      ...(specification.movePointer ? [{ action: "moveTo", selector: ".media-scene" }] : []),
-      { action: "pause", ms: specification.pause },
-    ],
-  }])),
-}, null, 2)}\n`);
-execFileSync("npx", ["--offline", "webreel", "validate", "-c", configPath], { cwd: root, stdio: "inherit" });
-execFileSync("npx", ["--offline", "webreel", "record", "-c", configPath, "--dry-run"], { cwd: root, stdio: "inherit" });
+if (!encodeOnly) {
+  execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
+    cwd: root, stdio: "inherit",
+  });
+  const [javascript, css, font, sansFont, geistFont, glassImage, glassDepth, logoImage, portraitA, portraitB] = await Promise.all([
+    readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
+    readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
+    readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
+    readFile(resolve(root, "src/app/fonts/InterVariable.woff2")),
+    readFile(resolve(root, "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2")),
+    readFile(resolve(root, "public/artwork/stay.jpeg")),
+    readFile(resolve(root, "public/artwork/stay-depth.png")),
+    readFile(resolve(root, "public/artwork/maynkudu-warehouse.png")),
+    readFile(resolve(root, "public/artwork/portrait-wave/christopher-campbell.jpg")),
+    readFile(resolve(root, "public/artwork/portrait-wave/michael-dam.jpg")),
+  ]);
+  const captureClock = await readFile(resolve(root, "scripts/media-capture-clock.js"), "utf8");
+  await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
+  @font-face{font-family:GeistMono;src:url(data:font/woff2;base64,${font.toString("base64")}) format("woff2")}
+  @font-face{font-family:Inter;src:url(data:font/woff2;base64,${sansFont.toString("base64")}) format("woff2");font-weight:100 900}
+  @font-face{font-family:GeistSans;src:url(data:font/woff2;base64,${geistFont.toString("base64")}) format("woff2")}
+  *{box-sizing:border-box}html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#050304;color:#c9bfc1;font-family:GeistMono,monospace}
+  .media-scene{width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
+  .media-scene canvas{width:100%;height:100%}
+  .control-media{height:100%;background:#f7f8fa;color:#20242b;font-family:Inter,sans-serif;padding:32px;display:flex;flex-direction:column}
+  .control-media-stage{flex:1;display:flex;align-items:center;justify-content:center}.control-media-stage>.snap-rail{width:480px}.control-media-stage>.liquid-cluster{width:500px}
+  .liquid-media{height:100%;padding:32px;box-sizing:border-box;background:#000;color:#e8e8e8;font-family:Inter,sans-serif;--font-sans:Inter,sans-serif;--foreground:#e8e8e8;--background:#000;--muted-foreground:#999}
+  .liquid-media .liquid-demo-tabs{display:none}
+  .liquid-media .liquid-demo{height:100%}.liquid-media .liquid-demo-stage{height:100%;min-height:0}
+  .liquid-text-media{min-height:100%;background:#000;--paper:#000;--background:#000;--ink:#f6efed;--foreground:#f6efed;--font-geist-sans:GeistSans,sans-serif}
+  .liquid-text-media>main>header,.liquid-text-media>main>section,.liquid-text-media>main>footer{display:none}
+  .liquid-text-media article{padding-block:70px}
+  body:has(.liquid-text-media),html:has(.liquid-text-media),#root:has(.liquid-text-media){overflow:visible;background:#000}
+  .download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#f1f1f1}
+  .eyespice-media{width:100%;height:100%;display:grid;place-items:center;background:#000}.eyespice-media .eyespice{width:88%;height:88%;aspect-ratio:1}.eyespice-rest{position:absolute;left:3%;top:3%;width:2px;height:2px}
+  .halftone-media{position:relative;width:100%;height:100%;background:#0a0403}.halftone-start,.halftone-end{position:absolute;width:2px;height:2px;pointer-events:none}.halftone-start{left:15%;top:25%}.halftone-end{left:80%;top:70%}
+  .download-media-rest{position:absolute;left:78%;top:75%;width:1px;height:1px;pointer-events:none}
+  .inline-download-media{position:relative;display:grid;place-items:center;width:100%;height:100%;background:#050505}
+  .inline-download-media>.inline-download{scale:2.4}
+  .inline-download-media-rest{position:absolute;left:10%;top:14%;width:1px;height:1px;pointer-events:none}
+  .state-buttons-media{width:100%;height:100%;display:grid;place-items:center;background:#080808}
+  .state-buttons-media .state-button{gap:22px;padding-inline:30px;border-radius:32px}
+  .state-buttons-media .state-button canvas{width:50px;height:50px}
+  .state-buttons-media .state-button-label{min-width:155px;font-size:30px;letter-spacing:-.8px}
+  </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
+
+  const budgets = Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, Math.max(Math.round(specification.seek * fps) + Math.round(entry.media.video.duration * fps) + (ambient.has(entry.component.name) ? 15 : 0), entry.component.name === "liquid-text-reveal" ? 420 : 300)]));
+  await writeFile(resolve(workspace, "capture-frame-budgets.json"), JSON.stringify(budgets, null, 2));
+  await writeFile(configPath, `${JSON.stringify({
+    $schema: "https://webreel.dev/schema/v1.json",
+    outDir: "./recordings",
+    defaultDelay: 0,
+    theme: { cursor: { size: 1 } },
+    videos: Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, {
+      url: `${pathToFileURL(previewPath).href}?component=${entry.component.name}`,
+      output: `${entry.component.name}.mp4`,
+      viewport: { width: entry.media.video.width, height: entry.media.video.height },
+      fps,
+      waitFor: "body[data-ready=true]",
+      steps: [
+        ...(entry.component.name === "halftone" ? [
+          { action: "moveTo", selector: ".halftone-start" },
+          { action: "pause", ms: 800 },
+          { action: "moveTo", selector: ".halftone-end" },
+          { action: "pause", ms: 800 },
+          { action: "moveTo", selector: ".halftone-start" },
+        ] : []),
+        ...(entry.component.name === "eyespice" ? [
+          { action: "pause", ms: 1000 },
+          { action: "moveTo", selector: ".eyespice-rest" },
+          { action: "pause", ms: 1000 },
+          { action: "moveTo", selector: ".eyespice canvas" },
+          { action: "pause", ms: 600 },
+          { action: "moveTo", selector: ".eyespice-rest" },
+        ] : []),
+        ...(entry.component.name === "inline-download" ? [
+          { action: "pause", ms: 200 },
+          { action: "click", selector: ".inline-download" },
+          { action: "moveTo", selector: ".inline-download-media-rest" },
+        ] : []),
+        ...(entry.component.name === "multi-step-download" ? [
+          { action: "pause", ms: 200 },
+          { action: "click", selector: ".msd-button" },
+          { action: "moveTo", selector: ".download-media-rest" },
+        ] : []),
+        ...(entry.component.name === "overlay-navigation" ? [
+          { action: "pause", ms: 2200 },
+          { action: "click", selector: '.site-header-menu[aria-expanded="true"]' },
+          { action: "pause", ms: 700 },
+          { action: "click", selector: '.site-header-menu[aria-expanded="false"]' },
+        ] : []),
+        ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "key", key: "r" }] : []),
+        ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "pause", ms: 2400 }, { action: "key", key: "0" }] : []),
+        ...(specification.movePointer ? [{ action: "moveTo", selector: ".media-scene" }] : []),
+        { action: "pause", ms: specification.pause },
+      ],
+    }])),
+  }, null, 2)}\n`);
+  execFileSync("npx", ["--offline", "webreel", "validate", "-c", configPath], { cwd: root, stdio: "inherit" });
+  execFileSync("npx", ["--offline", "webreel", "record", "-c", configPath, "--dry-run"], { cwd: root, stdio: "inherit" });
+}
 
 if (!dryRun) {
   const destination = outputDirectory ?? resolve(root, "public/media");
@@ -181,18 +190,18 @@ if (!dryRun) {
     const recording = resolve(workspace, `recordings/${component.name}.mp4`);
     const video = resolve(staging, basename(media.video.src));
     const thumbnail = resolve(staging, basename(media.thumbnail.src));
-    const frames = Math.round(media.video.duration * 60);
-    const start = Math.round(specification.seek * 60);
+    const frames = Math.round(media.video.duration * fps);
+    const start = Math.round(specification.seek * fps);
     const blend = ambient.has(component.name);
     const requiredFrames = start + frames + (blend ? 15 : 0);
     const actualFrames = Number(execFileSync(ffprobe, ["-v", "error", "-select_streams", "v:0", "-show_entries", "stream=nb_frames", "-of", "default=noprint_wrappers=1:nokey=1", recording], { encoding: "utf8" }).trim());
     if (!Number.isFinite(actualFrames) || actualFrames < requiredFrames) throw new Error(`Incomplete raw capture for ${component.name}: ${actualFrames} frames, need ${requiredFrames}.`);
-    const base = `[0:v]scale=${media.video.width}:${media.video.height}:flags=lanczos,fps=60,trim=start_frame=${start}:end_frame=${requiredFrames},setpts=PTS-STARTPTS`;
+    const base = `[0:v]scale=${media.video.width}:${media.video.height}:flags=lanczos,fps=${fps},trim=start_frame=${start}:end_frame=${requiredFrames},setpts=PTS-STARTPTS`;
     const filter = blend
-      ? `${base},split=3[m][t][h];[m]trim=start_frame=15:end_frame=${frames},setpts=PTS-STARTPTS[body];[t]trim=start_frame=${frames},setpts=PTS-STARTPTS,fps=60[tail];[h]trim=end_frame=15,setpts=PTS-STARTPTS,fps=60[head];[tail][head]xfade=transition=fade:duration=0.233333:offset=0[blend];[body][blend]concat=n=2:v=1:a=0,format=yuv420p[out]`
+      ? `${base},split=3[m][t][h];[m]trim=start_frame=15:end_frame=${frames},setpts=PTS-STARTPTS[body];[t]trim=start_frame=${frames},setpts=PTS-STARTPTS,fps=${fps}[tail];[h]trim=end_frame=15,setpts=PTS-STARTPTS,fps=${fps}[head];[tail][head]xfade=transition=fade:duration=0.233333:offset=0[blend];[body][blend]concat=n=2:v=1:a=0,format=yuv420p[out]`
       : `${base},format=yuv420p[out]`;
-    const common = ["-hide_banner", "-loglevel", "error", "-y", "-i", recording, "-filter_complex", filter, "-map", "[out]", "-an", "-r", "60", "-frames:v", String(frames), "-c:v", "libx264", "-preset", "slow", "-threads", "2", "-profile:v", "high", "-level:v", "3.2", "-pix_fmt", "yuv420p"];
-    const bitrate = Math.floor(850_000 * 8 / media.video.duration / 1000);
+    const common = ["-hide_banner", "-loglevel", "error", "-y", "-i", recording, "-filter_complex", filter, "-map", "[out]", "-an", "-r", String(fps), "-frames:v", String(frames), "-c:v", "libx264", "-preset", "slow", "-threads", "2", "-profile:v", "high", "-level:v", "3.2", "-pix_fmt", "yuv420p"];
+    const bitrate = Math.floor(targetVideoBytes * 8 / media.video.duration / 1000);
     execFileSync(ffmpeg, [...common, "-crf", "24", "-maxrate", `${bitrate}k`, "-bufsize", `${bitrate}k`, "-movflags", "+faststart", video]);
     if ((await stat(video)).size > maxVideoBytes) {
       const passlog = resolve(staging, `${component.name}-pass`);
@@ -210,6 +219,6 @@ if (!dryRun) {
     await rm(resolve(destination, `${component.name}.gif`), { force: true });
     reports.push(report);
     await writeFile(resolve(workspace, "media-report.json"), `${JSON.stringify(reports, null, 2)}\n`);
-    console.log(`Verified ${component.name}: ${report.frames} frames at 60 fps, ${report.bytes} bytes.`);
+    console.log(`Verified ${component.name}: ${report.frames} frames at ${fps} fps, ${report.bytes} bytes.`);
   }
 }
