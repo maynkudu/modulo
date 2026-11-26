@@ -523,11 +523,11 @@
     {
       "name": "state-buttons",
       "repository": "maynkudu/modulo-state-buttons",
-      "revision": "1892bc221698769f28d3a4b9982f226c4e3f1c82",
+      "revision": "381fcb77f467c817b23a43d49a5e9faf02386915",
       "files": [
-        { "path": "StateButton.tsx", "sha256": "0a2c121a76dfe49cfd60e78704f2e142464e7610673edc9c965ee579ecb2889a" },
-        { "path": "state-matrix.ts", "sha256": "79b2070d85ca6a9333387f1b4b2441ee389d81adc77106d4c9f2a1fe62928b6e" },
-        { "path": "state-button.css", "sha256": "2c4beff0c5a3b8b56d7b4b1cbbd5dea8a4b13ff743535741d7328b020f30b082" }
+        { "path": "StateButton.tsx", "sha256": "72bc2401c9f304169407c245b304600a3dc2a5121b2df656b474a6b7f5d9c922" },
+        { "path": "state-matrix.ts", "sha256": "5b9f8a6128338aff452966bcc29bec1accf3b679a0f3c4e8a22a41aca66e7a7f" },
+        { "path": "state-button.css", "sha256": "5f2c11b6c3dfaaeae28ba677978cb8f27ff2a02e0d75241b880ba498dac1fe7f" }
       ]
     }
   ]

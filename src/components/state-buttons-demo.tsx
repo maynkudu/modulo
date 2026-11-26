@@ -83,7 +83,7 @@ export function StateButtonsDemo() {
     const timer = window.setTimeout(() => {
       setState(next);
       if (next === "success") setDemoRunning(false);
-    }, 1500);
+    }, 600);
     return () => window.clearTimeout(timer);
   }, [demoRunning, state]);
 
