@@ -21,6 +21,7 @@ import { LiquidTextDemo } from "../src/components/liquid-text-demo";
 import { MultiStepDownload } from "../src/registry/multi-step-download/MultiStepDownload";
 import { InlineDownload } from "../src/registry/inline-download/InlineDownload";
 import { StateButton, type StateButtonState } from "../src/registry/state-buttons/StateButton";
+import { DotOrb } from "../src/registry/dot-orb/DotOrb";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
 
@@ -152,6 +153,7 @@ function StateButtonsCapture() {
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "dot-orb") return <DotOrbCapture />;
   if (name === "halftone") return <section className="halftone-media">
     <Halftone className="media-scene" onReady={markReady} />
     <span className="halftone-start" aria-hidden="true" /><span className="halftone-end" aria-hidden="true" />
@@ -197,6 +199,33 @@ function MediaPreview() {
     return <GardenCanvas className="media-scene" initialTime={34} timeScale={1} wind={1} onReady={markReady} />;
   }
   throw new Error("Select a component for media capture.");
+}
+
+/** A repeatable pointer-only teaser. Live audio is exercised separately through real input. */
+function DotOrbCapture() {
+  useEffect(() => {
+    let rippled = false;
+    function update(event: Event) {
+      const seconds: unknown = event instanceof CustomEvent ? event.detail : null;
+      const canvas = document.querySelector<HTMLCanvasElement>(".dot-orb-media canvas");
+      if (typeof seconds !== "number" || !canvas) return;
+      const box = canvas.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, (seconds - .5) / 4.5));
+      const x = box.left + box.width * (.25 + .5 * (1 - Math.cos(progress * Math.PI)) / 2);
+      const y = box.top + box.height * (.5 + .12 * Math.sin(progress * Math.PI * 2));
+      canvas.dispatchEvent(new PointerEvent("pointermove", { clientX: x, clientY: y }));
+      if (!rippled && seconds >= 2) {
+        canvas.dispatchEvent(new PointerEvent("pointerdown", { clientX: x, clientY: y }));
+        rippled = true;
+      }
+      if (seconds >= 5) canvas.dispatchEvent(new PointerEvent("pointerleave"));
+    }
+    window.addEventListener("modulo-media-time", update);
+    return () => window.removeEventListener("modulo-media-time", update);
+  }, []);
+  return <section className="dot-orb-media" style={{ width: "100%", height: "100%", background: "#000" }}>
+    <DotOrb onReady={markReady} />
+  </section>;
 }
 
 function LiquidTextCapture() {

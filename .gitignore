@@ -74,6 +74,7 @@ next-env.d.ts
 /src/registry/halftone/
 /src/registry/inline-download/
 /src/registry/state-buttons/
+/src/registry/dot-orb/
 /.private-registry/
 /public/r/
 /.data/

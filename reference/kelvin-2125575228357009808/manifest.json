@@ -1,0 +1,83 @@
+{
+  "source": "https://x.com/KelvinAdithya/status/2125575228357009808",
+  "capturedAt": "2026-11-26T21:37:02.232Z",
+  "resources": [
+    {
+      "path": "raw/post.json",
+      "url": "https://api.fxtwitter.com/status/2125575228357009808",
+      "contentType": "application/json",
+      "bytes": 6803,
+      "sha256": "66a7529918c5bf5be40046eaab59efad417dae76c022a051e1f925a8c7977c60",
+      "method": "public HTTP download",
+      "reuseStatus": "Original attribution Kelvin Adithya. No redistribution license found."
+    },
+    {
+      "path": "raw/source.mp4",
+      "url": "https://video.twimg.com/amplify_video/2124814924690124800/vid/avc1/1200x1698/S_lH3fSLJTnLPpsM.mp4",
+      "contentType": "video/mp4",
+      "bytes": 4618027,
+      "sha256": "e2a73ac883c05980dd35d8c0f8660fdd833128d75e917d0cf13a019608f32082",
+      "method": "public HTTP download",
+      "reuseStatus": "Original attribution Kelvin Adithya. No redistribution license found."
+    },
+    {
+      "path": "raw/source-1.jpg",
+      "url": "https://pbs.twimg.com/media/HXzb8eVagAAPptK.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 428481,
+      "sha256": "3079299e70bc746de7408fd3717de049d7e834caa1ee6d7e909bc0a22ea5956a",
+      "method": "public HTTP download",
+      "reuseStatus": "Original attribution Kelvin Adithya. No redistribution license found."
+    },
+    {
+      "path": "raw/source-2.jpg",
+      "url": "https://pbs.twimg.com/media/HXzb9robUAA8uir.jpg",
+      "contentType": "image/jpeg",
+      "bytes": 965582,
+      "sha256": "1413e2e44d7f8868a93b8aaf8b7f7d4ad40e194fb9500aa59feee9cf633a3213",
+      "method": "public HTTP download",
+      "reuseStatus": "Original attribution Kelvin Adithya. No redistribution license found."
+    }
+  ],
+  "sourceRecovery": {
+    "post": "recovered",
+    "video": "recovered",
+    "stills": "recovered",
+    "originalCode": "unavailable",
+    "interactiveDemo": "unavailable",
+    "fontFiles": "unavailable"
+  },
+  "comparisonContract": {
+    "reference": "Decoded source frames at exact CFR presentation timestamps",
+    "referenceResampler": "FFmpeg Lanczos to 600 x 849",
+    "proposalViewport": [
+      600,
+      849
+    ],
+    "devicePixelRatio": 1,
+    "background": "source frame #8792ff",
+    "channelThreshold": 18,
+    "unmaskedFullFrame": true,
+    "scopedRegions": [
+      "dot grid x=122,y=105,width=356,height=502"
+    ],
+    "passPolicy": "Report measured differences. No automatic threshold establishes exact fidelity."
+  },
+  "currentScope": "Dot orb only, real microphone or local audio file, pointer/touch/keyboard interaction. No phone, calendar, transcript or recorded motion.",
+  "appearance": {
+    "method": "First-frame circle geometry and color extraction",
+    "bytes": 2728,
+    "staticOnly": true,
+    "sha256": "a33a218058cd707e4eab5ce2f6954bb2b4df19522da5ba4b10660892b641b3de"
+  },
+  "currentComparison": {
+    "width": 320,
+    "height": 320,
+    "threshold": 18,
+    "changedPixels": 8952,
+    "changedFraction": 0.087421875,
+    "meanAbsoluteChannelError": 5.421357421875,
+    "maximumChannelError": 136,
+    "diff": ".plannotator/dot-orb/evidence/orb-difference-final.png"
+  }
+}

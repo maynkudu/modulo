@@ -87,6 +87,8 @@ try {
   check((await source("nilkamal", { key: first.key })).status === 401, "Revocation immediately denies CLI access.");
   check((await source("nilkamal", { cookie: sourceCookie })).status === 401, "Revocation immediately denies existing browser sessions.");
   check((await source("sprite-racer", { key: first.key })).status === 401, "Revocation immediately denies Switchback source.");
+  check((await source("dot-orb", { key: first.key })).status === 401, "Revocation immediately denies dot orb CLI access.");
+  check((await source("dot-orb", { cookie: sourceCookie })).status === 401, "Revocation immediately denies dot orb browser sessions.");
   check(!sessionStatusSchema.parse(await (await sourceStatus(request("/api/source-access", { cookie: sourceCookie }))).json()).authenticated, "Revoked source sessions report locked status.");
   check((await unlockSource(request("/api/source-access", { method: "POST", body: { key: first.key } }))).status === 401, "Revoked keys cannot open new sessions.");
   check((await source("nilkamal", { key: second.key })).status === 200, "Another active key survives revocation.");

@@ -4,6 +4,54 @@
   "homepage": "https://modulo-maynkudu.vercel.app",
   "items": [
     {
+      "name": "dot-orb",
+      "title": "Dot orb",
+      "description": "An interactive dot orb that reacts to your microphone or an audio file.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/dot-orb/DotOrb.tsx",
+          "type": "registry:component",
+          "target": "components/dot-orb/DotOrb.tsx"
+        },
+        {
+          "path": "src/registry/dot-orb/dot-orb-engine.ts",
+          "type": "registry:lib",
+          "target": "components/dot-orb/dot-orb-engine.ts"
+        },
+        {
+          "path": "src/registry/dot-orb/dot-orb-appearance.ts",
+          "type": "registry:lib",
+          "target": "components/dot-orb/dot-orb-appearance.ts"
+        },
+        {
+          "path": "src/registry/dot-orb/audio-input-session.ts",
+          "type": "registry:lib",
+          "target": "components/dot-orb/audio-input-session.ts"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A purple and white dot orb changing shape in a dark dot field.",
+            "width": 720,
+            "height": 624,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/dot-orb.jpg"
+          },
+          "video": {
+            "width": 720,
+            "height": 624,
+            "type": "video/mp4",
+            "duration": 5.65,
+            "url": "https://modulo-maynkudu.vercel.app/media/dot-orb.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "state-buttons",
       "title": "State buttons",
       "description": "A customizable button for loading, thinking, pending, success and error states.",

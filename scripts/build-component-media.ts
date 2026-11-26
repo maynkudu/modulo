@@ -34,6 +34,7 @@ for (let index = 0; index < args.length; index++) {
 if (dryRun && encodeOnly) throw new Error("--dry-run and --encode-only cannot be combined.");
 
 const specifications = [
+  { name: "dot-orb", flow: "dot-orb-pointer-ripples", pause: 6500, seek: 0, thumbnailSeek: 2, movePointer: false },
   { name: "halftone", flow: "halftone-hover-trail", pause: 7000, seek: .1, thumbnailSeek: 2, movePointer: false },
   { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .5, thumbnailSeek: 0, movePointer: false },
   { name: "eyespice", flow: "eyespice-gaze-close-retreat", pause: 4500, seek: .1, thumbnailSeek: 0, movePointer: false },
@@ -66,7 +67,7 @@ const captures = selectedItems.map((entry) => {
   if (!specification) throw new Error(`Add a media capture for ${entry.component.name}.`);
   return { entry, specification };
 });
-const ambient = new Set(["halftone", "portrait-wave", "eyespice", "brick-noise", "sprite-racer", "logo-refraction", "textured-glass", "diwali-26", "root-infection", "nilkamal", "interactive-art"]);
+const ambient = new Set(["dot-orb", "halftone", "portrait-wave", "eyespice", "brick-noise", "sprite-racer", "logo-refraction", "textured-glass", "diwali-26", "root-infection", "nilkamal", "interactive-art"]);
 for (const { entry } of captures) verifyMediaMetadata(entry);
 
 const workspace = resolve(root, process.env.MODULO_MEDIA_WORKSPACE ?? resolve(homedir(), ".webreel/modulo-component-media"));

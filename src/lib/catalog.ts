@@ -329,7 +329,28 @@ export type CatalogItem = {
   media: ComponentMedia;
 };
 
+export const dotOrb = {
+  name: "dot-orb" as const,
+  type: "registry:component",
+  title: "Dot orb",
+  description: "An interactive dot orb that reacts to your microphone or an audio file.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/dot-orb/DotOrb.tsx", target: "components/dot-orb/DotOrb.tsx", type: "registry:component" },
+    { path: "src/registry/dot-orb/dot-orb-engine.ts", target: "components/dot-orb/dot-orb-engine.ts", type: "registry:lib" },
+    { path: "src/registry/dot-orb/dot-orb-appearance.ts", target: "components/dot-orb/dot-orb-appearance.ts", type: "registry:lib" },
+    { path: "src/registry/dot-orb/audio-input-session.ts", target: "components/dot-orb/audio-input-session.ts", type: "registry:lib" },
+  ],
+} satisfies RegistryItem;
+
 export const catalogItems = [{
+  component: dotOrb,
+  addedAt: "2026-11-26",
+  keywords: ["orb", "dots", "audio", "voice", "microphone", "equalizer", "visualizer", "canvas", "interactive", "hover"],
+  seoDescription: "An audio-reactive dot orb for React. Use your microphone or a local audio file, pull the dots with your pointer, and send tap ripples. Includes keyboard controls and reduced motion. Install with an active Modulo key.",
+  media: componentMedia({ name: dotOrb.name, alt: "A purple and white dot orb changing shape in a dark dot field.", height: 1040, duration: 5.65 }),
+}, {
   component: stateButtons,
   addedAt: "2026-11-25",
   keywords: ["button", "state", "status", "loading", "thinking", "pending", "success", "error", "animation", "canvas", "matrix"],

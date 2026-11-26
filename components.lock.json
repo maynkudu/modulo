@@ -1,6 +1,17 @@
 {
   "components": [
     {
+      "name": "dot-orb",
+      "repository": "maynkudu/modulo-dot-orb",
+      "revision": "a9ca0274b1d6a8f4549b4f5c7ec9c03e4806bc31",
+      "files": [
+        { "path": "DotOrb.tsx", "sha256": "0acf2346c472bfc8c31b5691bc4fc263c7502ad775d2aeeedf9931be8c099f07" },
+        { "path": "dot-orb-engine.ts", "sha256": "85f0bbaadf26418f493de6a540dbe99d5fc0e94626282e51ed3e00450388110d" },
+        { "path": "dot-orb-appearance.ts", "sha256": "a33a218058cd707e4eab5ce2f6954bb2b4df19522da5ba4b10660892b641b3de" },
+        { "path": "audio-input-session.ts", "sha256": "332e565d1b62128c8a84912b11c8040b3d3c450f098a5c222aceede9c35b9a50" }
+      ]
+    },
+    {
       "name": "inline-download",
       "repository": "maynkudu/modulo-inline-download",
       "revision": "51afab5f1ec9af983bd3587eaa70ad1e96abc01c",
