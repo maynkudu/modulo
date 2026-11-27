@@ -4,7 +4,7 @@
 .preview > aside footer { justify-content: flex-end; }
 .preview > aside footer > button:first-child { flex: 0 1 auto; }
 .artwork { min-width: 0; }
-.stage { width: 100%; overflow: hidden; background: #93b6dc; border-radius: 20px; }
+.stage { width: 100%; overflow: hidden; background: #93b6dc; border-radius: 0; }
 .scene { width: 100%; height: auto; }
 .artwork > p { color: var(--quiet); margin: 16px 0 0; font-size: 13px; line-height: 1.6; }
 .upload { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; grid-column: 1 / -1; }
@@ -13,5 +13,4 @@
 .uploadButton:focus-within { outline: 2px solid var(--control-text); outline-offset: 4px; }
 .filename { overflow-wrap: anywhere; color: var(--control-muted); font-size: 12px; }
 .upload p { margin: 0; color: var(--control-muted); font-size: 12px; line-height: 1.6; }
-:global(html[data-design="bold"]) .stage { border-radius: 0; }
-@media (max-width: 860px) { .preview { gap: 16px; } .stage { border-radius: 12px; } .controlsGrid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 860px) { .preview { gap: 16px; } .controlsGrid { grid-template-columns: minmax(0, 1fr); } }

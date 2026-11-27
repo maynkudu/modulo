@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import type { ComponentMedia } from "@/lib/catalog";
+import { CatalogPreviewMedia } from "./catalog-preview-media";
 import styles from "./catalog-index.module.css";
 
 const collections = [
@@ -27,9 +27,15 @@ export type CatalogIndexEntry = {
   category: PublishedCollection;
   href: string;
   thumbnail: Pick<ComponentMedia["thumbnail"], "src" | "width" | "height">;
+  video: Pick<ComponentMedia["video"], "src" | "width" | "height">;
 };
 
 const categoryNames = { components: "Component", shaders: "Shader", pages: "Page" } satisfies Record<PublishedCollection, string>;
+const categoryAliases = {
+  components: ["components", "component type", "component listing", "ui", "interface", "interaction"],
+  shaders: ["shaders", "shader type", "shader listing", "visual effect", "effects", "webgl"],
+  pages: ["pages", "page type", "page listing", "template", "templates", "game"],
+} satisfies Record<PublishedCollection, readonly string[]>;
 const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
 const normalize = (value: string) => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
 
@@ -48,9 +54,17 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
   const [query, setQuery] = useState("");
   const [selection, setSelection] = useState("");
   const words = normalize(query).split(" ").filter(Boolean);
+
+  useEffect(() => {
+    if (window.location.hash !== "#collection-search") return;
+    const frame = requestAnimationFrame(() => search.current?.focus());
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   const visible = entries.filter((entry) => {
     if (collection !== "everything" && entry.category !== collection) return false;
-    const text = normalize([entry.title, entry.name, entry.description, categoryNames[entry.category], ...entry.keywords, entry.addedAt, dateFormat.format(new Date(entry.addedAt))].join(" "));
+    const text = normalize([entry.title, entry.name, entry.description, categoryNames[entry.category],
+      ...categoryAliases[entry.category], ...entry.keywords, entry.addedAt, dateFormat.format(new Date(entry.addedAt))].join(" "));
     return words.every((word) => text.includes(word));
   });
   const selectedName = visible.some((entry) => entry.name === selection) ? selection : visible[0]?.name;
@@ -83,8 +97,11 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
       <form className={styles.search} role="search" onSubmit={(event) => event.preventDefault()}>
         <span className={styles.searchIcon} aria-hidden="true">{searchIcon}</span>
         <label className="sr-only" htmlFor="collection-search">Search collection</label>
-        <input ref={search} id="collection-search" type="search" autoComplete="off" placeholder="Find something"
+        <input ref={search} id="collection-search" type="search" autoComplete="off" aria-keyshortcuts="/"
+          placeholder="Search name, type or topic"
           value={query} onChange={(event) => setQuery(event.currentTarget.value)} />
+        <button className={styles.searchShortcut} type="button" aria-label="Focus collection search, slash key"
+          onClick={() => search.current?.focus()}><kbd>/</kbd></button>
       </form>
     </div>
 
@@ -99,11 +116,7 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
             onClick={() => setSelection(entry.name)} onFocus={() => setSelection(entry.name)}
             onKeyDown={(event) => moveSelection(event, index)}>
             <span className={styles.nameStart}>{first}</span>
-            <span className={styles.artSlot} aria-hidden="true" data-modulo-entrance-target={active || undefined}>
-              <Image src={entry.thumbnail.src} alt="" width={entry.thumbnail.width} height={entry.thumbnail.height}
-                loading={active ? "eager" : "lazy"} fetchPriority={active ? "high" : "auto"} unoptimized
-                data-modulo-entrance-image={active || undefined} />
-            </span>
+            <CatalogPreviewMedia thumbnail={entry.thumbnail} video={entry.video} active={active} />
             {last && <span className={styles.nameEnd}>{last}</span>}
           </button>
           <span className={styles.kind}>{categoryNames[entry.category]}</span>

@@ -1,27 +1,24 @@
+import Image from "next/image";
 import Link from "next/link";
+import type { ComponentMedia } from "@/lib/catalog";
 import { collectionStatementText } from "@/lib/collection-statement-text";
-import { LiquidTextReveal } from "@/registry/liquid-text-reveal/LiquidTextReveal";
 import styles from "./collection-statement.module.css";
 
-/** Retains the selected collection statement and its reversible liquid text reveal. */
-export function CollectionStatement() {
-  return (
-    <section className={styles.statement} aria-labelledby="collection-statement">
-      <div className={styles.statementInner}>
-        <LiquidTextReveal
-          id="collection-statement"
-          as="h2"
-          className={styles.statementTitle}
-          text={collectionStatementText}
-          color="#ff0000"
-          profile="studio"
-          revealMode="scroll"
-        />
-        <div className={styles.statementBody}>
-          <p>Each component has a working demo, controls, and installation instructions. Source access uses a Modulo key.</p>
-          <Link href="/registry">Install a component</Link>
-        </div>
-      </div>
-    </section>
-  );
+export function CollectionStatement({ featured }: {
+  featured: {
+    title: string;
+    href: string;
+    thumbnail: Pick<ComponentMedia["thumbnail"], "src" | "alt" | "width" | "height">;
+  };
+}) {
+  return <section className={styles.statement} aria-labelledby="collection-statement">
+    <div className={styles.statementInner}>
+      <Link className={styles.featured} href={featured.href} aria-label={`Preview ${featured.title}`}>
+        <Image className={styles.featuredImage} src={featured.thumbnail.src} alt={featured.thumbnail.alt}
+          width={featured.thumbnail.width} height={featured.thumbnail.height} sizes="(max-width: 700px) 88px, 142px" priority unoptimized />
+        <span>{featured.title}</span>
+      </Link>
+      <h2 id="collection-statement" className={styles.statementTitle}>{collectionStatementText}</h2>
+    </div>
+  </section>;
 }

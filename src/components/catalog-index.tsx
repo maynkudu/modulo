@@ -18,6 +18,7 @@ export function CatalogIndex({ collection = "everything" }: { collection?: Catal
       category,
       href,
       thumbnail: { src: item.media.thumbnail.src, width: item.media.thumbnail.width, height: item.media.thumbnail.height },
+      video: { src: item.media.video.src, width: item.media.video.width, height: item.media.video.height },
     } satisfies CatalogIndexEntry;
   });
 
