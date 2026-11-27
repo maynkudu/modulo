@@ -1,4 +1,4 @@
-.header{position:relative;z-index:20;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;width:var(--site-width);min-height:100px;margin-inline:auto;color:var(--butter);font-family:var(--site-body-font);view-transition-name:modulo-header}
+.header{position:relative;z-index:20;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px;width:var(--site-width);min-height:100px;margin-inline:auto;color:var(--butter);font-family:var(--site-body-font)}
 .brand{justify-self:start;display:flex;align-items:center;width:148px;min-height:48px;text-decoration:none}
 .logo{width:100%;height:auto}
 .navigation{display:flex;align-items:center;justify-self:end;gap:25px;font-size:14px}
