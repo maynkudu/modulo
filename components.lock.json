@@ -562,7 +562,7 @@
     {
       "name": "thermal-image",
       "repository": "maynkudu/modulo-thermal-image",
-      "revision": "ba386c2435a30d29df247d00611781b4a29348af",
+      "revision": "3e3ec8e2dbaab071262b37478fdd06d5971455cd",
       "files": [
         {
           "path": "thermal-image.tsx",
@@ -578,11 +578,11 @@
         },
         {
           "path": "thermal-image.module.css",
-          "sha256": "94b25990896f4527a262277253639f1a331d7b0bbfad685799c60aeed3812cc1"
+          "sha256": "33dbcd768066fb97e512fa0f8c71551bff2588988ff31f42cb4efe4c7dd993ba"
         },
         {
           "path": "README.md",
-          "sha256": "3539ac0244524ca7fa402033fc2180d164026eba38cee608ab31d072defc7f6e"
+          "sha256": "8a5553ad9c47e8453538ccbb809ec67a91c4e6542bfe6d1540a21dd2768f178f"
         },
         {
           "path": "package.json",
@@ -590,7 +590,7 @@
         },
         {
           "path": "provenance.json",
-          "sha256": "a241ec3b0254065c7e662b884ba490c16fe4c1073edf6d748446d57624d55806"
+          "sha256": "fd65d149e0460754112fb20dcc713b9f633299bce612273a57e7e50204c64ea5"
         }
       ]
     }
