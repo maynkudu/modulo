@@ -66,6 +66,13 @@ const logoImage = {
   height: 630,
   type: "image/jpeg",
 };
+const siteVideo = {
+  src: "/media/porsche-gt3rs.mp4",
+  width: 720,
+  height: 406,
+  type: "video/mp4",
+  duration: 4,
+};
 const author = { "@type": "Person", "@id": absoluteUrl("/#author"), name: "maynkudu" };
 
 function createMetadata({
@@ -103,7 +110,7 @@ function createMetadata({
 }
 
 export function getSiteMetadata(page: keyof typeof sitePages) {
-  return createMetadata(sitePages[page]);
+  return createMetadata({ ...sitePages[page], ...(page === "home" && { video: siteVideo }) });
 }
 
 export const defaultMetadata: Metadata = {
