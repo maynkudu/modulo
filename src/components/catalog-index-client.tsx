@@ -52,7 +52,7 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
   searchIcon: ReactNode;
 }) {
   const search = useRef<HTMLInputElement>(null);
-  const rowButtons = useRef(new Map<string, HTMLButtonElement>());
+  const rowLinks = useRef(new Map<string, HTMLAnchorElement>());
   const [query, setQuery] = useState("");
   const [selection, setSelection] = useState("");
   const words = normalize(query).split(" ").filter(Boolean);
@@ -69,10 +69,10 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
       ...categoryAliases[entry.category], ...entry.keywords, entry.addedAt, dateFormat.format(new Date(entry.addedAt))].join(" "));
     return words.every((word) => text.includes(word));
   });
-  const selectedName = visible.some((entry) => entry.name === selection) ? selection : visible[0]?.name;
+  const selectedName = visible.some((entry) => entry.name === selection) ? selection : undefined;
   const currentCollection = collections.find((item) => item.name === collection);
 
-  function moveSelection(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+  function moveSelection(event: KeyboardEvent<HTMLAnchorElement>, index: number) {
     let nextIndex: number;
     switch (event.key) {
       case "ArrowDown": nextIndex = (index + 1) % visible.length; break;
@@ -85,8 +85,8 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
     if (!next) return;
     event.preventDefault();
     setSelection(next.name);
-    rowButtons.current.get(next.name)?.focus({ preventScroll: true });
-    rowButtons.current.get(next.name)?.scrollIntoView({ block: "nearest", behavior: "instant" });
+    rowLinks.current.get(next.name)?.focus({ preventScroll: true });
+    rowLinks.current.get(next.name)?.scrollIntoView({ block: "nearest", behavior: "instant" });
   }
 
   return <main className={styles.index} id="content" tabIndex={-1}>
@@ -113,16 +113,22 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
         const { first, last } = titleParts(entry.title);
         const titleSize = entry.title.length > 18 ? "long" : entry.title.length > 13 ? "medium" : "short";
         return <article key={entry.name} className={styles.row} data-selected={active || undefined} data-title-size={titleSize}>
-          <button ref={(node) => { if (node) rowButtons.current.set(entry.name, node); else rowButtons.current.delete(entry.name); }}
-            className={styles.rowHead} type="button" aria-label={`Select ${entry.title}`} aria-pressed={active}
-            onClick={() => setSelection(entry.name)} onFocus={() => setSelection(entry.name)}
+          <Link ref={(node) => { if (node) rowLinks.current.set(entry.name, node); else rowLinks.current.delete(entry.name); }}
+            className={styles.rowHead} href={entry.href} aria-label={entry.title}
+            onPointerEnter={event => { if (event.pointerType !== "touch") setSelection(entry.name); }}
+            onPointerLeave={event => {
+              if (!event.currentTarget.matches(":focus-visible")) setSelection(current => current === entry.name ? "" : current);
+            }}
+            onFocus={event => { if (event.currentTarget.matches(":focus-visible")) setSelection(entry.name); }}
+            onBlur={event => {
+              if (!event.currentTarget.matches(":hover")) setSelection(current => current === entry.name ? "" : current);
+            }}
             onKeyDown={(event) => moveSelection(event, index)}>
             <span className={styles.nameStart}>{first}</span>
             <CatalogPreviewMedia thumbnail={entry.thumbnail} video={entry.video} active={active} />
             {last && <span className={styles.nameEnd}>{last}</span>}
-          </button>
+          </Link>
           <span className={styles.kind}>{categoryNames[entry.category]}</span>
-          {active && <Link className={styles.openPreview} href={entry.href} aria-label={`Open ${entry.title} preview`}>Open preview</Link>}
         </article>;
       })}
     </div>

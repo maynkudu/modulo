@@ -19,7 +19,7 @@
 .searchShortcut kbd { font: inherit; }
 .list { min-width: 0; padding-top: 16px; }
 .row { position: relative; isolation: isolate; min-width: 0; }
-.rowHead { position: relative; display: flex; align-items: center; justify-content: flex-start; width: 100%; min-width: 0; min-height: 112px; margin: 0; padding: 7px 132px 7px 0; border: 0; border-radius: 0; background: transparent; color: #c9c9c5; font-family: var(--site-body-font); font-size: clamp(54px, 7.6cqw, 116px); font-weight: 650; line-height: 1; letter-spacing: -.045em; text-align: left; cursor: pointer; transition: min-height 650ms var(--ease), color 250ms, font-size 650ms var(--ease); }
+.rowHead { position: relative; display: flex; align-items: center; justify-content: flex-start; width: 100%; min-width: 0; min-height: 112px; margin: 0; padding: 7px 132px 7px 0; border: 0; border-radius: 0; background: transparent; color: #c9c9c5; font-family: var(--site-body-font); font-size: clamp(54px, 7.6cqw, 116px); font-weight: 650; line-height: 1; letter-spacing: -.045em; text-align: left; text-decoration: none; cursor: pointer; transition: min-height 650ms var(--ease), color 250ms, font-size 650ms var(--ease); }
 .row[data-title-size="medium"] .rowHead { font-size: clamp(50px, 7cqw, 106px); }
 .row[data-title-size="long"] .rowHead { font-size: clamp(46px, 6.3cqw, 96px); }
 .nameStart, .nameEnd { display: block; position: relative; z-index: 2; min-width: 0; transition: transform 650ms var(--ease); }
@@ -29,7 +29,7 @@
 .artSlot img, .artSlot video { display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; }
 .artSlot video { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 160ms; }
 .artSlot[data-video-ready] video { opacity: 1; }
-.row[data-selected] .rowHead { min-height: 246px; padding-block: 14px 43px; color: #fff; font-weight: 700; }
+.row[data-selected] .rowHead { min-height: 246px; padding-block: 14px; color: #fff; font-weight: 700; }
 .row[data-selected][data-title-size="long"] .rowHead { font-size: clamp(44px, 5.6cqw, 86px); }
 .row[data-selected][data-title-size="medium"] .rowHead { font-size: clamp(48px, 6.5cqw, 100px); }
 .row[data-selected] .artSlot { flex-basis: clamp(155px, 20cqw, 260px); width: clamp(155px, 20cqw, 260px); height: 198px; margin: 0 23px; opacity: 1; transform: rotate(-5deg); }
@@ -37,9 +37,7 @@
 .row:not([data-selected]):hover .nameStart, .row:not([data-selected]):hover .nameEnd { transform: translateX(10px); }
 .kind { position: absolute; top: 50%; right: 0; max-width: 120px; transform: translateY(-50%); color: var(--quiet); font-size: 13px; line-height: 1.4; text-align: right; pointer-events: none; }
 .row[data-selected] .kind { top: 22px; color: var(--melon); }
-.openPreview { position: absolute; z-index: 3; right: 0; bottom: 22px; display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 13px 18px; color: var(--cherry); background: var(--butter); font-size: 13px; font-weight: 600; line-height: 1.3; letter-spacing: -.025em; text-decoration: none; transition: background 150ms; }
-.openPreview:hover { background: var(--melon); }
-.category:focus-visible, .search input:focus-visible, .searchShortcut:focus-visible, .rowHead:focus-visible, .openPreview:focus-visible, .empty a:focus-visible, .empty button:focus-visible { outline: 3px solid var(--focus, var(--melon)); outline-offset: 5px; }
+.category:focus-visible, .search input:focus-visible, .searchShortcut:focus-visible, .rowHead:focus-visible, .empty a:focus-visible, .empty button:focus-visible { outline: 3px solid var(--focus, var(--melon)); outline-offset: 5px; }
 .empty { max-width: 750px; padding: 76px 0 110px; }
 .empty h2 { max-width: 700px; margin: 0 0 25px; color: var(--melon); font-family: var(--site-body-font); font-size: clamp(62px, 7cqw, 94px); font-weight: 700; line-height: .95; letter-spacing: -.045em; }
 .empty p { max-width: 400px; margin: 0 0 25px; color: var(--quiet); font-size: 16px; line-height: 1.6; }
@@ -53,10 +51,9 @@
   .categories { flex-wrap: wrap; }
   .search { flex: 0 0 auto; width: 240px; }
   .rowHead { min-height: 102px; padding-right: 110px; }
-  .row[data-selected] .rowHead { min-height: 220px; padding-bottom: 40px; }
+  .row[data-selected] .rowHead { min-height: 220px; padding-bottom: 14px; }
   .row[data-selected] .artSlot { height: 172px; margin-inline: 17px; }
   .kind { font-size: 12px; }
-  .openPreview { bottom: 13px; padding: 12px 15px; }
 }
 
 @media (max-width: 700px) {
@@ -70,7 +67,7 @@
   .list { padding-top: 8px; }
   .rowHead, .row[data-title-size="medium"] .rowHead, .row[data-title-size="long"] .rowHead { flex-wrap: wrap; justify-content: flex-start; min-height: 86px; padding: 7px 0; font-size: clamp(37px, 11.4cqw, 65px); line-height: 1.03; }
   .row[data-title-size="long"] .rowHead { font-size: clamp(32px, 9.9cqw, 57px); }
-  .row[data-selected] .rowHead { min-height: 218px; padding-block: 13px 57px; font-size: clamp(31px, 9.7cqw, 52px); }
+  .row[data-selected] .rowHead { min-height: 218px; padding-block: 13px; font-size: clamp(31px, 9.7cqw, 52px); }
   .row[data-selected][data-title-size="medium"] .rowHead { font-size: clamp(29px, 8.5cqw, 47px); }
   .row[data-selected][data-title-size="long"] .rowHead { font-size: clamp(28px, 7.8cqw, 44px); }
   .nameStart { max-width: 100%; }
@@ -78,7 +75,6 @@
   .row[data-selected] .artSlot { flex-basis: 96px; width: 96px; height: 132px; margin-inline: 10px; }
   .row[data-selected] .nameEnd { font-size: 1.06em; }
   .kind { display: none; }
-  .openPreview { bottom: 9px; min-height: 44px; padding: 12px 14px; font-size: 12px; }
   .empty { padding: 54px 0 88px; }
   .empty h2 { font-size: 60px; }
   .empty p { font-size: 14px; }
@@ -87,6 +83,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .artSlot video { display: none; }
-  .rowHead, .nameStart, .nameEnd, .artSlot, .category, .openPreview, .searchShortcut { transition: none; }
+  .rowHead, .nameStart, .nameEnd, .artSlot, .category, .searchShortcut { transition: none; }
   .artSlot, .row[data-selected] .artSlot, .row:not([data-selected]):hover .nameStart, .row:not([data-selected]):hover .nameEnd { transform: none; }
 }
