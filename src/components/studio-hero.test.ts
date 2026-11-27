@@ -15,8 +15,15 @@ test("the wave implementation retains the live reference shader", () => {
   assert.equal(sha256(baseline), "2a832470632661f3fabdd9c16ca84f526fa883c4bb1e1b14bdbfbebd9b412781");
 });
 
-test("the displayed logo is the user's original PNG", () => {
-  const displayed = readFileSync(new URL("../../public/brand/modulo-supplied-logo.png", import.meta.url));
-  assert.equal(sha256(displayed), "68c997507baf55b9e29579ada66a777c43d4f46dcb583dace201d7a21e823696");
-  assert.ok(read("./modulo-logo.tsx").includes('src="/brand/modulo-supplied-logo.png"'));
+test("the supplied lettering remains a transparent vector wordmark", () => {
+  const wordmark = read("../../public/brand/modulo-wordmark.svg");
+  const dimensions = wordmark.match(/viewBox="[\d.]+ [\d.]+ ([\d.]+) ([\d.]+)"/);
+  assert.ok(dimensions);
+  assert.equal(Number(dimensions[1]), 1255.465644163);
+  assert.equal(Number(dimensions[2]), 382.48143689);
+  assert.match(wordmark, /fill="url\(#wordmark-fill\)"/);
+  assert.doesNotMatch(wordmark, /<(?:rect|image)\b/);
+  const logo = read("./modulo-logo.tsx");
+  assert.ok(logo.includes('src="/brand/modulo-wordmark.svg"'));
+  assert.match(logo, /width=\{1255\.465644163\} height=\{382\.48143689\}/);
 });

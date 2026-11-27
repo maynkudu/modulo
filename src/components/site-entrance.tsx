@@ -1,39 +1,33 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { ModuloLogo } from "./modulo-logo";
 import { playSiteEntrance } from "@/lib/site-entrance";
 import styles from "./site-entrance.module.css";
 
-let entered = false;
-
 export function SiteEntrance() {
+  const overlay = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
-  useEffect(() => {
-    if (entered || pathname === "/access" || pathname === "/mint") return;
-    let cancel: (() => void) | undefined;
-    let observer: MutationObserver | undefined;
-    let finished = false;
-    document.documentElement.dataset.entranceReady = "false";
-    const complete = () => { document.documentElement.dataset.entranceReady = "true"; };
-    function start() {
-      if (finished) return;
-      const root = document.getElementById("site-shell");
-      const target = root?.querySelector<HTMLElement>("[data-modulo-entrance-target]");
-      const image = target instanceof HTMLImageElement ? target.currentSrc || target.src
-        : target?.dataset.moduloEntranceSrc || target?.querySelector<HTMLImageElement>("img")?.src;
-      if (!root || !target || !image) return;
-      finished = true;
-      entered = true;
-      observer?.disconnect();
-      cancel = playSiteEntrance({ root, target, image, classes: { overlay: styles.overlay, backdrop: styles.backdrop, window: styles.window, image: styles.image, skip: styles.skip }, onFinish: complete });
+  useLayoutEffect(() => {
+    const root = document.getElementById("site-shell");
+    if (!root || !overlay.current) return;
+    const html = document.documentElement;
+    if (pathname !== "/") {
+      if (html.dataset.entrance === "pending") {
+        html.dataset.entrance = "complete";
+        document.dispatchEvent(new Event("modulo-entrance-complete"));
+      }
+      return;
     }
-    const frame = requestAnimationFrame(() => {
-      start();
-      if (!finished) { observer = new MutationObserver(start); observer.observe(document.body, { childList: true, subtree: true }); }
-    });
-    const timeout = window.setTimeout(() => { if (!finished) { observer?.disconnect(); finished = true; complete(); } }, 2500);
-    return () => { cancelAnimationFrame(frame); clearTimeout(timeout); observer?.disconnect(); cancel?.(); };
+    if (html.dataset.entrance !== "pending") return;
+    return playSiteEntrance({ root, overlay: overlay.current });
   }, [pathname]);
-  return null;
+
+  return <div ref={overlay} className={styles.overlay} data-site-entrance="" role="dialog" aria-modal="true" aria-label="Preparing preview">
+    <div className={styles.top} data-entrance-panel="top" />
+    <div className={styles.bottom} data-entrance-panel="bottom" />
+    <div className={styles.mask} aria-hidden="true"><span className={styles.word} data-entrance-word=""><ModuloLogo alt="" className={styles.wordmark} /></span></div>
+    <button className={styles.skip} type="button">Skip entrance</button>
+  </div>;
 }

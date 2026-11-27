@@ -1,9 +1,11 @@
-.overlay{position:fixed;inset:0;z-index:2147483000;isolation:isolate;display:block;overflow:hidden;color:var(--butter);font-family:var(--site-body-font);overscroll-behavior:contain;touch-action:none}
-.overlay *{box-sizing:border-box}
-.backdrop{position:absolute;inset:0;background:var(--cherry)}
-.window{position:absolute;top:calc(50% - 110px);left:calc(50% - 32px);width:64px;height:220px;overflow:hidden;background:var(--surface);transform-origin:center;contain:layout paint}
-.image{position:absolute;top:50%;left:50%;display:block;width:220px;height:220px;max-width:none;max-height:none;object-fit:cover;transform:translate(-50%,-50%);pointer-events:none;user-select:none}
-.skip{position:absolute;bottom:28px;left:35px;min-height:44px;padding:12px 18px;border:0;border-radius:0;background:var(--surface);color:var(--butter);font:400 13px/1.4 var(--site-body-font);letter-spacing:-.01em;cursor:pointer;transition:background 160ms,color 160ms}
+.overlay{display:none;position:fixed;inset:0;z-index:2147483000;isolation:isolate;overflow:hidden;color:var(--butter);font-family:var(--site-body-font);overscroll-behavior:contain;touch-action:none}
+:global(html[data-entrance="pending"]) .overlay,:global(html[data-entrance="revealing"]) .overlay{display:block}
+.top,.bottom{position:absolute;left:0;right:0;height:calc(50% + 1px);background:#090909;backface-visibility:hidden}
+.top{top:0}.bottom{bottom:0}
+.mask{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);overflow:hidden;padding:0}
+.word{display:block;opacity:0;transform:translateY(110%)}
+.wordmark{display:block;width:clamp(145px,20vw,260px);max-width:calc(100vw - 48px);height:auto}
+.skip{position:absolute;bottom:28px;left:var(--site-gutter);min-height:44px;padding:12px 18px;border:0;border-radius:0;background:var(--surface);color:var(--butter);font:400 13px/1.4 var(--site-body-font);cursor:pointer;transition:opacity 160ms,background 160ms,color 160ms}
 .skip:hover{background:var(--butter);color:var(--cherry)}.skip:focus-visible{outline:3px solid var(--focus);outline-offset:5px}
-@media(max-width:700px){.skip{bottom:20px;left:20px}}
-@media(prefers-reduced-motion:reduce){.overlay{display:none}.skip{transition:none}}
+:global(html[data-entrance="revealing"]) .skip{opacity:0;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.overlay{display:none!important}}
