@@ -221,11 +221,30 @@ function MediaPreview() {
   throw new Error("Select a component for media capture.");
 }
 
+const captureLooks = ["thermal", "night-vision", "ultraviolet", "ice"] as const;
+
 function ThermalImageCapture() {
+  const [look, setLook] = useState<(typeof captureLooks)[number]>("thermal");
+  useEffect(() => {
+    let currentLook: (typeof captureLooks)[number] = "thermal";
+    function update(event: Event) {
+      const seconds: unknown = event instanceof CustomEvent ? event.detail : null;
+      if (typeof seconds !== "number") return;
+      const index = Math.min(captureLooks.length - 1, Math.floor(Math.max(0, seconds) / 1.5));
+      const nextLook = captureLooks[index] ?? "thermal";
+      if (nextLook === currentLook) return;
+      currentLook = nextLook;
+      setLook(nextLook);
+    }
+    window.addEventListener("modulo-media-time", update);
+    return () => window.removeEventListener("modulo-media-time", update);
+  }, []);
+
   return <section className="thermal-image-media">
     <ThermalImage
       src="__THERMAL_IMAGE__"
-      alt="A sports car rendered as a moving thermal field"
+      alt="A sports car moving through four animated color field looks"
+      look={look}
       background="studio"
       imageScale={1}
       pixelRatio={1}

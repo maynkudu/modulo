@@ -562,27 +562,27 @@
     {
       "name": "thermal-image",
       "repository": "maynkudu/modulo-thermal-image",
-      "revision": "3e3ec8e2dbaab071262b37478fdd06d5971455cd",
+      "revision": "0a2687553b40876994a3fa5c5be069216c144305",
       "files": [
         {
           "path": "thermal-image.tsx",
-          "sha256": "c32e810cf6af38f1a77902961754a7184e742b693d15d4a8c3ccf72432dd6b0b"
+          "sha256": "308c878435e1344bf4484c975224d79cd62eaecbd859930ad191c2344a0979b1"
         },
         {
           "path": "thermal-engine.ts",
-          "sha256": "429416d332988c3abf16d53c1220abc424cbf84a454fc75dd855939623bd2786"
+          "sha256": "5bec7dd3ecbc376725ec71594fe5cf1d4f8ef0f4f0ed498e7f8d195601d1b703"
         },
         {
           "path": "thermal-shaders.ts",
-          "sha256": "5b6495bf3c6a6b561f2795f2ff2944ed0036e6d7718d64a861ec92c24a4db0cc"
+          "sha256": "9d4d630802a7beb334bfad550443d630463ae419f13943222abfde1a89fa62a5"
         },
         {
           "path": "thermal-image.module.css",
-          "sha256": "33dbcd768066fb97e512fa0f8c71551bff2588988ff31f42cb4efe4c7dd993ba"
+          "sha256": "929cf38b749bc2517ca0a86581679b1a63323aaae446675f27c7b1c3b43eb872"
         },
         {
           "path": "README.md",
-          "sha256": "8a5553ad9c47e8453538ccbb809ec67a91c4e6542bfe6d1540a21dd2768f178f"
+          "sha256": "5b6211d1d1831c025cd841ef47d3b0325c631202fc2dd979841b68e0271bb1b7"
         },
         {
           "path": "package.json",

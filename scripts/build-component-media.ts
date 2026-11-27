@@ -36,7 +36,7 @@ if (dryRun && encodeOnly) throw new Error("--dry-run and --encode-only cannot be
 const specifications = [
   { name: "dot-orb", flow: "dot-orb-pointer-ripples", pause: 6500, seek: 0, thumbnailSeek: 2, movePointer: false },
   { name: "image-mosaic", flow: "image-mosaic-metallic-sweep", pause: 7000, seek: .1, thumbnailSeek: 1.5, movePointer: false },
-  { name: "thermal-image", flow: "thermal-image-spectrum", pause: 6500, seek: .1, thumbnailSeek: 2.5, movePointer: false },
+  { name: "thermal-image", flow: "thermal-image-spectrum", pause: 6500, seek: .1, thumbnailSeek: .5, movePointer: false },
   { name: "halftone", flow: "halftone-hover-trail", pause: 7000, seek: .1, thumbnailSeek: 2, movePointer: false },
   { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .5, thumbnailSeek: 0, movePointer: false },
   { name: "eyespice", flow: "eyespice-gaze-close-retreat", pause: 4500, seek: .1, thumbnailSeek: 0, movePointer: false },

@@ -8,11 +8,19 @@ import styles from "./thermal-image-demo.module.css";
 
 const defaults = { speed: 1, blurStrength: 1, halo: 0.85, warp: 0.012, grain: 0.055 };
 const defaultImage = "/artwork/thermal-image-car.png";
+type ThermalLook = NonNullable<ThermalImageProps["look"]>;
+const lookOptions: readonly { value: ThermalLook; label: string }[] = [
+  { value: "thermal", label: "Thermal" },
+  { value: "night-vision", label: "Night vision" },
+  { value: "ultraviolet", label: "Ultraviolet" },
+  { value: "ice", label: "Ice" },
+];
 type ImageChoice = { kind: "default"; src: string } | { kind: "upload"; src: string; name: string };
 type RenderStatus = { kind: "loading" } | { kind: "ready" } | { kind: "error"; message: string };
 
 export function ThermalImageDemo({ freezeTime = null }: { freezeTime?: number | null }) {
   const [settings, setSettings] = useState(defaults);
+  const [look, setLook] = useState<ThermalLook>("thermal");
   const [playing, setPlaying] = useState(true);
   const [background, setBackground] = useState<NonNullable<ThermalImageProps["background"]>>("studio");
   const [instance, setInstance] = useState(0);
@@ -27,7 +35,7 @@ export function ThermalImageDemo({ freezeTime = null }: { freezeTime?: number | 
   useEffect(() => () => { pendingImage.current += 1; }, []);
 
   function replay() { setStatus({ kind: "loading" }); setInstance(value => value + 1); }
-  function reset() { setSettings(defaults); setPlaying(true); setBackground("studio"); replay(); }
+  function reset() { setSettings(defaults); setLook("thermal"); setPlaying(true); setBackground("studio"); replay(); }
   function useDefault() {
     pendingImage.current += 1;
     setImage({ kind: "default", src: defaultImage }); setUploadError(""); setStatus({ kind: "loading" });
@@ -53,13 +61,14 @@ export function ThermalImageDemo({ freezeTime = null }: { freezeTime?: number | 
   return <section className={styles.preview} aria-label="Thermal image preview">
     <div className={styles.artwork}>
       <div className={styles.stage} data-render-status={status.kind}>
-        <ThermalImage key={instance} src={image.src} alt={image.kind === "default" ? "A Porsche rendered through moving thermal color bands" : "Uploaded image rendered in thermal colors"}
-          className={styles.scene} imageScale={1} {...settings} background={background} playing={playing} freezeTime={freezeTime} onReady={ready} onError={failed} />
+        <ThermalImage key={instance} src={image.src} alt={image.kind === "default" ? "A Porsche rendered through animated color fields" : "Uploaded image rendered through animated color fields"}
+          className={styles.scene} imageScale={1} look={look} {...settings} background={background} playing={playing} freezeTime={freezeTime} onReady={ready} onError={failed} />
       </div>
-      {status.kind === "error" && <p role="status">{status.message} The original image is shown. Use Replay to retry.</p>}
+      {status.kind === "error" && <p role="status">{status.message} The image stays blurred. Use Replay to retry or choose another image.</p>}
     </div>
     <DemoPanel menu={menu} onReplay={replay} onReset={reset}>
       <div className={styles.controlsGrid}>
+        <DemoSelect label="Effect" value={look} options={lookOptions} onValueChange={setLook} />
         <DemoToggle label="Animate" checked={playing} onCheckedChange={setPlaying} />
         <DemoSelect label="Background" value={background} options={[{ value: "studio", label: "Studio" }, { value: "reference", label: "Original field" }]} onValueChange={setBackground} />
         <DemoRange label="Speed" value={settings.speed} min={0.1} max={2} step={0.05} format={value => `${value.toFixed(2)}×`} onValueChange={speed => setSettings(current => ({ ...current, speed }))} />
