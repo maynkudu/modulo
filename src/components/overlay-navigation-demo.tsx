@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { OverlayNavigation } from "@/registry/overlay-navigation/OverlayNavigation";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import "./overlay-navigation-demo.css";
 
 const labels: Record<string, string> = { "/": "Home", "/work": "Works", "/playground": "Playground", "/about": "About", "/contact": "Contact" };
@@ -13,7 +13,7 @@ export function OverlayNavigationDemo({ full = false }: { full?: boolean }) {
   return <OverlayNavigation currentHref={href} onNavigate={setHref} layout={layout}>
     <div style={{ minHeight: "100dvh", display: "flex", flexDirection: "column", justifyContent: "center", padding: "112px clamp(24px, 6vw, 90px) 40px" }}>
       <h1 style={{ margin: 0, fontSize: "clamp(52px, 10vw, 150px)", fontWeight: 400, letterSpacing: "-.065em", lineHeight: 1 }}>{labels[href] ?? href}</h1>
-      <LiquidButton className="liquid-overlay-switch" onClick={() => setLayout(layout === "fine" ? "bold" : "fine")} style={{ alignSelf: "flex-start", marginTop: 36, color: "inherit" }}>Switch to {layout === "fine" ? "Bold" : "Fine"}</LiquidButton>
+      <PreviewButton className="liquid-overlay-switch" onClick={() => setLayout(layout === "fine" ? "bold" : "fine")} style={{ alignSelf: "flex-start", marginTop: 36, color: "var(--control-text)" }}>Switch to {layout === "fine" ? "Bold" : "Fine"}</PreviewButton>
     </div>
   </OverlayNavigation>;
 }

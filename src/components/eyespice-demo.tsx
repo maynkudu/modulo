@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { EyeSpice, type EyeSpiceController } from "@/registry/eyespice/EyeSpice";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import styles from "./eyespice-demo.module.css";
 
 declare global { interface Window { eyeSpice?: EyeSpiceController; } }
@@ -25,10 +25,10 @@ export function EyeSpiceDemo() {
   return <section className={styles.preview} aria-label="EyeSpice preview">
     <EyeSpice tracking={tracking} paused={paused} onReady={onReady} onError={onError} />
     <div className={styles.controls} data-eyespice-controls>
-      <LiquidButton disabled={!ready} aria-pressed={tracking} onClick={() => { setTracking(value => !value); controller.current?.setClosed(null); }}>Follow cursor</LiquidButton>
-      <LiquidButton disabled={!ready || paused} onClick={() => controller.current?.setClosed(true)}>Close eye</LiquidButton>
-      <LiquidButton disabled={!ready || paused} onClick={() => controller.current?.setClosed(false)}>Open eye</LiquidButton>
-      <LiquidButton disabled={!ready} aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? "Resume" : "Pause"}</LiquidButton>
+      <PreviewButton disabled={!ready} aria-pressed={tracking} onClick={() => { setTracking(value => !value); controller.current?.setClosed(null); }}>Follow cursor</PreviewButton>
+      <PreviewButton disabled={!ready || paused} onClick={() => controller.current?.setClosed(true)}>Close eye</PreviewButton>
+      <PreviewButton disabled={!ready || paused} onClick={() => controller.current?.setClosed(false)}>Open eye</PreviewButton>
+      <PreviewButton disabled={!ready} aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? "Resume" : "Pause"}</PreviewButton>
     </div>
     {error && <p className={styles.error} role="alert">{error}</p>}
   </section>;

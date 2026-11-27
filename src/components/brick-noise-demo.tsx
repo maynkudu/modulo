@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { BrickNoise, type BrickNoiseController, type BrickNoiseSnapshot } from "@/registry/brick-noise/BrickNoise";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import { InterfaceSlider } from "./interface-slider";
 import styles from "./brick-noise-demo.module.css";
 
@@ -28,11 +28,11 @@ export function BrickNoiseDemo() {
   return <section className={styles.preview} aria-label="Brick noise preview">
     <BrickNoise speed={speed} paused={paused} onReady={onReady} onFrame={onFrame} onError={onError} />
     <div className={styles.toolbar}>
-      <LiquidButton disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => {
+      <PreviewButton disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => {
         const next = !paused; setPaused(next);
         if (next && controller.current) setFrame(controller.current.snapshot().frame);
-      }}>{paused ? "Resume" : "Pause"}</LiquidButton>
-      <LiquidButton disabled={!ready} onClick={() => { controller.current?.seekFrame(0); setFrame(0); }}>Reset</LiquidButton>
+      }}>{paused ? "Resume" : "Pause"}</PreviewButton>
+      <PreviewButton disabled={!ready} onClick={() => { controller.current?.seekFrame(0); setFrame(0); }}>Reset</PreviewButton>
     </div>
     <div className={styles.settings}>
       <InterfaceSlider label="Speed" min={25} max={200} step={25} value={speed * 100} disabled={!ready || reducedMotion}

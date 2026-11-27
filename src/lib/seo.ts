@@ -4,50 +4,54 @@ import { allCatalogItems, catalogItems, pageCatalogItems, shaderCatalogItems, ge
 import { absoluteUrl, siteUrl } from "./site";
 
 export const sitePages = {
+  access: { path: "/access", title: "Get Access", description: "We aint sharing these" },
+  skills: { path: "/skills", title: "Skills", description: "Agent skills in the Modulo collection." },
+  inspiration: { path: "/inspiration", title: "Inspiration", description: "Design references in the Modulo collection." },
+  rules: { path: "/rules", title: "Rules", description: "Reusable rules in the Modulo collection." },
   home: {
     path: "/",
-    title: "Modulo | Independent design studio",
-    description: "Modulo designs and builds brand identities and launch websites, then carries them into motion, print, and merch.",
+    title: "Modulo | The collection",
+    description: "Interactive components, shaders, pages and resources by maynkudu. Try the live previews and explore the controls.",
   },
   work: {
     path: "/work",
     title: "Work",
-    description: "Explore Modulo's work in interactive art, typography and motion, plus the studio's interactive pages and React components.",
+    description: "Explore the Modulo collection of interactive components, shaders and complete pages.",
   },
   services: {
     path: "/services",
     title: "Services",
-    description: "Modulo designs brand identities, websites, motion, print and merch for product launches and campaigns.",
+    description: "Explore interactive components, shaders and pages in the Modulo collection.",
   },
   contact: {
     path: "/contact",
     title: "Contact",
-    description: "Email Modulo about a design project. Tell the studio what you're making, when it needs to launch and the budget you have in mind.",
+    description: "Explore the Modulo collection of interactive work by maynkudu.",
   },
   components: {
     path: "/components",
     title: "Components",
-    description: "Explore Modulo's interactive interface studies. Search the collection, try the live demos, and install original React source with shadcn.",
+    description: "Explore interactive components from Modulo. Search the collection and try the real demos and controls.",
   },
   pages: {
     path: "/pages",
     title: "Pages",
-    description: "Complete interactive pages from Modulo. Play the public previews and install the original React source with an active key.",
+    description: "Complete interactive pages from Modulo. Play the public previews and explore their controls.",
   },
   shaders: {
     path: "/shaders",
     title: "Shaders",
-    description: "WebGL shaders from Modulo. Try the live previews and install the React source with an active key.",
+    description: "Shaders and image effects from Modulo. Try the live previews, upload your own images and explore the controls.",
   },
   studio: {
     path: "/studio",
     title: "Studio",
-    description: "Modulo designs and builds launch websites, interactive product experiences, and frontend systems for software teams.",
+    description: "Interactive components, shaders and pages made by maynkudu.",
   },
   registry: {
     path: "/registry",
     title: "Registry",
-    description: "Install Modulo React components with the shadcn CLI. Use a direct registry URL or configure the @modulo namespace to copy the TypeScript source into your project.",
+    description: "Access to original Modulo components and agent instructions.",
   },
 };
 
@@ -155,14 +159,14 @@ function componentSource(entry: CatalogItem) {
     datePublished: addedAt,
     programmingLanguage: { "@type": "ComputerLanguage", name: "TypeScript" },
     runtimePlatform: "React",
-    isAccessibleForFree: true,
+    isAccessibleForFree: false,
     author: { "@id": author["@id"] },
   };
 }
 
 export function getCollectionStructuredData(page: "home" | "components" | "pages" | "shaders") {
   const { title, description, path } = sitePages[page];
-  const entries = page === "pages" ? pageCatalogItems : page === "shaders" ? shaderCatalogItems : catalogItems;
+  const entries = page === "home" ? allCatalogItems : page === "pages" ? pageCatalogItems : page === "shaders" ? shaderCatalogItems : catalogItems;
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

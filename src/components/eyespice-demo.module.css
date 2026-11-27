@@ -1,3 +1,4 @@
 .preview { grid-column: 1 / -1; min-width: 0; max-width: 760px; width: 100%; }
 .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
 .error { color: var(--foreground); margin: 18px 0 0; }
+.preview{margin-inline:auto}.controls{gap:8px}.controls button{min-height:44px}

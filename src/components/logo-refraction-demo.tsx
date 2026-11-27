@@ -2,7 +2,7 @@
 
 import { useCallback, useRef, useState } from "react";
 import { LogoRefraction, type LogoRefractionController, type LogoRefractionFrame } from "@/registry/logo-refraction/LogoRefraction";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import { InterfaceSlider } from "./interface-slider";
 import styles from "./logo-refraction-demo.module.css";
 
@@ -44,8 +44,8 @@ export function LogoRefractionDemo() {
     <LogoRefraction src="/artwork/maynkudu-warehouse.png" alt="The complete maynkudu logo" strength={strength} dispersion={dispersion} markSheen={markSheen} speed={speed} paused={paused} showOriginal={showOriginal} onReady={onReady} onFrame={onFrame} onError={onError} />
     <div className={styles.toolbar}>
       <p>Move over the image</p>
-      <LiquidButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume" : "Pause"}</LiquidButton>
-      <LiquidButton type="button" disabled={!ready} aria-pressed={showOriginal} onClick={() => setShowOriginal(!showOriginal)}>{showOriginal ? "Show refraction" : "Show original"}</LiquidButton>
+      <PreviewButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume" : "Pause"}</PreviewButton>
+      <PreviewButton type="button" disabled={!ready} aria-pressed={showOriginal} onClick={() => setShowOriginal(!showOriginal)}>{showOriginal ? "Show refraction" : "Show original"}</PreviewButton>
     </div>
     <div className={styles.settings}>
       {controls.map(({ name, label, value, setValue }) => <InterfaceSlider className={styles.setting} key={name}

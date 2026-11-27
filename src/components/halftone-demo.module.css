@@ -10,3 +10,5 @@
 .colors input, .background input { width: 44px; height: 36px; padding: 0; border: 0; background: transparent; cursor: pointer; }
 .preview input:focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
 @media (max-width: 850px) { .preview { grid-template-columns: 1fr; gap: 24px; } .scene { max-width: 620px; margin-inline: auto; } }
+.preview{grid-template-columns:minmax(0,1fr) 288px;gap:32px}.group{gap:12px}.paletteButtons button{font-size:12px;padding:10px 12px}
+@media(max-width:860px){.preview{grid-template-columns:1fr;gap:16px}}

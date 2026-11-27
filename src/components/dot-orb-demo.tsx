@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "
 import { DotOrb } from "@/registry/dot-orb/DotOrb";
 import type { DotOrbController } from "@/registry/dot-orb/dot-orb-engine";
 import { AudioInputSession, type AudioInputState } from "@/registry/dot-orb/audio-input-session";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import { DemoPanel, DemoRange, DemoSurface, DemoToggle, type DemoMenuEntry } from "./demo-controls";
 import styles from "./dot-orb-demo.module.css";
 
@@ -89,12 +89,12 @@ export function DotOrbDemo() {
         reducedMotion={reduced || systemReduced} onReady={onReady} onError={onError} /></div>
       <div className={styles.audioControls}>
         <div className={styles.sourceButtons}>
-          <LiquidButton aria-pressed={micActive} onClick={() => {
+          <PreviewButton aria-pressed={micActive} onClick={() => {
             setError("");
             if (micActive || micBusy) session.current?.stop();
             else void session.current?.useMicrophone();
-          }}>{micBusy ? "Cancel microphone" : micActive ? "Stop microphone" : "Use microphone"}</LiquidButton>
-          <LiquidButton onClick={() => fileInput.current?.click()}>Choose audio</LiquidButton>
+          }}>{micBusy ? "Cancel microphone" : micActive ? "Stop microphone" : "Use microphone"}</PreviewButton>
+          <PreviewButton onClick={() => fileInput.current?.click()}>Choose audio</PreviewButton>
           <input ref={fileInput} className={styles.fileInput} type="file" accept="audio/*,.m4a,.flac,.ogg,.wav,.mp3"
             aria-label="Choose an audio file" onChange={event => {
               const selected = event.currentTarget.files?.[0];
@@ -107,9 +107,9 @@ export function DotOrbDemo() {
         {file && <div className={styles.player}>
           <div className={styles.fileHeading}><span title={file.name}>{file.name}</span><output ref={time} aria-live="off" /></div>
           <div className={styles.transport}>
-            <LiquidButton onClick={() => file.status === "playing" ? session.current?.pauseFile() : void session.current?.playFile()}>
+            <PreviewButton onClick={() => file.status === "playing" ? session.current?.pauseFile() : void session.current?.playFile()}>
               {file.status === "playing" ? "Pause" : file.status === "ended" ? "Replay audio" : "Play"}
-            </LiquidButton>
+            </PreviewButton>
             <input ref={seek} type="range" aria-label="Audio position" min={0} max={file.duration || 1} step={.01}
               defaultValue={0} disabled={!file.duration} onInput={event => session.current?.seek(Number(event.currentTarget.value))} />
           </div>

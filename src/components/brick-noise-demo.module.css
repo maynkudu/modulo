@@ -6,3 +6,5 @@
 .status, .error { margin: 16px 0 0; color: var(--ui-muted, #aaa); font-size: 13px; line-height: 1.7; }
 .error { color: #ff8d8d; }
 @media (max-width: 440px) { .settings { grid-template-columns: 1fr; gap: 18px; } }
+.settings{background:var(--panel-surface);color:var(--control-text);padding:20px;gap:24px;--ui-muted:var(--control-muted)}
+.toolbar{flex-wrap:wrap}

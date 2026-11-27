@@ -7,7 +7,7 @@ import {
 } from "@/registry/interactive-art/examples/GardenCanvas";
 import { GARDEN_LAYERS, gardenLighting } from "@/registry/interactive-art/scenes/garden";
 import type { FrameState } from "@/registry/interactive-art/engine/runtime";
-import { LiquidButton, LiquidSelect } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton, PreviewSelect } from "./preview-controls";
 import { InterfaceSlider } from "./interface-slider";
 import styles from "./garden-demo.module.css";
 
@@ -104,26 +104,26 @@ export function GardenDemo() {
             : "Hover over a flower, or hold and pull it. The stem returns when you let go."}
         </p>
         <div className={styles.controls} role="group" aria-label="Garden controls">
-          <LiquidButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused}
+          <PreviewButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused}
             onClick={() => paused ? garden.current?.resume() : garden.current?.pause()}>
             {paused ? "Resume" : "Pause"}
-          </LiquidButton>
-          <LiquidButton type="button" disabled={!ready || paused || reducedMotion}
+          </PreviewButton>
+          <PreviewButton type="button" disabled={!ready || paused || reducedMotion}
             onClick={() => {
               garden.current?.bend("flower-4", direction.current);
               direction.current *= -1;
             }}>
             Bend lotus
-          </LiquidButton>
-          <LiquidButton type="button" disabled={!ready} onClick={() => {
+          </PreviewButton>
+          <PreviewButton type="button" disabled={!ready} onClick={() => {
             const instance = garden.current;
             if (instance) instance.seek(instance.snapshot().elapsed + 20);
           }}>
             Advance 20 seconds
-          </LiquidButton>
-          <LiquidButton type="button" disabled={!ready} onClick={() => garden.current?.seek(0)}>
+          </PreviewButton>
+          <PreviewButton type="button" disabled={!ready} onClick={() => garden.current?.seek(0)}>
             Start again
-          </LiquidButton>
+          </PreviewButton>
         </div>
         <InterfaceSlider className={styles.slider} label="Speed" min={1} max={6} step={1} value={Number(speed)} disabled={!ready}
           formatValue={value => `${value}x`} onValueChange={value => { setSpeed(String(value)); garden.current?.setTimeScale(value); }} />
@@ -131,14 +131,14 @@ export function GardenDemo() {
           <h3>Export artwork</h3>
           <div className={styles.field}>
             <label htmlFor={`${id}-layer`}>Layer</label>
-            <LiquidSelect id={`${id}-layer`} label="Layer" value={layer} onValueChange={setLayer} align="end" options={[
+            <PreviewSelect id={`${id}-layer`} label="Layer" value={layer} onValueChange={setLayer} align="end" options={[
               { value: "whole", label: "Whole scene" }, { value: "plants", label: "Plants" },
               ...GARDEN_LAYERS.map(value => ({ value, label: value.charAt(0).toUpperCase() + value.slice(1) })),
             ]} />
           </div>
-          <LiquidButton className={styles.save} type="button" disabled={!ready || saving} onClick={saveImage}>
+          <PreviewButton className={styles.save} type="button" disabled={!ready || saving} onClick={saveImage}>
             {saving ? "Saving..." : "Save PNG"}
-          </LiquidButton>
+          </PreviewButton>
         </div>
         {error && <p className={styles.error} role="alert">{error}</p>}
       </section>

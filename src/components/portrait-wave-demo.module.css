@@ -14,3 +14,6 @@
 .status, .error { margin: 12px 0 0; color: var(--ui-muted); font-size: 13px; line-height: 1.7; }
 .error { color: #ff8d8d; }
 @media (max-width: 440px) { .settings { grid-template-columns: 1fr; gap: 20px; } }
+.settings{background:var(--panel-surface);color:var(--control-text);padding:20px;--ui-muted:var(--control-muted)}
+.time input{height:44px;accent-color:var(--control-accent)}
+.upload input::file-selector-button{min-height:44px;border-radius:2px;background:var(--control-surface);color:var(--control-text)}

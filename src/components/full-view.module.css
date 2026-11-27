@@ -1,11 +1,14 @@
 .frame { position: relative; height: 100dvh; }
-.viewport { width: 100%; min-height: 100dvh; height: 100dvh; overflow: hidden; background: #050304; }
+.viewport { width: 100%; min-height: 100dvh; height: 100dvh; overflow: hidden; background: var(--cherry); }
 .scene { width: 100% !important; height: 100% !important; min-height: 0 !important; aspect-ratio: auto !important; border-radius: 0 !important; }
 .scene canvas { width: 100%; height: 100%; }
 .game { background: #fdfdfd; }
 .game > section { min-height: 100%; }
-.controlViewport { background: #fdfdfd; overflow: auto; }
-.logoViewport { background: #000; color: #e8e8e8; overflow: auto; }
-.controls { width: min(100%, 760px); margin: 0 auto; padding: 32px 20px; display: grid; gap: 24px; }
-.liquidViewport { background: #000; color: #e8e8e8; overflow: auto; }
+.controlViewport { background: var(--cherry); overflow: auto; }
+.logoViewport { background: var(--cherry); color: var(--butter); overflow: auto; }
+.controls { width: min(100%, 1220px); margin: 0 auto; padding: 32px 20px; display: grid; gap: 24px; }
+.liquidViewport { background: var(--cherry); color: var(--butter); overflow: auto; }
 .mosaicViewport { overflow: auto; }
+
+.controlViewport .controls{grid-template-columns:minmax(0,1fr) 288px;gap:32px;align-items:start}
+@media(max-width:860px){.controlViewport .controls{grid-template-columns:minmax(0,1fr);gap:16px}.controls{padding:20px}}

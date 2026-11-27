@@ -2,7 +2,7 @@
 
 import { useCallback, useState, useSyncExternalStore } from "react";
 import { Halftone, type HalftoneProps } from "@/registry/halftone/Halftone";
-import { LiquidButton, LiquidDisclosure } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton, PreviewDisclosure } from "./preview-controls";
 import { DemoPanel, DemoRange, DemoSelect, DemoToggle, type DemoMenuEntry } from "./demo-controls";
 import { halftoneControlGroups, halftoneNumericDefaults, halftonePalettes } from "@/lib/halftone-demo-settings";
 import styles from "./halftone-demo.module.css";
@@ -52,9 +52,9 @@ export function HalftoneDemo() {
       <DemoToggle label="Pointer interaction" checked={interactive} onCheckedChange={setInteractive} />
       <DemoRange label="Speed" value={settings.speed} min={0} max={3} step={0.1} disabled={reduced}
         format={value => `${value.toFixed(1)}×`} onValueChange={speed => setSettings(current => ({ ...current, speed }))} />
-      <LiquidDisclosure label="Colors" open>
-        <div className={styles.paletteButtons}>{halftonePalettes.map(palette => <LiquidButton key={palette.value}
-          onClick={() => { setColors(palette.colors); setBackground(palette.background); }}>{palette.label}</LiquidButton>)}</div>
+      <PreviewDisclosure label="Colors" open>
+        <div className={styles.paletteButtons}>{halftonePalettes.map(palette => <PreviewButton key={palette.value}
+          onClick={() => { setColors(palette.colors); setBackground(palette.background); }}>{palette.label}</PreviewButton>)}</div>
         <div className={styles.colors}>{colors.map((color, index) => <label key={index}>Color {index + 1}
           <input type="color" value={color} onChange={event => {
             const next = event.currentTarget.value;
@@ -62,19 +62,19 @@ export function HalftoneDemo() {
           }} />
         </label>)}</div>
         <div className={styles.paletteButtons}>
-          <LiquidButton disabled={colors.length >= 6} onClick={() => setColors(current => [...current, current[current.length - 1]])}>Add color</LiquidButton>
-          <LiquidButton disabled={colors.length <= 2} onClick={() => setColors(current => current.slice(0, -1))}>Remove color</LiquidButton>
+          <PreviewButton disabled={colors.length >= 6} onClick={() => setColors(current => [...current, current[current.length - 1]])}>Add color</PreviewButton>
+          <PreviewButton disabled={colors.length <= 2} onClick={() => setColors(current => current.slice(0, -1))}>Remove color</PreviewButton>
         </div>
         <label className={styles.background}>Background<input type="color" value={background} onChange={event => setBackground(event.currentTarget.value)} /></label>
-      </LiquidDisclosure>
-      {halftoneControlGroups.map(group => <LiquidDisclosure key={group.label} label={group.label}>
+      </PreviewDisclosure>
+      {halftoneControlGroups.map(group => <PreviewDisclosure key={group.label} label={group.label}>
         <div className={styles.group}>{group.fields.map(field => <DemoRange key={field.key} label={field.label}
           value={settings[field.key]} min={field.min} max={field.max} step={field.step}
           format={value => field.key === "spacing" || field.key === "radius" ? `${value}px` : field.key === "angle" ? `${value}°` : field.key === "trailLength" ? `${value.toFixed(1)}s` : String(Number(value.toFixed(3)))}
           onValueChange={value => setSettings(current => ({ ...current, [field.key]: value }))} />)}
           {group.label === "Fade" && <DemoSelect label="Direction" value={fadeFrom} options={fadeOptions} onValueChange={setFadeFrom} />}
         </div>
-      </LiquidDisclosure>)}
+      </PreviewDisclosure>)}
     </DemoPanel>
   </section>;
 }

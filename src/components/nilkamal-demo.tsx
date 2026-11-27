@@ -4,9 +4,9 @@ import { useCallback, useId, useRef, useState } from "react";
 import { Nilkamal, WEATHERS, type NilkamalController, type Weather } from "@/registry/nilkamal/Nilkamal";
 import type { FrameState } from "@/registry/nilkamal/engine/runtime";
 import { useSoundSettings } from "@/lib/interface-sounds";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import { InterfaceSlider } from "./interface-slider";
-import { LiquidTrack } from "@/registry/liquid-animations/LiquidTrack";
+import { PreviewTrack } from "./preview-controls";
 import styles from "./nilkamal-demo.module.css";
 
 declare global { interface Window { nilkamal?: NilkamalController; } }
@@ -56,9 +56,9 @@ export function NilkamalDemo() {
     </section>
     <section className={styles.controlsPanel} aria-labelledby={`${id}-controls`}>
       <h2 id={`${id}-controls`}>Weather</h2>
-      <LiquidTrack className={styles.weather} role="group" aria-label="Weather">
-        {WEATHERS.map(value => <LiquidButton type="button" key={value} aria-pressed={weather === value} disabled={!ready} onClick={() => { unlock(); setWeather(value); }}>{value.charAt(0).toUpperCase() + value.slice(1)}</LiquidButton>)}
-      </LiquidTrack>
+      <PreviewTrack className={styles.weather} role="group" aria-label="Weather">
+        {WEATHERS.map(value => <PreviewButton type="button" key={value} aria-pressed={weather === value} disabled={!ready} onClick={() => { unlock(); setWeather(value); }}>{value.charAt(0).toUpperCase() + value.slice(1)}</PreviewButton>)}
+      </PreviewTrack>
       <p className={styles.hint}>{reducedMotion ? "Motion follows your reduced-motion preference. Select a weather to change the still." : "Hover over the petals, pull the lotus, or brush the water. Snow and ice build over time."}</p>
       <InterfaceSlider className={styles.slider} label="Intensity" min={.2} max={1} step={.05} value={intensity} disabled={!ready}
         formatValue={value => `${Math.round(value * 100)}%`} onValueChange={value => { unlock(); setIntensity(value); }} />
@@ -67,10 +67,10 @@ export function NilkamalDemo() {
       <InterfaceSlider className={styles.slider} label="Volume" min={0} max={1} step={.05} value={volume} disabled={!ready || !enabled}
         formatValue={value => enabled ? `${Math.round(value * 100)}%` : "Muted"} onValueChange={value => { unlock(); setVolume(value); }} />
       <div className={styles.actions}>
-        <LiquidButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => { unlock(); setPaused(!paused); }}>{paused ? "Resume" : "Pause"}</LiquidButton>
-        <LiquidButton type="button" disabled={!ready || reducedMotion || paused || weather !== "storm"} onClick={() => { unlock(); controller.current?.lightning(); }}>Lightning</LiquidButton>
-        <LiquidButton type="button" disabled={!ready} onClick={() => { controller.current?.reset(); setBloom(1); }}>Reset</LiquidButton>
-        <LiquidButton type="button" disabled={!ready || saving} onClick={save}>{saving ? "Saving..." : "Save PNG"}</LiquidButton>
+        <PreviewButton type="button" disabled={!ready || reducedMotion} aria-pressed={paused} onClick={() => { unlock(); setPaused(!paused); }}>{paused ? "Resume" : "Pause"}</PreviewButton>
+        <PreviewButton type="button" disabled={!ready || reducedMotion || paused || weather !== "storm"} onClick={() => { unlock(); controller.current?.lightning(); }}>Lightning</PreviewButton>
+        <PreviewButton type="button" disabled={!ready} onClick={() => { controller.current?.reset(); setBloom(1); }}>Reset</PreviewButton>
+        <PreviewButton type="button" disabled={!ready || saving} onClick={save}>{saving ? "Saving..." : "Save PNG"}</PreviewButton>
       </div>
       {error && <p className={styles.error} role="alert">{error}</p>}
     </section>

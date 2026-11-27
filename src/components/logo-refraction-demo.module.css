@@ -10,3 +10,7 @@
 @media (max-width: 440px) { .settings { gap: 12px; } .setting label { flex-direction: column; gap: 5px; } .toolbar { padding: 14px 12px; gap: 6px; } .toolbar p { font-size: 12px; } .toolbar button { padding: 8px; font-size: 12px; } }
 @media (prefers-reduced-motion: reduce) { .toolbar button { transition: none; } }
 .setting { font-size: 13px; }
+.settings{background:var(--panel-surface);color:var(--control-text);padding:20px;--ui-muted:var(--control-muted)}
+.toolbar{flex-wrap:wrap;padding-inline:0}.toolbar p{flex-basis:100%}.toolbar button{min-height:44px}
+.preview :is(button,input):focus-visible{outline-color:var(--control-accent)}
+@media(max-width:550px){.settings{grid-template-columns:1fr;gap:16px;padding:18px}}

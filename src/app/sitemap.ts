@@ -5,7 +5,7 @@ import { absoluteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    ...Object.values(sitePages).map(({ path }) => ({
+    ...Object.values(sitePages).filter(({ path }) => !["/work", "/services", "/contact", "/studio", "/registry"].includes(path)).map(({ path }) => ({
       url: absoluteUrl(path),
       images: [absoluteUrl("/brand/modulo-og.jpg")],
     })),

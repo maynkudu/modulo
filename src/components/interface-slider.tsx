@@ -1,11 +1,12 @@
 "use client";
 
-import { LiquidSlider, type LiquidSliderProps } from "@/registry/liquid-animations/LiquidSlider";
-import { playSound } from "@/lib/interface-sounds";
+import type { ComponentProps } from "react";
+import { DemoRange } from "./demo-controls";
 
-export function InterfaceSlider({ onValueChange, ...props }: LiquidSliderProps) {
-  return <LiquidSlider {...props} onValueChange={value => {
-    onValueChange?.(value);
-    playSound("slide");
-  }} />;
+type InterfaceSliderProps = Omit<ComponentProps<typeof DemoRange>, "format"> & {
+  formatValue?: (value: number) => string;
+};
+
+export function InterfaceSlider({ formatValue, ...props }: InterfaceSliderProps) {
+  return <DemoRange {...props} format={formatValue} />;
 }

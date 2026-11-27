@@ -23,14 +23,14 @@ export function SoundControl({ className, label, placement = "popover" }: { clas
   const [open, setOpen] = useState(false);
   const changeOpen = (next: boolean) => { setOpen(next); if (next) playSound("click"); };
   if (placement === "drawer") return <Dialog.Root open={open} onOpenChange={changeOpen}>
-    <Dialog.Trigger className={`${styles.navTrigger} ${className ?? ""}`} aria-label={`${label ?? "Ambience"}, ${enabled && volume > 0 ? "on" : "muted"}`} data-sound-managed>
-      <span className={styles.navLabel}><span>{label ?? "Ambience"}</span><span aria-hidden="true">{label ?? "Ambience"}</span></span>
+    <Dialog.Trigger className={`${styles.navTrigger} ${className ?? ""}`} aria-label={`${label ?? "Sound"}, ${enabled && volume > 0 ? "on" : "muted"}`} data-sound-managed>
+      <span className={styles.navLabel}><span>{label ?? "Sound"}</span><span aria-hidden="true">{label ?? "Sound"}</span></span>
     </Dialog.Trigger>
     <Dialog.Portal>
       <Dialog.Backdrop className={styles.drawerBackdrop} />
       <Dialog.Popup className={styles.drawer} aria-labelledby="studio-ambience-title">
         <header className={styles.drawerHeader}>
-          <div><Dialog.Title className={styles.drawerTitle} id="studio-ambience-title">Ambience</Dialog.Title></div>
+          <div><Dialog.Title className={styles.drawerTitle} id="studio-ambience-title">Sound</Dialog.Title></div>
           <Dialog.Close className={styles.drawerClose} aria-label="Close ambience settings"><span aria-hidden="true">×</span></Dialog.Close>
         </header>
         <section className={styles.drawerSection} aria-labelledby="effects-title">
@@ -48,10 +48,7 @@ export function SoundControl({ className, label, placement = "popover" }: { clas
             <output>{equalizer[band] > 0 ? "+" : ""}{equalizer[band]} dB</output>
           </div>)}
         </section>
-        <section className={styles.drawerSection} aria-labelledby="ambient-audio-title">
-          <h3 id="ambient-audio-title">Ambient audio</h3>
-          <p>Ambient tracks aren&apos;t connected yet.</p>
-        </section>
+
       </Dialog.Popup>
     </Dialog.Portal>
   </Dialog.Root>;
@@ -60,7 +57,7 @@ export function SoundControl({ className, label, placement = "popover" }: { clas
     <LiquidPopover label="Sound settings" open={open} onOpenChange={changeOpen} width={280}
       trigger={<LiquidButton className={styles.trigger} aria-label={`${label ? `${label}, ` : "Sound settings, "}${enabled && volume > 0 ? `${Math.round(volume * 100)} percent` : "muted"}`} aria-pressed={enabled && volume > 0}>{label ? <span className={styles.triggerLabel}>{label}</span> : null}<SpeakerIcon enabled={enabled} volume={volume} /></LiquidButton>}>
       <section className={styles.panel} data-sound-managed>
-        <h2 data-liquid-item="">Ambience</h2>
+        <h2 data-liquid-item="">Sound</h2>
         <div data-liquid-item="" data-liquid-paint="box">
           <LiquidSlider label="Volume" min={0} max={1} step={.05} value={volume} formatValue={value => `${Math.round(value * 100)}%`}
             onValueChange={value => { setSoundVolume(value); playSound("slide"); }} />

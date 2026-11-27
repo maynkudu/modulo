@@ -1,59 +1,11 @@
-.header {
-  position: relative;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  width: var(--site-width);
-  min-height: var(--site-header-height);
-  margin-inline: auto;
-  color: var(--foreground);
-  background: transparent;
-  --liquid: #ffc1c8;
-  font-family: var(--site-body-font);
-  font-size: 15px;
-}
-
-.brand { flex: 0 0 104px; }
-.header .brand img { max-width: none; }
-.actions, .navigation { display: flex; align-items: center; }
-.actions { gap: clamp(12px, 2.3vw, 32px); }
-.navigation { gap: clamp(14px, 3.4vw, 48px); }
-
-.navigation a {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  min-height: 44px;
-  text-decoration: none;
-  transition: color 180ms ease;
-}
-
-.navigation a[aria-current] { color: var(--accent); }
-.navigation sup { top: 0; align-self: center; translate: 0 -.65em; color: var(--foreground); font-size: .65em; font-variant-numeric: tabular-nums; }
-.roll { display: grid; height: 1.2em; overflow: clip; line-height: 1.2; }
-.roll > span { grid-area: 1 / 1; transition: transform 420ms cubic-bezier(.2, .8, .2, 1); }
-.roll > span:last-child { color: var(--liquid); transform: translateY(110%); }
-.navigation a:is(:hover, :focus-visible) .roll > span:first-child { transform: translateY(-110%); }
-.navigation a:is(:hover, :focus-visible) .roll > span:last-child { transform: none; }
-.header :is(a, button):focus-visible { outline: 2px solid var(--foreground); outline-offset: 4px; }
-
-@media (max-width: 550px) {
-  .header { gap: 10px; font-size: 13px; }
-  .brand { flex-basis: 68px; }
-  .actions, .navigation { gap: 12px; }
-}
-
-@media (max-width: 360px) {
-  .brand { flex-basis: 52px; }
-  .actions, .navigation { gap: 6px; }
-  .header { font-size: 12px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .navigation a, .roll > span { transition: none; }
-  .navigation a:is(:hover, :focus-visible) { color: var(--liquid); }
-  .navigation a:is(:hover, :focus-visible) .roll > span:first-child { transform: none; }
-  .navigation a:is(:hover, :focus-visible) .roll > span:last-child { transform: translateY(110%); }
-}
+.header{position:relative;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;width:var(--site-width);min-height:100px;margin-inline:auto;color:var(--butter);font-family:var(--site-body-font);view-transition-name:modulo-header}
+.brand{justify-self:start;color:var(--butter);font-size:39px;font-weight:650;letter-spacing:-.075em;line-height:1;text-decoration:none}
+.navigation{display:flex;align-items:center;justify-self:end;gap:25px;font-size:14px}
+.navigation a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.navigation .access{justify-content:center;min-height:46px;padding:13px 21px;background:var(--butter);color:var(--cherry);font-weight:550}
+.header :is(a,button):focus-visible{outline:3px solid var(--focus);outline-offset:4px}
+:global(html[data-design="bold"]) .brand{font-weight:780;letter-spacing:-.085em}
+:global(html[data-design="bold"]) .navigation{font-weight:600}
+@media(max-width:1050px){.navigation{gap:18px}.collection{font-size:13px}}
+@media(max-width:800px){.header{min-height:90px;gap:16px}.brand{font-size:34px}.navigation .collection{display:none}.navigation{gap:0}.navigation .access{padding:12px 16px;font-size:13px}}
+@media(max-width:540px){.header{min-height:142px;grid-template-columns:1fr auto;grid-template-rows:70px 56px;gap:0 16px;padding-bottom:16px}.brand{grid-row:1;grid-column:1}.header>div{grid-column:1 / -1;grid-row:2;justify-self:start;align-self:start}.navigation{grid-row:1;grid-column:2}}

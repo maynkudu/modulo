@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { ImageMosaic } from "@/registry/image-mosaic/ImageMosaic";
 import type { MetallicFinish } from "@/registry/image-mosaic/create-image-mosaic";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import styles from "./image-mosaic-demo.module.css";
 
 export function ImageMosaicDemo() {
@@ -41,17 +41,16 @@ export function ImageMosaicDemo() {
   }
 
   return <section className={styles.preview} aria-label="Image mosaic preview">
-    <div className={styles.upload}><LiquidButton onClick={() => input.current?.click()}>Upload image</LiquidButton></div>
     <input ref={input} className={styles.hidden} aria-label="Upload image" type="file" accept="image/png,image/jpeg,image/webp" onChange={upload} />
     <ImageMosaic className={styles.scene} src={src} alt={name} cellSize={24 - detail * 20} detail={detail} seed={seed} finish={finish} refraction={refraction} />
-    <div className={styles.controls}>
+    <div className={styles.controls}><h2>Controls</h2><div className={styles.upload}><PreviewButton onClick={() => input.current?.click()}>Upload image</PreviewButton></div>
       <label>Finish<select aria-label="Finish" value={finish} onChange={event => {
         const value = event.currentTarget.value;
         if (value === "chrome" || value === "brushed" || value === "iridescent") setFinish(value);
       }}><option value="chrome">Chrome</option><option value="brushed">Brushed</option><option value="iridescent">Iridescent</option></select></label>
-      <LiquidButton onClick={() => setSeed(value => value + 1)}>Shuffle elements</LiquidButton>
-      <label>Detail<input aria-label="Detail" type="range" min="0" max="100" step="1" value={Math.round(detail * 100)} onChange={event => setDetail(event.currentTarget.valueAsNumber / 100)} /></label>
-      <label>Refraction<input aria-label="Refraction" type="range" min="0" max="100" step="1" value={Math.round(refraction * 100)} onChange={event => setRefraction(event.currentTarget.valueAsNumber / 100)} /></label>
+      <PreviewButton onClick={() => setSeed(value => value + 1)}>Shuffle elements</PreviewButton>
+      <label>Detail<output>{Math.round(detail * 100)}%</output><input aria-label="Detail" type="range" min="0" max="100" step="1" value={Math.round(detail * 100)} onChange={event => setDetail(event.currentTarget.valueAsNumber / 100)} /></label>
+      <label>Refraction<output>{Math.round(refraction * 100)}%</output><input aria-label="Refraction" type="range" min="0" max="100" step="1" value={Math.round(refraction * 100)} onChange={event => setRefraction(event.currentTarget.valueAsNumber / 100)} /></label>
     </div>
     {status && <p role="status" className={styles.status}>{status}</p>}
   </section>;

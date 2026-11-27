@@ -50,9 +50,9 @@ export function InlineDownloadDemo() {
           reducedMotion={reducedMotion}
           disabled={disabled}
           error={failed ? "The download failed." : null}
-          onDownload={() => { setLastAction("onDownload"); setFailed(false); if (failNext) { setFailNext(false); setTimeout(() => setFailed(true), 900); } }}
-          onCancel={() => { setLastAction("onCancel"); setFailed(false); }}
-          onOpen={() => setLastAction("onOpen")}
+          onDownload={() => { setLastAction("Download started"); setFailed(false); if (failNext) { setFailNext(false); setTimeout(() => setFailed(true), 900); } }}
+          onCancel={() => { setLastAction("Download canceled"); setFailed(false); }}
+          onOpen={() => setLastAction("Download opened")}
         />
       </div>
     </DemoSurface>
@@ -66,7 +66,7 @@ export function InlineDownloadDemo() {
         <DemoToggle label="Fail next run" checked={failNext} onCheckedChange={setFailNext} />
       </div>
       <p className={styles.hint}>Press the pill. Press it again, or press Escape, to cancel.</p>
-      <p className={styles.status} role="status">{lastAction ? `${lastAction}() called` : "No callback yet"}</p>
+      <p className={styles.status} role="status">{lastAction ?? "Ready to download"}</p>
     </DemoPanel>
   </>;
 }

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { PortraitWave, type PortraitShaderState, type PortraitWaveController } from "@/registry/portrait-wave/PortraitWave";
-import { LiquidButton } from "@/registry/liquid-animations/LiquidControls";
+import { PreviewButton } from "./preview-controls";
 import { portraitWaveImages } from "@/lib/portrait-wave-content";
 import { InterfaceSlider } from "./interface-slider";
 import styles from "./portrait-wave-demo.module.css";
@@ -44,10 +44,10 @@ export function PortraitWaveDemo() {
   return <section className={styles.preview} aria-label="Portrait wave preview">
     <PortraitWave key={instance} images={images} paused={paused} warp={warp} onReady={onReady} onState={onState} onTime={onTime} />
     <div className={styles.toolbar}>
-      <LiquidButton disabled={count < 2 || reduced} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume" : "Pause"}</LiquidButton>
-      <LiquidButton disabled={!count} onClick={() => controller.current?.seek(0)}>Reset</LiquidButton>
-      <LiquidButton onClick={() => replace(portraitWaveImages)}>Use sample images</LiquidButton>
-      {state.kind === "error" && <LiquidButton onClick={() => setInstance(value => value + 1)}>Retry</LiquidButton>}
+      <PreviewButton disabled={count < 2 || reduced} aria-pressed={paused} onClick={() => setPaused(!paused)}>{paused ? "Resume" : "Pause"}</PreviewButton>
+      <PreviewButton disabled={!count} onClick={() => controller.current?.seek(0)}>Reset</PreviewButton>
+      <PreviewButton onClick={() => replace(portraitWaveImages)}>Use sample images</PreviewButton>
+      {state.kind === "error" && <PreviewButton onClick={() => setInstance(value => value + 1)}>Retry</PreviewButton>}
     </div>
     <div className={styles.settings}>
       <label className={styles.time}>Time<output ref={output}>0 ms</output>

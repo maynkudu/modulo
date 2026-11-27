@@ -16,8 +16,8 @@
 .depthStatus { min-height: 20px; margin: 12px 0 8px; font-size: 12px; color: var(--ui-muted); }
 .depthMap { width: 100%; margin-bottom: 12px; }
 .processing { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; background: rgb(0 0 0 / 48%); color: #fff; }
-.processing span { padding: 14px 18px; border: 1px solid rgb(255 255 255 / 20%); background: rgb(0 0 0 / 65%); font-size: 14px; }
+.processing span { padding: 14px 18px;  background: rgb(0 0 0 / 65%); font-size: 14px; }
 @media (max-width: 700px) { .artwork, .scene { min-height: 340px; height: 340px; } }
 
 .modes button::before { background: transparent !important; transform: none !important; }
-.modes button[aria-pressed=true] { color: var(--foreground); }
+.modes button[aria-pressed=true] { color:var(--panel-surface); background:var(--control-accent); }

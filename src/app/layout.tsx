@@ -2,6 +2,8 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import { GeistSerif } from "geist/font/serif";
 import localFont from "next/font/local";
+import { DesignRuntime } from "@/components/design-switch";
+import { designInitialization } from "@/lib/site-design";
 import { StructuredData } from "@/components/structured-data";
 import { defaultMetadata, siteStructuredData } from "@/lib/seo";
 import "./globals.css";
@@ -10,8 +12,9 @@ export const metadata = defaultMetadata;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" id="modulo-scroll" className={`${inter.variable} ${GeistSans.variable} ${GeistSerif.variable} ${GeistMono.variable}`}>
-      <body><StructuredData data={siteStructuredData} />{children}</body>
+    <html lang="en" id="modulo-scroll" data-design="artistic" suppressHydrationWarning className={`${inter.variable} ${GeistSans.variable} ${GeistSerif.variable} ${GeistMono.variable}`}>
+      <head><script dangerouslySetInnerHTML={{ __html: designInitialization }} /></head>
+      <body><DesignRuntime /><StructuredData data={siteStructuredData} />{children}</body>
     </html>
   );
 }

@@ -1,17 +1,13 @@
 import Link from "next/link";
+import { SoundControl } from "./interface-sounds";
 import styles from "./site-footer.module.css";
 
-/** Keeps studio information and installation utilities accessible on every site page. */
 export function SiteFooter() {
   return <footer className={styles.footer}>
-    <Link href="/">Modulo</Link>
+    <p>Made by maynkudu.</p>
     <nav className={styles.links} aria-label="Footer navigation">
-      <Link href="/work">Work</Link>
-      <Link href="/services">Services</Link>
-      <Link href="/contact">Contact</Link>
-      <Link href="/studio">Studio</Link>
-      <Link href="/registry">Library</Link>
-      <Link href="/mint">Mint</Link>
+      <SoundControl label="Sound" placement="drawer" />
+      <Link href="/access">Get Access</Link>
     </nav>
   </footer>;
 }
