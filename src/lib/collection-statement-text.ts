@@ -1,2 +1,2 @@
-/** Shared homepage and Liquid Text Reveal demo copy. */
-export const collectionStatementText = "A collection library of components, shaders and pages for maynkudu.";
+/** Purpose copy for the collection intro. */
+export const collectionStatementText = "A showcase of components, interfaces, shaders and 3D renders by maynkudu.";

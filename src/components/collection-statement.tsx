@@ -1,24 +1,24 @@
-import Image from "next/image";
-import Link from "next/link";
-import type { ComponentMedia } from "@/lib/catalog";
+"use client";
+
+import { useSyncExternalStore } from "react";
+import { DotOrb } from "@/registry/dot-orb/DotOrb";
 import { collectionStatementText } from "@/lib/collection-statement-text";
 import styles from "./collection-statement.module.css";
 
-export function CollectionStatement({ featured }: {
-  featured: {
-    title: string;
-    href: string;
-    thumbnail: Pick<ComponentMedia["thumbnail"], "src" | "alt" | "width" | "height">;
-  };
-}) {
-  return <section className={styles.statement} aria-labelledby="collection-statement">
+function subscribeMotion(notify: () => void) {
+  const query = matchMedia("(prefers-reduced-motion: reduce)");
+  query.addEventListener("change", notify);
+  return () => query.removeEventListener("change", notify);
+}
+const getMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const getServerMotion = () => false;
+
+export function CollectionStatement() {
+  const reducedMotion = useSyncExternalStore(subscribeMotion, getMotion, getServerMotion);
+  return <section className={styles.statement} aria-label="About Modulo">
     <div className={styles.statementInner}>
-      <Link className={styles.featured} href={featured.href} aria-label={`Preview ${featured.title}`}>
-        <Image className={styles.featuredImage} src={featured.thumbnail.src} alt={featured.thumbnail.alt}
-          width={featured.thumbnail.width} height={featured.thumbnail.height} sizes="(max-width: 700px) 88px, 142px" priority unoptimized />
-        <span>{featured.title}</span>
-      </Link>
-      <h2 id="collection-statement" className={styles.statementTitle}>{collectionStatementText}</h2>
+      <div className={styles.featured}><DotOrb reducedMotion={reducedMotion} /></div>
+      <p className={styles.statementText}>{collectionStatementText}</p>
     </div>
   </section>;
 }
