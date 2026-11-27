@@ -25,6 +25,7 @@ import { StateButton, type StateButtonState } from "../src/registry/state-button
 import { DotOrb } from "../src/registry/dot-orb/DotOrb";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
+import { ThermalImage } from "../src/registry/thermal-image/thermal-image";
 
 const switchbackReady: SwitchbackPageProps["onReady"] = controller => {
   if (!controller) return;
@@ -170,6 +171,7 @@ function ImageMosaicCapture() {
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "thermal-image") return <ThermalImageCapture />;
   if (name === "dot-orb") return <DotOrbCapture />;
   if (name === "image-mosaic") return <ImageMosaicCapture />;
   if (name === "halftone") return <section className="halftone-media">
@@ -217,6 +219,19 @@ function MediaPreview() {
     return <GardenCanvas className="media-scene" initialTime={34} timeScale={1} wind={1} onReady={markReady} />;
   }
   throw new Error("Select a component for media capture.");
+}
+
+function ThermalImageCapture() {
+  return <section className="thermal-image-media">
+    <ThermalImage
+      src="__THERMAL_IMAGE__"
+      alt="A sports car rendered as a moving thermal field"
+      background="studio"
+      imageScale={1}
+      pixelRatio={1}
+      onReady={() => markReady(true)}
+    />
+  </section>;
 }
 
 /** A repeatable pointer-only teaser. Live audio is exercised separately through real input. */

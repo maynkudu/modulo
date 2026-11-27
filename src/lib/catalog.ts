@@ -516,6 +516,24 @@ export const imageMosaicItem = {
   ],
 } satisfies RegistryItem;
 
+/** Installable 2D thermal image shader with a blur wave, spectral palette and studio field. */
+export const thermalImage = {
+  name: "thermal-image" as const,
+  type: "registry:component",
+  title: "Thermal image",
+  description: "A flat image melts into moving bands of thermal color, with an optional studio field.",
+  dependencies: ["three@^0.186.0", "@types/three@^0.186.0"],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/thermal-image/thermal-image.tsx", target: "components/thermal-image/thermal-image.tsx", type: "registry:component" },
+    { path: "src/registry/thermal-image/thermal-engine.ts", target: "components/thermal-image/thermal-engine.ts", type: "registry:lib" },
+    { path: "src/registry/thermal-image/thermal-shaders.ts", target: "components/thermal-image/thermal-shaders.ts", type: "registry:lib" },
+    { path: "src/registry/thermal-image/thermal-image.module.css", target: "components/thermal-image/thermal-image.module.css", type: "registry:file" },
+    { path: "src/registry/thermal-image/README.md", target: "components/thermal-image/README.md", type: "registry:file" },
+    { path: "src/registry/thermal-image/provenance.json", target: "components/thermal-image/provenance.json", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 export const shaderCatalogItems = [{
   component: {
     name: "brick-noise" as const,
@@ -553,6 +571,12 @@ export const shaderCatalogItems = [{
   keywords: ["shader", "image", "mosaic", "periodic table", "elements", "metallic", "refraction", "comparison", "upload", "pointer", "trail", "webgl"],
   seoDescription: "Turn a photo into an adaptive periodic-table mosaic in React. Upload images, compare before and after, and try metallic finishes, refraction and a fading pointer trail. Install with an active Modulo key.",
   media: componentMedia({ name: imageMosaicItem.name, alt: "A horse-sculpture photograph compared with its metallic periodic-table mosaic.", height: 1600, duration: 6 }),
+}, {
+  component: thermalImage,
+  addedAt: "2026-11-27",
+  keywords: ["shader", "effect", "thermal", "heatmap", "image", "spectrum", "blur", "wave", "grain", "webgl", "upload", "studio"],
+  seoDescription: "A 2D thermal image shader for React with a spectral blur wave, halo, grain and an optional studio field. Upload a photo, tune the material and install with an active Modulo key.",
+  media: componentMedia({ name: thermalImage.name, alt: "A Porsche rendered as a moving thermal color field with a soft studio floor.", height: 400, duration: 6 }),
 }] satisfies CatalogItem[];
 
 export const brickNoise = shaderCatalogItems[0].component;

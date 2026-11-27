@@ -36,6 +36,7 @@ if (dryRun && encodeOnly) throw new Error("--dry-run and --encode-only cannot be
 const specifications = [
   { name: "dot-orb", flow: "dot-orb-pointer-ripples", pause: 6500, seek: 0, thumbnailSeek: 2, movePointer: false },
   { name: "image-mosaic", flow: "image-mosaic-metallic-sweep", pause: 7000, seek: .1, thumbnailSeek: 1.5, movePointer: false },
+  { name: "thermal-image", flow: "thermal-image-spectrum", pause: 6500, seek: .1, thumbnailSeek: 2.5, movePointer: false },
   { name: "halftone", flow: "halftone-hover-trail", pause: 7000, seek: .1, thumbnailSeek: 2, movePointer: false },
   { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .5, thumbnailSeek: 0, movePointer: false },
   { name: "eyespice", flow: "eyespice-gaze-close-retreat", pause: 4500, seek: .1, thumbnailSeek: 0, movePointer: false },
@@ -68,7 +69,7 @@ const captures = selectedItems.map((entry) => {
   if (!specification) throw new Error(`Add a media capture for ${entry.component.name}.`);
   return { entry, specification };
 });
-const ambient = new Set(["dot-orb", "image-mosaic", "halftone", "portrait-wave", "eyespice", "brick-noise", "sprite-racer", "logo-refraction", "textured-glass", "diwali-26", "root-infection", "nilkamal", "interactive-art"]);
+const ambient = new Set(["dot-orb", "image-mosaic", "thermal-image", "halftone", "portrait-wave", "eyespice", "brick-noise", "sprite-racer", "logo-refraction", "textured-glass", "diwali-26", "root-infection", "nilkamal", "interactive-art"]);
 for (const { entry } of captures) verifyMediaMetadata(entry);
 
 const workspace = resolve(root, process.env.MODULO_MEDIA_WORKSPACE ?? resolve(homedir(), ".webreel/modulo-component-media"));
@@ -82,7 +83,7 @@ if (!encodeOnly) {
   execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
     cwd: root, stdio: "inherit",
   });
-  const [javascript, css, font, sansFont, geistFont, glassImage, glassDepth, logoImage, portraitA, portraitB, mosaicImage] = await Promise.all([
+  const [javascript, css, font, sansFont, geistFont, glassImage, glassDepth, logoImage, portraitA, portraitB, mosaicImage, thermalImage] = await Promise.all([
     readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
     readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
     readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
@@ -94,6 +95,7 @@ if (!encodeOnly) {
     readFile(resolve(root, "public/artwork/portrait-wave/christopher-campbell.jpg")),
     readFile(resolve(root, "public/artwork/portrait-wave/michael-dam.jpg")),
     readFile(resolve(root, "public/artwork/image-mosaic.jpg")),
+    readFile(resolve(root, "public/artwork/thermal-image-car.png")),
   ]);
   const captureClock = await readFile(resolve(root, "scripts/media-capture-clock.js"), "utf8");
   await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
@@ -125,7 +127,9 @@ if (!encodeOnly) {
   .state-buttons-media .state-button-label{min-width:155px;font-size:30px;letter-spacing:-.8px}
   .image-mosaic-media{width:100%;height:100%;background:#0b0c0b}
   .image-mosaic-media .image-mosaic__image{border-radius:0}
-  </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("__IMAGE_MOSAIC_IMAGE__", `data:image/jpeg;base64,${mosaicImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
+  .thermal-image-media{width:100%;height:100%;background:#070707}
+  .thermal-image-media canvas,.thermal-image-media img{width:100%;height:100%;object-fit:contain}
+  </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("__IMAGE_MOSAIC_IMAGE__", `data:image/jpeg;base64,${mosaicImage.toString("base64")}`).replaceAll("__THERMAL_IMAGE__", `data:image/png;base64,${thermalImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
   const budgets = Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, Math.max(Math.round(specification.seek * fps) + Math.round(entry.media.video.duration * fps) + (ambient.has(entry.component.name) ? 15 : 0), entry.component.name === "liquid-text-reveal" ? 420 : 300)]));
   await writeFile(resolve(workspace, "capture-frame-budgets.json"), JSON.stringify(budgets, null, 2));

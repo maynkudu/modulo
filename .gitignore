@@ -76,6 +76,7 @@ next-env.d.ts
 /src/registry/state-buttons/
 /src/registry/image-mosaic/
 /src/registry/dot-orb/
+/src/registry/thermal-image/
 /.private-registry/
 /public/r/
 /.data/

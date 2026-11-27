@@ -1186,6 +1186,67 @@
       "type": "registry:component"
     },
     {
+      "name": "thermal-image",
+      "title": "Thermal image",
+      "description": "A flat image melts into moving bands of thermal color, with an optional studio field.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@types/three@^0.186.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/thermal-image/thermal-image.tsx",
+          "type": "registry:component",
+          "target": "components/thermal-image/thermal-image.tsx"
+        },
+        {
+          "path": "src/registry/thermal-image/thermal-engine.ts",
+          "type": "registry:lib",
+          "target": "components/thermal-image/thermal-engine.ts"
+        },
+        {
+          "path": "src/registry/thermal-image/thermal-shaders.ts",
+          "type": "registry:lib",
+          "target": "components/thermal-image/thermal-shaders.ts"
+        },
+        {
+          "path": "src/registry/thermal-image/thermal-image.module.css",
+          "type": "registry:file",
+          "target": "components/thermal-image/thermal-image.module.css"
+        },
+        {
+          "path": "src/registry/thermal-image/README.md",
+          "type": "registry:file",
+          "target": "components/thermal-image/README.md"
+        },
+        {
+          "path": "src/registry/thermal-image/provenance.json",
+          "type": "registry:file",
+          "target": "components/thermal-image/provenance.json"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "A Porsche rendered as a moving thermal color field with a soft studio floor.",
+            "width": 720,
+            "height": 240,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/thermal-image.jpg"
+          },
+          "video": {
+            "width": 720,
+            "height": 240,
+            "type": "video/mp4",
+            "duration": 6,
+            "url": "https://modulo-maynkudu.vercel.app/media/thermal-image.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "2048",
       "title": "2048",
       "description": "2048 with grayscale tiles, animated score meters, and merge sounds.",
