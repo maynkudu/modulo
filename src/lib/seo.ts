@@ -4,14 +4,14 @@ import { allCatalogItems, catalogItems, pageCatalogItems, shaderCatalogItems, re
 import { absoluteUrl, siteUrl } from "./site";
 
 export const sitePages = {
-  access: { path: "/access", title: "Get Access", description: "We aint sharing these" },
-  skills: { path: "/skills", title: "Skills", description: "Agent skills in the Modulo collection." },
-  inspiration: { path: "/inspiration", title: "Inspiration", description: "Design references in the Modulo collection." },
-  rules: { path: "/rules", title: "Rules", description: "Reusable rules in the Modulo collection." },
+  access: { path: "/access", title: "Get Access", description: "How to request access to the private source behind Modulo projects." },
+  skills: { path: "/skills", title: "Skills", description: "Agent skills and workflow notes written by maynkudu." },
+  inspiration: { path: "/inspiration", title: "Inspiration", description: "Websites and design references that inform maynkudu's work." },
+  rules: { path: "/rules", title: "Rules", description: "The working rules behind maynkudu's design and software projects." },
   home: {
     path: "/",
-    title: "Modulo | The collection",
-    description: "Interactive components, shaders, pages and resources by maynkudu. Try the live previews and explore the controls.",
+    title: "Modulo | Interactive work by maynkudu",
+    description: "A showcase of components, interfaces, shaders and 3D renders by maynkudu.",
   },
   work: {
     path: "/work",
@@ -31,21 +31,21 @@ export const sitePages = {
   components: {
     path: "/components",
     title: "Components",
-    description: "Explore interactive components from Modulo. Search the collection and try the real demos and controls.",
+    description: "Interactive components and interface experiments by maynkudu. Browse each piece and try its live demo.",
   },
   pages: {
     path: "/pages",
     title: "Pages",
-    description: "Complete interactive pages from Modulo. Play the public previews and explore their controls.",
+    description: "Interactive web pages and games by maynkudu. Explore each experience in the browser.",
   },
   renders: {
     path: "/renders", title: "Renders",
-    description: "Explore original 3D models and inspect their materials and geometry from every angle.",
+    description: "3D models and rendered work by maynkudu. Inspect the Porsche 911 GT3 RS from every angle.",
   },
   shaders: {
     path: "/shaders",
     title: "Shaders",
-    description: "Shaders and image effects from Modulo. Try the live previews, upload your own images and explore the controls.",
+    description: "Shaders and image effects by maynkudu. Explore each piece and adjust its controls.",
   },
   studio: {
     path: "/studio",
@@ -59,7 +59,13 @@ export const sitePages = {
   },
 };
 
-const logoImage = { src: "/brand/modulo-og.jpg", alt: "Modulo", width: 1200, height: 630, type: "image/jpeg" };
+const logoImage = {
+  src: "/brand/modulo-og.jpg",
+  alt: "Modulo, a showcase of components, interfaces, shaders and 3D renders by maynkudu",
+  width: 1200,
+  height: 630,
+  type: "image/jpeg",
+};
 const author = { "@type": "Person", "@id": absoluteUrl("/#author"), name: "maynkudu" };
 
 function createMetadata({
@@ -126,10 +132,10 @@ export function getComponentDetails(component: RegistryItem) {
 }
 
 export function getComponentMetadata(component: RegistryItem) {
-  const { seoDescription, media } = getComponentDetails(component);
+  const { media } = getComponentDetails(component);
   return createMetadata({
     title: component.title ?? component.name,
-    description: seoDescription,
+    description: component.description ?? component.name,
     path: getCatalogPath(component.name),
     image: media.thumbnail,
     video: media.video,
@@ -151,19 +157,16 @@ export const siteStructuredData = {
 };
 
 function componentSource(entry: CatalogItem) {
-  const { component, addedAt, media, seoDescription } = entry;
+  const { component, addedAt, media } = entry;
   const url = absoluteUrl(getCatalogPath(component.name));
   return {
-    "@type": "SoftwareSourceCode",
+    "@type": "CreativeWork",
     "@id": `${url}#component`,
     name: component.title,
-    description: seoDescription,
+    description: component.description ?? component.name,
     url,
     image: absoluteUrl(media.thumbnail.src),
     datePublished: addedAt,
-    programmingLanguage: { "@type": "ComputerLanguage", name: "TypeScript" },
-    runtimePlatform: "React",
-    isAccessibleForFree: false,
     author: { "@id": author["@id"] },
   };
 }
@@ -194,7 +197,12 @@ export function getCollectionStructuredData(page: "home" | "components" | "pages
 export function getComponentStructuredData(component: RegistryItem) {
   const source = componentSource(getComponentDetails(component));
   const categoryPath = getCatalogPath(component.name).split("/")[1];
-  const categoryTitle = categoryPath === "pages" ? "Pages" : categoryPath === "shaders" ? "Shaders" : "Components";
+  const categoryTitle = {
+    components: "Components",
+    pages: "Pages",
+    renders: "Renders",
+    shaders: "Shaders",
+  }[categoryPath] ?? "Components";
   return {
     "@context": "https://schema.org",
     "@graph": [source, {

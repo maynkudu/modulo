@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import { CatalogIndex } from "@/components/catalog-index";
+import { getSiteMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Skills", alternates: { canonical: "/skills" } };
+export const metadata = getSiteMetadata("skills");
 
 export default function SkillsPage() {
   return <CatalogIndex collection="skills" />;
