@@ -1,7 +1,8 @@
 export const entranceCompleteEvent = "modulo-entrance-complete";
+export const entranceMinimumDuration = 900;
 
 /** Runs before paint and never waits on the page's image assets. */
-export const entranceInitialization = `(()=>{const root=document.documentElement;if(window.top!==window||location.pathname!=="/"||matchMedia("(prefers-reduced-motion: reduce)").matches){root.dataset.entrance="complete";return}root.dataset.entrance="pending";const deadline=setTimeout(()=>{root.dataset.entrance="complete";const shell=document.getElementById("site-shell");if(shell)shell.inert=false;document.dispatchEvent(new Event("${entranceCompleteEvent}"))},3500);document.addEventListener("${entranceCompleteEvent}",()=>clearTimeout(deadline),{once:true})})()`;
+export const entranceInitialization = `(()=>{const root=document.documentElement;if(window.top!==window||location.pathname!=="/"||matchMedia("(prefers-reduced-motion: reduce)").matches){root.dataset.entrance="complete";return}root.dataset.entrance="pending";root.dataset.entranceStartedAt=String(Date.now());const deadline=setTimeout(()=>{root.dataset.entrance="complete";const shell=document.getElementById("site-shell");if(shell)shell.inert=false;document.dispatchEvent(new Event("${entranceCompleteEvent}"))},3500);document.addEventListener("${entranceCompleteEvent}",()=>clearTimeout(deadline),{once:true})})()`;
 
 /** Reveals the actual page underneath fixed panels, without changing its geometry. */
 export function playSiteEntrance({ root, overlay }: { root: HTMLElement; overlay: HTMLElement }) {
@@ -26,6 +27,7 @@ export function playSiteEntrance({ root, overlay }: { root: HTMLElement; overlay
     cancelAnimationFrame(firstFrame);
     cancelAnimationFrame(secondFrame);
     animations.forEach(animation => animation.cancel());
+    html.removeAttribute("data-entrance-started-at");
     root.inert = previousInert;
     html.dataset.entrance = "complete";
     document.dispatchEvent(new Event(entranceCompleteEvent));
@@ -84,6 +86,11 @@ export function playSiteEntrance({ root, overlay }: { root: HTMLElement; overlay
         check();
       });
       await content;
+      if (!active) return;
+      const startedAt = Number(html.dataset.entranceStartedAt);
+      const elapsed = Number.isFinite(startedAt) ? Date.now() - startedAt : entranceMinimumDuration;
+      const remaining = Math.max(0, entranceMinimumDuration - elapsed);
+      if (remaining) await new Promise<void>(resolve => window.setTimeout(resolve, remaining));
       if (!active) return;
       await new Promise<void>(resolve => {
         firstFrame = requestAnimationFrame(() => { secondFrame = requestAnimationFrame(() => resolve()); });
