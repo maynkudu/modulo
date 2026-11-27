@@ -8,7 +8,7 @@ export type { CatalogCollection } from "./catalog-index-client";
 export function CatalogIndex({ collection = "everything" }: { collection?: CatalogCollection }) {
   const entries = allCatalogItems.toSorted((a, b) => b.addedAt.localeCompare(a.addedAt)).map((item) => {
     const href = getCatalogPath(item.component.name);
-    const category = href.startsWith("/pages/") ? "pages" : href.startsWith("/shaders/") ? "shaders" : "components";
+    const category = href.startsWith("/pages/") ? "pages" : href.startsWith("/shaders/") ? "shaders" : href.startsWith("/renders/") ? "renders" : "components";
     return {
       name: item.component.name,
       title: item.component.title ?? item.component.name,

@@ -77,6 +77,10 @@ next-env.d.ts
 /src/registry/image-mosaic/
 /src/registry/dot-orb/
 /src/registry/thermal-image/
+/src/registry/porsche-gt3rs/
 /.private-registry/
 /public/r/
 /.data/
+
+# Compiled render copied from its verified private source at sync time.
+/public/artwork/porsche-gt3rs.glb

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { RegistryItem } from "shadcn/schema";
-import { allCatalogItems, catalogItems, pageCatalogItems, shaderCatalogItems, getCatalogPath, type CatalogItem, type ComponentMedia } from "./catalog";
+import { allCatalogItems, catalogItems, pageCatalogItems, shaderCatalogItems, renderCatalogItems, getCatalogPath, type CatalogItem, type ComponentMedia } from "./catalog";
 import { absoluteUrl, siteUrl } from "./site";
 
 export const sitePages = {
@@ -37,6 +37,10 @@ export const sitePages = {
     path: "/pages",
     title: "Pages",
     description: "Complete interactive pages from Modulo. Play the public previews and explore their controls.",
+  },
+  renders: {
+    path: "/renders", title: "Renders",
+    description: "Explore original 3D models and inspect their materials and geometry from every angle.",
   },
   shaders: {
     path: "/shaders",
@@ -164,9 +168,9 @@ function componentSource(entry: CatalogItem) {
   };
 }
 
-export function getCollectionStructuredData(page: "home" | "components" | "pages" | "shaders") {
+export function getCollectionStructuredData(page: "home" | "components" | "pages" | "shaders" | "renders") {
   const { title, description, path } = sitePages[page];
-  const entries = page === "home" ? allCatalogItems : page === "pages" ? pageCatalogItems : page === "shaders" ? shaderCatalogItems : catalogItems;
+  const entries = page === "home" ? allCatalogItems : page === "pages" ? pageCatalogItems : page === "shaders" ? shaderCatalogItems : page === "renders" ? renderCatalogItems : catalogItems;
   return {
     "@context": "https://schema.org",
     "@type": "CollectionPage",

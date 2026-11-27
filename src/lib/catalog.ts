@@ -344,6 +344,30 @@ export const dotOrb = {
   ],
 } satisfies RegistryItem;
 
+export const porscheGT3RS = {
+  name: "porsche-gt3rs" as const,
+  type: "registry:component",
+  title: "Porsche GT3RS",
+  description: "An interactive 992 GT3 RS with olive lacquer, bronze center-lock wheels and a modeled underbody.",
+  dependencies: ["three@^0.186.0", "@types/three@^0.186.0"],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/porsche-gt3rs/PorscheGT3RS.tsx", target: "components/porsche-gt3rs/PorscheGT3RS.tsx", type: "registry:component" },
+    { path: "src/registry/porsche-gt3rs/model-scene.ts", target: "components/porsche-gt3rs/model-scene.ts", type: "registry:lib" },
+    { path: "src/registry/porsche-gt3rs/asset.ts", target: "components/porsche-gt3rs/asset.ts", type: "registry:lib" },
+    { path: "src/registry/porsche-gt3rs/porsche-gt3rs.css", target: "components/porsche-gt3rs/porsche-gt3rs.css", type: "registry:file" },
+    { path: "src/registry/porsche-gt3rs/README.md", target: "components/porsche-gt3rs/README.md", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
+export const renderCatalogItems = [{
+  component: porscheGT3RS,
+  addedAt: "2026-11-27",
+  keywords: ["render", "3D", "Porsche", "911", "992", "GT3 RS", "car", "glTF", "orbit"],
+  seoDescription: "Orbit the Porsche GT3RS in 3D. Inspect its tinted glass, bronze wheels and underbody, or see the same model in Thermal Image.",
+  media: componentMedia({ name: porscheGT3RS.name, height: 675, duration: 4, alt: "The olive Porsche GT3RS turning under studio lights." }),
+}] satisfies CatalogItem[];
+
 export const catalogItems = [{
   component: dotOrb,
   addedAt: "2026-11-26",
@@ -521,12 +545,13 @@ export const thermalImage = {
   name: "thermal-image" as const,
   type: "registry:component",
   title: "Thermal image",
-  description: "A flat image melts into moving bands of thermal color, with an optional studio field.",
+  description: "Moving bands of thermal color follow a rotatable 3D car or an uploaded image.",
   dependencies: ["three@^0.186.0", "@types/three@^0.186.0"],
-  registryDependencies: [],
+  registryDependencies: ["@modulo/porsche-gt3rs"],
   files: [
     { path: "src/registry/thermal-image/thermal-image.tsx", target: "components/thermal-image/thermal-image.tsx", type: "registry:component" },
     { path: "src/registry/thermal-image/thermal-engine.ts", target: "components/thermal-image/thermal-engine.ts", type: "registry:lib" },
+    { path: "src/registry/thermal-image/thermal-model.ts", target: "components/thermal-image/thermal-model.ts", type: "registry:lib" },
     { path: "src/registry/thermal-image/thermal-shaders.ts", target: "components/thermal-image/thermal-shaders.ts", type: "registry:lib" },
     { path: "src/registry/thermal-image/thermal-image.module.css", target: "components/thermal-image/thermal-image.module.css", type: "registry:file" },
     { path: "src/registry/thermal-image/README.md", target: "components/thermal-image/README.md", type: "registry:file" },
@@ -575,17 +600,18 @@ export const shaderCatalogItems = [{
   component: thermalImage,
   addedAt: "2026-11-27",
   keywords: ["shader", "effect", "thermal", "heatmap", "image", "spectrum", "blur", "wave", "grain", "webgl", "upload", "studio"],
-  seoDescription: "A 2D thermal image shader for React with a spectral blur wave, halo, grain and an optional studio field. Upload a photo, tune the material and install with an active Modulo key.",
-  media: componentMedia({ name: thermalImage.name, alt: "A Porsche rendered as a moving thermal color field with a soft studio floor.", height: 400, duration: 6 }),
+  seoDescription: "Rotate a 3D Porsche 911 GT3 RS or upload a photo to explore four thermal shader looks in React. Install with an active Modulo key.",
+  media: componentMedia({ name: thermalImage.name, alt: "A 3D GT3 RS turning beneath moving thermal bands.", height: 534, duration: 6 }),
 }] satisfies CatalogItem[];
 
 export const brickNoise = shaderCatalogItems[0].component;
-export const previewCatalogItems = [...catalogItems, ...shaderCatalogItems];
+export const previewCatalogItems = [...catalogItems, ...shaderCatalogItems, ...renderCatalogItems];
 export const allCatalogItems = [...previewCatalogItems, ...pageCatalogItems];
 
 export function getCatalogPath(name: string) {
   const category = pageCatalogItems.some(item => item.component.name === name) ? "/pages"
-    : shaderCatalogItems.some(item => item.component.name === name) ? "/shaders" : "/components";
+    : shaderCatalogItems.some(item => item.component.name === name) ? "/shaders"
+    : renderCatalogItems.some(item => item.component.name === name) ? "/renders" : "/components";
   return `${category}/${name}`;
 }
 

@@ -36,7 +36,8 @@ if (dryRun && encodeOnly) throw new Error("--dry-run and --encode-only cannot be
 const specifications = [
   { name: "dot-orb", flow: "dot-orb-pointer-ripples", pause: 6500, seek: 0, thumbnailSeek: 2, movePointer: false },
   { name: "image-mosaic", flow: "image-mosaic-metallic-sweep", pause: 7000, seek: .1, thumbnailSeek: 1.5, movePointer: false },
-  { name: "thermal-image", flow: "thermal-image-spectrum", pause: 6500, seek: .1, thumbnailSeek: .5, movePointer: false },
+  { name: "porsche-gt3rs", flow: "porsche-gt3rs-orbit", pause: 4500, seek: .1, thumbnailSeek: .2, movePointer: false },
+  { name: "thermal-image", flow: "thermal-image-model-orbit", pause: 6500, seek: .1, thumbnailSeek: 2.5, movePointer: false },
   { name: "halftone", flow: "halftone-hover-trail", pause: 7000, seek: .1, thumbnailSeek: 2, movePointer: false },
   { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .5, thumbnailSeek: 0, movePointer: false },
   { name: "eyespice", flow: "eyespice-gaze-close-retreat", pause: 4500, seek: .1, thumbnailSeek: 0, movePointer: false },
@@ -69,7 +70,7 @@ const captures = selectedItems.map((entry) => {
   if (!specification) throw new Error(`Add a media capture for ${entry.component.name}.`);
   return { entry, specification };
 });
-const ambient = new Set(["dot-orb", "image-mosaic", "thermal-image", "halftone", "portrait-wave", "eyespice", "brick-noise", "sprite-racer", "logo-refraction", "textured-glass", "diwali-26", "root-infection", "nilkamal", "interactive-art"]);
+const ambient = new Set(["porsche-gt3rs", "dot-orb", "image-mosaic", "thermal-image", "halftone", "portrait-wave", "eyespice", "brick-noise", "sprite-racer", "logo-refraction", "textured-glass", "diwali-26", "root-infection", "nilkamal", "interactive-art"]);
 for (const { entry } of captures) verifyMediaMetadata(entry);
 
 const workspace = resolve(root, process.env.MODULO_MEDIA_WORKSPACE ?? resolve(homedir(), ".webreel/modulo-component-media"));
@@ -83,7 +84,7 @@ if (!encodeOnly) {
   execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
     cwd: root, stdio: "inherit",
   });
-  const [javascript, css, font, sansFont, geistFont, glassImage, glassDepth, logoImage, portraitA, portraitB, mosaicImage, thermalImage] = await Promise.all([
+  const [javascript, css, font, sansFont, geistFont, glassImage, glassDepth, logoImage, portraitA, portraitB, mosaicImage, thermalModel] = await Promise.all([
     readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
     readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
     readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
@@ -95,7 +96,7 @@ if (!encodeOnly) {
     readFile(resolve(root, "public/artwork/portrait-wave/christopher-campbell.jpg")),
     readFile(resolve(root, "public/artwork/portrait-wave/michael-dam.jpg")),
     readFile(resolve(root, "public/artwork/image-mosaic.jpg")),
-    readFile(resolve(root, "public/artwork/thermal-image-car.png")),
+    readFile(resolve(root, "public/artwork/porsche-gt3rs.glb")),
   ]);
   const captureClock = await readFile(resolve(root, "scripts/media-capture-clock.js"), "utf8");
   await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
@@ -129,7 +130,7 @@ if (!encodeOnly) {
   .image-mosaic-media .image-mosaic__image{border-radius:0}
   .thermal-image-media{width:100%;height:100%;background:#070707}
   .thermal-image-media canvas,.thermal-image-media img{width:100%;height:100%;object-fit:contain}
-  </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("__IMAGE_MOSAIC_IMAGE__", `data:image/jpeg;base64,${mosaicImage.toString("base64")}`).replaceAll("__THERMAL_IMAGE__", `data:image/png;base64,${thermalImage.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
+  </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("__IMAGE_MOSAIC_IMAGE__", `data:image/jpeg;base64,${mosaicImage.toString("base64")}`).replaceAll("__THERMAL_MODEL__", `data:model/gltf-binary;base64,${thermalModel.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
   const budgets = Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, Math.max(Math.round(specification.seek * fps) + Math.round(entry.media.video.duration * fps) + (ambient.has(entry.component.name) ? 15 : 0), entry.component.name === "liquid-text-reveal" ? 420 : 300)]));
   await writeFile(resolve(workspace, "capture-frame-budgets.json"), JSON.stringify(budgets, null, 2));
@@ -205,11 +206,11 @@ if (!dryRun) {
     const requiredFrames = start + frames + (blend ? 15 : 0);
     const actualFrames = Number(execFileSync(ffprobe, ["-v", "error", "-select_streams", "v:0", "-show_entries", "stream=nb_frames", "-of", "default=noprint_wrappers=1:nokey=1", recording], { encoding: "utf8" }).trim());
     if (!Number.isFinite(actualFrames) || actualFrames < requiredFrames) throw new Error(`Incomplete raw capture for ${component.name}: ${actualFrames} frames, need ${requiredFrames}.`);
-    const base = `[0:v]scale=${media.video.width}:${media.video.height}:flags=lanczos,fps=${fps},trim=start_frame=${start}:end_frame=${requiredFrames},setpts=PTS-STARTPTS`;
+    const base = `[0:v]scale=${media.video.width}:${media.video.height}:flags=lanczos:out_range=tv,fps=${fps},trim=start_frame=${start}:end_frame=${requiredFrames},setpts=PTS-STARTPTS`;
     const filter = blend
       ? `${base},split=3[m][t][h];[m]trim=start_frame=15:end_frame=${frames},setpts=PTS-STARTPTS[body];[t]trim=start_frame=${frames},setpts=PTS-STARTPTS,fps=${fps}[tail];[h]trim=end_frame=15,setpts=PTS-STARTPTS,fps=${fps}[head];[tail][head]xfade=transition=fade:duration=0.233333:offset=0[blend];[body][blend]concat=n=2:v=1:a=0,format=yuv420p[out]`
       : `${base},format=yuv420p[out]`;
-    const common = ["-hide_banner", "-loglevel", "error", "-y", "-i", recording, "-filter_complex", filter, "-map", "[out]", "-an", "-r", String(fps), "-frames:v", String(frames), "-c:v", "libx264", "-preset", "slow", "-threads", "2", "-profile:v", "high", "-level:v", "3.2", "-pix_fmt", "yuv420p"];
+    const common = ["-hide_banner", "-loglevel", "error", "-y", "-i", recording, "-filter_complex", filter, "-map", "[out]", "-an", "-r", String(fps), "-frames:v", String(frames), "-c:v", "libx264", "-preset", "slow", "-threads", "2", "-profile:v", "high", "-level:v", "3.2", "-pix_fmt", "yuv420p", "-color_range", "tv"];
     const bitrate = Math.floor(targetVideoBytes * 8 / media.video.duration / 1000);
     execFileSync(ffmpeg, [...common, "-crf", "24", "-maxrate", `${bitrate}k`, "-bufsize", `${bitrate}k`, "-movflags", "+faststart", video]);
     if ((await stat(video)).size > maxVideoBytes) {

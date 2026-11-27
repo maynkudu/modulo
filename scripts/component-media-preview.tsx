@@ -25,6 +25,7 @@ import { StateButton, type StateButtonState } from "../src/registry/state-button
 import { DotOrb } from "../src/registry/dot-orb/DotOrb";
 import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
+import { PorscheGT3RS } from "../src/registry/porsche-gt3rs/PorscheGT3RS";
 import { ThermalImage } from "../src/registry/thermal-image/thermal-image";
 
 const switchbackReady: SwitchbackPageProps["onReady"] = controller => {
@@ -171,6 +172,7 @@ function ImageMosaicCapture() {
 
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
+  if (name === "porsche-gt3rs") return <PorscheCapture />;
   if (name === "thermal-image") return <ThermalImageCapture />;
   if (name === "dot-orb") return <DotOrbCapture />;
   if (name === "image-mosaic") return <ImageMosaicCapture />;
@@ -221,30 +223,35 @@ function MediaPreview() {
   throw new Error("Select a component for media capture.");
 }
 
-const captureLooks = ["thermal", "night-vision", "ultraviolet", "ice"] as const;
+function PorscheCapture() {
+  const [phase, setPhase] = useState(0);
+  useEffect(() => {
+    function advance(event: Event) {
+      if (event instanceof CustomEvent && typeof event.detail === "number") setPhase(event.detail);
+    }
+    window.addEventListener("modulo-media-time", advance);
+    return () => window.removeEventListener("modulo-media-time", advance);
+  }, []);
+  return <PorscheGT3RS src="__THERMAL_MODEL__" view={{ angle: 32 + 25 * Math.sin(phase * Math.PI / 2), elevation: 10, zoom: 1 }} onReady={() => markReady(true)} />;
+}
 
 function ThermalImageCapture() {
-  const [look, setLook] = useState<(typeof captureLooks)[number]>("thermal");
+  const [phase, setPhase] = useState(0);
   useEffect(() => {
-    let currentLook: (typeof captureLooks)[number] = "thermal";
-    function update(event: Event) {
-      const seconds: unknown = event instanceof CustomEvent ? event.detail : null;
-      if (typeof seconds !== "number") return;
-      const index = Math.min(captureLooks.length - 1, Math.floor(Math.max(0, seconds) / 1.5));
-      const nextLook = captureLooks[index] ?? "thermal";
-      if (nextLook === currentLook) return;
-      currentLook = nextLook;
-      setLook(nextLook);
+    function advance(event: Event) {
+      if (event instanceof CustomEvent && typeof event.detail === "number") setPhase(event.detail);
     }
-    window.addEventListener("modulo-media-time", update);
-    return () => window.removeEventListener("modulo-media-time", update);
+    window.addEventListener("modulo-media-time", advance);
+    return () => window.removeEventListener("modulo-media-time", advance);
   }, []);
-
   return <section className="thermal-image-media">
     <ThermalImage
-      src="__THERMAL_IMAGE__"
-      alt="A sports car moving through four animated color field looks"
-      look={look}
+      src="__THERMAL_MODEL__"
+      sourceType="model"
+      modelAngle={12 + 30 * Math.sin(phase * Math.PI / 3)}
+      freezeTime={phase}
+      blurStrength={0.55}
+      alt="A 3D GT3 RS turning beneath moving thermal bands"
       background="studio"
       imageScale={1}
       pixelRatio={1}

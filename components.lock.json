@@ -562,35 +562,67 @@
     {
       "name": "thermal-image",
       "repository": "maynkudu/modulo-thermal-image",
-      "revision": "0a2687553b40876994a3fa5c5be069216c144305",
+      "revision": "b231f8707e45726d7499ebf7d54ab2eef9863c9c",
       "files": [
         {
           "path": "thermal-image.tsx",
-          "sha256": "308c878435e1344bf4484c975224d79cd62eaecbd859930ad191c2344a0979b1"
+          "sha256": "8f0307b8598459cf9632360126767c1e6b279aaeafbbd96c337ea24b83cbb481"
         },
         {
           "path": "thermal-engine.ts",
-          "sha256": "5bec7dd3ecbc376725ec71594fe5cf1d4f8ef0f4f0ed498e7f8d195601d1b703"
+          "sha256": "e03d607b0d682dfd77e80f9e657572399f5716936754fc6dda3919c415567731"
+        },
+        {
+          "path": "thermal-model.ts",
+          "sha256": "539f13078ac6dfee2b86b0be33ed17b89819c6e75e6c750a7da0706d17d5fccd"
         },
         {
           "path": "thermal-shaders.ts",
-          "sha256": "9d4d630802a7beb334bfad550443d630463ae419f13943222abfde1a89fa62a5"
+          "sha256": "2168f5f49ff777b9c8c5f7b4b80f0288b0234fc7041471f88684a9c48f4e3e43"
         },
         {
           "path": "thermal-image.module.css",
-          "sha256": "929cf38b749bc2517ca0a86581679b1a63323aaae446675f27c7b1c3b43eb872"
+          "sha256": "8b4eefb6a5f8a91de144a0ea1d7abd23ab652c47be8467b807e69679f976d879"
         },
         {
           "path": "README.md",
-          "sha256": "5b6211d1d1831c025cd841ef47d3b0325c631202fc2dd979841b68e0271bb1b7"
-        },
-        {
-          "path": "package.json",
-          "sha256": "55b2695fab537efcebb703a72400313c36f3fdaf8c53744d07107532d34267e9"
+          "sha256": "988dc5966e60dd1cad48ed220b2968ebb0e4f5d48a27a547cd0433a1cb123a4f"
         },
         {
           "path": "provenance.json",
-          "sha256": "fd65d149e0460754112fb20dcc713b9f633299bce612273a57e7e50204c64ea5"
+          "sha256": "b6ef85d8307030ca33ab5fb88de8e940bdd1a96e8ed54a17db74360a6462f631"
+        }
+      ]
+    },
+    {
+      "name": "porsche-gt3rs",
+      "repository": "maynkudu/modulo-porsche-gt3rs",
+      "revision": "9042f8d8e7e7990c6da3b6c469e80b893b32f020",
+      "files": [
+        {
+          "path": "PorscheGT3RS.tsx",
+          "sha256": "a5e13dca2da97e25ae5463298d7be0f67d5928ee38f7e453c728558ac0f0fa72"
+        },
+        {
+          "path": "asset.ts",
+          "sha256": "5c64d63d58e939dfdf8482abe956706e028bdc3e7a53149ba9bf1b726fce8162"
+        },
+        {
+          "path": "model-scene.ts",
+          "sha256": "4e5cdd7c9d99cf5627d11a5d394dd3a820b98580e288bd7c3f721725430a825f"
+        },
+        {
+          "path": "porsche-gt3rs.css",
+          "sha256": "a776bcc6465bc0b1923b96188e2a0be55b3d743b8f5ff91b51dd703c5c6326ff"
+        },
+        {
+          "path": "README.md",
+          "sha256": "f15d5a4789f2a6fef40e69fecbf67b9633afdc1a0d6881963a589aeada8e82c5"
+        },
+        {
+          "path": "web/Porsche-GT3RS.glb",
+          "sha256": "b7266550b008d348efc2e3d73f600bd7ccb10005eb0801ec705a28b2803561bd",
+          "publicAsset": "artwork/porsche-gt3rs.glb"
         }
       ]
     }

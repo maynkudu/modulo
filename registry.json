@@ -1188,12 +1188,14 @@
     {
       "name": "thermal-image",
       "title": "Thermal image",
-      "description": "A flat image melts into moving bands of thermal color, with an optional studio field.",
+      "description": "Moving bands of thermal color follow a rotatable 3D car or an uploaded image.",
       "dependencies": [
         "three@^0.186.0",
         "@types/three@^0.186.0"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "@modulo/porsche-gt3rs"
+      ],
       "files": [
         {
           "path": "src/registry/thermal-image/thermal-image.tsx",
@@ -1204,6 +1206,11 @@
           "path": "src/registry/thermal-image/thermal-engine.ts",
           "type": "registry:lib",
           "target": "components/thermal-image/thermal-engine.ts"
+        },
+        {
+          "path": "src/registry/thermal-image/thermal-model.ts",
+          "type": "registry:lib",
+          "target": "components/thermal-image/thermal-model.ts"
         },
         {
           "path": "src/registry/thermal-image/thermal-shaders.ts",
@@ -1229,18 +1236,74 @@
       "meta": {
         "media": {
           "thumbnail": {
-            "alt": "A Porsche rendered as a moving thermal color field with a soft studio floor.",
+            "alt": "A 3D GT3 RS turning beneath moving thermal bands.",
             "width": 720,
-            "height": 240,
+            "height": 320,
             "type": "image/jpeg",
             "url": "https://modulo-maynkudu.vercel.app/media/thermal-image.jpg"
           },
           "video": {
             "width": 720,
-            "height": 240,
+            "height": 320,
             "type": "video/mp4",
             "duration": 6,
             "url": "https://modulo-maynkudu.vercel.app/media/thermal-image.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "porsche-gt3rs",
+      "title": "Porsche GT3RS",
+      "description": "An interactive 992 GT3 RS with olive lacquer, bronze center-lock wheels and a modeled underbody.",
+      "dependencies": [
+        "three@^0.186.0",
+        "@types/three@^0.186.0"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/porsche-gt3rs/PorscheGT3RS.tsx",
+          "type": "registry:component",
+          "target": "components/porsche-gt3rs/PorscheGT3RS.tsx"
+        },
+        {
+          "path": "src/registry/porsche-gt3rs/model-scene.ts",
+          "type": "registry:lib",
+          "target": "components/porsche-gt3rs/model-scene.ts"
+        },
+        {
+          "path": "src/registry/porsche-gt3rs/asset.ts",
+          "type": "registry:lib",
+          "target": "components/porsche-gt3rs/asset.ts"
+        },
+        {
+          "path": "src/registry/porsche-gt3rs/porsche-gt3rs.css",
+          "type": "registry:file",
+          "target": "components/porsche-gt3rs/porsche-gt3rs.css"
+        },
+        {
+          "path": "src/registry/porsche-gt3rs/README.md",
+          "type": "registry:file",
+          "target": "components/porsche-gt3rs/README.md"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "The olive Porsche GT3RS turning under studio lights.",
+            "width": 720,
+            "height": 406,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/porsche-gt3rs.jpg"
+          },
+          "video": {
+            "width": 720,
+            "height": 406,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/porsche-gt3rs.mp4"
           }
         }
       },

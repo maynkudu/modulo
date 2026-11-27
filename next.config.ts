@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [{
+      source: "/artwork/porsche-gt3rs.glb",
+      headers: [{ key: "Access-Control-Allow-Origin", value: "*" }, { key: "Content-Type", value: "model/gltf-binary" }],
+    }, {
       source: "/r/:path*",
       headers: [{ key: "X-Robots-Tag", value: "noindex" }],
     }];

@@ -10,6 +10,7 @@ const collections = [
   { name: "everything", label: "Everything", href: "/" },
   { name: "components", label: "Components", href: "/components" },
   { name: "shaders", label: "Shaders", href: "/shaders" },
+  { name: "renders", label: "Renders", href: "/renders" },
   { name: "pages", label: "Pages", href: "/pages" },
   { name: "skills", label: "Skills", href: "/skills" },
   { name: "inspiration", label: "Inspiration", href: "/inspiration" },
@@ -17,7 +18,7 @@ const collections = [
 ] as const;
 
 export type CatalogCollection = (typeof collections)[number]["name"];
-type PublishedCollection = "components" | "shaders" | "pages";
+type PublishedCollection = "components" | "shaders" | "pages" | "renders";
 export type CatalogIndexEntry = {
   name: string;
   title: string;
@@ -30,11 +31,12 @@ export type CatalogIndexEntry = {
   video: Pick<ComponentMedia["video"], "src" | "width" | "height">;
 };
 
-const categoryNames = { components: "Component", shaders: "Shader", pages: "Page" } satisfies Record<PublishedCollection, string>;
+const categoryNames = { components: "Component", shaders: "Shader", pages: "Page", renders: "Render" } satisfies Record<PublishedCollection, string>;
 const categoryAliases = {
   components: ["components", "component type", "component listing", "ui", "interface", "interaction"],
   shaders: ["shaders", "shader type", "shader listing", "visual effect", "effects", "webgl"],
   pages: ["pages", "page type", "page listing", "template", "templates", "game"],
+  renders: ["renders", "render type", "render listing", "3d model", "models"],
 } satisfies Record<PublishedCollection, readonly string[]>;
 const dateFormat = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" });
 const normalize = (value: string) => value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
