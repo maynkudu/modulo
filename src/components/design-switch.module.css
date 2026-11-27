@@ -1,7 +1,7 @@
 .switch{display:inline-flex;gap:3px;padding:4px;background:var(--surface);width:max-content}
-.switch button{min-height:44px;min-width:70px;padding:8px 15px;border:0;background:transparent;color:var(--quiet);font:550 12px/1.2 var(--font-geist-sans),Arial,sans-serif;cursor:pointer;white-space:nowrap}
-.switch button:first-child{font-family:var(--font-geist-serif),Georgia,serif;font-size:16px;font-style:italic;font-weight:400}
-.switch button:last-child{font-weight:700;letter-spacing:-.045em}
+.switch button{min-height:44px;min-width:70px;padding:8px 15px;border:0;background:transparent;color:var(--quiet);font:500 12px/1.2 var(--site-body-font);cursor:pointer;white-space:nowrap}
+.switch button:first-child{font-family:var(--font-roxborough),Georgia,serif;font-size:16px;font-weight:400}
+.switch button:last-child{font-family:var(--font-stack-notch),Arial,sans-serif;font-weight:700;letter-spacing:-.045em}
 :global(html[data-design="artistic"]) .switch [data-design-mode="artistic"],:global(html[data-design="bold"]) .switch [data-design-mode="bold"]{background:var(--butter);color:var(--cherry)}
 .switch button:focus-visible{outline:3px solid var(--focus);outline-offset:4px}
 @media(max-width:540px){.switch button{padding:8px 16px}}

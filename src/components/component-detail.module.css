@@ -33,7 +33,7 @@
 .next{max-width:75%;color:var(--melon);font:var(--site-display-weight) clamp(30px,3.5vw,54px)/1.08 var(--site-display-font);letter-spacing:var(--site-display-tracking);text-align:right;text-decoration:none}
 :global(html[data-design="bold"]) .heading h1{font-size:clamp(64px,7.2vw,132px)}
 :global(html[data-design="bold"]) .actions :is(a,button){border-radius:0;font-weight:600}
-:global(html[data-design="bold"]) .next{font-weight:720;letter-spacing:-.065em}
+:global(html[data-design="bold"]) .next{font-weight:700;letter-spacing:-.065em}
 :global(html[data-design="bold"]) .notes h2{font-weight:680}
 @media(min-width:1600px){.heading{padding-bottom:38px}.heading p{font-size:16px}}
 @media(max-width:1050px){.heading h1{font-size:80px}.actions{max-width:165px;justify-content:flex-end}.notes{gap:35px}:global(html[data-design="bold"]) .heading h1{font-size:76px}}

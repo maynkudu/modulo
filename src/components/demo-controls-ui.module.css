@@ -1,7 +1,7 @@
 .controlsPanel,
 .controlMenu {
   box-sizing: border-box;
-  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-family: var(--site-body-font);
   font-size: 14px;
   line-height: 1.45;
   letter-spacing: -.025em;

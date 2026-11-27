@@ -4,7 +4,7 @@
 .navigation a{text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
 .navigation .access{justify-content:center;min-height:46px;padding:13px 21px;background:var(--butter);color:var(--cherry);font-weight:550}
 .header :is(a,button):focus-visible{outline:3px solid var(--focus);outline-offset:4px}
-:global(html[data-design="bold"]) .brand{font-weight:780;letter-spacing:-.085em}
+:global(html[data-design="bold"]) .brand{font-weight:700;letter-spacing:-.085em}
 :global(html[data-design="bold"]) .navigation{font-weight:600}
 @media(max-width:1050px){.navigation{gap:18px}.collection{font-size:13px}}
 @media(max-width:800px){.header{min-height:90px;gap:16px}.brand{font-size:34px}.navigation .collection{display:none}.navigation{gap:0}.navigation .access{padding:12px 16px;font-size:13px}}
