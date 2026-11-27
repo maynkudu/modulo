@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import type { RegistryItem } from "shadcn/schema";
 import { allCatalogItems, getCatalogPath } from "@/lib/catalog";
-import { getComponentDetails, getComponentStructuredData } from "@/lib/seo";
+import { getComponentStructuredData } from "@/lib/seo";
 import { StructuredData } from "./structured-data";
 import { PreviewWorkbench, type PreviewLayout } from "./preview-workbench";
 import styles from "./component-detail.module.css";
@@ -16,13 +16,12 @@ export function ComponentDetail({ item, layout, fullHref, idea, interaction, att
   attribution?: ReactNode;
   children: ReactNode;
 }) {
-  const entry = getComponentDetails(item);
   const index = allCatalogItems.findIndex(value => value.component.name === item.name);
   const following = allCatalogItems[(index + 1) % allCatalogItems.length];
   return <main className={styles.page} id="content">
     <StructuredData data={getComponentStructuredData(item)} />
     <Link className={styles.back} href="/">← The index</Link>
-    <PreviewWorkbench slug={item.name} title={item.title ?? item.name} description={item.description} image={entry.media.thumbnail.src} layout={layout} fullHref={fullHref}>
+    <PreviewWorkbench slug={item.name} title={item.title ?? item.name} description={item.description} layout={layout} fullHref={fullHref}>
       {children}
     </PreviewWorkbench>
     <div className={styles.notes}>

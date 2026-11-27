@@ -89,7 +89,7 @@ export function CatalogIndexClient({ collection, entries, searchIcon }: {
     rowLinks.current.get(next.name)?.scrollIntoView({ block: "nearest", behavior: "instant" });
   }
 
-  return <main className={styles.index} id="content" tabIndex={-1}>
+  return <main className={`${styles.index} catalog-index`} id="content" tabIndex={-1}>
     <h1 className="sr-only">{collection === "everything" ? "The index" : currentCollection?.label}</h1>
     <div className={styles.tools}>
       <nav className={styles.categories} aria-label="Resource type">

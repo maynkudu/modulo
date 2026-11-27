@@ -19,11 +19,11 @@ test("the supplied lettering remains a transparent vector wordmark", () => {
   const wordmark = read("../../public/brand/modulo-wordmark.svg");
   const dimensions = wordmark.match(/viewBox="[\d.]+ [\d.]+ ([\d.]+) ([\d.]+)"/);
   assert.ok(dimensions);
-  assert.equal(Number(dimensions[1]), 1255.465644163);
-  assert.equal(Number(dimensions[2]), 382.48143689);
-  assert.match(wordmark, /fill="url\(#wordmark-fill\)"/);
+  assert.equal(Number(dimensions[1]), 1028);
+  assert.equal(Number(dimensions[2]), 170);
+  assert.match(wordmark, /fill="#171614"/);
   assert.doesNotMatch(wordmark, /<(?:rect|image)\b/);
   const logo = read("./modulo-logo.tsx");
-  assert.ok(logo.includes('src="/brand/modulo-wordmark.svg"'));
-  assert.match(logo, /width=\{1255\.465644163\} height=\{382\.48143689\}/);
+  assert.ok(logo.includes('"/brand/modulo-wordmark-white.svg"'));
+  assert.match(logo, /width=\{animated \? 1124 : 1028\} height=\{animated \? 286 : 170\}/);
 });

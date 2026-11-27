@@ -6,11 +6,10 @@ import styles from "./component-detail.module.css";
 
 export type PreviewLayout = "split" | "self-contained" | "embedded-page" | "scoped-experience";
 
-export function PreviewWorkbench({ slug, title, description, image, layout, fullHref, children }: {
+export function PreviewWorkbench({ slug, title, description, layout, fullHref, children }: {
   slug: string;
   title: string;
   description?: string;
-  image: string;
   layout: PreviewLayout;
   fullHref?: string;
   children: ReactNode;
@@ -68,8 +67,7 @@ export function PreviewWorkbench({ slug, title, description, image, layout, full
       </div>
     </header>
     <section ref={stage} className={`${styles.stage} ${expanded ? styles.expanded : ""}`} role={expanded ? "dialog" : undefined}
-      aria-modal={expanded ? true : undefined} aria-label={expanded ? `${title} expanded preview` : `${title} playground`}
-      data-modulo-entrance-target="" data-modulo-entrance-src={image}>
+      aria-modal={expanded ? true : undefined} aria-label={expanded ? `${title} expanded preview` : `${title} playground`}>
       <div className={styles.expandedTools} hidden={!expanded}>
         <span>{title}</span><div>{fullHref && <Link href={fullHref} target="_blank" rel="noopener">Open standalone</Link>}
           <button ref={closeButton} type="button" onClick={() => setExpanded(false)}>Exit expanded view</button></div>

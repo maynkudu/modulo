@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import type { ComponentMedia } from "@/lib/catalog";
-import { entranceCompleteEvent } from "@/lib/site-entrance";
 import styles from "./catalog-index.module.css";
 
 /** Keeps the poster in place until the selected, visible clip has a presented frame. */
@@ -29,8 +28,7 @@ export function CatalogPreviewMedia({ thumbnail, video, active }: {
     let paintFrame: number | undefined;
 
     function canPlay() {
-      const entrance = document.documentElement.dataset.entrance;
-      return !disposed && visible && !document.hidden && !motion.matches && !failed && entrance !== "pending" && entrance !== "revealing";
+      return !disposed && visible && !document.hidden && !motion.matches && !failed;
     }
 
     function cancelFrame() {
@@ -82,7 +80,6 @@ export function CatalogPreviewMedia({ thumbnail, video, active }: {
     observer.observe(container);
     motion.addEventListener("change", updatePlayback);
     document.addEventListener("visibilitychange", updatePlayback);
-    document.addEventListener(entranceCompleteEvent, updatePlayback);
     clip.addEventListener("error", videoFailed);
 
     return () => {
@@ -90,7 +87,6 @@ export function CatalogPreviewMedia({ thumbnail, video, active }: {
       observer.disconnect();
       motion.removeEventListener("change", updatePlayback);
       document.removeEventListener("visibilitychange", updatePlayback);
-      document.removeEventListener(entranceCompleteEvent, updatePlayback);
       clip.removeEventListener("error", videoFailed);
       stop();
       clip.removeAttribute("src");
@@ -98,10 +94,10 @@ export function CatalogPreviewMedia({ thumbnail, video, active }: {
     };
   }, [active, video.src]);
 
-  return <span ref={slot} className={styles.artSlot} aria-hidden="true" data-modulo-entrance-target={active || undefined}>
+  return <span ref={slot} className={styles.artSlot} aria-hidden="true">
     <Image src={thumbnail.src} alt="" width={thumbnail.width} height={thumbnail.height}
       loading={active ? "eager" : "lazy"} fetchPriority={active ? "high" : "auto"} unoptimized
-      data-modulo-entrance-image={active || undefined} />
+      />
     <video ref={player} width={video.width} height={video.height} poster={thumbnail.src}
       muted loop playsInline preload="none" disablePictureInPicture tabIndex={-1} />
   </span>;

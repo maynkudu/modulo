@@ -1,7 +1,6 @@
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import localFont from "next/font/local";
-import { entranceInitialization } from "@/lib/site-entrance";
 import { StructuredData } from "@/components/structured-data";
 import { defaultMetadata, siteStructuredData } from "@/lib/seo";
 import "./globals.css";
@@ -12,7 +11,6 @@ export const metadata = defaultMetadata;
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" id="modulo-scroll" suppressHydrationWarning className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${stackNotch.variable}`}>
-      <head><script dangerouslySetInnerHTML={{ __html: entranceInitialization }} /></head>
       <body><StructuredData data={siteStructuredData} />{children}</body>
     </html>
   );

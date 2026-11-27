@@ -1,4 +1,0 @@
-.loading { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; color: var(--ink); background: var(--paper); }
-.wordmark { display:block;width:clamp(136px,20vw,220px);height:auto;animation:loaderWord 700ms 100ms var(--ease-out) both; }
-@keyframes loaderWord { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) { .wordmark { animation-duration: 1ms; animation-delay: 0ms; } }

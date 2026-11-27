@@ -4,6 +4,7 @@
 }
 
 .statementInner {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: minmax(0, 1fr);
@@ -14,6 +15,8 @@
   padding: clamp(20px, 2.4vw, 36px);
   box-sizing: border-box;
 }
+
+.statementInner > * { min-width: 0; }
 
 .featured {
   justify-self: center;
