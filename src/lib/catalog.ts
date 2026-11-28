@@ -1,6 +1,6 @@
 import type { RegistryItem } from "shadcn/schema";
-import { spriteRacer } from "./page-catalog";
-export { spriteRacer } from "./page-catalog";
+import { cubeArchive, spriteRacer } from "./page-catalog";
+export { cubeArchive, spriteRacer } from "./page-catalog";
 
 export const interactiveArt = {
   name: "interactive-art" as const,
@@ -484,6 +484,12 @@ export const pageCatalogItems = [{
   keywords: ["page", "game", "racing", "drift", "delivery", "sprite", "stack", "layered", "canvas", "audio"],
   seoDescription: "Play Switchback, a layered pixel driving game with six original vehicles, five circuits, a drift yard, engine audio and an exploded-world inspector. Install the complete React page with an active Modulo key.",
   media: componentMedia({ name: spriteRacer.name, alt: "A pixel car driving on a raised road through a layered forest world.", height: 800, duration: 6 }),
+}, {
+  component: cubeArchive,
+  addedAt: "2026-11-28",
+  keywords: ["page", "portfolio", "gallery", "cube", "project", "case study", "photography", "video", "archive"],
+  seoDescription: "An image-led portfolio page with a cube-turn project selector, full-width case views, project details and a return to the selected work.",
+  media: componentMedia({ name: cubeArchive.name, alt: "Portfolio images turning through a cube selector before opening as a wide project case.", height: 960, duration: 6 }),
 }] satisfies CatalogItem[];
 
 /** Image-array portrait morphing with a diagonal tile clock. */

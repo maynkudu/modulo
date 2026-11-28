@@ -27,6 +27,34 @@ import { useDownloadPreview } from "../src/components/use-download-preview";
 import { SwitchbackPage, type SwitchbackPageProps } from "../src/registry/sprite-racer/SwitchbackPage";
 import { PorscheGT3RS } from "../src/registry/porsche-gt3rs/PorscheGT3RS";
 import { ThermalImage } from "../src/registry/thermal-image/thermal-image";
+import { CubeArchivePage } from "../src/registry/cube-archive/CubeArchivePage";
+import { cubeArchiveProjects } from "../src/lib/cube-archive-projects";
+
+const cubeArchiveCaptureSources = new Map([
+  ["india-main.avif", "__CUBE_ARCHIVE_INDIA_MAIN__"],
+  ["india-portrait.avif", "__CUBE_ARCHIVE_INDIA_PORTRAIT__"],
+  ["india-crowd.avif", "__CUBE_ARCHIVE_INDIA_CROWD__"],
+  ["saigon-main.avif", "__CUBE_ARCHIVE_SAIGON_MAIN__"],
+  ["saigon-street.avif", "__CUBE_ARCHIVE_SAIGON_STREET__"],
+  ["saigon-darkroom.avif", "__CUBE_ARCHIVE_SAIGON_DARKROOM__"],
+  ["archive-01.avif", "__CUBE_ARCHIVE_ARCHIVE_01__"],
+  ["archive-02.avif", "__CUBE_ARCHIVE_ARCHIVE_02__"],
+  ["kitse-poster.jpg", "__CUBE_ARCHIVE_KITSE_POSTER__"],
+  ["kitse-frame-02.jpg", "__CUBE_ARCHIVE_KITSE_FRAME_02__"],
+]);
+
+function captureSource(source: string) {
+  const filename = source.split("/").at(-1);
+  return filename ? cubeArchiveCaptureSources.get(filename) ?? source : source;
+}
+
+const cubeArchiveCaptureProjects = cubeArchiveProjects.map(project => ({
+  ...project,
+  featured: project.featured.kind === "image"
+    ? { ...project.featured, src: captureSource(project.featured.src) }
+    : { ...project.featured, poster: captureSource(project.featured.poster) },
+  images: project.images.map(image => ({ ...image, src: captureSource(image.src) })),
+}));
 
 const switchbackReady: SwitchbackPageProps["onReady"] = controller => {
   if (!controller) return;
@@ -174,6 +202,7 @@ function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
   if (name === "porsche-gt3rs") return <PorscheCapture />;
   if (name === "thermal-image") return <ThermalImageCapture />;
+  if (name === "cube-archive") return <CubeArchiveCapture />;
   if (name === "dot-orb") return <DotOrbCapture />;
   if (name === "image-mosaic") return <ImageMosaicCapture />;
   if (name === "halftone") return <section className="halftone-media">
@@ -258,6 +287,27 @@ function ThermalImageCapture() {
       onReady={() => markReady(true)}
     />
   </section>;
+}
+
+function CubeArchiveCapture() {
+  useEffect(() => {
+    const sources = [...new Set(cubeArchiveCaptureProjects.flatMap(project => [
+      ...project.images.map(image => image.src),
+      project.featured.kind === "image" ? project.featured.src : project.featured.poster,
+    ]))];
+    let active = true;
+    void Promise.all(sources.map(source => new Promise<void>(resolve => {
+      const image = new Image();
+      image.onload = image.onerror = () => resolve();
+      image.src = source;
+      if (image.complete) resolve();
+    }))).then(() => {
+      if (active) document.body.dataset.ready = "true";
+    });
+    return () => { active = false; };
+  }, []);
+
+  return <section className="cube-archive-media"><CubeArchivePage projects={cubeArchiveCaptureProjects} /></section>;
 }
 
 /** A repeatable pointer-only teaser. Live audio is exercised separately through real input. */

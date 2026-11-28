@@ -595,6 +595,19 @@
       ]
     },
     {
+      "name": "cube-archive",
+      "repository": "maynkudu/modulo-cube-archive",
+      "revision": "408e7f23c624dd8f1ccf28ea9bf3ee90b9b09ad9",
+      "files": [
+        { "path": "CubeArchivePage.tsx", "sha256": "fa52d945a5163ad8f5ffc33e0e2eaabbeb1f1fd35ea2f07d0da07fe6cd68dd36" },
+        { "path": "cube-archive.module.css", "sha256": "223c1a77b02ee0dd62453c74b2468520364d9b9effb195053ced821efbb36fae" },
+        { "path": "types.ts", "sha256": "50bdbdaccb8acebe5650a2b4464744203cd28205d337de114db5ed265f60393b" },
+        { "path": "example-projects.ts", "sha256": "a2c8446dcc2f165bd4932d88dcb8d7f8673c2514bb97b1dec31f000729cbc53b" },
+        { "path": "README.md", "sha256": "2d5e5aabb31f470a701a9dc9e13799e394cdde317d72cbe8204167b488c41b67" },
+        { "path": "page.tsx", "sha256": "b462a3797300c28a02878c147db9e278808f80492a21d55d67fafd43290b78d2" }
+      ]
+    },
+    {
       "name": "porsche-gt3rs",
       "repository": "maynkudu/modulo-porsche-gt3rs",
       "revision": "132e846dfa08b19b8695c14a6bf1d42bdf039e65",

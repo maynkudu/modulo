@@ -79,6 +79,7 @@ next-env.d.ts
 /src/registry/thermal-image/
 /src/registry/porsche-gt3rs/
 /src/registry/solas-tf/
+/src/registry/cube-archive/
 /.private-registry/
 /public/r/
 /.data/

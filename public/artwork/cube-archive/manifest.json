@@ -1,0 +1,105 @@
+{
+  "assets": [
+    {
+      "path": "india-main.avif",
+      "source": "https://media.ugrfr.com/india/india0.avif",
+      "sourceSha256": "1b7aa93ecb0e0e53a866249624229916dbf367e1b0db3052bbc938cd64cc2869",
+      "sha256": "1b7aa93ecb0e0e53a866249624229916dbf367e1b0db3052bbc938cd64cc2869",
+      "bytes": 24675,
+      "role": "India project cover",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "india-portrait.avif",
+      "source": "https://media.ugrfr.com/india/india14.avif",
+      "sourceSha256": "cff6506369877e19079c50973eb514c59267d069c631a1471009047dd5490fe4",
+      "sha256": "cff6506369877e19079c50973eb514c59267d069c631a1471009047dd5490fe4",
+      "bytes": 55413,
+      "role": "India case image",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "india-crowd.avif",
+      "source": "https://media.ugrfr.com/india/india20.avif",
+      "sourceSha256": "37eeee41d550d3792922b6d93c7593d9b9fc1a6f9f507485e81f08cdf5364719",
+      "sha256": "37eeee41d550d3792922b6d93c7593d9b9fc1a6f9f507485e81f08cdf5364719",
+      "bytes": 44725,
+      "role": "India case image",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "saigon-main.avif",
+      "source": "https://media.ugrfr.com/saigon/saigon13.avif",
+      "sourceSha256": "5d39f034556d1afe9ab5457915ecec1b3d5d2ca084739adbe96420578ea718ab",
+      "sha256": "5d39f034556d1afe9ab5457915ecec1b3d5d2ca084739adbe96420578ea718ab",
+      "bytes": 21278,
+      "role": "Saigon project cover",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "saigon-street.avif",
+      "source": "https://media.ugrfr.com/saigon/saigon11.avif",
+      "sourceSha256": "d69e8301f32f5b4e4df0fc728c3a33720d858633eca12a6df818916d0a92a6ee",
+      "sha256": "d69e8301f32f5b4e4df0fc728c3a33720d858633eca12a6df818916d0a92a6ee",
+      "bytes": 43256,
+      "role": "Saigon case image",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "saigon-darkroom.avif",
+      "source": "https://media.ugrfr.com/saigon/saigon15.avif",
+      "sourceSha256": "47f84d6f21f12e41b9268cd0160ee81aebc455c42e650a82f7e669b8e575ef9a",
+      "sha256": "47f84d6f21f12e41b9268cd0160ee81aebc455c42e650a82f7e669b8e575ef9a",
+      "bytes": 11995,
+      "role": "Saigon case image",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "archive-01.avif",
+      "source": "https://media.ugrfr.com/archive/ugrfr1.avif",
+      "sourceSha256": "5195f3a9aed7e095ef29e5264f5b4f5d02203ba40c8a6ab8d60ca9679068e1f9",
+      "sha256": "5195f3a9aed7e095ef29e5264f5b4f5d02203ba40c8a6ab8d60ca9679068e1f9",
+      "bytes": 40195,
+      "role": "Archive project cover",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "archive-02.avif",
+      "source": "https://media.ugrfr.com/archive/ugrfr2.avif",
+      "sourceSha256": "32eee4105a978db4b4988be7c866cd4ab54073afcb3671654bbacafa71136d2f",
+      "sha256": "32eee4105a978db4b4988be7c866cd4ab54073afcb3671654bbacafa71136d2f",
+      "bytes": 28275,
+      "role": "Archive case image",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "kitse-poster.jpg",
+      "source": "https://media.chapterup.in/kitse-snippet.mp4",
+      "sourceSha256": "df0d3df2390f21d6d7dd82b30c5021e09fbe0678dff52c41d8c0f40fd4bcc011",
+      "sha256": "a0d3ba77777304e29088828e634ce66d15fd50ec241380fa72720776129326bd",
+      "bytes": 64650,
+      "role": "First video frame used as poster",
+      "derivation": "Extracted from the source video at its opening frame.",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "kitse-frame-02.jpg",
+      "source": "https://media.chapterup.in/kitse-snippet.mp4",
+      "sourceSha256": "df0d3df2390f21d6d7dd82b30c5021e09fbe0678dff52c41d8c0f40fd4bcc011",
+      "sha256": "7b7d83a894d2f454c7bfd1441ad75a820d8335de9de2f3ed32be9a87134b7c32",
+      "bytes": 257545,
+      "role": "Frame extracted at 1.8 seconds",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    },
+    {
+      "path": "kitse-preview.mp4",
+      "source": "https://media.chapterup.in/kitse-snippet.mp4",
+      "sourceSha256": "df0d3df2390f21d6d7dd82b30c5021e09fbe0678dff52c41d8c0f40fd4bcc011",
+      "intermediateSha256": "695beb08f2108da08842bf11a3db13f2fd9e778cc7c32d37a63050dd3f54fa66",
+      "sha256": "3be595bba16c04bc1f84609ca2f8cf90dc962223fb751f62fa6ee77e16f65fe2",
+      "bytes": 959179,
+      "role": "Six-second silent H.264 preview, derived from the source video proxy, scaled to 720 pixels wide at 30 fps",
+      "reuse": "User-owned project media, authorized for this Modulo page. No separate asset license metadata was found."
+    }
+  ]
+}

@@ -38,6 +38,7 @@ const specifications = [
   { name: "image-mosaic", flow: "image-mosaic-metallic-sweep", pause: 7000, seek: .1, thumbnailSeek: 1.5, movePointer: false },
   { name: "porsche-gt3rs", flow: "porsche-gt3rs-orbit", pause: 4500, seek: .1, thumbnailSeek: .2, movePointer: false },
   { name: "thermal-image", flow: "thermal-image-model-orbit", pause: 6500, seek: .1, thumbnailSeek: 2.5, movePointer: false },
+  { name: "cube-archive", flow: "cube-archive-case-return", pause: 1800, seek: 0, thumbnailSeek: 2, movePointer: false },
   { name: "halftone", flow: "halftone-hover-trail", pause: 7000, seek: .1, thumbnailSeek: 2, movePointer: false },
   { name: "portrait-wave", flow: "portrait-wave-loop", pause: 6500, seek: .5, thumbnailSeek: 0, movePointer: false },
   { name: "eyespice", flow: "eyespice-gaze-close-retreat", pause: 4500, seek: .1, thumbnailSeek: 0, movePointer: false },
@@ -98,6 +99,24 @@ if (!encodeOnly) {
     readFile(resolve(root, "public/artwork/image-mosaic.jpg")),
     readFile(resolve(root, "public/artwork/porsche-gt3rs.glb")),
   ]);
+  const cubeArchiveCaptureAssets = [
+    ["__CUBE_ARCHIVE_INDIA_MAIN__", "india-main.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_INDIA_PORTRAIT__", "india-portrait.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_INDIA_CROWD__", "india-crowd.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_SAIGON_MAIN__", "saigon-main.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_SAIGON_STREET__", "saigon-street.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_SAIGON_DARKROOM__", "saigon-darkroom.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_ARCHIVE_01__", "archive-01.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_ARCHIVE_02__", "archive-02.avif", "image/avif"],
+    ["__CUBE_ARCHIVE_KITSE_POSTER__", "kitse-poster.jpg", "image/jpeg"],
+    ["__CUBE_ARCHIVE_KITSE_FRAME_02__", "kitse-frame-02.jpg", "image/jpeg"],
+  ] as const;
+  const cubeArchiveDataUrls = await Promise.all(cubeArchiveCaptureAssets.map(async ([token, filename, mime]) => ({
+    token,
+    value: `data:${mime};base64,${(await readFile(resolve(root, "public/artwork/cube-archive", filename))).toString("base64")}`,
+  })));
+  let captureJavaScript = javascript;
+  for (const { token, value } of cubeArchiveDataUrls) captureJavaScript = captureJavaScript.replaceAll(token, value);
   const captureClock = await readFile(resolve(root, "scripts/media-capture-clock.js"), "utf8");
   await writeFile(previewPath, `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Modulo component media</title><style>${css}
   @font-face{font-family:GeistMono;src:url(data:font/woff2;base64,${font.toString("base64")}) format("woff2")}
@@ -130,7 +149,8 @@ if (!encodeOnly) {
   .image-mosaic-media .image-mosaic__image{border-radius:0}
   .thermal-image-media{width:100%;height:100%;background:#070707}
   .thermal-image-media canvas,.thermal-image-media img{width:100%;height:100%;object-fit:contain}
-  </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${javascript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("__IMAGE_MOSAIC_IMAGE__", `data:image/jpeg;base64,${mosaicImage.toString("base64")}`).replaceAll("__THERMAL_MODEL__", `data:model/gltf-binary;base64,${thermalModel.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
+  .cube-archive-media{width:100%;height:100%;background:#fff}
+  </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${captureJavaScript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("__IMAGE_MOSAIC_IMAGE__", `data:image/jpeg;base64,${mosaicImage.toString("base64")}`).replaceAll("__THERMAL_MODEL__", `data:model/gltf-binary;base64,${thermalModel.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
   const budgets = Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, Math.max(Math.round(specification.seek * fps) + Math.round(entry.media.video.duration * fps) + (ambient.has(entry.component.name) ? 15 : 0), entry.component.name === "liquid-text-reveal" ? 420 : 300)]));
   await writeFile(resolve(workspace, "capture-frame-budgets.json"), JSON.stringify(budgets, null, 2));
@@ -176,6 +196,18 @@ if (!encodeOnly) {
           { action: "click", selector: '.site-header-menu[aria-expanded="true"]' },
           { action: "pause", ms: 700 },
           { action: "click", selector: '.site-header-menu[aria-expanded="false"]' },
+        ] : []),
+        ...(entry.component.name === "cube-archive" ? [
+          { action: "pause", ms: 200 },
+          { action: "click", selector: '[data-project-index="1"]' },
+          { action: "pause", ms: 600 },
+          { action: "click", selector: "[data-stage]" },
+          { action: "pause", ms: 950 },
+          { action: "pause", ms: 900 },
+          { action: "click", selector: '[data-action="back"]' },
+          { action: "pause", ms: 950 },
+          { action: "click", selector: '[data-project-index="0"]' },
+          { action: "pause", ms: 600 },
         ] : []),
         ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "key", key: "r" }] : []),
         ...(["elastic-slider", "snap-rail", "liquid-cluster"].includes(entry.component.name) ? [{ action: "pause", ms: 2400 }, { action: "key", key: "0" }] : []),

@@ -1256,7 +1256,7 @@
     {
       "name": "porsche-gt3rs",
       "title": "Porsche GT3RS",
-      "description": "An interactive 992 GT3 RS with olive lacquer, bronze center-lock wheels and a modeled underbody.",
+      "description": "A configurable 992 GT3 RS with a dark studio floor, softbox reflections, paint colors and wheel finishes.",
       "dependencies": [
         "three@^0.186.0",
         "@types/three@^0.186.0"
@@ -1537,6 +1537,64 @@
             "type": "video/mp4",
             "duration": 6,
             "url": "https://modulo-maynkudu.vercel.app/media/sprite-racer.mp4"
+          }
+        }
+      },
+      "type": "registry:block"
+    },
+    {
+      "name": "cube-archive",
+      "title": "Cube Archive",
+      "description": "A portfolio page where projects turn through a cube selector and open into full-width case views.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/cube-archive/CubeArchivePage.tsx",
+          "type": "registry:component",
+          "target": "components/cube-archive/CubeArchivePage.tsx"
+        },
+        {
+          "path": "src/registry/cube-archive/types.ts",
+          "type": "registry:lib",
+          "target": "components/cube-archive/types.ts"
+        },
+        {
+          "path": "src/registry/cube-archive/cube-archive.module.css",
+          "type": "registry:file",
+          "target": "components/cube-archive/cube-archive.module.css"
+        },
+        {
+          "path": "src/registry/cube-archive/example-projects.ts",
+          "type": "registry:lib",
+          "target": "components/cube-archive/example-projects.ts"
+        },
+        {
+          "path": "src/registry/cube-archive/README.md",
+          "type": "registry:file",
+          "target": "components/cube-archive/README.md"
+        },
+        {
+          "path": "src/registry/cube-archive/page.tsx",
+          "type": "registry:page",
+          "target": "app/cube-archive/page.tsx"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Portfolio images turning through a cube selector before opening as a wide project case.",
+            "width": 720,
+            "height": 576,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/cube-archive.jpg"
+          },
+          "video": {
+            "width": 720,
+            "height": 576,
+            "type": "video/mp4",
+            "duration": 6,
+            "url": "https://modulo-maynkudu.vercel.app/media/cube-archive.mp4"
           }
         }
       },
