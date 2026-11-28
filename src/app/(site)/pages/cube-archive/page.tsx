@@ -1,5 +1,4 @@
 import { ComponentDetail } from "@/components/component-detail";
-import { ComponentSource } from "@/components/component-source";
 import { InstallCommand } from "@/components/install-command";
 import { cubeArchive } from "@/lib/catalog";
 import { getComponentMetadata } from "@/lib/seo";
@@ -59,7 +58,6 @@ export default function CubeArchiveDocumentation() {
         <h3>Featured media</h3>
         <p>Use image media with a source and alt description, or video media with a source, poster and alt description. Case images each need their own source and alt text.</p>
       </section>
-      <ComponentSource name={cubeArchive.name} />
     </div>
   </>;
 }

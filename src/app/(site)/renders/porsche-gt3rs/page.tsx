@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ComponentDetail } from "@/components/component-detail";
-import { ComponentSource } from "@/components/component-source";
 import { InstallCommand } from "@/components/install-command";
 import { PorscheGT3RSDemo } from "@/components/porsche-gt3rs-demo";
 import { getCatalogPath, porscheGT3RS } from "@/lib/catalog";
@@ -21,7 +20,6 @@ export default function PorscheGT3RSPage() {
         <pre><code>{'import { PorscheGT3RS } from "@/components/porsche-gt3rs/PorscheGT3RS";\n\n<PorscheGT3RS mode="Studio" paint="#68704b" wheel="Y-spoke" wheelFinish="#785b3b" lights />'}</code></pre>
         <p>Pass <code>src</code> to load a self-hosted GLB. Set <code>mode</code> to <code>Normal</code> or <code>Studio</code>, and configure <code>paint</code>, <code>wheel</code>, <code>wheelFinish</code> and <code>lights</code>. Use <code>view</code> and <code>onViewChange</code> to control azimuth, elevation and zoom.</p>
       </section>
-      <ComponentSource name={porscheGT3RS.name} />
     </div>
   </>;
 }
