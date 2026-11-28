@@ -155,6 +155,11 @@
   line-height: 1.45;
 }
 
+.controlToggleRow[data-disabled] {
+  color: var(--control-muted);
+  cursor: default;
+}
+
 .controlSelect {
   display: block;
   width: 100%;
@@ -279,6 +284,11 @@
   background: var(--control-surface);
   cursor: pointer;
   transition: background 150ms;
+}
+
+.controlToggle:disabled {
+  cursor: default;
+  opacity: .45;
 }
 
 .controlToggle::before {

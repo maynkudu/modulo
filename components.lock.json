@@ -597,11 +597,11 @@
     {
       "name": "porsche-gt3rs",
       "repository": "maynkudu/modulo-porsche-gt3rs",
-      "revision": "9042f8d8e7e7990c6da3b6c469e80b893b32f020",
+      "revision": "132e846dfa08b19b8695c14a6bf1d42bdf039e65",
       "files": [
         {
           "path": "PorscheGT3RS.tsx",
-          "sha256": "a5e13dca2da97e25ae5463298d7be0f67d5928ee38f7e453c728558ac0f0fa72"
+          "sha256": "0442ea2c96ed39af41f8e27e052cbd267b9c0e135f62b5200b5bd8b9480cbe4e"
         },
         {
           "path": "asset.ts",
@@ -609,15 +609,15 @@
         },
         {
           "path": "model-scene.ts",
-          "sha256": "4e5cdd7c9d99cf5627d11a5d394dd3a820b98580e288bd7c3f721725430a825f"
+          "sha256": "f97a86c98f18edb1b4473d42830aec0bd344cab6e2bee270b794b62501800e8e"
         },
         {
           "path": "porsche-gt3rs.css",
-          "sha256": "a776bcc6465bc0b1923b96188e2a0be55b3d743b8f5ff91b51dd703c5c6326ff"
+          "sha256": "dea5cee9798a3970df65dec3cf4d6d733551b58ff85aa2608f61f50bb32a4edc"
         },
         {
           "path": "README.md",
-          "sha256": "f15d5a4789f2a6fef40e69fecbf67b9633afdc1a0d6881963a589aeada8e82c5"
+          "sha256": "9d4bbb027059635489bf4289dce7f10d49ea64d37767bbd429c1158a4315d877"
         },
         {
           "path": "web/Porsche-GT3RS.glb",

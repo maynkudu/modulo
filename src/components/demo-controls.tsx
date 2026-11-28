@@ -76,23 +76,24 @@ export function DemoSurface({ children, className, label, menu }: {
   </ContextMenu.Root>;
 }
 
-export function DemoPanel({ children, menu, onReplay, onReset, replayDisabled = false }: {
+export function DemoPanel({ children, menu, onReplay, onReset, replayDisabled = false, collapseRequest = 0 }: {
   children: ReactNode;
   menu: readonly DemoMenuEntry[];
   onReplay: () => void;
   onReset: () => void;
   replayDisabled?: boolean;
+  collapseRequest?: number;
 }) {
   const id = useId();
   const wide = useSyncExternalStore(subscribePanelSize, getPanelSize, getServerPanelSize);
-  const [expandedOverride, setExpandedOverride] = useState<boolean | null>(null);
-  const expanded = expandedOverride ?? wide;
+  const [expansion, setExpansion] = useState<{ request: number; value: boolean | null }>({ request: 0, value: null });
+  const expanded = expansion.request === collapseRequest ? expansion.value ?? wide : false;
 
   return <aside className={styles.controlsPanel} aria-labelledby={id}>
     <details open={expanded}>
       <summary className={styles.controlsSummary} onClick={event => {
         event.preventDefault();
-        setExpandedOverride(!expanded);
+        setExpansion({ request: collapseRequest, value: !expanded });
       }}>
         <h2 id={id}>Controls</h2>
         <span className={styles.controlsDisclosureState} aria-hidden="true">{expanded ? "Hide" : "Show"}</span>
@@ -157,15 +158,17 @@ export function DemoRange({ label, value, min, max, step = 1, onValueChange, for
   </div>;
 }
 
-export function DemoToggle({ label, checked, onCheckedChange }: {
+export function DemoToggle({ label, checked, onCheckedChange, disabled = false }: {
   label: string;
   checked: boolean;
   onCheckedChange: (value: boolean) => void;
+  disabled?: boolean;
 }) {
   const id = useId();
-  return <label className={styles.controlToggleRow} htmlFor={id}>
+  return <label className={styles.controlToggleRow} data-disabled={disabled || undefined} htmlFor={id}>
     <span>{label}</span>
     <input id={id} className={styles.controlToggle} type="checkbox" role="switch" checked={checked}
+      disabled={disabled}
       onChange={event => onCheckedChange(event.currentTarget.checked)} />
   </label>;
 }

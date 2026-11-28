@@ -348,7 +348,7 @@ export const porscheGT3RS = {
   name: "porsche-gt3rs" as const,
   type: "registry:component",
   title: "Porsche GT3RS",
-  description: "An interactive 992 GT3 RS with olive lacquer, bronze center-lock wheels and a modeled underbody.",
+  description: "A configurable 992 GT3 RS with a dark studio floor, softbox reflections, paint colors and wheel finishes.",
   dependencies: ["three@^0.186.0", "@types/three@^0.186.0"],
   registryDependencies: [],
   files: [
@@ -363,8 +363,8 @@ export const porscheGT3RS = {
 export const renderCatalogItems = [{
   component: porscheGT3RS,
   addedAt: "2026-11-27",
-  keywords: ["render", "3D", "Porsche", "911", "992", "GT3 RS", "car", "glTF", "orbit"],
-  seoDescription: "Orbit the Porsche GT3RS in 3D. Inspect its tinted glass, bronze wheels and underbody, or see the same model in Thermal Image.",
+  keywords: ["render", "3D", "Porsche", "911", "992", "GT3 RS", "car", "glTF", "orbit", "studio", "configurator", "paint", "wheels"],
+  seoDescription: "Configure and orbit the Porsche GT3RS in a high-contrast studio scene. Choose paint, wheel styles and finishes, switch lighting, or inspect the model from multiple views.",
   media: componentMedia({ name: porscheGT3RS.name, height: 675, duration: 4, alt: "The olive Porsche GT3RS turning under studio lights." }),
 }] satisfies CatalogItem[];
 
