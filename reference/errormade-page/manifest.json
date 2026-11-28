@@ -1,0 +1,263 @@
+[
+  {
+    "path": "raw/api.js",
+    "url": "https://errormade.tech/api.js",
+    "sha256": "8e09d638dfb20c6d6a3b64b0226040f24db406372af5a2837253f02f279f5e7f",
+    "bytes": 1790,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/app.js",
+    "url": "https://errormade.tech/app.js",
+    "sha256": "6f777622138bbfd26d4b05e26268be97dde6bff9a8db38f66b8c90af42af30e7",
+    "bytes": 42133,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/case-info.js",
+    "url": "https://errormade.tech/case-info.js",
+    "sha256": "db07ac79ec85997131998c580c67f400e4efa97b4effefc71bd149e21c895c8a",
+    "bytes": 1964,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/case-media.js",
+    "url": "https://errormade.tech/case-media.js",
+    "sha256": "cb93387800e3f108f6cb5e764b4e9966336edb1c5b2a6f19a6b909abee421f53",
+    "bytes": 2626,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/case-scroll.js",
+    "url": "https://errormade.tech/case-scroll.js",
+    "sha256": "a120701b58fa9aab4c1d6e98b55c08e4099f1d0f8d2896aa13358ea4ccec7b66",
+    "bytes": 6775,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/case.css",
+    "url": "https://errormade.tech/case.css",
+    "sha256": "457ab0ee03222915d7bea68ae8b6c7d4a991697db89abf80453f92d15558e9d4",
+    "bytes": 18615,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/case.js",
+    "url": "https://errormade.tech/case.js",
+    "sha256": "c55085fefbcf1007cade5bd249e4edda4d4b1dd9b2a2c292178788b77958a4a5",
+    "bytes": 5958,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/gallery-media-v3.css",
+    "url": "https://errormade.tech/gallery-media-v3.css",
+    "sha256": "04016b9e9730ead33a51305823478135db2aa7574f8f96aed602e8745f887c29",
+    "bytes": 1218,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/index-view.css",
+    "url": "https://errormade.tech/index-view.css",
+    "sha256": "86e23f002e07bbd022d7d9e45c19fdb17523c262c7fbe89ce9f63dc8867adb49",
+    "bytes": 4193,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/index-view.js",
+    "url": "https://errormade.tech/index-view.js",
+    "sha256": "ee0fecaeeb1c10bdf51497ead3324ee47fdc711dafa30a3325814c7b59b76170",
+    "bytes": 4855,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/infinite-scroll.js",
+    "url": "https://errormade.tech/infinite-scroll.js",
+    "sha256": "c2644b957a1707b354f2096e27113f56686a95b950c5f8bb755f54e5056dc0f2",
+    "bytes": 6679,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/layout.js",
+    "url": "https://errormade.tech/layout.js",
+    "sha256": "69e5aee80bbe8d254a8ceba0530d40e0922edfefc502d0d88eed2161820598d8",
+    "bytes": 4527,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/media-loading.js",
+    "url": "https://errormade.tech/media-loading.js",
+    "sha256": "381353a996c6c0d5c33a7a8c859a4b3acb1a540774591d34cc598212c166d8fb",
+    "bytes": 8915,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/page-start.js",
+    "url": "https://errormade.tech/page-start.js",
+    "sha256": "e9a1b38dbc6e67de39bea296239969b9376424be797a523ca3bd77ad4257049d",
+    "bytes": 6192,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/pointer-tilt.js",
+    "url": "https://errormade.tech/pointer-tilt.js",
+    "sha256": "05febd71baeeff3761a7b2c82dcca6a18c7d82e5fb21cd230120b29e1ea61093",
+    "bytes": 8403,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/post.json",
+    "url": "https://api.fxtwitter.com/iamerrormade/status/2126280581004587412",
+    "sha256": "1a0d3cd215ecfb64f9e85d59d0c22aefc57e952111ad9c05f1934e82c7133764",
+    "bytes": 6102,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/project-description.js",
+    "url": "https://errormade.tech/project-description.js",
+    "sha256": "ff22a1be954470f70a6a657483d69e9f6ac5ce6f94182742746b495358a6c891",
+    "bytes": 4145,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/reference.mp4",
+    "url": "https://video.twimg.com/amplify_video/2126280181132177408/vid/avc1/2386x1904/ZZDLQw_s1F9dXOTJ.mp4?tag=29",
+    "sha256": "7a75e26d57c6d05eac32e3ddaf30d0ec284ec0533fe0d2731950cb184d41e8f5",
+    "bytes": 10668207,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/row-motion.js",
+    "url": "https://errormade.tech/row-motion.js",
+    "sha256": "7d71f18ba1b70f51a8440872a0621ef8a71a3ec94b9a6a6d8bfd766082809419",
+    "bytes": 15236,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/scroll-band-motion.js",
+    "url": "https://errormade.tech/scroll-band-motion.js",
+    "sha256": "469bb35080bb9943c5f0440c40f75325261c46b6da5f343eafc6c8b23541c97b",
+    "bytes": 269,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/scroll-settings.js",
+    "url": "https://errormade.tech/scroll-settings.js",
+    "sha256": "72ef2feeb1f0e680c49df994c0b5c851a28be6a73fb3d1bdb4302a2d3033ae8b",
+    "bytes": 513,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/site-theme.css",
+    "url": "https://errormade.tech/site-theme.css",
+    "sha256": "4af78b28293732538153181043b114045954764e46c5397abee8c7439e0f5f7d",
+    "bytes": 996,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/smooth-scroll.js",
+    "url": "https://errormade.tech/smooth-scroll.js",
+    "sha256": "163fbe47b249fad70cea10feb7edb7f36221f906d83a4c0c45989535087c601e",
+    "bytes": 11738,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/styles.css",
+    "url": "https://errormade.tech/styles.css",
+    "sha256": "acc7f7840fb37ee5774b55c712af79569c2b2ed157a50a1348d2142ff8fcadcb",
+    "bytes": 32260,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/tilt-geometry.js",
+    "url": "https://errormade.tech/tilt-geometry.js",
+    "sha256": "2b1f09e062bb8d4c780180361c9ac709fb666d5dde4424d98e64102d123b70be",
+    "bytes": 2088,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/wheel-input.js",
+    "url": "https://errormade.tech/wheel-input.js",
+    "sha256": "7d8c78aee36877c25be6ec589b378f09e2d49b4f588646215cb63266d1df60d7",
+    "bytes": 1413,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/work-title-band.js",
+    "url": "https://errormade.tech/work-title-band.js",
+    "sha256": "34d82f87ea50393d0d02be97d3b6a6357b8f0c53d2ad9a5a2b09a1d2c328ca12",
+    "bytes": 17039,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/work-v3.css",
+    "url": "https://errormade.tech/work-v3.css",
+    "sha256": "6d78f92ce7b5fe8a59b5aae9fb5a9a1fcea1b9f171d281cc508562b00021517b",
+    "bytes": 1538,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  },
+  {
+    "path": "raw/work.html",
+    "url": "https://errormade.tech/work/",
+    "sha256": "b7c0d84f836c29db20a984e03098172cd4d415d2c23d635fcfca9726a038a8ff",
+    "bytes": 9987,
+    "acquiredAt": "2026-11-27T19:52:34.842492+00:00",
+    "method": "HTTP GET, public delivered artifact",
+    "reuse": "Reference evidence. Original code license unverified."
+  }
+]
