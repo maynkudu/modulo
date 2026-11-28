@@ -7,9 +7,6 @@
 .preview > span:first-of-type { position: absolute; right: 18px; bottom: 17px; z-index: 1; padding: 9px 13px; border-radius: 999px; color: #050505; background: var(--coral); font-size: 11px; opacity: 0; transform: translateY(10px); transition: opacity 220ms, transform 450ms var(--ease-out); }
 .preview:hover img, .preview:focus-visible img { transform: scale(1.04); filter: saturate(1.1); }
 .preview:hover > span:first-of-type, .preview:focus-visible > span:first-of-type { opacity: 1; transform: translateY(0); }
-.privateMarker { position: absolute; top: 15px; right: 15px; z-index: 1; display: grid; width: 32px; height: 32px; place-items: center; border-radius: 50%; color: #fff; background: rgb(0 0 0 / 66%); }
-.preview[data-private-source="true"] .privateMarker { opacity: 1; transform: none; }
-.privateMarker svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.4; }
 .cardBody { display: flex; min-height: 115px; flex-direction: column; justify-content: space-between; padding-top: 15px; }
 .cardBody h2 { margin: 0; font: 450 clamp(20px, 2.6vw, 31px)/1 var(--site-display-font); letter-spacing: -.04em; }
 .cardBody h2 a { text-decoration: none; }

@@ -1,19 +1,9 @@
 import { ComponentDetail } from "@/components/component-detail";
-import { InstallCommand } from "@/components/install-command";
 import { cubeArchive } from "@/lib/catalog";
 import { getComponentMetadata } from "@/lib/seo";
 import styles from "../../page.module.css";
 
 export const metadata = getComponentMetadata(cubeArchive);
-
-const usage = [
-  'import { CubeArchivePage } from "@/components/cube-archive/CubeArchivePage";',
-  'import { cubeArchiveProjects } from "@/components/cube-archive/example-projects";',
-  "",
-  "export default function Page() {",
-  "  return <CubeArchivePage projects={cubeArchiveProjects} />;",
-  "}",
-].join("\n");
 
 const projectProps = [
   ["projects", "readonly CubeArchiveProject[]", "Required", "Project order, title, category, description, featured media and case images."],
@@ -37,12 +27,6 @@ export default function CubeArchiveDocumentation() {
       />
     </ComponentDetail>
     <div className={[styles.page, styles.main].join(" ")}>
-      <section className={[styles.panel, styles.docPanel, styles.install].join(" ")}>
-        <h2>Use Cube Archive</h2>
-        <InstallCommand name={cubeArchive.name} />
-        <pre><code>{usage}</code></pre>
-        <p>Each project needs a title, category, description, featured image or video, and one or more case images. Video projects use a poster image and play silently in a loop. Add those files to your public directory or pass URLs from your own asset host.</p>
-      </section>
       <section className={[styles.panel, styles.docPanel, styles.api].join(" ")}>
         <h2>Project data</h2>
         <table>

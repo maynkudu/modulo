@@ -17,15 +17,11 @@
 .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: start; }
 .panel { min-width: 0; padding: 32px; background: var(--card); }
 .docPanel { padding: 0; background: transparent; }
-.install { grid-column: span 5; }
 .api { grid-column: span 7; }
-.source { grid-column: 1 / -1; scroll-margin-top: 32px; }
-.sourceGate { padding: 20px; }
 .panel h2 { margin: 0 0 24px; font: 450 24px/1.2 var(--site-display-font); letter-spacing: -.03em; }
 .panel h3 { margin: 24px 0 10px; font-size: 14px; font-weight: 550; }
 .panel p { color: var(--ui-muted); font-size: 13px; line-height: 1.8; margin: 16px 0; }
 .panel pre { overflow: auto; max-width: 100%; margin: 0 0 16px; padding: 20px; background: var(--background); font-size: 12px; line-height: 1.9; }
-.install pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 .panel :is(pre, p, td) code { font-family: var(--font-geist-mono), monospace; }
 .panel a { display: inline-block; margin-right: 16px; font-size: 13px; text-underline-offset: 4px; text-decoration: underline; }
 .panelDivider { margin: 32px 0; }
@@ -34,10 +30,6 @@
 .api th { padding: 14px 16px; color: var(--ui-muted); font-weight: 400; }
 .api td { padding: 14px 16px; vertical-align: top; }
 .api td span { display: block; max-width: 320px; margin-top: 5px; color: var(--ui-muted); font-size: 12px; line-height: 1.6; }
-.details { margin-top: 16px; }
-.details summary { cursor: pointer; font-size: 13px; overflow-wrap: anywhere; }
-.details pre { margin-top: 0; max-height: 480px; }
-.accessHeading { display: flex; gap: 16px; align-items: start; justify-content: space-between; flex-wrap: wrap; }
 .accessForm { display: grid; gap: 12px; max-width: 440px; color-scheme: dark; }
 .accessForm label { color: var(--ink-soft); font-size: 13px; }
 .accessForm input { min-width: 0; width: 100%; font-size: 16px; }
@@ -56,7 +48,7 @@
 
 @media (max-width: 1000px) {
   .demo { grid-template-columns: minmax(0, 1fr) 260px; }
-  .install, .api { grid-column: span 6; }
+  .api { grid-column: span 6; }
 }
 
 @media (max-width: 700px) {
@@ -66,7 +58,7 @@
   .sections { gap: 30px; }
   .demo { grid-template-columns: minmax(0, 1fr); }
   .grid { gap: 16px; }
-  .install, .api { grid-column: 1 / -1; }
+  .api { grid-column: 1 / -1; }
   .panel { padding: 24px; }
   .docPanel { padding: 0; }
   .api table { min-width: 460px; }
