@@ -1,0 +1,140 @@
+{
+  "artifact": "Blank Interfaces Heat car embed",
+  "source_url": "https://www.blankinterfaces.com/f1/heatcar.html",
+  "captured_utc": "2026-11-27T05:30:32.996751+00:00",
+  "scope": "One thermal car embed, its exact delivered implementation and directly imported dependencies. No unrelated site routes or assets.",
+  "provenance": {
+    "effect": "Source credits thermal artwork after Studio Gruhl Rerun gear film (19-Artwork).",
+    "model": "Aston Martin F1 AMR23 2023 by Redgrund, CC BY 4.0",
+    "model_url": "https://sketchfab.com/3d-models/aston-martin-f1-amr23-2023-f6ba825a43b146a9b669934a4e1fd529",
+    "optimized_model_credit": "https://github.com/Ron2509/Ron2509.github.io"
+  },
+  "resources": [
+    {
+      "path": "raw/f1/model/car-hi.glb",
+      "source_url": "https://www.blankinterfaces.com/f1/model/car-hi.glb",
+      "acquisition": "HTTPS GET, ordinary public delivered resource",
+      "captured_at_utc": "2026-11-27T05:25:26.681225+00:00",
+      "sha256": "48e075aaa93928bd2cb68de6123daf9d84de8986dccf2298097070a854ca2516",
+      "size_bytes": 725392,
+      "content_type": "model/gltf-binary",
+      "reuse_status": "CC BY 4.0 per the delivered heatcar.html attribution, model by Redgrund; gltfpack optimized derivative"
+    },
+    {
+      "path": "raw/heatcar.html",
+      "source_url": "https://www.blankinterfaces.com/f1/heatcar.html",
+      "acquisition": "HTTPS GET, ordinary public delivered resource",
+      "captured_at_utc": "2026-11-27T05:23:34.806340+00:00",
+      "sha256": "6ef68147d20cbf5018a7c37c876d4fc834d266c286c18c22b99fb4e1466447d2",
+      "size_bytes": 15361,
+      "content_type": "text/html",
+      "reuse_status": "No license statement recovered for the website or shader implementation. Local research capture, not redistribution clearance."
+    },
+    {
+      "path": "raw/index.html",
+      "source_url": "https://www.blankinterfaces.com/",
+      "acquisition": "HTTPS GET, ordinary public delivered resource",
+      "captured_at_utc": "2026-11-27T05:21:42.885916+00:00",
+      "sha256": "f9e761fd1b5e20e642008baed5059169710b10ec41be59f6ff4ffb23917d2d12",
+      "size_bytes": 81426,
+      "content_type": "text/html",
+      "reuse_status": "No license statement recovered for the website or shader implementation. Local research capture, not redistribution clearance."
+    },
+    {
+      "path": "raw/vendor/three@0.170.0/build/three.module.min.js",
+      "source_url": "https://www.blankinterfaces.com/vendor/three@0.170.0/build/three.module.min.js",
+      "acquisition": "HTTPS GET, ordinary public delivered resource",
+      "captured_at_utc": "2026-11-27T05:25:26.629523+00:00",
+      "sha256": "08fd7545d13d2c7fb65ab691530a802dafefd638596501854f267d0fb13c39e7",
+      "size_bytes": 691648,
+      "content_type": "text/javascript",
+      "reuse_status": "Three.js MIT and meshoptimizer MIT. Preserve upstream license notices. Shader authorship does not inherit the dependency license."
+    },
+    {
+      "path": "raw/vendor/three@0.170.0/examples/jsm/libs/meshopt_decoder.module.js",
+      "source_url": "https://www.blankinterfaces.com/vendor/three@0.170.0/examples/jsm/libs/meshopt_decoder.module.js",
+      "acquisition": "HTTPS GET, ordinary public delivered resource",
+      "captured_at_utc": "2026-11-27T05:25:26.607873+00:00",
+      "sha256": "01f48524f4bac6141eaba07e94cc36e7ee56f311796fa6117c159842941b0468",
+      "size_bytes": 24850,
+      "content_type": "text/javascript",
+      "reuse_status": "Three.js MIT and meshoptimizer MIT. Preserve upstream license notices. Shader authorship does not inherit the dependency license."
+    },
+    {
+      "path": "raw/vendor/three@0.170.0/examples/jsm/loaders/GLTFLoader.js",
+      "source_url": "https://www.blankinterfaces.com/vendor/three@0.170.0/examples/jsm/loaders/GLTFLoader.js",
+      "acquisition": "HTTPS GET, ordinary public delivered resource",
+      "captured_at_utc": "2026-11-27T05:25:26.623255+00:00",
+      "sha256": "45139faddd5aaf48ed2d62203d976e5cbd703db1a592de40527f9f6cf58abd44",
+      "size_bytes": 110273,
+      "content_type": "text/javascript",
+      "reuse_status": "Three.js MIT and meshoptimizer MIT. Preserve upstream license notices. Shader authorship does not inherit the dependency license."
+    },
+    {
+      "path": "raw/vendor/three@0.170.0/examples/jsm/utils/BufferGeometryUtils.js",
+      "source_url": "https://www.blankinterfaces.com/vendor/three@0.170.0/examples/jsm/utils/BufferGeometryUtils.js",
+      "acquisition": "HTTPS GET, ordinary public delivered resource",
+      "captured_at_utc": "2026-11-27T05:25:26.659833+00:00",
+      "sha256": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6",
+      "size_bytes": 31768,
+      "content_type": "text/javascript",
+      "reuse_status": "Three.js MIT and meshoptimizer MIT. Preserve upstream license notices. Shader authorship does not inherit the dependency license."
+    }
+  ],
+  "privacy": "No HAR, cookies, authorization headers or signed URLs collected. Raw captures remain under project ignored reference paths.",
+  "limits": [
+    "Shader source is delivered and recoverable, but no license granting redistribution was found in the captured HTML.",
+    "Source input is a 3D normal/light clay render. Requested 2D image input is an explicit adaptation; geometry fidelity cannot be claimed against a substituted car image.",
+    "Model GLB is self-contained, asset.version2.0, generatorgltfpack1.3, one mesh and one node, no external URI dependencies."
+  ],
+  "captures": [
+    {
+      "path": "captures/source-t0-960x600.png",
+      "source_url": "https://www.blankinterfaces.com/f1/heatcar.html?t=0",
+      "acquisition": "Agent Browser screenshot after window.__ready",
+      "captured_at_utc": "2026-11-27T05:26:18.153397+00:00",
+      "sha256": "5e5624308cd52057af21af5a5ac98a98b01adcf62e40a9e8b742659a2565e456",
+      "size_bytes": 806737,
+      "content_type": "image/png",
+      "viewport_css": [
+        960,
+        600
+      ],
+      "dpr": 1,
+      "simulation_time_seconds": 0.0,
+      "reuse_status": "Reference-only render. Underlying modelCCBY4.0; shader/site redistribution terms not recovered."
+    },
+    {
+      "path": "captures/source-t075-960x600.png",
+      "source_url": "https://www.blankinterfaces.com/f1/heatcar.html?t=0.75",
+      "acquisition": "Agent Browser screenshot after window.__ready",
+      "captured_at_utc": "2026-11-27T05:26:28.518490+00:00",
+      "sha256": "126703a5c9fd49d3767569f85fe23c2553ce915c81b2aeb868c14a69f59503cc",
+      "size_bytes": 811323,
+      "content_type": "image/png",
+      "viewport_css": [
+        960,
+        600
+      ],
+      "dpr": 1,
+      "simulation_time_seconds": 0.75,
+      "reuse_status": "Reference-only render. Underlying modelCCBY4.0; shader/site redistribution terms not recovered."
+    },
+    {
+      "path": "captures/source-t150-960x600.png",
+      "source_url": "https://www.blankinterfaces.com/f1/heatcar.html?t=1.5",
+      "acquisition": "Agent Browser screenshot after window.__ready",
+      "captured_at_utc": "2026-11-27T05:26:39.296587+00:00",
+      "sha256": "f8e5432d6b659134f8dc1fb773d6f45c820f12e8c806b05208c32e4504245f82",
+      "size_bytes": 794396,
+      "content_type": "image/png",
+      "viewport_css": [
+        960,
+        600
+      ],
+      "dpr": 1,
+      "simulation_time_seconds": 1.5,
+      "reuse_status": "Reference-only render. Underlying modelCCBY4.0; shader/site redistribution terms not recovered."
+    }
+  ]
+}
