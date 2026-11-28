@@ -78,6 +78,7 @@ next-env.d.ts
 /src/registry/dot-orb/
 /src/registry/thermal-image/
 /src/registry/porsche-gt3rs/
+/src/registry/solas-tf/
 /.private-registry/
 /public/r/
 /.data/

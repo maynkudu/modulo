@@ -1,0 +1,27 @@
+{
+  "capturedAt": "2026-11-27",
+  "sources": [
+    {
+      "path": "raw/maynkudu-logo.png",
+      "origin": "User attachment maynkudu-logo.png",
+      "sha256": "76c50494e69c15b564fb5f26bd1389eb850bd28104ff5eaf9e2703220f6fb340",
+      "contentType": "image/png",
+      "dimensions": [2000, 682],
+      "role": "Primary visible outlines and proportions",
+      "terms": "Supplied by the user for this reconstruction; external font identity and original font license unavailable."
+    },
+    {
+      "path": "raw/modulo-sparkle.png",
+      "origin": "User attachment Elegant Modulo Logo with Sparkle.png",
+      "sha256": "7d6e2d6371d2730e915da497976ba6fdabbd7720e1658e852e8ec05a1fc96c88",
+      "contentType": "image/png",
+      "dimensions": [2000, 681],
+      "role": "Secondary star treatment",
+      "terms": "Supplied by the user for this reconstruction."
+    }
+  ],
+  "originalFontFile": "unavailable",
+  "reconstruction": "Separate traced glyphs, inferred partitions at connected joins, zero-advance raised mark, RHYT variable axis.",
+  "privateRepository": "https://github.com/maynkudu/solas-tf",
+  "repositoryVisibilityVerified": "PRIVATE"
+}
