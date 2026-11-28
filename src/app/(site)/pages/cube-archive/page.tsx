@@ -1,5 +1,4 @@
 import { ComponentDetail } from "@/components/component-detail";
-import { ComponentMediaLinks } from "@/components/component-media-links";
 import { ComponentSource } from "@/components/component-source";
 import { InstallCommand } from "@/components/install-command";
 import { cubeArchive } from "@/lib/catalog";
@@ -44,7 +43,6 @@ export default function CubeArchiveDocumentation() {
         <InstallCommand name={cubeArchive.name} />
         <pre><code>{usage}</code></pre>
         <p>Each project needs a title, category, description, featured image or video, and one or more case images. Video projects use a poster image and play silently in a loop. Add those files to your public directory or pass URLs from your own asset host.</p>
-        <ComponentMediaLinks component={cubeArchive} />
       </section>
       <section className={[styles.panel, styles.docPanel, styles.api].join(" ")}>
         <h2>Project data</h2>
