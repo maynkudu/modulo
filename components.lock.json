@@ -562,7 +562,7 @@
     {
       "name": "thermal-image",
       "repository": "maynkudu/modulo-thermal-image",
-      "revision": "b231f8707e45726d7499ebf7d54ab2eef9863c9c",
+      "revision": "86461260638b5fa0dd1247980f67dc27488bc36f",
       "files": [
         {
           "path": "thermal-image.tsx",
@@ -570,7 +570,7 @@
         },
         {
           "path": "thermal-engine.ts",
-          "sha256": "e03d607b0d682dfd77e80f9e657572399f5716936754fc6dda3919c415567731"
+          "sha256": "e5f491595422472e5ba3e6cdff3b956609d3087b85f3ef5e40b6ff91010b8ba3"
         },
         {
           "path": "thermal-model.ts",
