@@ -121,6 +121,22 @@ export const texturedGlass = {
   ],
 } satisfies RegistryItem;
 
+/** Refraction, reflection, dispersion, and frosting over a rendered scene. */
+export const liquidGlass = {
+  name: "liquid-glass" as const,
+  type: "registry:component",
+  title: "Liquid Glass",
+  description: "A WebGL lens that refracts, reflects, and softens typography or images beneath the glass.",
+  dependencies: [],
+  registryDependencies: [],
+  files: [
+    { path: "src/registry/liquid-glass/liquid-glass.tsx", target: "components/liquid-glass/liquid-glass.tsx", type: "registry:component" },
+    { path: "src/registry/liquid-glass/liquid-glass-engine.ts", target: "components/liquid-glass/liquid-glass-engine.ts", type: "registry:lib" },
+    { path: "src/registry/liquid-glass/liquid-glass-shaders.ts", target: "components/liquid-glass/liquid-glass-shaders.ts", type: "registry:lib" },
+    { path: "src/registry/liquid-glass/liquid-glass.module.css", target: "components/liquid-glass/liquid-glass.module.css", type: "registry:file" },
+  ],
+} satisfies RegistryItem;
+
 export const game2048 = {
   name: "2048" as const,
   type: "registry:component",
@@ -422,6 +438,12 @@ export const catalogItems = [{
   keywords: ["threejs", "three", "webgl", "shader", "glass", "frosted", "textured", "refraction", "image", "upload", "light", "grid", "depth", "parallax", "focus"],
   seoDescription: "A Three.js textured glass effect for React with local image depth estimation, mouse parallax, and adjustable focus blur. Upload a photo and install the component with a mint key.",
   media: componentMedia({ name: texturedGlass.name, alt: "A photograph seen through rough glass with a fine square grid and a broad light reflection.", height: 800 }),
+}, {
+  component: liquidGlass,
+  addedAt: "2026-11-28",
+  keywords: ["glass", "liquid", "refraction", "reflection", "dispersion", "frost", "shader", "webgl", "lens", "typography", "image", "upload"],
+  seoDescription: "A WebGL liquid glass lens for React. Refract, reflect, and soften rendered typography or images, with chromatic separation and subtle corner morphing. Preview four modes and install the component with an active Modulo key.",
+  media: componentMedia({ name: liquidGlass.name, alt: "Liquid Glass refracting the word Color on a pale background.", height: 1260, duration: 4 }),
 }, {
   component: elasticSlider,
   addedAt: "2026-11-09",

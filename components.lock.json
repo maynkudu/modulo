@@ -638,6 +638,17 @@
           "publicAsset": "artwork/porsche-gt3rs.glb"
         }
       ]
+    },
+    {
+      "name": "liquid-glass",
+      "repository": "maynkudu/modulo-liquid-glass",
+      "revision": "f95d3e96ee9cfeef707a094ea89a3534c9b94f81",
+      "files": [
+        { "path": "liquid-glass.tsx", "sha256": "a25c4ea65604d155a5f1616000783d1a91947d5f08ab60649abf7f4fb05161f0" },
+        { "path": "liquid-glass-engine.ts", "sha256": "15df5dddf2bb44c1be398988a78ee2da11c098baec357606997c44f42a7f2b02" },
+        { "path": "liquid-glass-shaders.ts", "sha256": "de611f5ab34b09feaf85270e4172e42ad8ae71161d7d062fa0af832c121ff84a" },
+        { "path": "liquid-glass.module.css", "sha256": "c04efe923c6653017d261fd981428c6e90a1d16a71d7ec0b1dd93e1513eeb117" }
+      ]
     }
   ]
 }

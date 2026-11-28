@@ -80,6 +80,7 @@ next-env.d.ts
 /src/registry/porsche-gt3rs/
 /src/registry/solas-tf/
 /src/registry/cube-archive/
+/src/registry/liquid-glass/
 /.private-registry/
 /public/r/
 /.data/

@@ -25,6 +25,7 @@ import { ImageMosaicDemo } from "./image-mosaic-demo";
 import { DotOrbDemo } from "./dot-orb-demo";
 import { PorscheGT3RSDemo } from "./porsche-gt3rs-demo";
 import { ThermalImageDemo } from "./thermal-image-demo";
+import { LiquidGlassDemo } from "./liquid-glass-demo";
 import { previewCatalogItems as catalogItems } from "@/lib/catalog";
 import styles from "./full-view.module.css";
 
@@ -39,6 +40,7 @@ const views = {
   "multi-step-download": () => <div className={styles.controls}><MultiStepDownloadDemo /></div>,
   "inline-download": () => <div className={styles.controls}><InlineDownloadDemo /></div>,
   "state-buttons": () => <div className={styles.controls}><StateButtonsDemo /></div>,
+  "liquid-glass": () => <div className={styles.controls}><LiquidGlassDemo /></div>,
   "overlay-navigation": () => <OverlayNavigationDemo full />,
   "interactive-art": () => <GardenCanvas className={styles.scene} fallback="/artwork/lotus-garden.png" />,
   "nilkamal": () => <Nilkamal className={styles.scene} fallback="/artwork/nilkamal.png" />,
@@ -59,7 +61,7 @@ export function FullView({ name }: { name: ComponentName }) {
   const id = useId(), viewport = useRef<HTMLElement>(null);
   const View = views[name];
   if (name === "liquid-text-reveal") return <View />;
-  const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download" || name === "inline-download" || name === "state-buttons";
+  const control = name === "elastic-slider" || name === "snap-rail" || name === "liquid-cluster" || name === "multi-step-download" || name === "inline-download" || name === "state-buttons" || name === "liquid-glass";
   const scrollable = control || name === "dot-orb" || name === "image-mosaic" || name === "halftone" || name === "portrait-wave" || name === "eyespice" || name === "brick-noise" || name === "logo-refraction" || name === "liquid-animations" || name === "thermal-image" || name === "porsche-gt3rs";
   return <div className={styles.frame}>
     <main ref={viewport} id={id} className={`${styles.viewport} ${scrollable ? "liquid-scroll-viewport" : ""} ${control ? styles.controlViewport : ""} ${name === "logo-refraction" ? styles.logoViewport : ""} ${name === "liquid-animations" || name === "dot-orb" ? styles.liquidViewport : ""} ${name === "image-mosaic" ? styles.mosaicViewport : ""}`}><View /></main>

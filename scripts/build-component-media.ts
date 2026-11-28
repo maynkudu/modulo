@@ -60,6 +60,7 @@ const specifications = [
   { name: "root-infection", flow: "root-growth", pause: 13000, seek: 8, movePointer: true },
   { name: "nilkamal", flow: "lotus-rain", pause: 8000, seek: 2, movePointer: false },
   { name: "interactive-art", flow: "garden-growth", pause: 8000, seek: 2, movePointer: false },
+  { name: "liquid-glass", flow: "liquid-glass-corner-refraction", pause: 4000, seek: 0, thumbnailSeek: 2, movePointer: false },
 ];
 const selectedNames = selectedComponent?.split(",");
 const unknownNames = selectedNames?.filter(name => !catalogItems.some(entry => entry.component.name === name));
@@ -85,12 +86,14 @@ if (!encodeOnly) {
   execFileSync("bun", ["build", "scripts/component-media-preview.tsx", "--target=browser", "--format=esm", "--production", `--outdir=${bundle}`], {
     cwd: root, stdio: "inherit",
   });
-  const [javascript, css, font, sansFont, geistFont, glassImage, glassDepth, logoImage, portraitA, portraitB, mosaicImage, thermalModel] = await Promise.all([
+  const [javascript, css, font, sansFont, geistFont, glassDisplayFont, glassSerifFont, glassImage, glassDepth, logoImage, portraitA, portraitB, mosaicImage, thermalModel] = await Promise.all([
     readFile(resolve(bundle, "component-media-preview.js"), "utf8"),
     readFile(resolve(bundle, "component-media-preview.css"), "utf8"),
     readFile(resolve(root, "node_modules/geist/dist/fonts/geist-mono/GeistMono-Regular.woff2")),
     readFile(resolve(root, "src/app/fonts/InterVariable.woff2")),
     readFile(resolve(root, "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2")),
+    readFile(resolve(root, "src/app/fonts/StackSansNotch-latin.woff2")),
+    readFile(resolve(root, "src/app/fonts/RoxboroughCF-Regular.woff2")),
     readFile(resolve(root, "public/artwork/stay.jpeg")),
     readFile(resolve(root, "public/artwork/stay-depth.png")),
     readFile(resolve(root, "public/artwork/maynkudu-warehouse.png")),
@@ -122,6 +125,8 @@ if (!encodeOnly) {
   @font-face{font-family:GeistMono;src:url(data:font/woff2;base64,${font.toString("base64")}) format("woff2")}
   @font-face{font-family:Inter;src:url(data:font/woff2;base64,${sansFont.toString("base64")}) format("woff2");font-weight:100 900}
   @font-face{font-family:GeistSans;src:url(data:font/woff2;base64,${geistFont.toString("base64")}) format("woff2")}
+  @font-face{font-family:GlassDisplay;src:url(data:font/woff2;base64,${glassDisplayFont.toString("base64")}) format("woff2");font-weight:200 700}
+  @font-face{font-family:GlassSerif;src:url(data:font/woff2;base64,${glassSerifFont.toString("base64")}) format("woff2")}
   *{box-sizing:border-box}html,body,#root{margin:0;width:100%;height:100%;overflow:hidden;background:#050304;color:#c9bfc1;font-family:GeistMono,monospace}
   .media-scene{width:100%!important;height:100%!important;min-height:0!important;aspect-ratio:auto!important}
   .media-scene canvas{width:100%;height:100%}
@@ -150,6 +155,8 @@ if (!encodeOnly) {
   .thermal-image-media{width:100%;height:100%;background:#070707}
   .thermal-image-media canvas,.thermal-image-media img{width:100%;height:100%;object-fit:contain}
   .cube-archive-media{width:100%;height:100%;background:#fff}
+  .liquid-glass-media{width:100%;height:100%;display:grid;place-items:center;background:#e8e8e8}
+  .liquid-glass-media .media-scene{width:min(100%,calc(100vh * 20 / 21))!important;height:min(100%,calc(100vw * 21 / 20))!important;max-width:100%;max-height:100%;aspect-ratio:20/21}
   </style></head><body><main id="root"></main><script>${captureClock}</script><script type="module">${captureJavaScript.replaceAll("__TEXTURED_GLASS_IMAGE__", `data:image/jpeg;base64,${glassImage.toString("base64")}`).replaceAll("__TEXTURED_GLASS_DEPTH__", `data:image/png;base64,${glassDepth.toString("base64")}`).replaceAll("__LOGO_REFRACTION_IMAGE__", `data:image/png;base64,${logoImage.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_A__", `data:image/jpeg;base64,${portraitA.toString("base64")}`).replaceAll("__PORTRAIT_WAVE_B__", `data:image/jpeg;base64,${portraitB.toString("base64")}`).replaceAll("__IMAGE_MOSAIC_IMAGE__", `data:image/jpeg;base64,${mosaicImage.toString("base64")}`).replaceAll("__THERMAL_MODEL__", `data:model/gltf-binary;base64,${thermalModel.toString("base64")}`).replaceAll("</script", "<\\/script")}</script></body></html>`);
 
   const budgets = Object.fromEntries(captures.map(({ entry, specification }) => [specification.flow, Math.max(Math.round(specification.seek * fps) + Math.round(entry.media.video.duration * fps) + (ambient.has(entry.component.name) ? 15 : 0), entry.component.name === "liquid-text-reveal" ? 420 : 300)]));

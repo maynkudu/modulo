@@ -543,6 +543,54 @@
       "type": "registry:component"
     },
     {
+      "name": "liquid-glass",
+      "title": "Liquid Glass",
+      "description": "A WebGL lens that refracts, reflects, and softens typography or images beneath the glass.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/registry/liquid-glass/liquid-glass.tsx",
+          "type": "registry:component",
+          "target": "components/liquid-glass/liquid-glass.tsx"
+        },
+        {
+          "path": "src/registry/liquid-glass/liquid-glass-engine.ts",
+          "type": "registry:lib",
+          "target": "components/liquid-glass/liquid-glass-engine.ts"
+        },
+        {
+          "path": "src/registry/liquid-glass/liquid-glass-shaders.ts",
+          "type": "registry:lib",
+          "target": "components/liquid-glass/liquid-glass-shaders.ts"
+        },
+        {
+          "path": "src/registry/liquid-glass/liquid-glass.module.css",
+          "type": "registry:file",
+          "target": "components/liquid-glass/liquid-glass.module.css"
+        }
+      ],
+      "meta": {
+        "media": {
+          "thumbnail": {
+            "alt": "Liquid Glass refracting the word Color on a pale background.",
+            "width": 720,
+            "height": 756,
+            "type": "image/jpeg",
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-glass.jpg"
+          },
+          "video": {
+            "width": 720,
+            "height": 756,
+            "type": "video/mp4",
+            "duration": 4,
+            "url": "https://modulo-maynkudu.vercel.app/media/liquid-glass.mp4"
+          }
+        }
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "elastic-slider",
       "title": "Elastic slider",
       "description": "A bounded slider with elastic endpoint stretch, rigid content, and interruptible settling.",

@@ -29,6 +29,7 @@ import { PorscheGT3RS } from "../src/registry/porsche-gt3rs/PorscheGT3RS";
 import { ThermalImage } from "../src/registry/thermal-image/thermal-image";
 import { CubeArchivePage } from "../src/registry/cube-archive/CubeArchivePage";
 import { cubeArchiveProjects } from "../src/lib/cube-archive-projects";
+import { LiquidGlass } from "../src/registry/liquid-glass/liquid-glass";
 
 const cubeArchiveCaptureSources = new Map([
   ["india-main.avif", "__CUBE_ARCHIVE_INDIA_MAIN__"],
@@ -198,6 +199,45 @@ function ImageMosaicCapture() {
   </section>;
 }
 
+function LiquidGlassCapture() {
+  useEffect(() => {
+    void Promise.all([
+      document.fonts.load("700 140px GlassDisplay"),
+      document.fonts.load("italic 166px GlassSerif"),
+    ]).then(() => markReady(true));
+
+    function followCapturePointer(event: Event) {
+      const seconds: unknown = event instanceof CustomEvent ? event.detail : null;
+      const canvas = document.querySelector<HTMLCanvasElement>(".liquid-glass-media canvas");
+      if (typeof seconds !== "number" || !canvas) return;
+
+      const bounds = canvas.getBoundingClientRect();
+      const angle = seconds / 4 * Math.PI * 2;
+      const x = bounds.left + bounds.width * (.5 + .18 * Math.sin(angle));
+      const y = bounds.top + bounds.height * (.5 - .12 * Math.cos(angle));
+      canvas.dispatchEvent(new PointerEvent("pointermove", {
+        bubbles: true,
+        pointerType: "mouse",
+        clientX: x,
+        clientY: y,
+      }));
+    }
+
+    window.addEventListener("modulo-media-time", followCapturePointer);
+    return () => window.removeEventListener("modulo-media-time", followCapturePointer);
+  }, []);
+
+  return <section className="liquid-glass-media">
+    <LiquidGlass
+      className="media-scene"
+      mode="lucid"
+      source={{ kind: "typography", lines: ["Color", "theory"], displayFont: "GlassDisplay", serifFont: "GlassSerif" }}
+      reducedMotion={false}
+      cornerMorph={.35}
+    />
+  </section>;
+}
+
 function MediaPreview() {
   const name = new URLSearchParams(location.search).get("component");
   if (name === "porsche-gt3rs") return <PorscheCapture />;
@@ -205,6 +245,7 @@ function MediaPreview() {
   if (name === "cube-archive") return <CubeArchiveCapture />;
   if (name === "dot-orb") return <DotOrbCapture />;
   if (name === "image-mosaic") return <ImageMosaicCapture />;
+  if (name === "liquid-glass") return <LiquidGlassCapture />;
   if (name === "halftone") return <section className="halftone-media">
     <Halftone className="media-scene" onReady={markReady} />
     <span className="halftone-start" aria-hidden="true" /><span className="halftone-end" aria-hidden="true" />
